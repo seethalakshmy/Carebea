@@ -16,6 +16,7 @@ import '../../../core/text_styles.dart';
 import '../../../domain/caregivers/model/verification_types.dart';
 import '../../../domain/common_response/common_response.dart';
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
+import '../../../domain/on_boarding/models/common_response.dart';
 import '../../../infrastructure/caregiver_verification/caregivers_verification_repository.dart';
 import '../../../presentation/widget/cached_image.dart';
 import '../../../presentation/widget/custom_alert_dialog_widget.dart';
@@ -299,7 +300,7 @@ class CareGiverVerificationBloc
 
   _careGiverCertificateReject(_CareGiverCertificateReject event,
       Emitter<CareGiverVerificationState> emit) async {
-    final Either<ApiErrorHandler, VerifyResponse> result =
+    final Either<ApiErrorHandler, CommonResponse> result =
         await careGiverVerificationRepository.careGiverCertificateReject(
             params: event.params);
     CareGiverVerificationState caregiverVerificationState = result.fold((l) {

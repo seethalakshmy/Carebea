@@ -338,12 +338,23 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
         );
         if (result != null) {
           file = result.files.single;
-          for (PlatformFile file in result.files) {
-            bytesList.add(file);
-            listUpdated = !listUpdated;
-            if (bytesList.length == 2) {
-              break;
+          if (file?.extension == 'avi' ||
+              file?.extension == 'flv' ||
+              file?.extension == 'mkv' ||
+              file?.extension == 'mov' ||
+              file?.extension == 'mp4' ||
+              file?.extension == 'mpeg' ||
+              file?.extension == 'webm' ||
+              file?.extension == 'wmv') {
+            for (PlatformFile file in result.files) {
+              bytesList.add(file);
+              listUpdated = !listUpdated;
+              if (bytesList.length == 2) {
+                break;
+              }
             }
+          } else {
+            CSnackBar.showError(context, msg: AppString.fileTypeNotSupport.val);
           }
           rebuild(() {});
           // widget.onboardingBloc.add(

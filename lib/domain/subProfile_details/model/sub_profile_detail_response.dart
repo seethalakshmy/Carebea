@@ -80,6 +80,7 @@ class Data {
     List<String>? healthProfile,
     List<String>? diet,
     Services? services,
+    AdvanceDirective? advanceDirective,
   }) {
     _id = id;
     _profileCompletionPercentage = profileCompletionPercentage;
@@ -107,6 +108,8 @@ class Data {
     _healthProfile = healthProfile;
     _diet = diet;
     _services = services;
+    _advanceDirective = advanceDirective;
+
   }
 
   Data.fromJson(dynamic json) {
@@ -156,12 +159,16 @@ class Data {
     _diet = json['diet'] != null ? json['diet'].cast<String>() : [];
     _services =
         json['services'] != null ? Services.fromJson(json['services']) : null;
+    _advanceDirective = json['advance_directive'] != null
+        ? AdvanceDirective.fromJson(json['advance_directive'])
+        : null;
     if (json['address'] != null) {
       _address = [];
       json['address'].forEach((v) {
         _address?.add(Address.fromJson(v));
       });
     }
+
   }
   String? _id;
   int? _profileCompletionPercentage;
@@ -190,6 +197,8 @@ class Data {
   List<String>? _healthProfile;
   List<String>? _diet;
   Services? _services;
+  AdvanceDirective? _advanceDirective;
+
   Data copyWith({
     String? id,
     int? profileCompletionPercentage,
@@ -217,6 +226,8 @@ class Data {
     List<String>? healthProfile,
     List<String>? diet,
     Services? services,
+    AdvanceDirective? advanceDirective,
+
   }) =>
       Data(
         id: id ?? _id,
@@ -247,6 +258,8 @@ class Data {
         healthProfile: healthProfile ?? _healthProfile,
         diet: diet ?? _diet,
         services: services ?? _services,
+        advanceDirective: advanceDirective ?? _advanceDirective,
+
       );
   String? get id => _id;
   int? get profileCompletionPercentage => _profileCompletionPercentage;
@@ -276,6 +289,8 @@ class Data {
   List<String>? get healthProfile => _healthProfile;
   List<String>? get diet => _diet;
   Services? get services => _services;
+  AdvanceDirective? get advanceDirective => _advanceDirective;
+
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -330,6 +345,49 @@ class Data {
     if (_services != null) {
       map['services'] = _services?.toJson();
     }
+    if (_advanceDirective != null) {
+      map['advance_directive'] = _advanceDirective?.toJson();
+    }
+    return map;
+  }
+}
+
+AdvanceDirective advanceDirectiveFromJson(String str) =>
+    AdvanceDirective.fromJson(json.decode(str));
+String advanceDirectiveToJson(AdvanceDirective data) =>
+    json.encode(data.toJson());
+
+class AdvanceDirective {
+  AdvanceDirective({
+    bool? status,
+    String? advanceDirectiveLocation,
+  }) {
+    _status = status;
+    _advanceDirectiveLocation = advanceDirectiveLocation;
+  }
+
+  AdvanceDirective.fromJson(dynamic json) {
+    _status = json['status'];
+    _advanceDirectiveLocation = json['advanceDirectiveLocation'];
+  }
+  bool? _status;
+  String? _advanceDirectiveLocation;
+  AdvanceDirective copyWith({
+    bool? status,
+    String? advanceDirectiveLocation,
+  }) =>
+      AdvanceDirective(
+        status: status ?? _status,
+        advanceDirectiveLocation:
+        advanceDirectiveLocation ?? _advanceDirectiveLocation,
+      );
+  bool? get status => _status;
+  String? get advanceDirectiveLocation => _advanceDirectiveLocation;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['status'] = _status;
+    map['advanceDirectiveLocation'] = _advanceDirectiveLocation;
     return map;
   }
 }

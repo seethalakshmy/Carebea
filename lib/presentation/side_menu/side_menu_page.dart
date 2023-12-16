@@ -350,6 +350,7 @@ class _MenuBarState extends State<SideMenuPage> {
           child: InkWell(
             onTap: () {
               SharedPreffUtil().logoutClear();
+              // Navigator.of(context).popUntil((route) => route.isFirst == true);
               context.router.replace(const LoginRoute());
             },
             child: Text(

@@ -213,6 +213,40 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
           var item = e.value;
 
           return DataRow2(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  context.read<ServiceRequestManagementBloc>().add(
+                      ServiceRequestManagementEvent.getServiceDetails(
+                          context: context, serviceId: item.id ?? ''));
+                  debugPrint('item status ${item.status}');
+                  return CustomAlertDialogWidget(
+                    heading: item.status == 2
+                        ? 'Upcoming'
+                        : item.status == 3
+                            ? 'Ongoing'
+                            : item.status == 5
+                                ? 'Completed'
+                                : item.status == 6
+                                    ? 'Canceled'
+                                    : 'Missed',
+                    child: ServiceDetailsAlert(
+                      title: item.status == 2
+                          ? 'Upcoming'
+                          : item.status == 3
+                              ? 'Ongoing'
+                              : item.status == 5
+                                  ? 'Completed'
+                                  : item.status == 6
+                                      ? 'Canceled'
+                                      : 'Missed',
+                      serviceBloc: serviceRequestManagementBloc,
+                    ),
+                  );
+                },
+              );
+            },
             cells: [
               DataCell(TableRowView(
                 text: _pageIndex.toString(),

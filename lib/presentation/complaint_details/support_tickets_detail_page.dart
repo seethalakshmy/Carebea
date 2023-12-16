@@ -452,8 +452,9 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
     return RowColonCombo.twoHundred(
         customWidthLg1: 180,
         label: AppString.createdDateTime.val,
-        value: _complaintDetailBloc.generateFormattedDate(
-            DateTime.parse(_complaintDetailBloc.complaintDetailsList[0].createdDate ?? "").toLocal().toString()),
+        value:_complaintDetailBloc.complaintDetailsList[0].createdDate ?? '',
+        // _complaintDetailBloc.generateFormattedDate(
+        //     DateTime.parse(_complaintDetailBloc.complaintDetailsList[0].createdDate ?? "").toLocal().toString()),
         fontSize: FS.font13PointFive.val);
   }
 

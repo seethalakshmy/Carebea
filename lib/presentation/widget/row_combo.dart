@@ -109,6 +109,7 @@ class RowColonCombo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      // alignment: WrapAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

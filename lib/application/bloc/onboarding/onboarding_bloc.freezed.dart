@@ -68,7 +68,8 @@ mixin _$OnboardingEvent {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -159,7 +160,7 @@ mixin _$OnboardingEvent {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -250,7 +251,7 @@ mixin _$OnboardingEvent {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -761,7 +762,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -872,7 +874,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -983,7 +985,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -1455,7 +1457,8 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -1558,7 +1561,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -1661,7 +1664,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -2099,7 +2102,8 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -2200,7 +2204,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -2301,7 +2305,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -2615,7 +2619,8 @@ class _$_CommonDataLists implements _CommonDataLists {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -2709,7 +2714,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -2803,7 +2808,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -3128,7 +3133,8 @@ class _$_CityLists implements _CityLists {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -3222,7 +3228,7 @@ class _$_CityLists implements _CityLists {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -3316,7 +3322,7 @@ class _$_CityLists implements _CityLists {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -3650,7 +3656,8 @@ class _$_StateLists implements _StateLists {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -3744,7 +3751,7 @@ class _$_StateLists implements _StateLists {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -3838,7 +3845,7 @@ class _$_StateLists implements _StateLists {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -4135,7 +4142,8 @@ class _$_RelationList implements _RelationList {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -4229,7 +4237,7 @@ class _$_RelationList implements _RelationList {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -4323,7 +4331,7 @@ class _$_RelationList implements _RelationList {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -4638,7 +4646,8 @@ class _$_SubmitReference implements _SubmitReference {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -4732,7 +4741,7 @@ class _$_SubmitReference implements _SubmitReference {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -4826,7 +4835,7 @@ class _$_SubmitReference implements _SubmitReference {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -5121,7 +5130,8 @@ class _$_AddReference implements _AddReference {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -5215,7 +5225,7 @@ class _$_AddReference implements _AddReference {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -5309,7 +5319,7 @@ class _$_AddReference implements _AddReference {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -5624,7 +5634,8 @@ class _$DeleteReference implements DeleteReference {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -5718,7 +5729,7 @@ class _$DeleteReference implements DeleteReference {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -5812,7 +5823,7 @@ class _$DeleteReference implements DeleteReference {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -6132,7 +6143,8 @@ class _$UpdateReference implements UpdateReference {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -6226,7 +6238,7 @@ class _$UpdateReference implements UpdateReference {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -6320,7 +6332,7 @@ class _$UpdateReference implements UpdateReference {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -6649,7 +6661,8 @@ class _$EditReference implements EditReference {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -6743,7 +6756,7 @@ class _$EditReference implements EditReference {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -6837,7 +6850,7 @@ class _$EditReference implements EditReference {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -7134,7 +7147,8 @@ class _$_YearsOfExp implements _YearsOfExp {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -7228,7 +7242,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -7322,7 +7336,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -7529,7 +7543,7 @@ abstract class _$$_GetPetListCopyWith<$Res> {
           _$_GetPetList value, $Res Function(_$_GetPetList) then) =
       __$$_GetPetListCopyWithImpl<$Res>;
   @useResult
-  $Res call({String petSearchKey});
+  $Res call({String petSearchKey, List<PetsModel> petList});
 }
 
 /// @nodoc
@@ -7544,12 +7558,17 @@ class __$$_GetPetListCopyWithImpl<$Res>
   @override
   $Res call({
     Object? petSearchKey = null,
+    Object? petList = null,
   }) {
     return _then(_$_GetPetList(
       null == petSearchKey
           ? _value.petSearchKey
           : petSearchKey // ignore: cast_nullable_to_non_nullable
               as String,
+      null == petList
+          ? _value._petList
+          : petList // ignore: cast_nullable_to_non_nullable
+              as List<PetsModel>,
     ));
   }
 }
@@ -7557,14 +7576,22 @@ class __$$_GetPetListCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_GetPetList implements _GetPetList {
-  const _$_GetPetList(this.petSearchKey);
+  const _$_GetPetList(this.petSearchKey, final List<PetsModel> petList)
+      : _petList = petList;
 
   @override
   final String petSearchKey;
+  final List<PetsModel> _petList;
+  @override
+  List<PetsModel> get petList {
+    if (_petList is EqualUnmodifiableListView) return _petList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_petList);
+  }
 
   @override
   String toString() {
-    return 'OnboardingEvent.petsList(petSearchKey: $petSearchKey)';
+    return 'OnboardingEvent.petsList(petSearchKey: $petSearchKey, petList: $petList)';
   }
 
   @override
@@ -7573,11 +7600,13 @@ class _$_GetPetList implements _GetPetList {
         (other.runtimeType == runtimeType &&
             other is _$_GetPetList &&
             (identical(other.petSearchKey, petSearchKey) ||
-                other.petSearchKey == petSearchKey));
+                other.petSearchKey == petSearchKey) &&
+            const DeepCollectionEquality().equals(other._petList, _petList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, petSearchKey);
+  int get hashCode => Object.hash(
+      runtimeType, petSearchKey, const DeepCollectionEquality().hash(_petList));
 
   @JsonKey(ignore: true)
   @override
@@ -7638,7 +7667,8 @@ class _$_GetPetList implements _GetPetList {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -7677,7 +7707,7 @@ class _$_GetPetList implements _GetPetList {
         submitAccountDetais,
     required TResult Function(bool isAllSelected) selectAllServices,
   }) {
-    return petsList(petSearchKey);
+    return petsList(petSearchKey, petList);
   }
 
   @override
@@ -7732,7 +7762,7 @@ class _$_GetPetList implements _GetPetList {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -7771,7 +7801,7 @@ class _$_GetPetList implements _GetPetList {
         submitAccountDetais,
     TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
-    return petsList?.call(petSearchKey);
+    return petsList?.call(petSearchKey, petList);
   }
 
   @override
@@ -7826,7 +7856,7 @@ class _$_GetPetList implements _GetPetList {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -7867,7 +7897,7 @@ class _$_GetPetList implements _GetPetList {
     required TResult orElse(),
   }) {
     if (petsList != null) {
-      return petsList(petSearchKey);
+      return petsList(petSearchKey, petList);
     }
     return orElse();
   }
@@ -8024,9 +8054,11 @@ class _$_GetPetList implements _GetPetList {
 }
 
 abstract class _GetPetList implements OnboardingEvent {
-  const factory _GetPetList(final String petSearchKey) = _$_GetPetList;
+  const factory _GetPetList(
+      final String petSearchKey, final List<PetsModel> petList) = _$_GetPetList;
 
   String get petSearchKey;
+  List<PetsModel> get petList;
   @JsonKey(ignore: true)
   _$$_GetPetListCopyWith<_$_GetPetList> get copyWith =>
       throw _privateConstructorUsedError;
@@ -8165,7 +8197,8 @@ class _$_GetLanguageList implements _GetLanguageList {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -8259,7 +8292,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -8353,7 +8386,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -8676,7 +8709,8 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -8770,7 +8804,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -8864,7 +8898,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -9185,7 +9219,8 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -9279,7 +9314,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -9373,7 +9408,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -9694,7 +9729,8 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -9788,7 +9824,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -9882,7 +9918,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -10204,7 +10240,8 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -10298,7 +10335,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -10392,7 +10429,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -10716,7 +10753,8 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -10810,7 +10848,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -10904,7 +10942,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -11227,7 +11265,8 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -11321,7 +11360,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -11415,7 +11454,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -11740,7 +11779,8 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -11834,7 +11874,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -11928,7 +11968,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -12250,7 +12290,8 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -12344,7 +12385,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -12438,7 +12479,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -12760,7 +12801,8 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -12854,7 +12896,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -12948,7 +12990,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -13270,7 +13312,8 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -13364,7 +13407,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -13458,7 +13501,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -13803,7 +13846,8 @@ class _$_SecurityDocumentUploadSelected
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -13897,7 +13941,7 @@ class _$_SecurityDocumentUploadSelected
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -13991,7 +14035,7 @@ class _$_SecurityDocumentUploadSelected
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -14336,7 +14380,8 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -14430,7 +14475,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -14524,7 +14569,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -14869,7 +14914,8 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -14963,7 +15009,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -15057,7 +15103,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -15401,7 +15447,8 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -15495,7 +15542,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -15589,7 +15636,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -15934,7 +15981,8 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -16028,7 +16076,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -16122,7 +16170,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -16419,7 +16467,8 @@ class _$_LanguagePagination implements _LanguagePagination {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -16513,7 +16562,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -16607,7 +16656,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -16896,7 +16945,8 @@ class _$_StatePagination implements _StatePagination {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -16990,7 +17040,7 @@ class _$_StatePagination implements _StatePagination {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -17084,7 +17134,7 @@ class _$_StatePagination implements _StatePagination {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -17373,7 +17423,8 @@ class _$_CityPagination implements _CityPagination {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -17467,7 +17518,7 @@ class _$_CityPagination implements _CityPagination {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -17561,7 +17612,7 @@ class _$_CityPagination implements _CityPagination {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -17850,7 +17901,8 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -17944,7 +17996,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -18038,7 +18090,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -18370,7 +18422,8 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -18464,7 +18517,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -18558,7 +18611,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -18892,7 +18945,8 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -18986,7 +19040,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -19080,7 +19134,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -19438,7 +19492,8 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -19532,7 +19587,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -19627,7 +19682,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -19992,7 +20047,8 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -20087,7 +20143,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -20182,7 +20238,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -20512,7 +20568,8 @@ class _$_SelectAllServices implements _SelectAllServices {
     required TResult Function(int index) updateReference,
     required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
-    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
     required TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)
         languageList,
@@ -20606,7 +20663,7 @@ class _$_SelectAllServices implements _SelectAllServices {
     TResult? Function(int index)? updateReference,
     TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
-    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult? Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,
@@ -20700,7 +20757,7 @@ class _$_SelectAllServices implements _SelectAllServices {
     TResult Function(int index)? updateReference,
     TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
-    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
     TResult Function(String languageSearchKey,
             List<PreferenceLanguageModel> languageList)?
         languageList,

@@ -3762,7 +3762,7 @@ mixin _$CareGiverVerificationState {
       throw _privateConstructorUsedError;
   VerifyResponse? get certificateVerifyApproveResponse =>
       throw _privateConstructorUsedError;
-  VerifyResponse? get certificateVerifyRejectResponse =>
+  CommonResponse? get certificateVerifyRejectResponse =>
       throw _privateConstructorUsedError;
   VerifyResponse? get sendTrainingResponse =>
       throw _privateConstructorUsedError;
@@ -3796,7 +3796,7 @@ abstract class $CareGiverVerificationStateCopyWith<$Res> {
       CaregiverVerificationResponse? response,
       VerifyResponse? backgroundVerifyResponse,
       VerifyResponse? certificateVerifyApproveResponse,
-      VerifyResponse? certificateVerifyRejectResponse,
+      CommonResponse? certificateVerifyRejectResponse,
       VerifyResponse? sendTrainingResponse,
       CommonResponseUse? notifyPendingDocumentResponse,
       bool isBackGroundVerificationReasonFieldTapped,
@@ -3875,7 +3875,7 @@ class _$CareGiverVerificationStateCopyWithImpl<$Res,
               certificateVerifyRejectResponse
           ? _value.certificateVerifyRejectResponse
           : certificateVerifyRejectResponse // ignore: cast_nullable_to_non_nullable
-              as VerifyResponse?,
+              as CommonResponse?,
       sendTrainingResponse: freezed == sendTrainingResponse
           ? _value.sendTrainingResponse
           : sendTrainingResponse // ignore: cast_nullable_to_non_nullable
@@ -3927,7 +3927,7 @@ abstract class _$$_CareGiverVerificationStateCopyWith<$Res>
       CaregiverVerificationResponse? response,
       VerifyResponse? backgroundVerifyResponse,
       VerifyResponse? certificateVerifyApproveResponse,
-      VerifyResponse? certificateVerifyRejectResponse,
+      CommonResponse? certificateVerifyRejectResponse,
       VerifyResponse? sendTrainingResponse,
       CommonResponseUse? notifyPendingDocumentResponse,
       bool isBackGroundVerificationReasonFieldTapped,
@@ -4005,7 +4005,7 @@ class __$$_CareGiverVerificationStateCopyWithImpl<$Res>
               certificateVerifyRejectResponse
           ? _value.certificateVerifyRejectResponse
           : certificateVerifyRejectResponse // ignore: cast_nullable_to_non_nullable
-              as VerifyResponse?,
+              as CommonResponse?,
       sendTrainingResponse: freezed == sendTrainingResponse
           ? _value.sendTrainingResponse
           : sendTrainingResponse // ignore: cast_nullable_to_non_nullable
@@ -4085,7 +4085,7 @@ class _$_CareGiverVerificationState implements _CareGiverVerificationState {
   @override
   final VerifyResponse? certificateVerifyApproveResponse;
   @override
-  final VerifyResponse? certificateVerifyRejectResponse;
+  final CommonResponse? certificateVerifyRejectResponse;
   @override
   final VerifyResponse? sendTrainingResponse;
   @override
@@ -4193,7 +4193,7 @@ abstract class _CareGiverVerificationState
       required final CaregiverVerificationResponse? response,
       required final VerifyResponse? backgroundVerifyResponse,
       required final VerifyResponse? certificateVerifyApproveResponse,
-      required final VerifyResponse? certificateVerifyRejectResponse,
+      required final CommonResponse? certificateVerifyRejectResponse,
       required final VerifyResponse? sendTrainingResponse,
       required final CommonResponseUse? notifyPendingDocumentResponse,
       final bool isBackGroundVerificationReasonFieldTapped,
@@ -4219,7 +4219,7 @@ abstract class _CareGiverVerificationState
   @override
   VerifyResponse? get certificateVerifyApproveResponse;
   @override
-  VerifyResponse? get certificateVerifyRejectResponse;
+  CommonResponse? get certificateVerifyRejectResponse;
   @override
   VerifyResponse? get sendTrainingResponse;
   @override

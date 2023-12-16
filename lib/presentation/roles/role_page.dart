@@ -228,9 +228,11 @@ class _RolesPageState extends State<RolesPage> {
         _getCareGiverEvent();
       },
       onChanged: (String value) {
-        if (_searchController.text == "" || _searchController.text.isEmpty) {
-          _getCareGiverEvent();
-        }
+        _page = 1;
+
+        // if (_searchController.text == "" || _searchController.text.isEmpty) {
+        _getCareGiverEvent();
+        // }
       },
       suffixIcon: InkWell(
         onTap: () {

@@ -7,7 +7,11 @@ enum AppString {
   blsUrl("https://www.nationalcprfoundation.com/"),
   pageCreation("Page Creation"),
   notAttempted("Missed"),
+  verificationCode("Verification Code"),
   pageManagement("Page Management"),
+  deletedClient("Deleted Client"),
+  deletedCareRecipient("Deleted Care Recipient"),
+  deletedCareAmbassador("Deleted Care Ambassador"),
   createNew("Create New"),
   updatePolicy("Update Policy"),
   profileIncomplete("Profile Incomplete"),
@@ -26,7 +30,8 @@ enum AppString {
   averageReviewByCareAmbassador("Average Review By Care Ambassadors"),
   medicalCondition("Medical Condition"),
   planName("Plan Name"),
-  recurringTime("Recurring Time"),
+  planAmount("Plan Amount"),
+  renewalDate("Renewal date & time"),
   careRecipients("Care Recipients"),
 
   userId("USER ID"),
@@ -103,6 +108,7 @@ enum AppString {
   doYouHaveAnAdvanceDirective("Do you have an advance directive"),
   doYouHaveDNR("Do you have DNR?"),
   verify("Verify"),
+  verifyEmail("Verify Email"),
   login("Login"),
   height('height'),
   weight('weight'),
@@ -155,8 +161,9 @@ enum AppString {
   clientAnalytics("Client Analytics"),
   analytics("Analytics"),
   resetPasswordDescription(
-      "Enter your registered mail id to receive password\nreset link"),
-  sendRestInstructions("Send  reset instructions"),
+      "Enter your registered mail id to receive password\nreset verification code"),
+  enterTheCode("Enter the verification code send to your registered\nemail"),
+  sendRestInstructions("Send  Reset Instructions"),
   createNewPassword("Please create your new password"),
   newPassword("New Password"),
   confirmPassword("Confirm Password"),
@@ -253,6 +260,8 @@ enum AppString {
   serviceNeeded("Services Needed"),
   serviceNeededCount("Services Needed Count"),
   canceledRequest("Total Services Canceled By Client"),
+  totalServicesCanceledByTheCareAmbassador(
+      "Total Services Canceled by the Care Ambassador"),
   reviewGiven("Review Given"),
   serviceList("Service List"),
   location("Location"),
@@ -326,6 +335,7 @@ enum AppString {
   transactionId("Transaction ID"),
   serviceId("Service ID"),
   transactionType("Transaction Type"),
+  paymentMethod("Payment Method"),
   paidFor("Paid For"),
   paidTo("Paid To"),
   receivedFrom("Received From"),
@@ -349,7 +359,6 @@ enum AppString {
   careAmbassadorAnalytics("Care Ambassador Analytics "),
   noProfiles("No Profiles Found!"),
   creditCardDetails("Credit card details"),
-  paymentMethod("Payment Method"),
   paymentStatus("Payment Status"),
   accountHolderName("Account Holder Name"),
   accountNumber("Account Number"),
@@ -557,6 +566,7 @@ enum AppString {
   pleaseSelectProfilePicture("please select a profile picture"),
   errorUploadingFile("Error uploading file, Please try again"),
   fileSizeError("File size must be less than 20Mb"),
+  fileTypeNotSupport("File type not support"),
   serviceRequestManagement("Service Request Management"),
   supportTickets("Complaints Management"),
   faq("Faq Management"),
@@ -574,9 +584,9 @@ enum AppString {
   decisionMakerIdAndName("Decision maker ID & Name"),
   decisionMakerName("Decision maker Name"),
   clientIdAndName("Client ID & Name"),
-  startDateAndTime("Start Date & Start Time"),
+  startDateAndTime("Start Date & Time"),
   startDate("Start Date"),
-  endDateAndTime("End Date & End Time"),
+  endDateAndTime("End Date & Time"),
   endDate("End Date"),
   noOfMatchingIsShown("No of Matching list shown"),
   cancelledBy("Cancelled By"),
@@ -1080,7 +1090,8 @@ enum Day {
 
 enum InOut {
   indoor(1),
-  outdoor(2);
+  outdoor(2),
+  both(3);
 
   final int val;
 

@@ -285,7 +285,7 @@ class _LoginPageState extends State<LoginPage> {
               isHide = !isHide;
             });
           },
-          child: Icon(Icons.remove_red_eye)),
+          child: Icon(isHide ? Icons.visibility_off : Icons.visibility)),
       obscureText: isHide ? true : false,
       width: DBL.fourFifty.val,
       onChanged: (String value) {},

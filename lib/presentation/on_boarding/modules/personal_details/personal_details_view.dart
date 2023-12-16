@@ -935,20 +935,31 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           int? sizeInBytes = file?.size;
           double sizeInMb = sizeInBytes! / (1024 * 1024);
           debugPrint("size $sizeInMb");
-          if (sizeInMb < 20) {
-            // This file is Longer the
+          if (file?.extension == 'jpg' ||
+              file?.extension == 'png' ||
+              file?.extension == 'jpeg' ||
+              file?.extension == 'JPG' ||
+              file?.extension == 'PNG' ||
+              file?.extension == 'JPEG' ||
+              file?.extension == 'pdf' ||
+              file?.extension == 'PDF') {
+            if (sizeInMb < 20) {
+              // This file is Longer the
 
-            for (PlatformFile file in result.files) {
-              bytesList.add(file);
-              if (bytesList.length == 2) {
-                break;
+              for (PlatformFile file in result.files) {
+                bytesList.add(file);
+                if (bytesList.length == 2) {
+                  break;
+                }
               }
+              widget.onboardingBloc.add(
+                OnboardingEvent.securityDocumentUpload(bytesList, listUpdated),
+              );
+            } else {
+              CSnackBar.showError(context, msg: AppString.fileSizeError.val);
             }
-            widget.onboardingBloc.add(
-              OnboardingEvent.securityDocumentUpload(bytesList, listUpdated),
-            );
           } else {
-            CSnackBar.showError(context, msg: AppString.fileSizeError.val);
+            CSnackBar.showError(context, msg: AppString.fileTypeNotSupport.val);
           }
         }
       },
@@ -961,7 +972,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       bloc: formValidationBloc,
       builder: (context, state) {
         return CommonNextOrCancelButtons(
-          showLeftButton: false,
           isLoading: widget.onboardingBloc.state.isLoading,
           leftButtonName: AppString.back.val,
           rightButtonName: AppString.next.val,
@@ -974,6 +984,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           },
           onRightButtonPressed: () async {
             widget.onboardingBloc.nextButtonClicked = true;
+
             if (selectedGender.isEmpty &&
                 selectedState.isEmpty &&
                 selectedDocument.isEmpty &&
@@ -990,8 +1001,12 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             }
 
             if (widget.onboardingBloc.state.pickedProfilePic!.size > 0) {
+              widget.onboardingBloc
+                  .emit(widget.onboardingBloc.state.copyWith(isLoading: true));
               await uploadProfilePicToAwsS3(AppString.profilePicture.val,
                   SharedPreffUtil().getCareGiverUserId);
+              widget.onboardingBloc
+                  .emit(widget.onboardingBloc.state.copyWith(isLoading: false));
             }
 
             if (bytesList.isEmpty) {
@@ -1000,8 +1015,12 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
 
             if (bytesList.length <= 1) {
               for (int i = 0; i < bytesList.length; i++) {
+                widget.onboardingBloc.emit(
+                    widget.onboardingBloc.state.copyWith(isLoading: true));
                 await uploadDocumentsToAwsS3(AppString.documents.val,
                     SharedPreffUtil().getCareGiverUserId, bytesList[i]);
+                widget.onboardingBloc.emit(
+                    widget.onboardingBloc.state.copyWith(isLoading: false));
               }
             }
             checkInputData();

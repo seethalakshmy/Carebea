@@ -13,6 +13,7 @@ import 'application/bloc/caregiver_submit_agreement/caregiver_submit_agreement_b
 import 'application/bloc/caregiver_verification/caregiver_verification_bloc.dart';
 import 'application/bloc/client_report/client_report_bloc.dart';
 import 'application/bloc/email-otp-verification/email_otp_verification_bloc.dart';
+import 'application/bloc/forgot_password/forgot_password_bloc.dart';
 import 'application/bloc/form_validation/form_validation_bloc.dart';
 import 'application/bloc/get_cities_bloc/get_cities_bloc.dart';
 import 'application/bloc/get_states_bloc/get_states_bloc.dart';
@@ -20,8 +21,10 @@ import 'application/bloc/login/login_bloc.dart';
 import 'application/bloc/master/master_bloc.dart';
 import 'application/bloc/page/page_bloc.dart';
 import 'application/bloc/resend_otp_bloc/resend_otp_bloc.dart';
+import 'application/bloc/reset_password/reset_password_bloc.dart';
 import 'application/bloc/service_request_management/service_request_management_bloc.dart';
 import 'application/bloc/signup/signup_bloc.dart';
+import 'application/bloc/verify_email/verify_email_bloc.dart';
 import 'core/config/environment.dart';
 import 'core/hive/hive_utils.dart';
 import 'core/theme.dart';
@@ -30,14 +33,17 @@ import 'infrastructure/caregiver_submit_agreement_repo/caregiver_submit_agreemen
 import 'infrastructure/caregiver_verification/caregivers_verification_repository.dart';
 import 'infrastructure/client_report/client_report_repository.dart';
 import 'infrastructure/email_otp_verification/email_otp_verification_repository.dart';
+import 'infrastructure/forgot_password/forgot_password_repository.dart';
 import 'infrastructure/login/login_repository.dart';
 import 'infrastructure/master/master_repository.dart';
 import 'infrastructure/on_boarding/on_boarding_repository.dart';
 import 'infrastructure/page/page_repository.dart';
 import 'infrastructure/resend_otp/resend_otp_repo_impl.dart';
+import 'infrastructure/reset_password_repository/reset_password_repository.dart';
 import 'infrastructure/service_request_management/service_request_management_repository.dart';
 import 'infrastructure/shared_preference/shared_preff_util.dart';
 import 'infrastructure/signup/signup_repository.dart';
+import 'infrastructure/verify_email/verify_email_repository.dart';
 import 'presentation/routes/app_router.dart';
 import 'presentation/widget/loader_view.dart';
 
@@ -90,6 +96,11 @@ class _MyAppState extends State<MyApp> {
                 CareGiverVerificationBloc(CareGiverVerificationRepository())),
         BlocProvider(create: (_) => FormValidationBloc()),
         BlocProvider(create: (_) => LoginBloc(LoginRepository())),
+        BlocProvider(create: (_) => VerifyEmailBloc(VerifyEmailRepository())),
+        BlocProvider(
+            create: (_) => ResetPasswordBloc(ResetPasswordRepository())),
+        BlocProvider(
+            create: (_) => ForgotPasswordBloc(ForgotPasswordRepository())),
         BlocProvider(create: (_) => SignupBloc(SignupRepository())),
         BlocProvider(create: (_) => ClientReportBloc(ClientReportRepository())),
         BlocProvider(create: (_) => MasterBloc(MasterRepository())),

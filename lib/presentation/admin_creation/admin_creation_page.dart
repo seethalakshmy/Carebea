@@ -13,6 +13,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/admin_creation/admin_creation_bloc.dart';
+import '../../application/bloc/admins/admins_bloc.dart';
+import '../../core/custom_snackbar.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
@@ -32,12 +34,12 @@ import '../widget/header_view.dart';
 
 @RoutePage()
 class AdminCreationPage extends StatefulWidget {
-  const AdminCreationPage(
-      {Key? key,
-      @QueryParam('view') this.isView,
-      @QueryParam('edit') this.isEdit,
-      @QueryParam('id') this.id})
-      : super(key: key);
+  const AdminCreationPage({
+    Key? key,
+    @QueryParam('view') this.isView,
+    @QueryParam('edit') this.isEdit,
+    @QueryParam('id') this.id,
+  }) : super(key: key);
 
   /// To do change :- change these two variables to bool for now getting error like " NoSuchMethodError: 'toLowerCase"  when extracting using auto-route
   final String? isView;
@@ -65,6 +67,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
   String adminUserID = "";
   String adminId = "";
   String selectedRole = '';
+  String? firstName;
 
   bool? _isView;
 
@@ -137,7 +140,8 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
 
   _bodyView(BuildContext context, AdminCreationState state) {
     if (state.viewResponse != null) {
-      _fNameController.text = state.viewResponse?.data?.firstName ?? "";
+      firstName = state.viewResponse?.data?.firstName ?? "";
+      _fNameController.text = firstName ?? '';
       _lNameController.text = state.viewResponse?.data?.lastName ?? "";
       _emailController.text = state.viewResponse?.data?.email ?? "";
       _mobileController.text = state.viewResponse?.data?.phoneNumber ?? "";
@@ -336,12 +340,15 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
                   isIgnore: _isView!,
+                  inputFormatter: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Z., ]"))
+                  ],
                   isMandatory: true,
                   labelName: AppString.firstName.val,
                   focusNode: _fNameFocusNode,
                   controller: _fNameController,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value?.trim() == null || value!.trim().isEmpty) {
                       return AppString.emptyFName.val;
                     }
                     return null;
@@ -354,13 +361,16 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
               CustomSizedBox(
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
+                  inputFormatter: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Z., ]"))
+                  ],
                   isIgnore: _isView!,
                   isMandatory: true,
                   labelName: AppString.lastName.val,
                   focusNode: _lNameFocusNode,
                   controller: _lNameController,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value?.trim() == null || value!.trim().isEmpty) {
                       return AppString.emptyLName.val;
                     }
                     return null;
@@ -446,6 +456,15 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                           height: DBL.fortyFive.val,
                           minWidth: DBL.oneTwenty.val,
                           onPressed: () async {
+                            firstName = _fNameController.text;
+                            _emailController.text =
+                                state.viewResponse?.data?.email ?? "";
+                            _mobileController.text =
+                                state.viewResponse?.data?.phoneNumber ?? "";
+                            selectedRole =
+                                state.viewResponse?.data?.roleId ?? '';
+                            _adminCreationBloc.profileUrl =
+                                state.viewResponse?.data?.profile ?? '';
                             if (_adminCreationBloc
                                     .state.pickedProfilePic!.size >
                                 0) {
@@ -475,10 +494,10 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
     _adminCreationBloc.add(AdminCreationEvent.dropDownErrorDisplay(
         value: state.selectedRole == null));
     if (_formKey.currentState!.validate() && !state.isDropDownError) {
-      print('id:: ${adminUserID}');
-      if (_isEdit!) {
-        _adminCreationBloc.add(AdminCreationEvent.updateAdmin(
-            adminId: adminId,
+      if (!_isEdit! && _adminCreationBloc.state.pickedProfilePic?.size == 0) {
+        CSnackBar.showError(context, msg: 'Please select a profile picture');
+      } else {
+        _adminCreationBloc.add(AdminCreationEvent.addAdmin(
             userId: adminUserID,
             roleId: state.selectedRole?.id ?? "",
             context: context,
@@ -487,8 +506,10 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
             email: _emailController.text.trim().toLowerCase(),
             mobile: _mobileController.text.trim(),
             profilePic: _adminCreationBloc.profileUrl));
-      } else {
-        _adminCreationBloc.add(AdminCreationEvent.addAdmin(
+      }
+      if (_isEdit!) {
+        _adminCreationBloc.add(AdminCreationEvent.updateAdmin(
+            adminId: adminId,
             userId: adminUserID,
             roleId: state.selectedRole?.id ?? "",
             context: context,

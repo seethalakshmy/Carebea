@@ -7,7 +7,10 @@ import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/subscription/model/subscription_model.dart';
+import '../routes/app_router.gr.dart';
+import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
+import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/row_combo.dart';
 
 class SubscriptionDetailScreen extends StatelessWidget {
@@ -39,6 +42,25 @@ class SubscriptionDetailScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CachedImage(
+                                  onTap: () {
+                                    showGeneralDialog(
+                                      barrierDismissible: true,
+                                      barrierLabel: "",
+                                      context: context,
+                                      pageBuilder: (BuildContext buildContext,
+                                          Animation animation,
+                                          Animation secondaryAnimation) {
+                                        return CustomAlertDialogWidget(
+                                            showHeading: false,
+                                            width: 700,
+                                            heading: "",
+                                            child: CachedImage(
+                                              fit: BoxFit.contain,
+                                              imgUrl: item.profile,
+                                            ));
+                                      },
+                                    );
+                                  },
                                   imgUrl: item.profile,
                                   width: isXs(context) ? 150 : 200,
                                   height: isXs(context) ? 125 : 175,
@@ -73,16 +95,45 @@ class SubscriptionDetailScreen extends StatelessWidget {
                                 const SizedBox(
                                   height: 40,
                                 ),
-                                CustomText(
-                                  (item.name?.firstName ?? '') +
-                                      (item.name?.lastName ?? ''),
-                                  style: TS().gRoboto(
-                                    color: AppColor.rowColor.val,
-                                    fontWeight: FW.w600.val,
-                                    fontSize: getFontSize(
-                                      context,
-                                      fontSize: FS.font19.val,
-                                    ),
+                                InkWell(
+                                  onTap: () {
+                                    debugPrint('statusssss ${item.status}');
+                                    Navigator.pop(context);
+                                    autoTabRouter?.navigate(
+                                        ClientSubProfileDetailsRoute(
+                                            id: item.id));
+                                  },
+                                  child: Row(
+                                    children: [
+                                      CustomText(
+                                        (item.name?.firstName ?? '') +
+                                            (item.name?.lastName ?? ''),
+                                        style: TS().gRoboto(
+                                          color: AppColor.rowColor.val,
+                                          fontWeight: FW.w600.val,
+                                          needUnderLine: true,
+                                          fontSize: getFontSize(
+                                            context,
+                                            fontSize: FS.font19.val,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      CustomText(
+                                          item.status == false
+                                              ? AppString
+                                                  .deletedCareRecipient.val
+                                              : '',
+                                          style: TS().gRoboto(
+                                              color: AppColor.red.val,
+                                              fontWeight: FW.w600.val,
+                                              fontSize: getFontSize(
+                                                context,
+                                                fontSize: FS.font19.val,
+                                              ))),
+                                    ],
                                   ),
                                 ),
                                 CustomText(
@@ -227,6 +278,26 @@ class SubscriptionDetailScreen extends StatelessWidget {
               value: Utility.serviceDate(
                   DateTime.parse(item.subscriptionDetails?.expiry ?? "")
                       .toLocal()),
+              fontSize: FS.font13PointFive.val),
+          CustomSizedBox(
+            height: DBL.seventeen.val,
+          ),
+
+          RowColonCombo.twoHundred(
+              label: AppString.renewalDate.val,
+              value: "",
+              fontSize: FS.font13PointFive.val),
+          CustomSizedBox(
+            height: DBL.seventeen.val,
+          ),
+          RowColonCombo.twoHundred(
+              label: AppString.subscriptionStatus.val,
+              value: item.subscriptionDetails?.isActive == true
+                  ? AppString.active.val
+                  : AppString.inActive.val,
+              valueColor: item.subscriptionDetails?.isActive == true
+                  ? AppColor.green.val
+                  : AppColor.red.val,
               fontSize: FS.font13PointFive.val),
 
           // isLg(context) ? _rightView() : CustomSizedBox.shrink(),

@@ -46,11 +46,11 @@ class DotTextListItem extends StatelessWidget {
           CustomSizedBox(
             width: DBL.twenty.val,
           ),
-          CustomContainer(
-            height: DBL.twenty.val,
-            width: DBL.one.val,
-            color: AppColor.dividerColor3.val,
-          ),
+          // CustomContainer(
+          //   height: DBL.twenty.val,
+          //   width: DBL.one.val,
+          //   color: AppColor.dividerColor3.val,
+          // ),
           CustomSizedBox(
             width: DBL.fifteen.val,
           ),

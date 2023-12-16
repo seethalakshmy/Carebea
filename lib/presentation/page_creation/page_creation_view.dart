@@ -25,13 +25,14 @@ import '../widget/header_view.dart';
 class PageCreationPage extends StatefulWidget {
   PageCreationPage(
       {Key? key,
+      @QueryParam('heading') this.heading,
       @QueryParam('title') this.title,
       @QueryParam('id') this.id,
       @QueryParam('description') this.description,
       @QueryParam('isEdit') this.isEdit,
       @QueryParam('forWhom') this.forWhom})
       : super(key: key);
-
+  final String? heading;
   final String? title;
   final String? id;
   final String? description;
@@ -50,6 +51,7 @@ class _PageCreationPageState extends State<PageCreationPage> {
   String? description;
   num? forWhom;
   String? adminUserID;
+  String? heading;
   final FocusNode titleFocusNode = FocusNode();
   final _pageFormKey = GlobalKey<FormState>();
   final AutovalidateMode _validateMode = AutovalidateMode.disabled;
@@ -85,6 +87,8 @@ class _PageCreationPageState extends State<PageCreationPage> {
   void initState() {
     super.initState();
     // _faqCreationBloc = FaqCreationBloc(FaqCreationRepository());
+    heading =
+        autoTabRouter?.currentChild?.queryParams.getString("heading", "") ?? '';
     log("initState called");
     adminUserID = SharedPreffUtil().getAdminId;
     id = autoTabRouter?.currentChild?.queryParams.getString("id", "") ?? "";
@@ -111,7 +115,7 @@ class _PageCreationPageState extends State<PageCreationPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            HeaderView(title: AppString.pageManagement.val),
+            HeaderView(title: heading ?? ''),
             CustomSizedBox(height: DBL.twenty.val),
             _forWhoWidget(),
             CForm(

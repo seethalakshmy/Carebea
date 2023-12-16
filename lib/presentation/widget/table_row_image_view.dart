@@ -28,19 +28,22 @@ class TableRowImageView extends StatelessWidget {
 
   Expanded _buildText(BuildContext context) {
     return Expanded(
-      child: CustomText(
-        name,
-        style: _buildStyle(context),
+      child: Tooltip(
+        message: name,
+        child: CustomText(
+          name,
+          style: _buildStyle(context),
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
     );
   }
 
   _buildStyle(BuildContext context) {
     return TS().gRoboto(
-          fontSize:
-              Responsive.isWeb(context) ? DBL.fourteen.val : DBL.twelve.val,
-          fontWeight: FW.w400.val,
-          color: AppColor.rowColor.val);
+        fontSize: Responsive.isWeb(context) ? DBL.fourteen.val : DBL.twelve.val,
+        fontWeight: FW.w400.val,
+        color: AppColor.rowColor.val);
   }
 
   ClipRRect _buildImage() {

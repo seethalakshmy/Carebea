@@ -32,9 +32,9 @@ class Data {
 
   Data.fromJson(Map<String, dynamic> json) {
     totalCount = json['totalCount'];
-    if (json['earnings'] != null) {
+    if (json['transactions'] != null) {
       earnings = <Earnings>[];
-      json['earnings'].forEach((v) {
+      json['transactions'].forEach((v) {
         earnings!.add(Earnings.fromJson(v));
       });
     }
@@ -44,7 +44,7 @@ class Data {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['totalCount'];
     if (earnings != null) {
-      data['earnings'] = earnings!.map((v) => v.toJson()).toList();
+      data['transactions'] = earnings!.map((v) => v.toJson()).toList();
     }
     return data;
   }

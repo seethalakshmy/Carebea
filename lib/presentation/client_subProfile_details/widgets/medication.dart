@@ -10,15 +10,14 @@ import '../../widget/custom_sizedbox.dart';
 import '../../widget/row_combo.dart';
 
 class MedicationWidget extends StatelessWidget {
-  MedicationWidget({Key? key, this.medication}) : super(key: key);
+  MedicationWidget({Key? key, this.healthMedicalConditions}) : super(key: key);
 
-  List<Medication>? medication;
   HealthMedicalConditions? healthMedicalConditions;
 
   @override
   Widget build(BuildContext context) {
-    print('medication ${medication?.length}');
-    print('drug ${healthMedicalConditions?.toJson()}');
+    print('medication ${healthMedicalConditions?.medication?.length}');
+    debugPrint("drgsssss ${healthMedicalConditions?.drugs}");
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,13 +42,13 @@ class MedicationWidget extends StatelessWidget {
             height: 10,
           ),
           SizedBox(
-            height: 200,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, index) {
-                return Wrap(
-                  children: [
-                    Container(
+              height: 200,
+              child: Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  children: List.generate(
+                    healthMedicalConditions?.medication?.length ?? 0,
+                    (index) => Container(
                       decoration: BoxDecoration(
                           border: Border.all(color: AppColor.lightGrey.val)),
                       child: Padding(
@@ -57,20 +56,37 @@ class MedicationWidget extends StatelessWidget {
                           child: SizedBox(
                               width: 500,
                               child: _medicationDetailsView(
-                                  data: medication?[index]))),
+                                  data: healthMedicalConditions
+                                      ?.medication?[index]))),
                     ),
-                    const SizedBox(
-                      width: 10,
-                    )
-                  ],
-                );
-              },
-              scrollDirection: Axis.horizontal,
-              itemCount: medication?.length ?? 0,
-            ),
-          ),
+
+                    // ListView.builder(
+                    //   shrinkWrap: true,
+                    //   itemBuilder: (BuildContext context, index) {
+                    //     return Wrap(
+                    //       children: [
+                    //         Container(
+                    //           decoration: BoxDecoration(
+                    //               border: Border.all(color: AppColor.lightGrey.val)),
+                    //           child: Padding(
+                    //               padding: const EdgeInsets.all(10.0),
+                    //               child: SizedBox(
+                    //                   width: 500,
+                    //                   child: _medicationDetailsView(
+                    //                       data: medication?[index]))),
+                    //         ),
+                    //         const SizedBox(
+                    //           width: 10,
+                    //         )
+                    //       ],
+                    //     );
+                    //   },
+                    //   scrollDirection: Axis.horizontal,
+                    //   itemCount: medication?.length ?? 0,
+                    // ),
+                  ))),
           SizedBox(
-            height: 20,
+            height: 150,
           ),
           Row(
             children: [
@@ -88,24 +104,21 @@ class MedicationWidget extends StatelessWidget {
               )
             ],
           ),
+          SizedBox(
+            height: 10,
+          ),
           Wrap(
             children: healthMedicalConditions?.drugs
                     ?.map(
-                      (e) => Container(
-                        color: Colors.red,
-                        // height: 20,
-                        width: 100,
-
-                        child: Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: Row(
-                            children: [
-                              AlertTextLabel(
-                                e ?? '',
-                                color: Colors.black,
-                              ),
-                            ],
-                          ),
+                      (e) => Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Row(
+                          children: [
+                            AlertTextLabel(
+                              e + (',') ?? '',
+                              color: Colors.black,
+                            ),
+                          ],
                         ),
                       ),
                     )
@@ -168,8 +181,7 @@ class MedicationWidget extends StatelessWidget {
     return RowColonCombo.twoHundred(
         label: AppString.expirationDate.val,
         value: Utility.dateConverter(
-            date:
-                DateTime.parse(data?.expirationDate ?? '').toLocal().toString(),
+            date: data?.expirationDate ?? '',
             currentFormat: 'dd/mm/yyyy',
             convertToFormat: 'mm/dd/yyyy'),
         fontSize: FS.font13PointFive.val);

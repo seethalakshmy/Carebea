@@ -161,6 +161,11 @@ class _SampleDropdownState extends State<SampleDropdown> {
                                   widget.onSearchChanged(val);
                                 });
                               },
+                              onFieldSubmitted: (val) {
+                                setState(() {
+                                  widget.onSearchChanged(val);
+                                });
+                              },
                               decoration: const InputDecoration(
                                   hintText: 'Search...',
                                   prefixIcon: Icon(Icons.search),
@@ -395,7 +400,7 @@ class _SampleDropdownState extends State<SampleDropdown> {
     return List<Widget>.generate(selectedItems.length, (index) {
       final item = selectedItems[index];
       return Container(
-        width: 100,
+        // width: 100,
         height: 30,
         padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
@@ -418,18 +423,24 @@ class _SampleDropdownState extends State<SampleDropdown> {
                       : AppColor.both.val,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisSize: MainAxisSize.min,
+          // mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
               item.name,
               style: const TextStyle(fontSize: 13),
+            ),
+            const SizedBox(
+              width: 20,
             ),
             InkWell(
               borderRadius: BorderRadius.circular(50),
               onTap: () {
                 setState(() {
                   if (widget.isFromLangauge) {
+                    debugPrint('taped');
                     widget.onboardingBloc.selectedLanguageList.remove(item);
+                    selectedItems.remove(item);
                   } else {
                     widget.onboardingBloc.selectedPetsList.remove(item);
                   }

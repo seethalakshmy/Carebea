@@ -169,8 +169,9 @@ class SubProfileHealthProfile extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: MedicationWidget(
-                    medication: state
-                        .response?.data?.healthMedicalConditions?.medication),
+                  healthMedicalConditions:
+                      state.response?.data?.healthMedicalConditions,
+                ),
               )
             ],
           ),

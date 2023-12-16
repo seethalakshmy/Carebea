@@ -13,6 +13,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../application/bloc/forgot_password/forgot_password_bloc.dart';
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../routes/app_router.gr.dart';
 import '../widget/custom_text_field.dart';
@@ -184,23 +185,33 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   }
 
   Widget _sendInstructionButton() {
-    return CustomMaterialButton(
-      text: AppString.sendRestInstructions.val,
-      borderRadius: DBL.eight.val,
-      height: DBL.sixty.val,
-      minWidth: DBL.fourFifty.val,
-      color: AppColor.primaryColor.val,
-      onPressed: () {
-        if (_validateMode != AutovalidateMode.always) {
-          _validationBloc.add(const FormValidationEvent.submit());
-        }
+    return BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+      builder: (context, state) {
+        return CustomMaterialButton(
+          isLoading: state.isLoading,
+          text: AppString.sendRestInstructions.val,
+          borderRadius: DBL.eight.val,
+          height: DBL.sixty.val,
+          minWidth: DBL.fourFifty.val,
+          color: AppColor.primaryColor.val,
+          onPressed: () {
+            if (_validateMode != AutovalidateMode.always) {
+              _validationBloc.add(const FormValidationEvent.submit());
+            }
 
-        CustomLog.log("${_formKey.currentState!.validate()}");
-        if (_formKey.currentState!.validate()) {
-          context.router.navigate(const ResetPasswordRoute());
-        } else {
-          CustomLog.log("not validated");
-        }
+            CustomLog.log("${_formKey.currentState!.validate()}");
+            if (_formKey.currentState!.validate()) {
+              context
+                  .read<ForgotPasswordBloc>()
+                  .add(ForgotPasswordEvent.forgotPassword(
+                    context: context,
+                    email: _usernameController.text.trim().toLowerCase(),
+                  ));
+            } else {
+              CustomLog.log("not validated");
+            }
+          },
+        );
       },
     );
   }

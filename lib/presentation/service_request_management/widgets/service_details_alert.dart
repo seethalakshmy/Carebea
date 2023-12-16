@@ -190,15 +190,16 @@ class ServiceDetailsAlert extends StatelessWidget {
                 feedback: reviewByClient,
                 rating:
                     double.tryParse(ratingByClient.toString()) ?? DBL.zero.val)
-            : _rateNowButton(onPressed: () {}, title: AppString.rateTheCa.val),
+            : SizedBox.shrink(),
         CustomSizedBox(height: DBL.ten.val),
         title == AppString.completed.val && (service.isRatedByCg ?? false)
             ? RatingWidget(
-                rater: AppString.careAmbassador.val,
+                rater: AppString.careAmbassadors.val,
                 feedback: reviewByCa,
                 rating: double.tryParse(ratingByCa.toString()) ?? DBL.zero.val)
-            : _rateNowButton(
-                onPressed: () {}, title: AppString.rateTheClient.val)
+            : SizedBox.shrink(),
+        // _rateNowButton(
+        //         onPressed: () {}, title: AppString.rateTheClient.val)
       ],
     );
   }
@@ -494,7 +495,7 @@ class ServiceDetailsAlert extends StatelessWidget {
                 needUnderLine: true,
                 name:
                     "${service.caregiverInfo!.name!.firstName ?? ""} ${service.caregiverInfo!.name!.lastName ?? ""}",
-                subText: AppString.careAmbassador.val,
+                subText: AppString.careAmbassadors.val,
                 onNameTap: () {
                   Navigator.pop(context);
                   autoTabRouter?.navigate(

@@ -394,13 +394,14 @@ class _ServiceRequestManagementPageState
                       text: AppString.slNo.val, fontWeight: FontWeight.bold),
                 ),
                 DataColumn2(
-                  size: ColumnSize.S,
+                  size: ColumnSize.L,
                   fixedWidth: DBL.oneFifty.val,
                   label: _columnsView(
                       text: AppString.serviceId.val,
                       fontWeight: FontWeight.bold),
                 ),
                 DataColumn2(
+                  size: ColumnSize.L,
                   fixedWidth: DBL.twoHundred.val,
                   label: _columnsView(
                       text: AppString.clientName.val,
@@ -420,14 +421,14 @@ class _ServiceRequestManagementPageState
                       text: AppString.caName.val, fontWeight: FontWeight.bold),
                 ),
                 DataColumn2(
-                  size: ColumnSize.L,
+                  size: ColumnSize.M,
                   fixedWidth: DBL.twoHundred.val,
                   label: _columnsView(
                       text: AppString.startDateAndTime.val,
                       fontWeight: FontWeight.bold),
                 ),
                 DataColumn2(
-                  size: ColumnSize.L,
+                  size: ColumnSize.M,
                   fixedWidth: DBL.twoHundred.val,
                   label: _columnsView(
                       text: AppString.endDateAndTime.val,
@@ -460,13 +461,13 @@ class _ServiceRequestManagementPageState
                   ),*/
                 //bug num 67494
                 DataColumn2(
-                  size: ColumnSize.L,
+                  size: ColumnSize.S,
                   fixedWidth: 150,
                   label: _columnsView(
                       text: AppString.status.val, fontWeight: FontWeight.bold),
                 ),
                 DataColumn2(
-                  // size: ColumnSize.L,
+                  size: ColumnSize.S,
                   fixedWidth: Responsive.isWeb(context)
                       ? MediaQuery.of(context).size.width * .1
                       : DBL.oneSeventy.val,
@@ -600,18 +601,22 @@ class _ServiceRequestManagementPageState
               borderRadius: BorderRadius.circular(8),
               color: _generateColor(text ?? ""))
           : const BoxDecoration(),
-      child: CustomText(
-        '$text',
-        softWrap: true,
-        overflow: TextOverflow.ellipsis,
-        style: TS().gRoboto(
-            fontSize: Responsive.isWeb(context)
-                ? DBL.thirteenPointFive.val
-                : DBL.twelve.val,
-            fontWeight: FW.w400.val,
-            color:
-                isStatus ?? false ? AppColor.white.val : AppColor.rowColor.val),
-        textAlign: TextAlign.start,
+      child: Tooltip(
+        message: text,
+        child: CustomText(
+          '$text',
+          softWrap: true,
+          overflow: TextOverflow.ellipsis,
+          style: TS().gRoboto(
+              fontSize: Responsive.isWeb(context)
+                  ? DBL.thirteenPointFive.val
+                  : DBL.twelve.val,
+              fontWeight: FW.w400.val,
+              color: isStatus ?? false
+                  ? AppColor.white.val
+                  : AppColor.rowColor.val),
+          textAlign: TextAlign.start,
+        ),
       ),
     );
   }

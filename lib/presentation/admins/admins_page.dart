@@ -1,3 +1,4 @@
+import '../../application/bloc/admin_creation/admin_creation_bloc.dart';
 import '../../application/bloc/admins/admins_bloc.dart';
 import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
@@ -509,28 +510,30 @@ class _AdminsPageState extends State<AdminsPage> {
               DataCell(_tableRowView(item.role ?? "")),
               DataCell(_tableSwitchBox(item)),
               // DataCell(_statusBox(item.status ?? false)),
-              DataCell(TableActions(
-                isView: sharedPrefUtil.getViewAdmin,
-                onViewTap: sharedPrefUtil.getViewAdmin
-                    ? () {
-                        autoTabRouter?.navigate(
-                            AdminCreationRoute(isView: "view", id: item.id));
-                      }
-                    : null,
-                isDelete: sharedPrefUtil.getDeleteAdmin,
-                onDeleteTap: sharedPrefUtil.getDeleteAdmin
-                    ? () {
-                        _deletePopup(context, item.id ?? "");
-                      }
-                    : null,
-                isEdit: sharedPrefUtil.getEditAdmin,
-                onEditTap: sharedPrefUtil.getEditAdmin
-                    ? () {
-                        autoTabRouter?.navigate(
-                            AdminCreationRoute(isEdit: "edit", id: item.id));
-                      }
-                    : null,
-              )),
+              DataCell(
+                TableActions(
+                  isView: sharedPrefUtil.getViewAdmin,
+                  onViewTap: sharedPrefUtil.getViewAdmin
+                      ? () {
+                          autoTabRouter?.navigate(
+                              AdminCreationRoute(isView: "view", id: item.id));
+                        }
+                      : null,
+                  isDelete: sharedPrefUtil.getDeleteAdmin,
+                  onDeleteTap: sharedPrefUtil.getDeleteAdmin
+                      ? () {
+                          _deletePopup(context, item.id ?? "");
+                        }
+                      : null,
+                  isEdit: sharedPrefUtil.getEditAdmin,
+                  onEditTap: sharedPrefUtil.getEditAdmin
+                      ? () {
+                          autoTabRouter?.navigate(
+                              AdminCreationRoute(isEdit: "edit", id: item.id));
+                        }
+                      : null,
+                ),
+              )
             ],
           );
         }).toList(),
@@ -558,9 +561,12 @@ class _AdminsPageState extends State<AdminsPage> {
     );
   }
 
-  TableRowView _tableRowView(String name) {
-    return TableRowView(
-      text: name,
+  Tooltip _tableRowView(String name) {
+    return Tooltip(
+      message: name,
+      child: TableRowView(
+        text: name,
+      ),
     );
   }
 

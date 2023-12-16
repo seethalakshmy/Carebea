@@ -36,14 +36,13 @@ class CareGiverPreferenceView extends StatelessWidget {
                 value: preference?.serveWithPets ?? "",
                 fontSize: FS.font13PointFive.val),
             CustomSizedBox(
-              width: DBL.threeEighty.val,
-            ),
-            CustomSizedBox(
-              height: DBL.fourteen.val,
-            ),
-            petsList(context, MediaQuery.of(context).size, preference),
-            CustomSizedBox(
               height: DBL.twenty.val,
+            ),
+            preference?.serveWithPets == 'Yes'
+                ? petsList(context, MediaQuery.of(context).size, preference)
+                : const SizedBox.shrink(),
+            CustomSizedBox(
+              height: DBL.ten.val,
             ),
             RowColonCombo.threeEighty(
                 label: AppString.willingToServeWithSmoker.val,
@@ -55,7 +54,7 @@ class CareGiverPreferenceView extends StatelessWidget {
             RowColonCombo.threeEighty(
                 label: AppString.knownLanguage.val,
                 value: preference?.languages != null
-                    ? preference!.languages!.join(",")
+                    ? preference!.languages!.join(" , ")
                     : "",
                 fontSize: FS.font13PointFive.val),
             CustomSizedBox(
@@ -88,6 +87,8 @@ class CareGiverPreferenceView extends StatelessWidget {
             itemCount: preference?.pets?.length ?? 0,
             itemBuilder: (context, index) {
               Pets pets = preference!.pets![index];
+              debugPrint('petssssss ${pets.name}');
+
               return PetItem(
                   name: pets.name ?? "", inOutStatus: pets.inOutStatus ?? 0);
             },

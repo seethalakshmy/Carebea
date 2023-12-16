@@ -1288,7 +1288,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                                     );
                                   } else {
                                     rejectionParams = RejectionParams(
-                                        userId: SharedPreffUtil().adminId,
+                                        userId: adminId,
                                         caregiverId: userId,
                                         hhaRejectReason:
                                             _hhaReasonController.text.trim(),

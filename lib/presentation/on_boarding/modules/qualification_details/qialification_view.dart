@@ -164,23 +164,35 @@ class _QualificationViewState extends State<QualificationView> {
                           int? sizeInBytes = hhaFile?.size;
                           double sizeInMb = sizeInBytes! / (1024 * 1024);
                           debugPrint("size $sizeInMb");
-                          if (sizeInMb < 20) {
-                            for (PlatformFile file in hhaResult.files) {
-                              widget.onboardingBloc.hhaBytesList.add(file);
-                              if (widget.onboardingBloc.hhaBytesList.length ==
-                                  2) {
-                                break;
+                          if (hhaFile?.extension == 'jpg' ||
+                              hhaFile?.extension == 'png' ||
+                              hhaFile?.extension == 'jpeg' ||
+                              hhaFile?.extension == 'JPG' ||
+                              hhaFile?.extension == 'PNG' ||
+                              hhaFile?.extension == 'JPEG' ||
+                              hhaFile?.extension == 'pdf' ||
+                              hhaFile?.extension == 'PDF') {
+                            if (sizeInMb < 20) {
+                              for (PlatformFile file in hhaResult.files) {
+                                widget.onboardingBloc.hhaBytesList.add(file);
+                                if (widget.onboardingBloc.hhaBytesList.length ==
+                                    2) {
+                                  break;
+                                }
                               }
-                            }
 
-                            widget.onboardingBloc.add(
-                              OnboardingEvent.hhaDocumentUpload(
-                                  widget.onboardingBloc.hhaBytesList,
-                                  hhaListUpdated),
-                            );
+                              widget.onboardingBloc.add(
+                                OnboardingEvent.hhaDocumentUpload(
+                                    widget.onboardingBloc.hhaBytesList,
+                                    hhaListUpdated),
+                              );
+                            } else {
+                              CSnackBar.showError(context,
+                                  msg: AppString.fileSizeError.val);
+                            }
                           } else {
                             CSnackBar.showError(context,
-                                msg: AppString.fileSizeError.val);
+                                msg: AppString.fileTypeNotSupport.val);
                           }
                         } else {
                           // User canceled the picker
@@ -230,7 +242,6 @@ class _QualificationViewState extends State<QualificationView> {
                             'png',
                             'jpeg',
                             'pdf',
-                            'doc'
                           ],
                         );
 
@@ -241,22 +252,34 @@ class _QualificationViewState extends State<QualificationView> {
                           int? sizeInBytes = blsFile?.size;
                           double sizeInMb = sizeInBytes! / (1024 * 1024);
                           debugPrint("size $sizeInMb");
-                          if (sizeInMb < 20) {
-                            for (PlatformFile file in blsResult.files) {
-                              widget.onboardingBloc.blsBytesList.add(file);
-                              if (widget.onboardingBloc.blsBytesList.length ==
-                                  2) {
-                                break;
+                          if (blsFile?.extension == 'jpg' ||
+                              blsFile?.extension == 'png' ||
+                              blsFile?.extension == 'jpeg' ||
+                              blsFile?.extension == 'JPG' ||
+                              blsFile?.extension == 'PNG' ||
+                              blsFile?.extension == 'JPEG' ||
+                              blsFile?.extension == 'pdf' ||
+                              blsFile?.extension == 'PDF') {
+                            if (sizeInMb < 20) {
+                              for (PlatformFile file in blsResult.files) {
+                                widget.onboardingBloc.blsBytesList.add(file);
+                                if (widget.onboardingBloc.blsBytesList.length ==
+                                    2) {
+                                  break;
+                                }
                               }
+                              widget.onboardingBloc.add(
+                                OnboardingEvent.blsDocumentUpload(
+                                    widget.onboardingBloc.blsBytesList,
+                                    blsListUpdated),
+                              );
+                            } else {
+                              CSnackBar.showError(context,
+                                  msg: AppString.fileSizeError.val);
                             }
-                            widget.onboardingBloc.add(
-                              OnboardingEvent.blsDocumentUpload(
-                                  widget.onboardingBloc.blsBytesList,
-                                  blsListUpdated),
-                            );
                           } else {
                             CSnackBar.showError(context,
-                                msg: AppString.fileSizeError.val);
+                                msg: AppString.fileTypeNotSupport.val);
                           }
                         } else {}
                       },
@@ -296,7 +319,6 @@ class _QualificationViewState extends State<QualificationView> {
                             'png',
                             'jpeg',
                             'pdf',
-                            'doc'
                           ],
                         );
                         if (tbResult != null) {
@@ -305,23 +327,35 @@ class _QualificationViewState extends State<QualificationView> {
 
                           int? sizeInBytes = tbFile?.size;
                           double sizeInMb = sizeInBytes! / (1024 * 1024);
-                          if (sizeInMb < 20) {
-                            for (PlatformFile file in tbResult.files) {
-                              widget.onboardingBloc.tbBytesList.add(file);
-                              if (widget.onboardingBloc.tbBytesList.length ==
-                                  2) {
-                                break;
+                          if (tbFile?.extension == 'jpg' ||
+                              tbFile?.extension == 'png' ||
+                              tbFile?.extension == 'jpeg' ||
+                              tbFile?.extension == 'JPG' ||
+                              tbFile?.extension == 'PNG' ||
+                              tbFile?.extension == 'JPEG' ||
+                              tbFile?.extension == 'pdf' ||
+                              tbFile?.extension == 'PDF') {
+                            if (sizeInMb < 20) {
+                              for (PlatformFile file in tbResult.files) {
+                                widget.onboardingBloc.tbBytesList.add(file);
+                                if (widget.onboardingBloc.tbBytesList.length ==
+                                    2) {
+                                  break;
+                                }
                               }
-                            }
 
-                            widget.onboardingBloc.add(
-                              OnboardingEvent.tbDocumentUpload(
-                                  widget.onboardingBloc.tbBytesList,
-                                  tbListUpdated),
-                            );
+                              widget.onboardingBloc.add(
+                                OnboardingEvent.tbDocumentUpload(
+                                    widget.onboardingBloc.tbBytesList,
+                                    tbListUpdated),
+                              );
+                            } else {
+                              CSnackBar.showError(context,
+                                  msg: AppString.fileSizeError.val);
+                            }
                           } else {
                             CSnackBar.showError(context,
-                                msg: AppString.fileSizeError.val);
+                                msg: AppString.fileTypeNotSupport.val);
                           }
                         } else {
                           // User canceled the picker
@@ -360,7 +394,6 @@ class _QualificationViewState extends State<QualificationView> {
                             'png',
                             'jpeg',
                             'pdf',
-                            'doc'
                           ],
                         );
                         if (covidResult != null) {
@@ -369,23 +402,36 @@ class _QualificationViewState extends State<QualificationView> {
 
                           int? sizeInBytes = tbFile?.size;
                           double sizeInMb = sizeInBytes! / (1024 * 1024);
-                          if (sizeInMb < 20) {
-                            for (PlatformFile file in covidResult.files) {
-                              widget.onboardingBloc.covidBytesList.add(file);
-                              if (widget.onboardingBloc.covidBytesList.length ==
-                                  2) {
-                                break;
+                          if (tbFile?.extension == 'jpg' ||
+                              tbFile?.extension == 'png' ||
+                              tbFile?.extension == 'jpeg' ||
+                              tbFile?.extension == 'JPG' ||
+                              tbFile?.extension == 'PNG' ||
+                              tbFile?.extension == 'JPEG' ||
+                              tbFile?.extension == 'pdf' ||
+                              tbFile?.extension == 'PDF') {
+                            if (sizeInMb < 20) {
+                              for (PlatformFile file in covidResult.files) {
+                                widget.onboardingBloc.covidBytesList.add(file);
+                                if (widget
+                                        .onboardingBloc.covidBytesList.length ==
+                                    2) {
+                                  break;
+                                }
                               }
-                            }
 
-                            widget.onboardingBloc.add(
-                              OnboardingEvent.covidDocumentUpload(
-                                  widget.onboardingBloc.covidBytesList,
-                                  covidListUpdated),
-                            );
+                              widget.onboardingBloc.add(
+                                OnboardingEvent.covidDocumentUpload(
+                                    widget.onboardingBloc.covidBytesList,
+                                    covidListUpdated),
+                              );
+                            } else {
+                              CSnackBar.showError(context,
+                                  msg: AppString.fileSizeError.val);
+                            }
                           } else {
                             CSnackBar.showError(context,
-                                msg: AppString.fileSizeError.val);
+                                msg: AppString.fileTypeNotSupport.val);
                           }
                         } else {
                           // User canceled the picker
@@ -400,6 +446,7 @@ class _QualificationViewState extends State<QualificationView> {
                       bloc: _validationBloc,
                       builder: (context, validationState) {
                         return CommonNextOrCancelButtons(
+                          showLeftButton: true,
                           isLoading: widget.onboardingBloc.state.isLoading,
                           rightButtonName: AppString.next.val,
                           leftButtonName: AppString.back.val,
@@ -429,11 +476,17 @@ class _QualificationViewState extends State<QualificationView> {
                               for (int i = 0;
                                   i < widget.onboardingBloc.hhaBytesList.length;
                                   i++) {
+                                widget.onboardingBloc.emit(widget
+                                    .onboardingBloc.state
+                                    .copyWith(isLoading: true));
                                 widget.onboardingBloc.uploadedHhaDocList.add(
                                     await uploadDocumentsToAwsS3(
                                         AppString.documents.val,
                                         SharedPreffUtil().getCareGiverUserId,
                                         widget.onboardingBloc.hhaBytesList[i]));
+                                widget.onboardingBloc.emit(widget
+                                    .onboardingBloc.state
+                                    .copyWith(isLoading: false));
                               }
                               widget.onboardingBloc.hhaBytesList.clear();
                             }
@@ -441,11 +494,17 @@ class _QualificationViewState extends State<QualificationView> {
                               for (int i = 0;
                                   i < widget.onboardingBloc.blsBytesList.length;
                                   i++) {
+                                widget.onboardingBloc.emit(widget
+                                    .onboardingBloc.state
+                                    .copyWith(isLoading: true));
                                 widget.onboardingBloc.uploadedBlsDocList.add(
                                     await uploadDocumentsToAwsS3(
                                         AppString.documents.val,
                                         SharedPreffUtil().getCareGiverUserId,
                                         widget.onboardingBloc.blsBytesList[i]));
+                                widget.onboardingBloc.emit(widget
+                                    .onboardingBloc.state
+                                    .copyWith(isLoading: false));
                               }
                               widget.onboardingBloc.blsBytesList.clear();
                             }
@@ -453,11 +512,17 @@ class _QualificationViewState extends State<QualificationView> {
                               for (int i = 0;
                                   i < widget.onboardingBloc.tbBytesList.length;
                                   i++) {
+                                widget.onboardingBloc.emit(widget
+                                    .onboardingBloc.state
+                                    .copyWith(isLoading: true));
                                 widget.onboardingBloc.uploadedTbDocList.add(
                                     await uploadDocumentsToAwsS3(
                                         AppString.documents.val,
                                         SharedPreffUtil().getCareGiverUserId,
                                         widget.onboardingBloc.tbBytesList[i]));
+                                widget.onboardingBloc.emit(widget
+                                    .onboardingBloc.state
+                                    .copyWith(isLoading: false));
                               }
                               widget.onboardingBloc.tbBytesList.clear();
                             }
@@ -468,12 +533,18 @@ class _QualificationViewState extends State<QualificationView> {
                                       widget
                                           .onboardingBloc.covidBytesList.length;
                                   i++) {
+                                widget.onboardingBloc.emit(widget
+                                    .onboardingBloc.state
+                                    .copyWith(isLoading: true));
                                 widget.onboardingBloc.uploadedCovidDocList.add(
                                     await uploadDocumentsToAwsS3(
                                         AppString.documents.val,
                                         SharedPreffUtil().getCareGiverUserId,
                                         widget
                                             .onboardingBloc.covidBytesList[i]));
+                                widget.onboardingBloc.emit(widget
+                                    .onboardingBloc.state
+                                    .copyWith(isLoading: false));
                               }
                               widget.onboardingBloc.covidBytesList.clear();
                             }

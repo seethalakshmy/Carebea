@@ -19,13 +19,14 @@ class SubProfilePersonalDetailsTwoView extends StatelessWidget {
     List<String>? languages = state.response?.data?.languages;
     String? pets = state.response?.data?.pets?.havePets.toString();
     List<Pet>? petList = state.response?.data?.pets?.pet;
+    AdvanceDirective? advanceDirective = state.response?.data?.advanceDirective;
     return CustomContainer(
       padding: EdgeInsets.symmetric(
           horizontal: DBL.twentyFive.val, vertical: DBL.twentyFive.val),
       color: AppColor.white.val,
       child: SingleChildScrollView(
-        child:
-            _rightView(personalDetails, languages ?? [], pets, petList ?? []),
+        child: _rightView(personalDetails, languages ?? [], pets, petList ?? [],
+            advanceDirective),
       ),
     );
   }
@@ -42,6 +43,15 @@ class SubProfilePersonalDetailsTwoView extends StatelessWidget {
     return RowColonCombo.threeSeventy(
         label: AppString.doYouHaveAnAdvanceDirective.val,
         value: personalDetails?.haveAnAdvanceDirective ?? '',
+        fontSize: FS.font13PointFive.val);
+  }
+
+  RowColonCombo _advanceDirectiveDescription(
+      AdvanceDirective? advanceDirective) {
+    return RowColonCombo.threeSeventy(
+        hasColon: false,
+        label: '',
+        value: advanceDirective?.advanceDirectiveLocation ?? '',
         fontSize: FS.font13PointFive.val);
   }
 
@@ -78,17 +88,19 @@ class SubProfilePersonalDetailsTwoView extends StatelessWidget {
   }
 
   Column _rightView(PersonalDetails2? personalDetails, List<String>? languages,
-      String? pets, List<Pet> petList) {
+      String? pets, List<Pet> petList, AdvanceDirective? advanceDirective) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _petsView(pets, petList),
         _petListView(petList),
-        petList.isNotEmpty ? CustomSizedBox(
-          height: DBL.ten.val,
-        ) :  CustomSizedBox(
-          height: DBL.six.val,
-        ),
+        petList.isNotEmpty
+            ? CustomSizedBox(
+                height: DBL.ten.val,
+              )
+            : CustomSizedBox(
+                height: DBL.six.val,
+              ),
         _languageView(languages ?? []),
         CustomSizedBox(
           height: DBL.six.val,
@@ -98,6 +110,7 @@ class SubProfilePersonalDetailsTwoView extends StatelessWidget {
           height: DBL.six.val,
         ),
         _advanceDirectiveView(personalDetails),
+        _advanceDirectiveDescription(advanceDirective),
         CustomSizedBox(
           height: DBL.six.val,
         ),

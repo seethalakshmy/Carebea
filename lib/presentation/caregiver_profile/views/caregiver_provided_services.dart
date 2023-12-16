@@ -25,7 +25,8 @@ class CareGiverProvidedServices extends StatelessWidget {
           horizontal: DBL.twentyFive.val, vertical: DBL.twentyFive.val),
       color: AppColor.white.val,
       child: SingleChildScrollView(
-        child: Column(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _basicServicesView(basicServices),
@@ -43,66 +44,87 @@ class CareGiverProvidedServices extends StatelessWidget {
   }
 
   _basicServicesView(List<String> services) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        HeaderView(
-          title: AppString.basicServices.val,
-          color: AppColor.matBlack3.val,
-          fontSize: FS.font18.val,
-          topPadding: DBL.zero.val,
-          sidePadding: DBL.zero.val,
-        ),
-        CustomSizedBox(
-          height: DBL.eight.val,
-        ),
-        services.isNotEmpty
-            ? CustomSizedBox(
-                height: DBL.forty.val,
-                child: CustomListViewBuilder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: services.length,
-                    itemBuilder: (context, index) => DotTextListItem(
-                          isForHorizontalView: true,
-                          value: services[index],
-                          color: AppColor.label6.val,
-                        )),
-              )
-            : EmptyLabelView(msg: AppString.noServices.val),
-      ],
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          HeaderView(
+            title: AppString.basicServices.val,
+            color: AppColor.matBlack3.val,
+            fontSize: FS.font18.val,
+            topPadding: DBL.zero.val,
+            sidePadding: DBL.zero.val,
+          ),
+          CustomSizedBox(
+            height: DBL.eight.val,
+          ),
+          services.isNotEmpty
+              ? Wrap(
+                  children: List.generate(
+                      services.length,
+                      (index) => DotTextListItem(
+                            isForHorizontalView: true,
+                            value: services[index],
+                            color: AppColor.label6.val,
+                          )),
+                )
+              // CustomSizedBox(
+              //         height: DBL.forty.val,
+              //         child: CustomListViewBuilder(
+              //             shrinkWrap: true,
+              //             scrollDirection: Axis.horizontal,
+              //             itemCount: services.length,
+              //             itemBuilder: (context, index) => DotTextListItem(
+              //                   isForHorizontalView: true,
+              //                   value: services[index],
+              //                   color: AppColor.label6.val,
+              //                 )),
+              //       )
+              : EmptyLabelView(msg: AppString.noServices.val),
+        ],
+      ),
     );
   }
 
   _specialServicesView(List<String> services) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        HeaderView(
-          title: AppString.specialServices.val,
-          color: AppColor.matBlack3.val,
-          fontSize: FS.font18.val,
-          topPadding: DBL.zero.val,
-          sidePadding: DBL.zero.val,
-        ),
-        CustomSizedBox(
-          height: DBL.eight.val,
-        ),
-        services.isNotEmpty
-            ? CustomSizedBox(
-                height: DBL.forty.val,
-                child: CustomListViewBuilder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: services.length,
-                    itemBuilder: (context, index) => DotTextListItem(
-                          isForHorizontalView: true,
-                          value: services[index],
-                          color: AppColor.red.val,
-                        )),
-              )
-            : EmptyLabelView(msg: AppString.noServices.val),
-      ],
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          HeaderView(
+            title: AppString.specialServices.val,
+            color: AppColor.matBlack3.val,
+            fontSize: FS.font18.val,
+            topPadding: DBL.zero.val,
+            sidePadding: DBL.zero.val,
+          ),
+          CustomSizedBox(
+            height: DBL.eight.val,
+          ),
+          services.isNotEmpty
+              ? Wrap(
+                  children: List.generate(
+                      services.length,
+                      (index) => DotTextListItem(
+                            value: services[index],
+                            color: AppColor.red.val,
+                          )),
+                )
+              // CustomSizedBox(
+              //         height: DBL.forty.val,
+              //         child: CustomListViewBuilder(
+              //             shrinkWrap: true,
+              //             scrollDirection: Axis.horizontal,
+              //             itemCount: services.length,
+              //             itemBuilder: (context, index) => DotTextListItem(
+              //                   isForHorizontalView: true,
+              //                   value: services[index],
+              //                   color: AppColor.red.val,
+              //                 )),
+              //       )
+              : EmptyLabelView(msg: AppString.noServices.val),
+        ],
+      ),
     );
   }
 }

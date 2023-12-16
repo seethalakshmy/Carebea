@@ -104,7 +104,7 @@ class _CareGiverReferenceViewState extends State<CareGiverReferenceView> {
         ),
         RowColonCombo.twoHundred(
             label: AppString.relationship.val,
-            value: e.relationship ?? "",
+            value: e.relationshipDescription ?? e.relationship ?? '',
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.eight.val,
@@ -117,12 +117,16 @@ class _CareGiverReferenceViewState extends State<CareGiverReferenceView> {
           height: DBL.eight.val,
         ),
         RowColonCombo.twoHundred(
-            label: AppString.street.val,
-            value: e.city ?? "",
+            label: AppString.addressLine2.val,
+            value: e.street ?? "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.eight.val,
         ),
+        RowColonCombo.twoHundred(
+            label: AppString.city.val,
+            value: e.city ?? "",
+            fontSize: FS.font13PointFive.val),
       ],
     );
   }

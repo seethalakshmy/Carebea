@@ -5,6 +5,8 @@ import 'package:admin_580_tech/domain/common_response/common_response.dart';
 import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.dart';
 import 'package:dartz/dartz.dart';
 
+import '../on_boarding/models/common_response.dart';
+
 abstract class ICareGiverVerificationRepo {
   Future<Either<ApiErrorHandler, CaregiverVerificationResponse>>
       getCareGiverVerificationData({
@@ -21,7 +23,7 @@ abstract class ICareGiverVerificationRepo {
     required int status,
     required String adminId,
   });
-  Future<Either<ApiErrorHandler, VerifyResponse>> careGiverCertificateReject(
+  Future<Either<ApiErrorHandler, CommonResponse>> careGiverCertificateReject(
       {required RejectionParams params});
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverSendTrainingRequest(
       {required String userID, required String adminId});
