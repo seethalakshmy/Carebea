@@ -18,6 +18,7 @@ part 'upload_video_state.dart';
 class UploadVideoBloc extends Bloc<VideoUploadEvent, VideoUploadState> {
   UploadVideoRepository uploadVideoRepository;
   String uploadedVideo = '';
+  int radioValue = 0;
 
   TextEditingController title = TextEditingController();
 
@@ -28,7 +29,7 @@ class UploadVideoBloc extends Bloc<VideoUploadEvent, VideoUploadState> {
   }
 
   _addVideo(_UploadVideo event, Emitter<VideoUploadState> emit) async {
-    emit(state.copyWith(isLoadingButton: true));
+    emit(state.copyWith(isLoadingButton: true, radioValue: radioValue));
     final Either<ApiErrorHandler, CommonResponse> result =
         await uploadVideoRepository.uploadVideo(
             adminId: event.adminId,
@@ -38,16 +39,18 @@ class UploadVideoBloc extends Bloc<VideoUploadEvent, VideoUploadState> {
             userType: event.userType);
     VideoUploadState videoUploadState = result.fold((l) {
       CSnackBar.showError(event.context, msg: 'Please add attachment');
-      return state.copyWith(isLoadingButton: false);
+      return state.copyWith(isLoadingButton: false, radioValue: radioValue);
     }, (r) {
       event.context.router.navigate(const VideoManagementRoute());
-      return state.copyWith(isLoadingButton: false);
+      return state.copyWith(isLoadingButton: false, radioValue: radioValue);
     });
     emit(videoUploadState);
     print('loading check ${state.isLoadingButton}');
   }
 
   _radioForClient(_RadioForClient event, Emitter<VideoUploadState> emit) {
+    radioValue = event.isSelected ?? radioValue;
+
     emit(state.copyWith(isForClient: event.isSelected));
   }
 }

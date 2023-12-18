@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'amplifyconfiguration.dart';
+import 'application/bloc/admin_creation/admin_creation_bloc.dart';
 import 'application/bloc/caregiver-profile/caregiver_profile_bloc.dart';
 import 'application/bloc/caregiver_submit_agreement/caregiver_submit_agreement_bloc.dart';
 import 'application/bloc/caregiver_verification/caregiver_verification_bloc.dart';
@@ -28,6 +29,7 @@ import 'application/bloc/verify_email/verify_email_bloc.dart';
 import 'core/config/environment.dart';
 import 'core/hive/hive_utils.dart';
 import 'core/theme.dart';
+import 'infrastructure/admin_creation/admin_creation_repository.dart';
 import 'infrastructure/caregiver_profile/caregiver_profile_repository.dart';
 import 'infrastructure/caregiver_submit_agreement_repo/caregiver_submit_agreement_repo_impl.dart';
 import 'infrastructure/caregiver_verification/caregivers_verification_repository.dart';
@@ -96,6 +98,8 @@ class _MyAppState extends State<MyApp> {
                 CareGiverVerificationBloc(CareGiverVerificationRepository())),
         BlocProvider(create: (_) => FormValidationBloc()),
         BlocProvider(create: (_) => LoginBloc(LoginRepository())),
+        BlocProvider(
+            create: (_) => AdminCreationBloc(AdminCreationRepository())),
         BlocProvider(create: (_) => VerifyEmailBloc(VerifyEmailRepository())),
         BlocProvider(
             create: (_) => ResetPasswordBloc(ResetPasswordRepository())),

@@ -30,57 +30,57 @@ class PageBloc extends Bloc<PageEvent, PageState> {
             isError: false,
             isForClient: 0,
             response: null)) {
-    on<_CreatePage>(_createPage);
+    // on<_CreatePage>(_createPage);
     on<_GetPages>(_getPages);
     on<_RadioForClient>(_radioForClient);
     on<_UpdatePage>(_updatePage);
     on<_DeletePage>(_deletePage);
   }
 
-  _createPage(_CreatePage event, Emitter<PageState> emit) async {
-    emit(PageState.initial(
-        radioValue: 0,
-        isLoading: true,
-        getPagesResponse: null,
-        isError: false,
-        isForClient: 0,
-        response: null));
-    final Either<ApiErrorHandler, CommonResponse> result =
-        await pageRepo.createPage(
-            title: event.title,
-            description: event.description,
-            pageFor: event.pageFor ?? '');
-    PageState pageState = result.fold((l) {
-      CSnackBar.showError(event.context!, msg: l.error ?? "");
-      return PageState.initial(
-          radioValue: radioValue,
-          isLoading: false,
-          getPagesResponse: null,
-          isError: true,
-          isForClient: 0,
-          response: null);
-    }, (r) {
-      if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context!, msg: r.message ?? "");
-        autoTabRouter?.setActiveIndex(24);
-      } else {
-        CSnackBar.showError(event.context!, msg: r.message ?? "");
-      }
-      return PageState.initial(
-          radioValue: radioValue,
-          isLoading: false,
-          getPagesResponse: null,
-          isError: true,
-          isForClient: 0,
-          response: r);
-    });
-    emit(
-      pageState,
-    );
-  }
+  // _createPage(_CreatePage event, Emitter<PageState> emit) async {
+  //   emit(PageState.initial(
+  //       radioValue: 0,
+  //       isLoading: true,
+  //       getPagesResponse: null,
+  //       isError: false,
+  //       isForClient: 0,
+  //       response: null));
+  //   final Either<ApiErrorHandler, CommonResponse> result =
+  //       await pageRepo.createPage(
+  //           title: event.title,
+  //           description: event.description,
+  //           pageFor: event.pageFor ?? '');
+  //   PageState pageState = result.fold((l) {
+  //     CSnackBar.showError(event.context!, msg: l.error ?? "");
+  //     return PageState.initial(
+  //         radioValue: radioValue,
+  //         isLoading: false,
+  //         getPagesResponse: null,
+  //         isError: true,
+  //         isForClient: 0,
+  //         response: null);
+  //   }, (r) {
+  //     if (r.status ?? false) {
+  //       CSnackBar.showSuccess(event.context!, msg: r.message ?? "");
+  //       autoTabRouter?.setActiveIndex(24);
+  //     } else {
+  //       CSnackBar.showError(event.context!, msg: r.message ?? "");
+  //     }
+  //     return PageState.initial(
+  //         radioValue: radioValue,
+  //         isLoading: false,
+  //         getPagesResponse: null,
+  //         isError: true,
+  //         isForClient: 0,
+  //         response: r);
+  //   });
+  //   emit(
+  //     pageState,
+  //   );
+  // }
 
   _getPages(_GetPages event, Emitter<PageState> emit) async {
-    PageState.loading();
+    emit(PageState.loading());
     final Either<ApiErrorHandler, GetPagesResponse> homeResult =
         await pageRepo.getPages();
     PageState homeState = homeResult.fold((l) {
@@ -177,7 +177,7 @@ class PageBloc extends Bloc<PageEvent, PageState> {
       CSnackBar.showError(event.context, msg: l.error ?? "");
       return PageState.initial(
           radioValue: radioValue,
-          isLoading: true,
+          isLoading: false,
           getPagesResponse: null,
           isError: true,
           isForClient: 0,
@@ -196,7 +196,7 @@ class PageBloc extends Bloc<PageEvent, PageState> {
       //     response: r, isLoading: false, radioValue: radioValue);
       return PageState.initial(
           radioValue: radioValue,
-          isLoading: true,
+          isLoading: false,
           getPagesResponse: null,
           isError: true,
           isForClient: 0,

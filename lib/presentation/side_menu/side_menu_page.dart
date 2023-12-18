@@ -69,6 +69,11 @@ class _MenuBarState extends State<SideMenuPage> {
   Future getVersionNumber() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     version = packageInfo.version;
+    if (version.runtimeType == String) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        setState(() {});
+      });
+    }
   }
 
   @override

@@ -12,11 +12,9 @@ import '../../core/utility.dart';
 import '../../infrastructure/page/page_repository.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../side_menu/side_menu_page.dart';
-import '../widget/custom_button.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_data_table_2.dart';
-import '../widget/custom_icon.dart';
 import '../widget/custom_selection_area.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text.dart';
@@ -284,28 +282,28 @@ class _PageListPage extends State<PageListPage> {
   //   );
   // }
 
-  _pageCreate() {
-    return CustomButton(
-        onPressed: () {
-          autoTabRouter
-              ?.navigate(RouteCreationRoute(heading: AppString.createNew.val));
-        },
-        text: AppString.create.val,
-        color: AppColor.primaryColor.val,
-        height: DBL.fiftyTwo.val,
-        borderRadius: DBL.five.val,
-        padding: EdgeInsets.symmetric(
-            horizontal: DBL.twentyTwo.val, vertical: DBL.ten.val),
-        textStyle: TS().gRoboto(
-            color: AppColor.white.val,
-            fontWeight: FW.w600.val,
-            fontSize: FS.font16.val),
-        icon: CustomIcon(
-          icon: Icons.add,
-          size: DBL.twenty.val,
-          color: AppColor.white.val,
-        ));
-  }
+  // _pageCreate() {
+  //   return CustomButton(
+  //       onPressed: () {
+  //         autoTabRouter
+  //             ?.navigate(RouteCreationRoute(heading: AppString.createNew.val));
+  //       },
+  //       text: AppString.create.val,
+  //       color: AppColor.primaryColor.val,
+  //       height: DBL.fiftyTwo.val,
+  //       borderRadius: DBL.five.val,
+  //       padding: EdgeInsets.symmetric(
+  //           horizontal: DBL.twentyTwo.val, vertical: DBL.ten.val),
+  //       textStyle: TS().gRoboto(
+  //           color: AppColor.white.val,
+  //           fontWeight: FW.w600.val,
+  //           fontSize: FS.font16.val),
+  //       icon: CustomIcon(
+  //         icon: Icons.add,
+  //         size: DBL.twenty.val,
+  //         color: AppColor.white.val,
+  //       ));
+  // }
 
   bool isLarge(BuildContext context) =>
       MediaQuery.of(context).size.width <= 1236;

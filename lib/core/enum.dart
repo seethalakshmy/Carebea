@@ -7,6 +7,7 @@ enum AppString {
   blsUrl("https://www.nationalcprfoundation.com/"),
   pageCreation("Page Creation"),
   notAttempted("Missed"),
+  video("video"),
   verificationCode("Verification Code"),
   pageManagement("Page Management"),
   deletedClient("Deleted Client"),

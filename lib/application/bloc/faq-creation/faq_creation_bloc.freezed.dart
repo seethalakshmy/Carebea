@@ -865,6 +865,7 @@ mixin _$FaqCreationState {
   bool get isError => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   int get isForClient => throw _privateConstructorUsedError;
+  int get radioValue => throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, FaqDetailsResponseModel>>
       get faqDetailOption => throw _privateConstructorUsedError;
   bool get isClientError => throw _privateConstructorUsedError;
@@ -887,6 +888,7 @@ abstract class $FaqCreationStateCopyWith<$Res> {
       bool isError,
       String? error,
       int isForClient,
+      int radioValue,
       Option<Either<ApiErrorHandler, FaqDetailsResponseModel>> faqDetailOption,
       bool isClientError,
       bool isDropDownError});
@@ -910,6 +912,7 @@ class _$FaqCreationStateCopyWithImpl<$Res, $Val extends FaqCreationState>
     Object? isError = null,
     Object? error = freezed,
     Object? isForClient = null,
+    Object? radioValue = null,
     Object? faqDetailOption = null,
     Object? isClientError = null,
     Object? isDropDownError = null,
@@ -934,6 +937,10 @@ class _$FaqCreationStateCopyWithImpl<$Res, $Val extends FaqCreationState>
       isForClient: null == isForClient
           ? _value.isForClient
           : isForClient // ignore: cast_nullable_to_non_nullable
+              as int,
+      radioValue: null == radioValue
+          ? _value.radioValue
+          : radioValue // ignore: cast_nullable_to_non_nullable
               as int,
       faqDetailOption: null == faqDetailOption
           ? _value.faqDetailOption
@@ -965,6 +972,7 @@ abstract class _$$_FaqCreationStateCopyWith<$Res>
       bool isError,
       String? error,
       int isForClient,
+      int radioValue,
       Option<Either<ApiErrorHandler, FaqDetailsResponseModel>> faqDetailOption,
       bool isClientError,
       bool isDropDownError});
@@ -986,6 +994,7 @@ class __$$_FaqCreationStateCopyWithImpl<$Res>
     Object? isError = null,
     Object? error = freezed,
     Object? isForClient = null,
+    Object? radioValue = null,
     Object? faqDetailOption = null,
     Object? isClientError = null,
     Object? isDropDownError = null,
@@ -1010,6 +1019,10 @@ class __$$_FaqCreationStateCopyWithImpl<$Res>
       isForClient: null == isForClient
           ? _value.isForClient
           : isForClient // ignore: cast_nullable_to_non_nullable
+              as int,
+      radioValue: null == radioValue
+          ? _value.radioValue
+          : radioValue // ignore: cast_nullable_to_non_nullable
               as int,
       faqDetailOption: null == faqDetailOption
           ? _value.faqDetailOption
@@ -1036,6 +1049,7 @@ class _$_FaqCreationState implements _FaqCreationState {
       required this.isError,
       required this.error,
       required this.isForClient,
+      required this.radioValue,
       required this.faqDetailOption,
       this.isClientError = false,
       this.isDropDownError = false});
@@ -1051,6 +1065,8 @@ class _$_FaqCreationState implements _FaqCreationState {
   @override
   final int isForClient;
   @override
+  final int radioValue;
+  @override
   final Option<Either<ApiErrorHandler, FaqDetailsResponseModel>>
       faqDetailOption;
   @override
@@ -1062,7 +1078,7 @@ class _$_FaqCreationState implements _FaqCreationState {
 
   @override
   String toString() {
-    return 'FaqCreationState(isLoading: $isLoading, isLoadingButton: $isLoadingButton, isError: $isError, error: $error, isForClient: $isForClient, faqDetailOption: $faqDetailOption, isClientError: $isClientError, isDropDownError: $isDropDownError)';
+    return 'FaqCreationState(isLoading: $isLoading, isLoadingButton: $isLoadingButton, isError: $isError, error: $error, isForClient: $isForClient, radioValue: $radioValue, faqDetailOption: $faqDetailOption, isClientError: $isClientError, isDropDownError: $isDropDownError)';
   }
 
   @override
@@ -1078,6 +1094,8 @@ class _$_FaqCreationState implements _FaqCreationState {
             (identical(other.error, error) || other.error == error) &&
             (identical(other.isForClient, isForClient) ||
                 other.isForClient == isForClient) &&
+            (identical(other.radioValue, radioValue) ||
+                other.radioValue == radioValue) &&
             (identical(other.faqDetailOption, faqDetailOption) ||
                 other.faqDetailOption == faqDetailOption) &&
             (identical(other.isClientError, isClientError) ||
@@ -1094,6 +1112,7 @@ class _$_FaqCreationState implements _FaqCreationState {
       isError,
       error,
       isForClient,
+      radioValue,
       faqDetailOption,
       isClientError,
       isDropDownError);
@@ -1112,6 +1131,7 @@ abstract class _FaqCreationState implements FaqCreationState {
       required final bool isError,
       required final String? error,
       required final int isForClient,
+      required final int radioValue,
       required final Option<Either<ApiErrorHandler, FaqDetailsResponseModel>>
           faqDetailOption,
       final bool isClientError,
@@ -1127,6 +1147,8 @@ abstract class _FaqCreationState implements FaqCreationState {
   String? get error;
   @override
   int get isForClient;
+  @override
+  int get radioValue;
   @override
   Option<Either<ApiErrorHandler, FaqDetailsResponseModel>> get faqDetailOption;
   @override

@@ -1,3 +1,5 @@
+import 'dart:js_util';
+
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
 import 'package:admin_580_tech/infrastructure/admin_creation/admin_creation_repository.dart';
@@ -67,7 +69,6 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
   String adminUserID = "";
   String adminId = "";
   String selectedRole = '';
-  String? firstName;
 
   bool? _isView;
 
@@ -96,6 +97,10 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
     } else {
       _isEdit = false;
     }
+    // _adminCreationBloc.add(AdminCreationEvent.viewAdmin(
+    //     userId: adminUserID, adminId: adminId, searchTerm: ''));
+    // _adminCreationBloc.add(AdminCreationEvent.getRoles(
+    //     userId: adminUserID, searchTerm: ''));
   }
 
   @override
@@ -140,8 +145,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
 
   _bodyView(BuildContext context, AdminCreationState state) {
     if (state.viewResponse != null) {
-      firstName = state.viewResponse?.data?.firstName ?? "";
-      _fNameController.text = firstName ?? '';
+      _fNameController.text = state.viewResponse?.data?.firstName ?? "";
       _lNameController.text = state.viewResponse?.data?.lastName ?? "";
       _emailController.text = state.viewResponse?.data?.email ?? "";
       _mobileController.text = state.viewResponse?.data?.phoneNumber ?? "";
@@ -456,18 +460,21 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                           height: DBL.fortyFive.val,
                           minWidth: DBL.oneTwenty.val,
                           onPressed: () async {
-                            firstName = _fNameController.text;
-                            _emailController.text =
-                                state.viewResponse?.data?.email ?? "";
-                            _mobileController.text =
-                                state.viewResponse?.data?.phoneNumber ?? "";
-                            selectedRole =
-                                state.viewResponse?.data?.roleId ?? '';
-                            _adminCreationBloc.profileUrl =
-                                state.viewResponse?.data?.profile ?? '';
+                            // _fNameController.text =
+                            //     state.viewResponse?.data?.firstName ?? '';
+                            // _emailController.text =
+                            //     state.viewResponse?.data?.email ?? "";
+                            // _mobileController.text =
+                            //     state.viewResponse?.data?.phoneNumber ?? "";
+                            // selectedRole =
+                            //     state.viewResponse?.data?.roleId ?? '';
+                            // _adminCreationBloc.profileUrl =
+                            //     state.viewResponse?.data?.profile ?? '';
                             if (_adminCreationBloc
                                     .state.pickedProfilePic!.size >
                                 0) {
+                              _adminCreationBloc.emit(_adminCreationBloc.state
+                                  .copyWith(isLoadingButton: true));
                               await uploadProfilePicToAwsS3(
                                   AppString.profilePicture.val,
                                   SharedPreffUtil().getAdminId);

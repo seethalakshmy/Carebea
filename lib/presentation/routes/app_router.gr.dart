@@ -241,6 +241,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
                 isEdit: queryParams.optString('edit'),
                 id: queryParams.optString('id'),
                 item: queryParams.get('item'),
+                forWhom: queryParams.optInt('forWhom'),
               ));
       return _i38.AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -250,6 +251,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
           isEdit: args.isEdit,
           id: args.id,
           item: args.item,
+          forWhom: args.forWhom,
         ),
       );
     },
@@ -856,6 +858,7 @@ class FaqCreationRoute extends _i38.PageRouteInfo<FaqCreationRouteArgs> {
     String? isEdit,
     String? id,
     _i40.FaqListData? item,
+    int? forWhom,
     List<_i38.PageRouteInfo>? children,
   }) : super(
           FaqCreationRoute.name,
@@ -865,12 +868,14 @@ class FaqCreationRoute extends _i38.PageRouteInfo<FaqCreationRouteArgs> {
             isEdit: isEdit,
             id: id,
             item: item,
+            forWhom: forWhom,
           ),
           rawQueryParams: {
             'view': isView,
             'edit': isEdit,
             'id': id,
             'item': item,
+            'forWhom': forWhom,
           },
           initialChildren: children,
         );
@@ -888,6 +893,7 @@ class FaqCreationRouteArgs {
     this.isEdit,
     this.id,
     this.item,
+    this.forWhom,
   });
 
   final _i39.Key? key;
@@ -900,9 +906,11 @@ class FaqCreationRouteArgs {
 
   final _i40.FaqListData? item;
 
+  final int? forWhom;
+
   @override
   String toString() {
-    return 'FaqCreationRouteArgs{key: $key, isView: $isView, isEdit: $isEdit, id: $id, item: $item}';
+    return 'FaqCreationRouteArgs{key: $key, isView: $isView, isEdit: $isEdit, id: $id, item: $item, forWhom: $forWhom}';
   }
 }
 

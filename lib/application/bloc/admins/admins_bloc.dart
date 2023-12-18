@@ -24,7 +24,7 @@ class AdminsBloc extends Bloc<AdminEvent, AdminsState> {
 
   AdminsBloc(this.adminsRepository) : super(AdminsState.initial()) {
     on<_GetAdmins>(_getAdmins);
-    on<_AdminDelete>(_deleteRoles);
+    on<_AdminDelete>(_deleteAdmin);
     on<_ChangeAdminStatus>(_changeAdminStatus);
   }
 
@@ -47,7 +47,7 @@ class AdminsBloc extends Bloc<AdminEvent, AdminsState> {
     emit(
       roleState,
     );
-
+    state.copyWith(isLoading: true);
     final Either<ApiErrorHandler, AdminGetResponse> adminResult =
         await adminsRepository.getAdmins(
       userID: event.userId,
@@ -75,7 +75,7 @@ class AdminsBloc extends Bloc<AdminEvent, AdminsState> {
     );
   }
 
-  _deleteRoles(_AdminDelete event, Emitter<AdminsState> emit) async {
+  _deleteAdmin(_AdminDelete event, Emitter<AdminsState> emit) async {
     final Either<ApiErrorHandler, CommonResponseUse> homeResult =
         await adminsRepository.deleteAdmin(
             adminID: event.adminID, userID: event.userID);

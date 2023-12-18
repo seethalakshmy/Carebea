@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:admin_580_tech/infrastructure/faq_creation/faq_creation_repository.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
@@ -30,7 +32,8 @@ class FaqCreationPage extends StatefulWidget {
       @QueryParam('view') this.isView,
       @QueryParam('edit') this.isEdit,
       @QueryParam('id') this.id,
-      @QueryParam('item') this.item})
+      @QueryParam('item') this.item,
+      @QueryParam('forWhom') this.forWhom})
       : super(key: key);
 
   /// To do change :- change these two variables to bool for now getting error like " NoSuchMethodError: 'toLowerCase"  when extracting using auto-route
@@ -38,6 +41,7 @@ class FaqCreationPage extends StatefulWidget {
   final String? isEdit;
   final String? id;
   final FaqListData? item;
+  final int? forWhom;
 
   @override
   State<FaqCreationPage> createState() => _faqCreationPageState();
@@ -58,6 +62,7 @@ class _faqCreationPageState extends State<FaqCreationPage> {
   bool? _isView;
 
   bool? _isEdit;
+  int? forWhom;
 
   @override
   void initState() {
@@ -69,8 +74,11 @@ class _faqCreationPageState extends State<FaqCreationPage> {
     item = autoTabRouter?.currentChild?.queryParams.get(
       'item',
     );
+    forWhom =
+        autoTabRouter?.currentChild?.queryParams.getInt("forWhom", 1) ?? 1;
     _faqCreationBloc.questionController.text = item?.question ?? '';
     _faqCreationBloc.answerController.text = item?.answer ?? '';
+    _faqCreationBloc.radioValue = forWhom!.toInt() - 1;
     // _faqCreationBloc.add(FaqCreationEvent.getFaq(id: adminId));
     if (autoTabRouter!.currentChild!.queryParams
         .getString('view', "")
@@ -112,7 +120,7 @@ class _faqCreationPageState extends State<FaqCreationPage> {
 
   _rebuildView() {
     return BlocProvider(
-      create: (context) => FaqCreationBloc(FaqCreationRepository()),
+      create: (context) => _faqCreationBloc,
       child: BlocBuilder<FaqCreationBloc, FaqCreationState>(
         builder: (context, state) {
           debugPrint("loading ${state.isLoading}");
@@ -219,7 +227,10 @@ class _faqCreationPageState extends State<FaqCreationPage> {
                       CustomSizedBox(width: DBL.twenty.val),
                       !_isView!
                           ? BlocBuilder<FaqCreationBloc, FaqCreationState>(
+                              bloc: _faqCreationBloc,
                               builder: (context, state) {
+                                log("${state.isLoadingButton}",
+                                    name: "FAQBloc");
                                 return CustomButton(
                                   isLoading: state.isLoadingButton,
                                   height: DBL.fortyFive.val,
@@ -266,12 +277,14 @@ class _faqCreationPageState extends State<FaqCreationPage> {
               yesLabel: AppString.forClient.val,
               noLabel: AppString.forCa.val,
               onChanged: (val) {
-                _faqCreationBloc.radioValue = item?.forClient == true ? 0 : 1;
+                BlocProvider.of<FaqCreationBloc>(context)
+                    .add(FaqCreationEvent.radioForClient(isSelected: val!));
+                // _faqCreationBloc.radioValue = item?.forClient == true ? 0 : 1;
                 // BlocProvider.of<FaqCreationBloc>(context).add(
                 //     FaqCreationEvent.radioForClient(
-                //         isSelected:  item?.forClient == true ? 0:1));
+                //         isSelected: item?.forClient == true ? 0 : 1));
               },
-              groupValue: state.isForClient,
+              groupValue: _faqCreationBloc.radioValue,
             );
           },
         )
@@ -282,7 +295,10 @@ class _faqCreationPageState extends State<FaqCreationPage> {
   checkInputData(FaqCreationState state) {
     if (_formKey.currentState!.validate()) {
       print('id:: ${adminUserID}');
+      debugPrint("loading yes ${state.isLoadingButton}");
       if (_isEdit!) {
+        debugPrint("loading before ${state.isLoadingButton}");
+
         _faqCreationBloc.add(FaqCreationEvent.updateFaq(
             id: adminId,
             question: _faqCreationBloc.questionController.text.trim(),
@@ -290,6 +306,8 @@ class _faqCreationPageState extends State<FaqCreationPage> {
             status: "true",
             forClient: state.isForClient == 0 ? true : false,
             context: context));
+
+        debugPrint("loading after ${state.isLoadingButton}");
       } else {
         _faqCreationBloc.add(FaqCreationEvent.addFaq(
           context: context,
