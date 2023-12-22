@@ -257,7 +257,7 @@ class SubscriptionDetailScreen extends StatelessWidget {
             height: DBL.seventeen.val,
           ),
           RowColonCombo.twoHundred(
-              label: AppString.subscription.val,
+              label: AppString.subscriptionType.val,
               value: item.subscriptionDetails?.type == '1'
                   ? 'Monthly'
                   : item.subscriptionDetails?.type == '2'
@@ -268,6 +268,14 @@ class SubscriptionDetailScreen extends StatelessWidget {
                   : item.subscriptionDetails?.type == '2'
                       ? AppColor.red.val
                       : AppColor.green.val,
+              fontSize: FS.font13PointFive.val),
+          CustomSizedBox(
+            height: DBL.seventeen.val,
+          ),
+
+          RowColonCombo.twoHundred(
+              label: AppString.subscriptionFee.val,
+              value: item.subscriptionDetails?.subscriptionPlanFee ?? "",
               fontSize: FS.font13PointFive.val),
           CustomSizedBox(
             height: DBL.seventeen.val,
@@ -285,7 +293,7 @@ class SubscriptionDetailScreen extends StatelessWidget {
 
           RowColonCombo.twoHundred(
               label: AppString.renewalDate.val,
-              value: "",
+              value: item.subscriptionDetails?.monthlyExpire ?? '',
               fontSize: FS.font13PointFive.val),
           CustomSizedBox(
             height: DBL.seventeen.val,

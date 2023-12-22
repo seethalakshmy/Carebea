@@ -297,7 +297,7 @@ class TransactionDetailsAlert extends StatelessWidget {
                                     ),
                                     CustomSizedBox(height: DBL.five.val),
                                     CustomText(
-                                      "Txn Id : ${transactionBloc.detailsList[0].refund!.paymentStatus![index].paymentLogTxnId ?? ""}",
+                                      "Txn Id : ${transactionBloc.detailsList[0].refund!.paymentStatus![index].transactionId ?? ""}",
                                       style: TS().gRoboto(
                                           fontSize: FS.font12.val,
                                           fontWeight: FW.w400.val,

@@ -106,7 +106,7 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
                   value: state.response?.data?.address
                           ?.where((element) => element.isDefault == true)
                           .first
-                          .city ??
+                          .cityName ??
                       '',
                   // personalDetails?.street ?? "",
                   fontSize: FS.font13PointFive.val),
@@ -129,7 +129,7 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
                   value: state.response?.data?.address
                           ?.where((element) => element.isDefault == true)
                           .first
-                          .state ??
+                          .stateName ??
                       '',
                   // personalDetails?.zip ?? "",
                   fontSize: FS.font13PointFive.val),

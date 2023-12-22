@@ -75,7 +75,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   PlatformFile? file;
   SharedPreffUtil sharedPreffUtil = SharedPreffUtil();
   final pdfController = PdfViewerController();
-
+  final GlobalKey<ScrollableState> _scrollableKey =
+      GlobalKey<ScrollableState>();
   final FocusNode _dateFocusNode = FocusNode();
   String selectedDate = "";
   String selectedGender = "";
@@ -200,6 +201,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           builder: (context, state) {
             return CommonPaddingWidget(
               child: SingleChildScrollView(
+                key: _scrollableKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -279,49 +281,47 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           : isWeb
               ? MediaQuery.of(context).size.width * 0.52
               : MediaQuery.of(context).size.width,
-      child: SingleChildScrollView(
-        child: CForm(
-          formKey: _formKey,
-          autoValidateMode: _validateMode,
-          child: Wrap(
-            alignment: Responsive.isWeb(context)
-                ? WrapAlignment.start
-                : WrapAlignment.center,
-            spacing: 20,
-            runSpacing: state.isInitialLoading ? DBL.twenty.val : DBL.zero.val,
-            children: [
-              _dateWidget(state),
-              _genderWidget(state),
-              _addressLineWidget(state),
-              _locationWidget(state),
-              _streetWidget(state),
-              _stateWidget(state),
-              _cityWidget(state),
-              _zipWidget(state),
-              _socialSecurityNoWidget(state),
-              state.isInitialLoading
-                  ? const CustomSizedBox()
-                  : DocumentDetailsView(
-                      onChanged: (value) {
-                        selectedDocument = value;
-                      },
-                      selectedDocumentType: selectedDocument,
-                      dateController: expiryDateController,
-                      documentNumberController: documentNumberController,
-                      onboardingBloc: widget.onboardingBloc,
-                      nextClicked: widget.onboardingBloc.state.nextClicked,
-                      pageController: widget.pageController,
-                    ),
-              state.securityDocumentList.length > 1
-                  ? CustomContainer(height: DBL.twenty.val)
-                  : state.isInitialLoading
-                      ? const CustomSizedBox()
-                      : _uploadDocumentWidget(),
-              state.securityDocumentList.isNotEmpty
-                  ? _previewShowingWidget(state)
-                  : const CustomContainer(),
-            ],
-          ),
+      child: CForm(
+        formKey: _formKey,
+        autoValidateMode: _validateMode,
+        child: Wrap(
+          alignment: Responsive.isWeb(context)
+              ? WrapAlignment.start
+              : WrapAlignment.center,
+          spacing: 20,
+          runSpacing: state.isInitialLoading ? DBL.twenty.val : DBL.zero.val,
+          children: [
+            _dateWidget(state),
+            _genderWidget(state),
+            _addressLineWidget(state),
+            _locationWidget(state),
+            _streetWidget(state),
+            _stateWidget(state),
+            _cityWidget(state),
+            _zipWidget(state),
+            _socialSecurityNoWidget(state),
+            state.isInitialLoading
+                ? const CustomSizedBox()
+                : DocumentDetailsView(
+                    onChanged: (value) {
+                      selectedDocument = value;
+                    },
+                    selectedDocumentType: selectedDocument,
+                    dateController: expiryDateController,
+                    documentNumberController: documentNumberController,
+                    onboardingBloc: widget.onboardingBloc,
+                    nextClicked: widget.onboardingBloc.state.nextClicked,
+                    pageController: widget.pageController,
+                  ),
+            state.securityDocumentList.length > 1
+                ? CustomContainer(height: DBL.twenty.val)
+                : state.isInitialLoading
+                    ? const CustomSizedBox()
+                    : _uploadDocumentWidget(),
+            state.securityDocumentList.isNotEmpty
+                ? _previewShowingWidget(state)
+                : const CustomContainer(),
+          ],
         ),
       ),
     );

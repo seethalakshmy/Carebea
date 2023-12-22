@@ -71,10 +71,21 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
         CustomSizedBox(
           height: DBL.six.val,
         ),
-        RowColonCombo.twoHundred(
-            label: AppString.addressLine1.val,
-            value: personalDetails?.addressLine ?? "",
-            fontSize: FS.font13PointFive.val),
+        Row(
+          children: [
+            Expanded(
+              child: RowColonCombo.twoHundred(
+                  label: AppString.addressLine1.val,
+                  value: personalDetails?.addressLine ?? "",
+                  fontSize: FS.font13PointFive.val),
+            ),
+            !isLg(context)
+                ? Expanded(
+                    child: _ssnView(),
+                  )
+                : CustomSizedBox.shrink(),
+          ],
+        ),
         CustomSizedBox(
           height: DBL.six.val,
         ),
@@ -168,6 +179,13 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
         fontSize: FS.font13PointFive.val);
   }
 
+  RowColonCombo _ssnView() {
+    return RowColonCombo.twoHundred(
+        label: AppString.socialSecurityNumber.val,
+        value: state.response?.data?.ssn ?? '',
+        fontSize: FS.font13PointFive.val);
+  }
+
   RowColonCombo _alterNativeMobileNumberView(PersonalDetails? personalDetails) {
     return RowColonCombo.twoHundred(
         label: AppString.alternativeMobileNumber.val,
@@ -198,6 +216,7 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
         CustomSizedBox(
           height: DBL.six.val,
         ),
+        _ssnView()
       ],
     );
   }

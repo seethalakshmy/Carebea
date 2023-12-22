@@ -573,6 +573,7 @@ enum AppString {
   faq("Faq Management"),
   updateFaq("Update Faq"),
   subscriptionType("Subscription Type"),
+  subscriptionFee("Subscription Fee"),
   page("Policy Management"),
   supportTicketsDetails("Complaints Details"),
   pleaseSelectPets("Please select the pets"),

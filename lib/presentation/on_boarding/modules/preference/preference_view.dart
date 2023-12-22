@@ -29,8 +29,16 @@ class PreferenceView extends StatelessWidget {
   final petSearchController = TextEditingController();
   final languageSearchController = TextEditingController();
 
+  initState() {
+    ScrollController(initialScrollOffset: 0);
+  }
+
   @override
   Widget build(BuildContext context) {
+    ScrollController(initialScrollOffset: 0);
+    final GlobalKey<ScrollableState> _scrollableKey =
+        GlobalKey<ScrollableState>();
+
     onboardingBloc.add(const OnboardingEvent.yearsOfExpList());
     onboardingBloc.add(const OnboardingEvent.petsList("", []));
     onboardingBloc.add(const OnboardingEvent.languageList("", []));
@@ -71,6 +79,7 @@ class PreferenceView extends StatelessWidget {
         return CommonPaddingWidget(
             child: CustomContainer(
           child: SingleChildScrollView(
+            key: _scrollableKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

@@ -254,12 +254,15 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
                       Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            CustomText(file?.name ?? ''),
-                            CustomText(file?.name ?? ''),
+                            CustomText(file?.name ?? attachment),
                             IconButton(
                                 onPressed: () {
-                                  bytesList.clear();
+                                  setState(() {
+                                    bytesList.remove(file);
+                                    attachment = '';
+                                  });
                                   log('bytlist ${bytesList.length}');
+                                  log('attachment ${attachment}');
                                 },
                                 icon: Icon(
                                   Icons.close,
@@ -426,13 +429,14 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
       //   }
       // }
       // else {
-      if (_videoBloc.uploadedVideo == '') {
+      if (_videoBloc.uploadedVideo == '' && attachment == '') {
         CSnackBar.showError(context, msg: 'Please attach video');
       } else {
         _videoBloc.add(VideoUploadEvent.addSettings(
+            settingsId: settingsId,
             adminId: adminUserID,
             title: _videoBloc.title.text,
-            attachment: _videoBloc.uploadedVideo,
+            attachment: _videoBloc.uploadedVideo ?? attachment,
             userType: state.isForClient == 0 ? 2 : 1,
             context: context));
       }
