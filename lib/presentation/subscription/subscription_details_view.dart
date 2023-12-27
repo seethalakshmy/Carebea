@@ -64,6 +64,7 @@ class SubscriptionDetailScreen extends StatelessWidget {
                                   imgUrl: item.profile,
                                   width: isXs(context) ? 150 : 200,
                                   height: isXs(context) ? 125 : 175,
+                                  circleRadius: 80,
                                 ),
                               ],
                             ),

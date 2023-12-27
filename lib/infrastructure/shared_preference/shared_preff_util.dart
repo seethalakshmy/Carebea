@@ -30,7 +30,6 @@ class SharedPreffUtil {
   final editCareGiver = "edit_caregiver";
 
   final viewUser = "view_user";
-  final editUser = "edit_user";
 
   final viewTransaction = "view_transaction";
   final rememberMe = "remember_me";
@@ -38,7 +37,6 @@ class SharedPreffUtil {
   final loginPassword = "login_password";
 
   final viewServiceRequest = "view_service";
-  final editServiceRequest = "edit_service";
 
   final page = "page";
   final tab = "tab";
@@ -227,6 +225,14 @@ class SharedPreffUtil {
     return _prefs?.getBool(editRole) ?? false;
   }
 
+  set setViewUser(bool value) {
+    _prefs?.setBool(viewUser, value);
+  }
+
+  get getViewUser {
+    return _prefs?.getBool(viewUser) ?? false;
+  }
+
   set setDeleteRole(bool value) {
     _prefs?.setBool(deleteRole, value);
   }
@@ -281,14 +287,6 @@ class SharedPreffUtil {
 
   get getViewServiceRequest {
     return _prefs?.getBool(viewServiceRequest) ?? false;
-  }
-
-  set setEditServiceRequest(bool value) {
-    _prefs?.setBool(editServiceRequest, value);
-  }
-
-  get getEditServiceRequest {
-    return _prefs?.getBool(editServiceRequest) ?? false;
   }
 
   set setViewTransaction(bool value) {
@@ -349,8 +347,8 @@ class SharedPreffUtil {
     _prefs!.setBool(viewCareGiver, false);
     _prefs!.setBool(editCareGiver, false);
     _prefs!.setBool(viewServiceRequest, false);
-    _prefs!.setBool(editServiceRequest, false);
     _prefs!.setBool(viewTransaction, false);
+    _prefs!.setBool(viewUser, false);
     print('Logout successful');
   }
 }

@@ -230,7 +230,14 @@ class _CareGiversPageState extends State<CareGiversPage> {
             _tabType != 1 ? _statusDropDown(context) : CustomSizedBox.shrink(),
             Row(
               children: [
-                _searchField(),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    _searchField(),
+                  ],
+                ),
                 CustomSizedBox(
                   width: DBL.ten.val,
                 ),
@@ -253,8 +260,8 @@ class _CareGiversPageState extends State<CareGiversPage> {
             color: AppColor.primaryColor.val,
             height: DBL.fiftyFive.val,
             borderRadius: DBL.five.val,
-            // padding: EdgeInsets.symmetric(
-            //     horizontal: DBL.twentyTwo.val, vertical: DBL.ten.val),
+            padding: EdgeInsets.symmetric(
+                horizontal: DBL.twentyTwo.val, vertical: DBL.ten.val),
             textStyle: TS().gRoboto(
                 color: AppColor.white.val,
                 fontWeight: FW.w600.val,

@@ -225,6 +225,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
       height: DBL.oneSeventyFive.val,
       width: DBL.twoHundred.val,
       isDetailPage: true,
+      circleRadius: 80,
     );
   }
 

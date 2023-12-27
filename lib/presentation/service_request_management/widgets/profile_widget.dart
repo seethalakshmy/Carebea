@@ -44,18 +44,20 @@ class ProfileWidget extends StatelessWidget {
                       name,
                       width: width,
                       style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        decoration:
-                            needUnderLine ? TextDecoration.underline : null,
-                      ),
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          decoration:
+                              needUnderLine ? TextDecoration.underline : null,
+                          color: needUnderLine ? AppColor.blue.val : null),
                     ),
                   ),
                 ),
                 const SizedBox(
                   height: 4,
                 ),
-                CustomText(subText),
+                CustomText(
+                  subText,
+                ),
               ],
             )
           ],
@@ -71,28 +73,30 @@ class ProfileWidget extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: CachedImage(
-          onTap: () {
-            showDialog(
-              barrierLabel: "",
-              barrierDismissible: true,
-              context: context,
-              builder: (BuildContext buildContext) {
-                return CustomAlertDialogWidget(
-                    showHeading: false,
-                    width: 700,
-                    heading: "",
-                    child: CachedImage(
-                      fit: BoxFit.contain,
-                      imgUrl: imageUrl,
-                    ));
-              },
-            );
-          },
-          height: DBL.oneFifty.val,
-          width: DBL.oneFifty.val,
-          imgUrl: imageUrl,
-          placeHolderHeight: DBL.oneFifty.val,
-          placeHolderWidth: DBL.oneFifty.val),
+        onTap: () {
+          showDialog(
+            barrierLabel: "",
+            barrierDismissible: true,
+            context: context,
+            builder: (BuildContext buildContext) {
+              return CustomAlertDialogWidget(
+                  showHeading: false,
+                  width: 700,
+                  heading: "",
+                  child: CachedImage(
+                    fit: BoxFit.contain,
+                    imgUrl: imageUrl,
+                  ));
+            },
+          );
+        },
+        height: DBL.oneFifty.val,
+        width: DBL.oneFifty.val,
+        imgUrl: imageUrl,
+        placeHolderHeight: DBL.oneFifty.val,
+        placeHolderWidth: DBL.oneFifty.val,
+        circleRadius: 80,
+      ),
     );
   }
 }

@@ -333,6 +333,7 @@ enum AppString {
   previous("Previous"),
   next("Next"),
   create("Create"),
+  createAndEdit("Create/Edit"),
   transactionId("Transaction ID"),
   serviceId("Service ID"),
   transactionType("Transaction Type"),

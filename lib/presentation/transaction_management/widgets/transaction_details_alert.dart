@@ -143,7 +143,9 @@ class TransactionDetailsAlert extends StatelessWidget {
                   return CustomAlertDialogWidget(
                     heading: AppString.services.val,
                     child: ServiceDetailsAlert(
-                      title: AppString.serviceDetails.val,
+                      title: transactionBloc
+                              .transactionDetailsData.serviceStatus ??
+                          '',
                       serviceBloc: serviceRequestManagementBloc,
                     ),
                   );

@@ -11,6 +11,9 @@ class CDataTable2 extends StatelessWidget {
     this.dividerThickness,
     this.headingRowHeight,
     this.dataRowHeight,
+    this.sortArrowBuilder,
+    this.sortColumnIndex,
+    this.sortAscending,
   }) : super(key: key);
   final double? minWidth;
   final double? dividerThickness;
@@ -18,11 +21,19 @@ class CDataTable2 extends StatelessWidget {
   final double? dataRowHeight;
   final List<DataColumn2> columns;
   final List<DataRow2> rows;
+  final Widget? Function(bool, bool)? sortArrowBuilder;
+  final int? sortColumnIndex;
+  final bool? sortAscending;
 
   @override
   Widget build(BuildContext context) {
     return DataTable2(
+        scrollController: null,
         columnSpacing: 20,
+        sortArrowIcon: Icons.cabin,
+        sortArrowBuilder: sortArrowBuilder,
+        sortColumnIndex: sortColumnIndex,
+        sortAscending: sortAscending ?? true,
         minWidth: minWidth,
         dividerThickness: dividerThickness,
         headingRowHeight: headingRowHeight,

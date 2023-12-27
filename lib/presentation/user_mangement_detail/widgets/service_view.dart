@@ -142,12 +142,12 @@ class _ServiceViewState extends State<ServiceView> {
                 fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.S,
+            size: ColumnSize.M,
             label: _columnsView(context,
                 text: AppString.serviceFee.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.S,
+            size: ColumnSize.M,
             label: _columnsView(context,
                 text: AppString.tip.val, fontWeight: FontWeight.bold),
           ),
@@ -346,16 +346,19 @@ class _ServiceViewState extends State<ServiceView> {
               ),
               Expanded(
                 flex: 1,
-                child: CustomText(
-                  name,
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: true,
-                  style: TS().gRoboto(
-                      fontSize: Responsive.isWeb(context)
-                          ? DBL.twelve.val
-                          : DBL.ten.val,
-                      fontWeight: FW.w400.val,
-                      color: AppColor.rowColor.val),
+                child: Tooltip(
+                  message: name,
+                  child: CustomText(
+                    name,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: true,
+                    style: TS().gRoboto(
+                        fontSize: Responsive.isWeb(context)
+                            ? DBL.twelve.val
+                            : DBL.ten.val,
+                        fontWeight: FW.w400.val,
+                        color: AppColor.rowColor.val),
+                  ),
                 ),
               ),
               CustomSizedBox(

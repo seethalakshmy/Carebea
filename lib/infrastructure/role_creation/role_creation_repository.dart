@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:admin_580_tech/domain/common_response/common_response.dart';
 import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.dart';
 import 'package:admin_580_tech/domain/role_creation/i_role_creation_repo.dart';
@@ -5,6 +7,7 @@ import 'package:admin_580_tech/domain/role_creation/model/module_response.dart';
 import 'package:admin_580_tech/domain/role_creation/model/view_role_response.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
@@ -28,6 +31,7 @@ class RoleCreationRepository implements IRoleCreationRepo {
         roleId,
         moduleId,
       );
+      debugPrint("privilage ${json.encode(moduleId)}");
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");

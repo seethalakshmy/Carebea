@@ -78,6 +78,7 @@ String dataToJson(TransactionDetailsData data) => json.encode(data.toJson());
 class TransactionDetailsData {
   TransactionDetailsData({
     String? serviceId,
+    String? serviceStatus,
     String? uniqueServiceId,
     String? uniqueTransactionId,
     String? transactionType,
@@ -94,6 +95,7 @@ class TransactionDetailsData {
     Status? status,
   }) {
     _serviceId = serviceId;
+    _serviceStatus = serviceStatus;
     _uniqueServiceId = uniqueServiceId;
     _uniqueTransactionId = uniqueTransactionId;
 
@@ -113,6 +115,7 @@ class TransactionDetailsData {
 
   TransactionDetailsData.fromJson(dynamic json) {
     _serviceId = json['serviceId'];
+    _serviceStatus = json['service_status'];
     _uniqueServiceId = json['unique_service_id'];
     _uniqueTransactionId = json['unique_transaction_id'];
 
@@ -130,6 +133,7 @@ class TransactionDetailsData {
     _status = json['status'] != null ? Status.fromJson(json['status']) : null;
   }
   String? _serviceId;
+  String? _serviceStatus;
   String? _uniqueServiceId;
   String? _uniqueTransactionId;
 
@@ -147,6 +151,7 @@ class TransactionDetailsData {
   Status? _status;
   TransactionDetailsData copyWith({
     String? serviceId,
+    String? serviceStatus,
     String? uniqueTransactionId,
     String? uniqueServiceId,
     String? transactionType,
@@ -164,6 +169,7 @@ class TransactionDetailsData {
   }) =>
       TransactionDetailsData(
         serviceId: serviceId ?? _serviceId,
+        serviceStatus: serviceStatus ?? _serviceStatus,
         uniqueServiceId: uniqueServiceId ?? _uniqueServiceId,
         uniqueTransactionId: uniqueTransactionId ?? _uniqueTransactionId,
         transactionType: transactionType ?? _transactionType,
@@ -180,6 +186,7 @@ class TransactionDetailsData {
         status: status ?? _status,
       );
   String? get serviceId => _serviceId;
+  String? get serviceStatus => _serviceStatus;
   String? get uniqueServiceId => _uniqueServiceId;
   String? get uniqueTransactionId => _uniqueTransactionId;
 
@@ -199,6 +206,7 @@ class TransactionDetailsData {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['serviceId'] = _serviceId;
+    map['service_status'] = _serviceStatus;
     map['unique_transaction_id'] = _uniqueTransactionId;
     map['unique_service_id'] = _uniqueServiceId;
 

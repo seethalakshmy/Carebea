@@ -476,6 +476,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
 
   _genderWidget(OnboardingState state) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         state.isInitialLoading
@@ -983,6 +984,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             //     .jumpToPage(widget.pageController.page!.toInt() - 1);
           },
           onRightButtonPressed: () async {
+            checkInputData();
+
             widget.onboardingBloc.nextButtonClicked = true;
 
             if (selectedGender.isEmpty &&
@@ -1023,7 +1026,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                     widget.onboardingBloc.state.copyWith(isLoading: false));
               }
             }
-            checkInputData();
           },
         );
       },

@@ -45,7 +45,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         sharedPrefUtil.setAdminId = r.data?.userId ?? "";
         sharedPrefUtil.setAccessToken = r.data?.accessToken ?? "";
         sharedPrefUtil.setViewRole = r.data?.permissions?.role?.view ?? false;
-        sharedPrefUtil.setEditRole = r.data?.permissions?.role?.view ?? false;
+        sharedPrefUtil.setEditRole = r.data?.permissions?.role?.edit ?? false;
         sharedPrefUtil.setDeleteRole =
             r.data?.permissions?.role?.delete ?? false;
 
@@ -56,13 +56,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
         sharedPrefUtil.setViewCareGiver =
             r.data?.permissions?.careAmbassador?.view ?? false;
+        sharedPrefUtil.setViewUser = r.data?.permissions?.client?.view ?? false;
         sharedPrefUtil.setEditCareGiver =
             r.data?.permissions?.careAmbassador?.edit ?? false;
 
         sharedPrefUtil.setViewServiceRequest =
             r.data?.permissions?.services?.view ?? false;
-        sharedPrefUtil.setEditServiceRequest =
-            r.data?.permissions?.services?.edit ?? false;
 
         sharedPrefUtil.setViewTransaction =
             r.data?.permissions?.transactions?.view ?? false;

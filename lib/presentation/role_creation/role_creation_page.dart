@@ -300,6 +300,7 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
               children: List<Widget>.generate(
                   state.moduleResponse?.module?.length ?? 0, (index) {
                 var item = state.moduleResponse?.module![index];
+                debugPrint('"iteeeeems ${json.encode(item)}"}');
                 return Padding(
                   padding: EdgeInsets.symmetric(
                       vertical: DBL.six.val, horizontal: DBL.five.val),
@@ -351,8 +352,26 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
                             onSelected: (bool selected) {
                               if (selected == false) {
                                 item.isView = false;
-                                item.isDelete = false;
+
                                 item.isEdit = false;
+                                if ((item.isCreateShow && index == 0) ||
+                                    item.isEditShow) {
+                                  item.isCreate = false;
+                                }
+                                if (item.isDeleteShow) {
+                                  item.isDelete = false;
+                                }
+                              } else {
+                                item.isView = true;
+
+                                item.isEdit = true;
+                                if ((item.isCreateShow && index == 0) ||
+                                    item.isEditShow) {
+                                  item.isCreate = true;
+                                }
+                                if (item.isDeleteShow) {
+                                  item.isDelete = true;
+                                }
                               }
                               roleCreationBloc.add(RoleCreationEvent.isSelected(
                                 module: item,
@@ -362,7 +381,7 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
                         ),
                         const Spacer(),
                         SizedBox(
-                          width: 250,
+                          width: 300,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -381,17 +400,17 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
                               CustomSizedBox(
                                 width: DBL.eight.val,
                               ),
-                              item.isEditShow
-                                  ? CustomCheckLabel(
-                                      isIgnoring: _isView!,
-                                      label: AppString.edit.val,
-                                      value: item.isEdit,
-                                      onToggle: (val) {
-                                        roleCreationBloc.add(
-                                            RoleCreationEvent.isCheckedEdit(
-                                                item));
-                                      })
-                                  : CustomSizedBox.shrink(),
+                              // item.isEditShow
+                              //     ? CustomCheckLabel(
+                              //         isIgnoring: _isView!,
+                              //         label: AppString.edit.val,
+                              //         value: item.isEdit,
+                              //         onToggle: (val) {
+                              //           roleCreationBloc.add(
+                              //               RoleCreationEvent.isCheckedEdit(
+                              //                   item));
+                              //         })
+                              //     : CustomSizedBox.shrink(),
                               CustomSizedBox(
                                 width: DBL.eight.val,
                               ),
@@ -406,10 +425,11 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
                                                 item));
                                       })
                                   : CustomSizedBox.shrink(),
-                              item.isCreateShow && index == 0
+                              (item.isCreateShow && index == 0) ||
+                                      item.isEditShow
                                   ? CustomCheckLabel(
                                       isIgnoring: _isView!,
-                                      label: AppString.create.val,
+                                      label: AppString.createAndEdit.val,
                                       value: item.isCreate,
                                       onToggle: (val) {
                                         roleCreationBloc.add(
@@ -442,10 +462,9 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
     final moduleList = state.moduleResponse?.module ?? [];
     for (var element in moduleList) {
       if (element.isSelected &&
-          (element.isView ||
-              element.isEdit ||
-              element.isDelete ||
-              element.isCreate)) {
+          (element.isView == true ||
+              element.isDelete == true ||
+              element.isCreate == true)) {
         CustomLog.log("element:: ${json.encode(element)}");
         selectedModules.add(element);
       }

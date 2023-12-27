@@ -144,6 +144,7 @@ class ServiceDetailsAlert extends StatelessWidget {
       ServiceDetailsData service, BuildContext context) {
     return ProfileWidget(
       // width: DBL.threeFifty.val,
+      needUnderLine: true,
       imageUrl: service.parentProPic ?? "",
       name:
           "${service.parentName!.firstName ?? ""} ${service.parentName!.lastName ?? ""}",
@@ -649,6 +650,11 @@ class ServiceDetailsAlert extends StatelessWidget {
             SizedBox(width: DBL.eight.val),
             CustomText(
               subText,
+              style: TextStyle(
+                  decoration: (needUnderLine ?? false)
+                      ? TextDecoration.underline
+                      : null,
+                  color: needUnderLine ?? false ? AppColor.blue.val : null),
               width: Responsive.isMobile(context)
                   ? DBL.oneFifty.val
                   : Responsive.isMobile(context) || Responsive.isTablet(context)

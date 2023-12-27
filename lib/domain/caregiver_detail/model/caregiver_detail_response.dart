@@ -25,7 +25,7 @@ class CareGiverDetailResponse {
 class Data {
   String? userId;
   Name? name;
-  Location? location;
+  List<Location>? location;
   String? phone;
   String? email;
   String? ssn;
@@ -38,29 +38,34 @@ class Data {
   List<String>? pendingDocs;
   Schedule? schedule;
   AccountDetails? accountDetails;
+  int? missedService;
 
-  Data({
-    this.userId,
-    this.name,
-    this.location,
-    this.phone,
-    this.email,
-    this.ssn,
-    this.serviceCompleted,
-    this.cancelledRequests,
-    this.totalReviewsGiven,
-    this.reviewPending,
-    this.pendingDocs,
-    this.schedule,
-    this.accountDetails,
-  });
+  Data(
+      {this.userId,
+      this.name,
+      this.location,
+      this.phone,
+      this.email,
+      this.ssn,
+      this.serviceCompleted,
+      this.cancelledRequests,
+      this.totalReviewsGiven,
+      this.reviewPending,
+      this.pendingDocs,
+      this.schedule,
+      this.accountDetails,
+      this.missedService});
 
   Data.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];
     rating = json['rating'];
     name = json['name'] != null ? Name.fromJson(json['name']) : null;
-    location =
-        json['location'] != null ? Location.fromJson(json['location']) : null;
+    if (json['location'] != null) {
+      location = <Location>[];
+      json['location'].forEach((v) {
+        location!.add(Location.fromJson(v));
+      });
+    }
     phone = json['phone'];
     email = json['email'];
     ssn = json['ssn'];
@@ -75,6 +80,7 @@ class Data {
     accountDetails = json['account_details'] != null
         ? AccountDetails.fromJson(json['account_details'])
         : null;
+    missedService = json['missedServices'];
   }
 
   Map<String, dynamic> toJson() {
@@ -84,7 +90,7 @@ class Data {
       data['name'] = name!.toJson();
     }
     if (location != null) {
-      data['location'] = location!.toJson();
+      data['location'] = location!.map((v) => v.toJson()).toList();
     }
     data['phone'] = phone;
     data['email'] = email;
@@ -94,6 +100,7 @@ class Data {
     data['total_reviews_given'] = totalReviewsGiven;
     data['review_pending'] = reviewPending;
     data['pending_docs'] = pendingDocs;
+    data['missedServices'] = missedService;
     if (schedule != null) {
       data['schedule'] = schedule!.toJson();
     }
@@ -134,6 +141,8 @@ class Location {
   String? lattitude;
   String? longitude;
   String? city;
+  String? cityName;
+  String? stateName;
   String? state;
   String? address;
   String? zipCode;
@@ -144,6 +153,8 @@ class Location {
   Location(
       {this.streetName,
       this.lattitude,
+      this.stateName,
+      this.cityName,
       this.longitude,
       this.city,
       this.state,
@@ -157,6 +168,8 @@ class Location {
     streetName = json['streetName'];
     lattitude = json['lattitude'];
     longitude = json['longitude'];
+    stateName = json['stateName'];
+    cityName = json['cityName'];
     city = json['city'];
     state = json['state'];
     address = json['address'];
@@ -170,6 +183,9 @@ class Location {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['streetName'] = streetName;
     data['lattitude'] = lattitude;
+    data['stateName'] = stateName;
+    data['cityName'] = cityName;
+
     data['longitude'] = longitude;
     data['city'] = city;
     data['state'] = state;

@@ -99,6 +99,7 @@ class DocumentDetailsView extends StatelessWidget {
     return BlocBuilder<OnboardingBloc, OnboardingState>(
       builder: (context, state) {
         return Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _labelWidget(AppString.selectDocumentType.val),

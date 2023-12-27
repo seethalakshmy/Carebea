@@ -459,6 +459,8 @@ class _QualificationViewState extends State<QualificationView> {
                                 widget.pageController.page!.toInt() - 1);
                           },
                           onRightButtonPressed: () async {
+                            checkInputData(onboardingState);
+
                             if ((onboardingState.isCovidSelected == 0 &&
                                     widget.onboardingBloc.state
                                         .covidDocumentList.isEmpty) ||
@@ -551,7 +553,6 @@ class _QualificationViewState extends State<QualificationView> {
                               }
                               widget.onboardingBloc.covidBytesList.clear();
                             }
-                            checkInputData(onboardingState);
                           },
                         );
                       },

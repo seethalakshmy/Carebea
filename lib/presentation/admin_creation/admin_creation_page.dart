@@ -251,29 +251,33 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
   }
 
   _profileImageView(BuildContext context, String url) {
-    return CachedImage(
-      onTap: () {
-        showGeneralDialog(
-          barrierDismissible: true,
-          barrierLabel: "",
-          context: context,
-          pageBuilder: (BuildContext buildContext, Animation animation,
-              Animation secondaryAnimation) {
-            return CustomAlertDialogWidget(
-                showHeading: false,
-                width: 700,
-                heading: "",
-                child: CachedImage(
-                  fit: BoxFit.contain,
-                  imgUrl: url,
-                ));
-          },
-        );
-      },
-      imgUrl: url,
-      height: DBL.oneSeventyFive.val,
-      width: DBL.twoHundred.val,
-      isDetailPage: true,
+    return Center(
+      child: CachedImage(
+        onTap: () {
+          showGeneralDialog(
+            barrierDismissible: true,
+            barrierLabel: "",
+            context: context,
+            pageBuilder: (BuildContext buildContext, Animation animation,
+                Animation secondaryAnimation) {
+              return CustomAlertDialogWidget(
+                  showHeading: false,
+                  width: 700,
+                  heading: "",
+                  child: CachedImage(
+                    fit: BoxFit.contain,
+                    imgUrl: url,
+                  ));
+            },
+          );
+        },
+        imgUrl: url,
+        height: DBL.oneSeventyFive.val,
+        width: DBL.twoHundred.val,
+        isDetailPage: true,
+        isCircle: true,
+        circleRadius: 80,
+      ),
     );
   }
 
@@ -460,16 +464,18 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                           height: DBL.fortyFive.val,
                           minWidth: DBL.oneTwenty.val,
                           onPressed: () async {
-                            // _fNameController.text =
-                            //     state.viewResponse?.data?.firstName ?? '';
-                            // _emailController.text =
-                            //     state.viewResponse?.data?.email ?? "";
-                            // _mobileController.text =
-                            //     state.viewResponse?.data?.phoneNumber ?? "";
-                            // selectedRole =
-                            //     state.viewResponse?.data?.roleId ?? '';
-                            // _adminCreationBloc.profileUrl =
-                            //     state.viewResponse?.data?.profile ?? '';
+                            // if (_isEdit!) {
+                            //   _fNameController.text =
+                            //       state.viewResponse?.data?.firstName ?? '';
+                            //   _emailController.text =
+                            //       state.viewResponse?.data?.email ?? "";
+                            //   _mobileController.text =
+                            //       state.viewResponse?.data?.phoneNumber ?? "";
+                            //   selectedRole =
+                            //       state.viewResponse?.data?.roleId ?? '';
+                            //   _adminCreationBloc.profileUrl =
+                            //       state.viewResponse?.data?.profile ?? '';
+                            // }
                             if (_adminCreationBloc
                                     .state.pickedProfilePic!.size >
                                 0) {

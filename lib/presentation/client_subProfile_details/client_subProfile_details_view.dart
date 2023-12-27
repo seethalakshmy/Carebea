@@ -135,6 +135,7 @@ class _ClientSubProfileDetailsPageState
                                               height: isXs(context) ? 125 : 135,
                                               imgUrl: state
                                                   .response?.data?.profilePic,
+                                              circleRadius: 70,
                                             ),
                                             CustomSizedBox(
                                               height: DBL.seventeen.val,
@@ -155,10 +156,7 @@ class _ClientSubProfileDetailsPageState
                                                 width: DBL.five.val,
                                               ),
                                               CustomText(
-                                                state.response?.data
-                                                        ?.profileCompletionPercentage
-                                                        .toString() ??
-                                                    '',
+                                                '${state.response?.data?.profileCompletionPercentage} %',
                                                 style: TS().gRoboto(
                                                     fontWeight: FW.w500.val,
                                                     fontSize: getFontSize(

@@ -59,6 +59,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   Widget _bodyView() {
     List<Widget> pages = [
+      QualificationView(
+          state: _onboardingBloc.state,
+          onboardingBloc: _onboardingBloc,
+          pageController: controller),
       PersonalDetailsView(
         onboardingBloc: _onboardingBloc,
         pageController: controller,
