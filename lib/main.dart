@@ -20,6 +20,7 @@ import 'application/bloc/get_cities_bloc/get_cities_bloc.dart';
 import 'application/bloc/get_states_bloc/get_states_bloc.dart';
 import 'application/bloc/login/login_bloc.dart';
 import 'application/bloc/master/master_bloc.dart';
+import 'application/bloc/onboarding/onboarding_bloc.dart';
 import 'application/bloc/page/page_bloc.dart';
 import 'application/bloc/resend_otp_bloc/resend_otp_bloc.dart';
 import 'application/bloc/reset_password/reset_password_bloc.dart';
@@ -108,6 +109,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (_) => SignupBloc(SignupRepository())),
         BlocProvider(create: (_) => ClientReportBloc(ClientReportRepository())),
         BlocProvider(create: (_) => MasterBloc(MasterRepository())),
+        BlocProvider(create: (_) => OnboardingBloc(OnBoardingRepository())),
         BlocProvider(create: (_) => PageBloc(PageRepo())),
         BlocProvider<ServiceRequestManagementBloc>(
             create: (context) => serviceRequestManagementBloc),

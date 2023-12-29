@@ -95,6 +95,7 @@ class ProfileWidget extends StatelessWidget {
         imgUrl: imageUrl,
         placeHolderHeight: DBL.oneFifty.val,
         placeHolderWidth: DBL.oneFifty.val,
+        isCircle: true,
         circleRadius: 80,
       ),
     );

@@ -10,7 +10,7 @@ class CachedImage extends StatelessWidget {
     this.fit,
     this.width,
     this.height,
-    this.isCircle = true,
+    this.isCircle = false,
     this.isDocImage = false,
     this.isDetailPage = false,
     this.placeHolderWidth,

@@ -409,7 +409,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
       {double? height, required UserDetailResponse? response}) {
     return ServiceRewardAndCompletion(
       height: height,
-      title: response?.data?.totalReviewsGiven.toString() ?? "",
+      title: response?.data?.averageReviewsGiven.toString() ?? "",
       subTitle: AppString.averageReviewByCareAmbassador.val,
     );
   }

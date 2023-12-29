@@ -19,6 +19,7 @@ import '../../../../core/time_utils.dart';
 import '../../../../infrastructure/api_service_s3.dart';
 import '../../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../../../caregiver_creation/caregiver_creation_page.dart';
 import '../../../routes/app_router.gr.dart';
 import '../../../widget/commonImageview.dart';
 import '../../../widget/common_date_picker_widget.dart';
@@ -979,13 +980,25 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           onLeftButtonPressed: () {
             widget.isFromSignUp
                 ? context.router.navigate(const SignUpRoute())
-                : context.router.navigate(const CaregiverCreationRoute());
+                : Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CaregiverCreationPage(),
+                    ),
+                  ).then((_) {
+                    addressLineController.text =
+                        addressLineController.text.trim();
+                    documentNumberController.text =
+                        documentNumberController.text.trim();
+                    streetController.text = streetController.text.trim();
+// Here you will get callback after coming back from NextPage()
+// Do your code here
+                  });
+            // : context.router.navigate(const CaregiverCreationRoute());
             // widget.pageController
             //     .jumpToPage(widget.pageController.page!.toInt() - 1);
           },
           onRightButtonPressed: () async {
-            checkInputData();
-
             widget.onboardingBloc.nextButtonClicked = true;
 
             if (selectedGender.isEmpty &&
@@ -1026,6 +1039,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                     widget.onboardingBloc.state.copyWith(isLoading: false));
               }
             }
+            checkInputData();
           },
         );
       },
@@ -1041,9 +1055,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   }
 
   checkInputData() {
-    addressLineController.text = addressLineController.text.trim();
-    documentNumberController.text = documentNumberController.text.trim();
-    streetController.text = streetController.text.trim();
+    // addressLineController.text = addressLineController.text.trim();
+    // documentNumberController.text = documentNumberController.text.trim();
+    // streetController.text = streetController.text.trim();
     if (_validateMode != AutovalidateMode.always) {
       formValidationBloc.add(const FormValidationEvent.submit());
       formValidationBloc.add(const FormValidationEvent.dropDown("true"));

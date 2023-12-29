@@ -135,6 +135,7 @@ class _ClientSubProfileDetailsPageState
                                               height: isXs(context) ? 125 : 135,
                                               imgUrl: state
                                                   .response?.data?.profilePic,
+                                              isCircle: true,
                                               circleRadius: 70,
                                             ),
                                             CustomSizedBox(

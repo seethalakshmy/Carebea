@@ -1,4 +1,7 @@
+import 'dart:html';
+
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/link.dart';
 
 import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
@@ -48,6 +51,7 @@ import '../transaction_management/transaction_management_page.dart';
 import '../user_management/user_management_page.dart';
 import '../user_mangement_detail/user_managemet_detail_page.dart';
 import '../widget/dropdown/dropdown.dart';
+import 'package:universal_html/html.dart' as html;
 
 TabsRouter? autoTabRouter;
 
@@ -704,4 +708,11 @@ class _MenuBarState extends State<SideMenuPage> {
   }
 
   bool isXs(context) => MediaQuery.of(context).size.width <= 805;
+
+  static openNewTab({required String setUrl, required String setTitle}) {
+    return html.window.open(
+      setUrl,
+      setTitle,
+    );
+  }
 }

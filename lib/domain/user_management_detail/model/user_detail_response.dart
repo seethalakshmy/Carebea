@@ -64,6 +64,7 @@ class Data {
     num? serviceCompleted,
     num? cancelledRequest,
     num? totalReviewsGiven,
+    num? averageReviewsGiven,
     List<SubProfiles>? subProfiles,
     PaymentMethod? paymentMethod,
     List<Transactions>? transactions,
@@ -78,6 +79,7 @@ class Data {
     _serviceCompleted = serviceCompleted;
     _cancelledRequest = cancelledRequest;
     _totalReviewsGiven = totalReviewsGiven;
+    _averageReviewsGiven = averageReviewsGiven;
     _subProfiles = subProfiles;
     _paymentMethod = paymentMethod;
     _transactions = transactions;
@@ -94,6 +96,7 @@ class Data {
     _serviceCompleted = json['service_completed'];
     _cancelledRequest = json['cancelled_request'];
     _totalReviewsGiven = json['total_reviews_given'];
+    _averageReviewsGiven = json['average_review'];
     if (json['subProfiles'] != null) {
       _subProfiles = [];
       json['subProfiles'].forEach((v) {
@@ -121,6 +124,7 @@ class Data {
   num? _serviceCompleted;
   num? _cancelledRequest;
   num? _totalReviewsGiven;
+  num? _averageReviewsGiven;
   List<SubProfiles>? _subProfiles;
   PaymentMethod? _paymentMethod;
   List<Transactions>? _transactions;
@@ -135,6 +139,7 @@ class Data {
     num? serviceCompleted,
     num? cancelledRequest,
     num? totalReviewsGiven,
+    num? averageReviewsGiven,
     List<SubProfiles>? subProfiles,
     PaymentMethod? paymentMethod,
     List<Transactions>? transactions,
@@ -150,6 +155,7 @@ class Data {
         serviceCompleted: serviceCompleted ?? _serviceCompleted,
         cancelledRequest: cancelledRequest ?? _cancelledRequest,
         totalReviewsGiven: totalReviewsGiven ?? _totalReviewsGiven,
+        averageReviewsGiven: averageReviewsGiven ?? _averageReviewsGiven,
         subProfiles: subProfiles ?? _subProfiles,
         paymentMethod: paymentMethod ?? _paymentMethod,
         transactions: transactions ?? _transactions,
@@ -164,6 +170,7 @@ class Data {
   num? get serviceCompleted => _serviceCompleted;
   num? get cancelledRequest => _cancelledRequest;
   num? get totalReviewsGiven => _totalReviewsGiven;
+  num? get averageReviewsGiven => _averageReviewsGiven;
   List<SubProfiles>? get subProfiles => _subProfiles;
   PaymentMethod? get paymentMethod => _paymentMethod;
   List<Transactions>? get transactions => _transactions;
@@ -182,6 +189,7 @@ class Data {
     map['service_completed'] = _serviceCompleted;
     map['cancelled_request'] = _cancelledRequest;
     map['total_reviews_given'] = _totalReviewsGiven;
+    map['average_review'] = _averageReviewsGiven;
     if (_subProfiles != null) {
       map['subProfiles'] = _subProfiles?.map((v) => v.toJson()).toList();
     }
