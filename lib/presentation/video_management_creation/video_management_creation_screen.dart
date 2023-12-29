@@ -85,6 +85,7 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
     _videoBloc.title.text =
         autoTabRouter?.currentChild?.queryParams.getString("title", '') ?? '';
     type = autoTabRouter?.currentChild?.queryParams.getNum("type", 0) ?? 0;
+
     attachment =
         autoTabRouter?.currentChild?.queryParams.getString("attachment", '') ??
             '';
@@ -97,6 +98,12 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
       _isEdit = true;
     } else {
       _isEdit = false;
+    }
+
+    if (_isEdit == true) {
+      _videoBloc.radioValue = type.toInt() == 2 ? 0 : 1;
+    } else {
+      _videoBloc.radioValue = type.toInt();
     }
   }
 
@@ -247,14 +254,15 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
                       Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            CachedImage(
-                              imgUrl: attachment,
-                            ),
-                            CustomText('Uploaded'),
+                            CustomText(file?.name ?? attachment),
                             IconButton(
                                 onPressed: () {
-                                  bytesList.clear();
+                                  setState(() {
+                                    bytesList.remove(file);
+                                    attachment = '';
+                                  });
                                   log('bytlist ${bytesList.length}');
+                                  log('attachment ${attachment}');
                                 },
                                 icon: Icon(
                                   Icons.close,
@@ -386,7 +394,7 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
                 BlocProvider.of<UploadVideoBloc>(context)
                     .add(VideoUploadEvent.radioForClient(isSelected: val ?? 0));
               },
-              groupValue: state.isForClient,
+              groupValue: _videoBloc.radioValue,
             );
           },
         )
@@ -396,8 +404,10 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
 
   uploadVideo(VideoUploadState state) async {
     if (bytesList.isNotEmpty) {
-      await uploadVideoToAwsS3(AppString.documents.val,
+      _videoBloc.emit(_videoBloc.state.copyWith(isLoadingButton: true));
+      await uploadVideoToAwsS3(AppString.video.val,
           SharedPreffUtil().getCareGiverUserId, bytesList.first, state);
+      _videoBloc.emit(_videoBloc.state.copyWith(isLoadingButton: false));
     }
   }
 
@@ -419,13 +429,14 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
       //   }
       // }
       // else {
-      if (_videoBloc.uploadedVideo == '') {
+      if (_videoBloc.uploadedVideo == '' && attachment == '') {
         CSnackBar.showError(context, msg: 'Please attach video');
       } else {
         _videoBloc.add(VideoUploadEvent.addSettings(
+            settingsId: settingsId,
             adminId: adminUserID,
             title: _videoBloc.title.text,
-            attachment: _videoBloc.uploadedVideo,
+            attachment: _videoBloc.uploadedVideo ?? attachment,
             userType: state.isForClient == 0 ? 2 : 1,
             context: context));
       }

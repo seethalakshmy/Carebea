@@ -8,6 +8,7 @@ class VideoUploadState with _$VideoUploadState {
     required int isForClient,
     required CommonResponse? response,
     required String? error,
+    required int radioValue,
     @Default(false) bool isLoadingButton,
   }) = _VideoUploadState;
 
@@ -18,6 +19,7 @@ class VideoUploadState with _$VideoUploadState {
       isError: false,
       response: null,
       error: null,
+      radioValue: 0,
     );
   }
 }

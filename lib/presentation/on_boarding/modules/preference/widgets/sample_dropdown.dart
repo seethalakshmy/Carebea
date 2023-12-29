@@ -38,6 +38,7 @@ class _SampleDropdownState extends State<SampleDropdown> {
   final ScrollController scrollController = ScrollController();
   @override
   void initState() {
+    debugPrint("petlistinit  ${widget.petList}");
     scrollController.addListener(() {
       if (scrollController.position.atEdge) {
         if (scrollController.position.pixels == 0) {
@@ -133,247 +134,232 @@ class _SampleDropdownState extends State<SampleDropdown> {
       builder: (context) {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
-            return BlocProvider(
-              create: (context) => OnboardingBloc(OnBoardingRepository()),
-              child: BlocBuilder<OnboardingBloc, OnboardingState>(
-                builder: (context, state) {
-                  return AlertDialog(
-                    elevation: 10,
-                    shadowColor: Colors.black,
-                    backgroundColor: Colors.white,
-                    surfaceTintColor: Colors.transparent,
-                    content: CustomSizedBox(
-                      width: 500, // Set a specific width for the container
-                      child: Column(
-                        children: [
-                          Wrap(
-                            runSpacing: 5.0,
-                            spacing: 8.0,
-                            children: generateSelectedItemsList(),
+            return BlocBuilder<OnboardingBloc, OnboardingState>(
+              builder: (context, state) {
+                return AlertDialog(
+                  elevation: 10,
+                  shadowColor: Colors.black,
+                  backgroundColor: Colors.white,
+                  surfaceTintColor: Colors.transparent,
+                  content: CustomSizedBox(
+                    width: 500, // Set a specific width for the container
+                    child: Column(
+                      children: [
+                        Wrap(
+                          runSpacing: 5.0,
+                          spacing: 8.0,
+                          children: generateSelectedItemsList(),
+                        ),
+                        CustomSizedBox(height: DBL.sixteen.val),
+                        Container(
+                          color: AppColor.offWhite.val,
+                          child: TextFormField(
+                            controller: widget.searchController,
+                            onChanged: (val) {
+                              setState(() {
+                                widget.onSearchChanged(val);
+                              });
+                            },
+                            onFieldSubmitted: (val) {
+                              setState(() {
+                                widget.onSearchChanged(val);
+                              });
+                            },
+                            decoration: const InputDecoration(
+                                hintText: 'Search...',
+                                prefixIcon: Icon(Icons.search),
+                                enabledBorder: InputBorder.none,
+                                border: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                disabledBorder: InputBorder.none,
+                                errorBorder: InputBorder.none,
+                                focusedErrorBorder: InputBorder.none),
                           ),
-                          CustomSizedBox(height: DBL.sixteen.val),
-                          Container(
-                            color: AppColor.offWhite.val,
-                            child: TextFormField(
-                              controller: widget.searchController,
-                              onChanged: (val) {
-                                setState(() {
-                                  widget.onSearchChanged(val);
-                                });
-                              },
-                              onFieldSubmitted: (val) {
-                                setState(() {
-                                  widget.onSearchChanged(val);
-                                });
-                              },
-                              decoration: const InputDecoration(
-                                  hintText: 'Search...',
-                                  prefixIcon: Icon(Icons.search),
-                                  enabledBorder: InputBorder.none,
-                                  border: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  disabledBorder: InputBorder.none,
-                                  errorBorder: InputBorder.none,
-                                  focusedErrorBorder: InputBorder.none),
-                            ),
-                          ),
-                          CustomSizedBox(height: DBL.sixteen.val),
-                          Flexible(
-                            child: ListView.separated(
-                              controller: scrollController,
-                              separatorBuilder: (context, index) {
-                                return CustomContainer(
-                                  height: DBL.one.val,
-                                  color: AppColor.lightGrey.val,
-                                );
-                              },
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: widget.isFromLangauge
-                                  ? widget.languageList!.length
-                                  : widget.petList!.length,
-                              itemBuilder: (context, index) {
-                                final selectedItem = widget.isFromLangauge
-                                    ? widget.languageList![index]
-                                    : widget.petList![index];
-                                bool isSelected = false;
-                                if (widget.isFromLangauge) {
-                                  isSelected = widget
-                                      .onboardingBloc.selectedLanguageList
-                                      .map((e) => e.id)
-                                      .contains(widget.languageList![index].id);
-                                } else {
-                                  isSelected = widget
-                                      .onboardingBloc.selectedPetsList
-                                      .map((e) => e.id)
-                                      .contains(widget.petList![index].id);
-                                }
+                        ),
+                        CustomSizedBox(height: DBL.sixteen.val),
+                        Flexible(
+                          child: ListView.separated(
+                            controller: scrollController,
+                            separatorBuilder: (context, index) {
+                              return CustomContainer(
+                                height: DBL.one.val,
+                                color: AppColor.lightGrey.val,
+                              );
+                            },
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: widget.isFromLangauge
+                                ? widget.languageList!.length
+                                : widget.petList!.length,
+                            itemBuilder: (context, index) {
+                              final selectedItem = widget.isFromLangauge
+                                  ? widget.languageList![index]
+                                  : widget.petList![index];
+                              bool isSelected = false;
+                              if (widget.isFromLangauge) {
+                                isSelected = widget
+                                    .onboardingBloc.selectedLanguageList
+                                    .map((e) => e.id)
+                                    .contains(widget.languageList![index].id);
+                              } else {
+                                isSelected = widget
+                                    .onboardingBloc.selectedPetsList
+                                    .map((e) => e.id)
+                                    .contains(widget.petList![index].id);
+                              }
 
-                                return ListTile(
-                                  // titleAlignment: ListTileTitleAlignment.center,
-                                  leading: Checkbox(
-                                    value: isSelected,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        addOrRemoveFunction(
-                                            isSelected, selectedItem, index);
-                                      });
-                                    },
-                                  ),
-                                  title: CustomText(
-                                    !widget.isFromLangauge
-                                        ? widget.petList![index].name
-                                        : widget.languageList![index].name,
-                                    style: TS().gRoboto(
-                                        color: AppColor.primaryColor.val,
-                                        fontSize: FS.font14.val,
-                                        fontWeight: FW.w400.val),
-                                  ),
-                                  trailing: widget.isFromLangauge
-                                      ? Container(width: 10)
-                                      : CustomContainer(
-                                          width: 245.0,
-                                          child: ButtonBar(
-                                            children: [
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    widget.petList![index]
-                                                        .type = PetsType.INDOOR;
-                                                  });
-                                                },
-                                                child: Container(
-                                                  alignment: Alignment.center,
-                                                  width: 70,
-                                                  height: 30,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: Border.all(
-                                                      color:
-                                                          AppColor.amber2.val,
-                                                    ),
-                                                    color: widget
-                                                                .petList![index]
-                                                                .type ==
-                                                            PetsType.INDOOR
-                                                        ? AppColor.indoor.val
-                                                        : AppColor.white.val,
-                                                  ),
-                                                  child: CustomText(
-                                                    AppString.inDoor.val,
-                                                    style: TS().gRoboto(
-                                                        fontSize: FS.font13.val,
-                                                        fontWeight:
-                                                            FW.w400.val),
-                                                  ),
-                                                ),
-                                              ),
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    widget.petList![index]
-                                                            .type =
-                                                        PetsType.OUTDOOR;
-                                                  });
-                                                },
-                                                child: Container(
-                                                  alignment: Alignment.center,
-                                                  width: 70,
-                                                  height: 30,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: Border.all(
-                                                      color: AppColor.red1.val,
-                                                    ),
-                                                    color: widget
-                                                                .petList![index]
-                                                                .type ==
-                                                            PetsType.OUTDOOR
-                                                        ? AppColor.outdoor.val
-                                                        : AppColor.white.val,
-                                                  ),
-                                                  child: CustomText(
-                                                    AppString.outDoor.val,
-                                                    style: TS().gRoboto(
-                                                        fontSize: FS.font13.val,
-                                                        fontWeight:
-                                                            FW.w400.val),
-                                                  ),
-                                                ),
-                                              ),
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    widget.petList![index]
-                                                        .type = PetsType.BOTH;
-                                                  });
-                                                },
-                                                child: Container(
-                                                  alignment: Alignment.center,
-                                                  width: 70,
-                                                  height: 30,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: Border.all(
-                                                      color: AppColor.blue1.val,
-                                                    ),
-                                                    color: widget
-                                                                .petList![index]
-                                                                .type ==
-                                                            PetsType.BOTH
-                                                        ? AppColor.both.val
-                                                        : AppColor.white.val,
-                                                  ),
-                                                  child: CustomText(
-                                                    AppString.both.val,
-                                                    style: TS().gRoboto(
-                                                        fontSize: FS.font13.val,
-                                                        fontWeight:
-                                                            FW.w400.val),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                  tileColor:
-                                      isSelected ? Colors.grey[200] : null,
-                                  onTap: () {
+                              return ListTile(
+                                // titleAlignment: ListTileTitleAlignment.center,
+                                leading: Checkbox(
+                                  value: isSelected,
+                                  onChanged: (value) {
                                     setState(() {
                                       addOrRemoveFunction(
                                           isSelected, selectedItem, index);
                                     });
                                   },
-                                );
-                              },
-                            ),
+                                ),
+                                title: CustomText(
+                                  !widget.isFromLangauge
+                                      ? widget.petList![index].name
+                                      : widget.languageList![index].name,
+                                  style: TS().gRoboto(
+                                      color: AppColor.primaryColor.val,
+                                      fontSize: FS.font14.val,
+                                      fontWeight: FW.w400.val),
+                                ),
+                                trailing: widget.isFromLangauge
+                                    ? Container(width: 10)
+                                    : CustomContainer(
+                                        width: 245.0,
+                                        child: ButtonBar(
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  widget.petList![index].type =
+                                                      PetsType.INDOOR;
+                                                });
+                                              },
+                                              child: Container(
+                                                alignment: Alignment.center,
+                                                width: 70,
+                                                height: 30,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                    color: AppColor.amber2.val,
+                                                  ),
+                                                  color: widget.petList![index]
+                                                              .type ==
+                                                          PetsType.INDOOR
+                                                      ? AppColor.indoor.val
+                                                      : AppColor.white.val,
+                                                ),
+                                                child: CustomText(
+                                                  AppString.inDoor.val,
+                                                  style: TS().gRoboto(
+                                                      fontSize: FS.font13.val,
+                                                      fontWeight: FW.w400.val),
+                                                ),
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  widget.petList![index].type =
+                                                      PetsType.OUTDOOR;
+                                                });
+                                              },
+                                              child: Container(
+                                                alignment: Alignment.center,
+                                                width: 70,
+                                                height: 30,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                    color: AppColor.red1.val,
+                                                  ),
+                                                  color: widget.petList![index]
+                                                              .type ==
+                                                          PetsType.OUTDOOR
+                                                      ? AppColor.outdoor.val
+                                                      : AppColor.white.val,
+                                                ),
+                                                child: CustomText(
+                                                  AppString.outDoor.val,
+                                                  style: TS().gRoboto(
+                                                      fontSize: FS.font13.val,
+                                                      fontWeight: FW.w400.val),
+                                                ),
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  widget.petList![index].type =
+                                                      PetsType.BOTH;
+                                                });
+                                              },
+                                              child: Container(
+                                                alignment: Alignment.center,
+                                                width: 70,
+                                                height: 30,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                    color: AppColor.blue1.val,
+                                                  ),
+                                                  color: widget.petList![index]
+                                                              .type ==
+                                                          PetsType.BOTH
+                                                      ? AppColor.both.val
+                                                      : AppColor.white.val,
+                                                ),
+                                                child: CustomText(
+                                                  AppString.both.val,
+                                                  style: TS().gRoboto(
+                                                      fontSize: FS.font13.val,
+                                                      fontWeight: FW.w400.val),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                tileColor: isSelected ? Colors.grey[200] : null,
+                                onTap: () {
+                                  setState(() {
+                                    addOrRemoveFunction(
+                                        isSelected, selectedItem, index);
+                                  });
+                                },
+                              );
+                            },
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    actions: [
-                      CustomButton(
-                        text: AppString.ok.val,
-                        onPressed: () {
-                          if (widget.isFromLangauge) {
-                            Navigator.of(context).pop(
-                                widget.onboardingBloc.selectedLanguageList);
-                          } else {
-                            Navigator.of(context)
-                                .pop(widget.onboardingBloc.selectedPetsList);
-                          }
-                        },
-                      ),
-                    ],
-                  );
-                },
-              ),
+                  ),
+                  actions: [
+                    CustomButton(
+                      text: AppString.ok.val,
+                      onPressed: () {
+                        if (widget.isFromLangauge) {
+                          Navigator.of(context)
+                              .pop(widget.onboardingBloc.selectedLanguageList);
+                        } else {
+                          Navigator.of(context)
+                              .pop(widget.onboardingBloc.selectedPetsList);
+                        }
+                      },
+                    ),
+                  ],
+                );
+              },
             );
           },
         );

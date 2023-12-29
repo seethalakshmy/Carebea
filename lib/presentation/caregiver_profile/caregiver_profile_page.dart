@@ -222,6 +222,8 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
                           width: DBL.oneFifty.val,
                           isDetailPage: true,
                           fit: BoxFit.cover,
+                          isCircle: true,
+                          circleRadius: 80,
                         ),
                         CustomSizedBox(
                           height: DBL.five.val,

@@ -57,6 +57,8 @@ class _QualificationViewState extends State<QualificationView> {
   final _formKey = GlobalKey<FormState>();
   final FormValidationBloc _validationBloc = FormValidationBloc();
   SharedPreffUtil sharedPreffUtil = SharedPreffUtil();
+  final GlobalKey<ScrollableState> _scrollableKey =
+      GlobalKey<ScrollableState>();
 
   bool hhaListUpdated = false;
   bool blsListUpdated = false;
@@ -107,6 +109,7 @@ class _QualificationViewState extends State<QualificationView> {
         builder: (context, onboardingState) {
           return CommonPaddingWidget(
             child: SingleChildScrollView(
+              key: _scrollableKey,
               child: CustomContainer(
                   child: CForm(
                 formKey: _formKey,
@@ -456,6 +459,8 @@ class _QualificationViewState extends State<QualificationView> {
                                 widget.pageController.page!.toInt() - 1);
                           },
                           onRightButtonPressed: () async {
+                            checkInputData(onboardingState);
+
                             if ((onboardingState.isCovidSelected == 0 &&
                                     widget.onboardingBloc.state
                                         .covidDocumentList.isEmpty) ||
@@ -548,7 +553,6 @@ class _QualificationViewState extends State<QualificationView> {
                               }
                               widget.onboardingBloc.covidBytesList.clear();
                             }
-                            checkInputData(onboardingState);
                           },
                         );
                       },

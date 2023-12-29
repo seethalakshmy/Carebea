@@ -102,7 +102,7 @@ class _PageCreationPageState extends State<PageCreationPage> {
     debugPrint("description passed $description");
     pageBloc.titleController.text =
         autoTabRouter?.currentChild?.queryParams.getString("title", "") ?? '';
-    pageBloc.radioValue = forWhom!.toInt() - 1;
+    pageBloc.radioValue = forWhom!.toInt();
     // _faqCreationBloc.add(FaqCreationEvent.getFaq(id: adminId));
     log("radioValue ${pageBloc.radioValue}");
   }
@@ -194,9 +194,10 @@ class _PageCreationPageState extends State<PageCreationPage> {
                           minWidth: 100,
                           height: 50,
                           isLoading: false,
-                          text: id == ''
-                              ? AppString.submit.val
-                              : AppString.update.val,
+                          text:
+                              // id == ''
+                              //     ? AppString.submit.val
+                              AppString.update.val,
                           onPressed: () async {
                             await getText(controller);
                             if (pageBloc.titleController.text.isNotEmpty ||
@@ -212,39 +213,39 @@ class _PageCreationPageState extends State<PageCreationPage> {
                             if (_pageFormKey.currentState!.validate() &&
                                 htmlText!.isNotEmpty &&
                                 htmlText != '') {
-                              (id == ''
-                                  ? pageBloc.add(PageEvent.createPage(
-                                      title:
-                                          pageBloc.titleController.text.trim(),
-                                      description: htmlText ?? '',
-                                      pageFor: radioValue == 0
-                                          ? '1'
-                                          : radioValue == 1
-                                              ? '2'
-                                              : '3',
-                                      context: context,
-                                    ))
-                                  : pageBloc.add(PageEvent.updatePage(
-                                      userId: adminUserID ?? '',
-                                      id: id ?? '',
-                                      title:
-                                          pageBloc.titleController.text.trim(),
-                                      description: htmlText ?? '',
-                                      pageFor: radioValue == 0
-                                          ? '1'
-                                          : radioValue == 1
-                                              ? '2'
-                                              : '3',
-                                      context: context,
-                                    )));
+                              // (id == ''
+                              //     ? pageBloc.add(PageEvent.createPage(
+                              //         title:
+                              //             pageBloc.titleController.text.trim(),
+                              //         description: htmlText ?? '',
+                              //         pageFor: radioValue == 0
+                              //             ? '1'
+                              //             : radioValue == 1
+                              //                 ? '2'
+                              //                 : '3',
+                              //         context: context,
+                              //       ))
+                              pageBloc.add(PageEvent.updatePage(
+                                userId: adminUserID ?? '',
+                                id: id ?? '',
+                                title: pageBloc.titleController.text.trim(),
+                                description: htmlText ?? '',
+                                pageFor: radioValue == 0
+                                    ? '1'
+                                    : radioValue == 1
+                                        ? '2'
+                                        : '3',
+                                context: context,
+                              ));
                             }
                           });
                     }, loading: () {
                       return CustomButton(
                           isLoading: true,
-                          text: id == ''
-                              ? AppString.submit.val
-                              : AppString.update.val,
+                          text:
+                              // id == ''
+                              //     ? AppString.submit.val
+                              AppString.update.val,
                           onPressed: () {});
                     })
                   ],

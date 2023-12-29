@@ -311,7 +311,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
 
   CustomSizedBox _topRightView(
       BuildContext context, CareGiverDetailResponse response) {
-    Location? location = response.data?.location;
+    List<Location>? location = response.data?.location;
     return CustomSizedBox(
       width: isXs3(context)
           ? MediaQuery.of(context).size.width - DBL.twoThirty.val
@@ -346,7 +346,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
           SVGText(
             path: IMG.location.val,
             name:
-                "${location?.address ?? ""}, ${location?.streetName ?? ""}, ${location?.city ?? ""}, ${location?.state ?? ""}, ${location?.zipCode ?? ""}, ",
+                "${location?.first.address ?? ""}, ${location?.first.streetName ?? ""}, ${location?.first.cityName ?? ""}, ${location?.first.stateName ?? ""}, ${location?.first.zipCode ?? ""}, ",
             widthGap: DBL.fifteen.val,
           ),
           CustomSizedBox(
@@ -513,6 +513,8 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
       height: DBL.oneSeventyFive.val,
       width: DBL.twoHundred.val,
       isDetailPage: true,
+      isCircle: true,
+      circleRadius: 80,
     );
   }
 
@@ -560,7 +562,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
       {double? height, required CareGiverDetailResponse response}) {
     return ServiceRewardAndCompletion(
       height: height,
-      title: "",
+      title: response.data?.missedService.toString() ?? '',
       subTitle: AppString.totalMissedServices.val,
     );
   }

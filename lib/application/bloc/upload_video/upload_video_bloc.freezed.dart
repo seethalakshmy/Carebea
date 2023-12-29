@@ -504,6 +504,7 @@ mixin _$VideoUploadState {
   int get isForClient => throw _privateConstructorUsedError;
   CommonResponse? get response => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  int get radioValue => throw _privateConstructorUsedError;
   bool get isLoadingButton => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -523,6 +524,7 @@ abstract class $VideoUploadStateCopyWith<$Res> {
       int isForClient,
       CommonResponse? response,
       String? error,
+      int radioValue,
       bool isLoadingButton});
 }
 
@@ -544,6 +546,7 @@ class _$VideoUploadStateCopyWithImpl<$Res, $Val extends VideoUploadState>
     Object? isForClient = null,
     Object? response = freezed,
     Object? error = freezed,
+    Object? radioValue = null,
     Object? isLoadingButton = null,
   }) {
     return _then(_value.copyWith(
@@ -567,6 +570,10 @@ class _$VideoUploadStateCopyWithImpl<$Res, $Val extends VideoUploadState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      radioValue: null == radioValue
+          ? _value.radioValue
+          : radioValue // ignore: cast_nullable_to_non_nullable
+              as int,
       isLoadingButton: null == isLoadingButton
           ? _value.isLoadingButton
           : isLoadingButton // ignore: cast_nullable_to_non_nullable
@@ -589,6 +596,7 @@ abstract class _$$_VideoUploadStateCopyWith<$Res>
       int isForClient,
       CommonResponse? response,
       String? error,
+      int radioValue,
       bool isLoadingButton});
 }
 
@@ -608,6 +616,7 @@ class __$$_VideoUploadStateCopyWithImpl<$Res>
     Object? isForClient = null,
     Object? response = freezed,
     Object? error = freezed,
+    Object? radioValue = null,
     Object? isLoadingButton = null,
   }) {
     return _then(_$_VideoUploadState(
@@ -631,6 +640,10 @@ class __$$_VideoUploadStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      radioValue: null == radioValue
+          ? _value.radioValue
+          : radioValue // ignore: cast_nullable_to_non_nullable
+              as int,
       isLoadingButton: null == isLoadingButton
           ? _value.isLoadingButton
           : isLoadingButton // ignore: cast_nullable_to_non_nullable
@@ -648,6 +661,7 @@ class _$_VideoUploadState implements _VideoUploadState {
       required this.isForClient,
       required this.response,
       required this.error,
+      required this.radioValue,
       this.isLoadingButton = false});
 
   @override
@@ -661,12 +675,14 @@ class _$_VideoUploadState implements _VideoUploadState {
   @override
   final String? error;
   @override
+  final int radioValue;
+  @override
   @JsonKey()
   final bool isLoadingButton;
 
   @override
   String toString() {
-    return 'VideoUploadState(isLoading: $isLoading, isError: $isError, isForClient: $isForClient, response: $response, error: $error, isLoadingButton: $isLoadingButton)';
+    return 'VideoUploadState(isLoading: $isLoading, isError: $isError, isForClient: $isForClient, response: $response, error: $error, radioValue: $radioValue, isLoadingButton: $isLoadingButton)';
   }
 
   @override
@@ -682,13 +698,15 @@ class _$_VideoUploadState implements _VideoUploadState {
             (identical(other.response, response) ||
                 other.response == response) &&
             (identical(other.error, error) || other.error == error) &&
+            (identical(other.radioValue, radioValue) ||
+                other.radioValue == radioValue) &&
             (identical(other.isLoadingButton, isLoadingButton) ||
                 other.isLoadingButton == isLoadingButton));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isLoading, isError, isForClient,
-      response, error, isLoadingButton);
+      response, error, radioValue, isLoadingButton);
 
   @JsonKey(ignore: true)
   @override
@@ -704,6 +722,7 @@ abstract class _VideoUploadState implements VideoUploadState {
       required final int isForClient,
       required final CommonResponse? response,
       required final String? error,
+      required final int radioValue,
       final bool isLoadingButton}) = _$_VideoUploadState;
 
   @override
@@ -716,6 +735,8 @@ abstract class _VideoUploadState implements VideoUploadState {
   CommonResponse? get response;
   @override
   String? get error;
+  @override
+  int get radioValue;
   @override
   bool get isLoadingButton;
   @override

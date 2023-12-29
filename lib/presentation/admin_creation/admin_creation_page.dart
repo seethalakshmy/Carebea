@@ -1,3 +1,5 @@
+import 'dart:js_util';
+
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
 import 'package:admin_580_tech/infrastructure/admin_creation/admin_creation_repository.dart';
@@ -39,12 +41,18 @@ class AdminCreationPage extends StatefulWidget {
     @QueryParam('view') this.isView,
     @QueryParam('edit') this.isEdit,
     @QueryParam('id') this.id,
+    @QueryParam('fName') this.fName,
+    @QueryParam('lName') this.lName,
+    @QueryParam('profilePic') this.profilePic,
   }) : super(key: key);
 
   /// To do change :- change these two variables to bool for now getting error like " NoSuchMethodError: 'toLowerCase"  when extracting using auto-route
   final String? isView;
   final String? isEdit;
   final String? id;
+  final String? fName;
+  final String? lName;
+  final String? profilePic;
 
   @override
   State<AdminCreationPage> createState() => _AdminCreationPageState();
@@ -67,7 +75,9 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
   String adminUserID = "";
   String adminId = "";
   String selectedRole = '';
-  String? firstName;
+  String? fName;
+  String? lName;
+  String? profilePic;
 
   bool? _isView;
 
@@ -82,6 +92,15 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
     adminUserID = SharedPreffUtil().getAdminId;
     adminId =
         autoTabRouter?.currentChild?.queryParams.getString("id", "") ?? "";
+    fName =
+        autoTabRouter?.currentChild?.queryParams.getString('fName', "") ?? '';
+    lName =
+        autoTabRouter?.currentChild?.queryParams.getString('lName', "") ?? "";
+    profilePic =
+        autoTabRouter?.currentChild?.queryParams.getString('profilePic', "") ??
+            "";
+
+    debugPrint("profile pic $profilePic");
     if (autoTabRouter!.currentChild!.queryParams
         .getString('view', "")
         .isNotEmpty) {
@@ -96,6 +115,14 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
     } else {
       _isEdit = false;
     }
+    _fNameController.text = fName ?? '';
+    _lNameController.text = lName ?? '';
+    _adminCreationBloc.profileUrl = profilePic ?? '';
+
+    // _adminCreationBloc.add(AdminCreationEvent.viewAdmin(
+    //     userId: adminUserID, adminId: adminId, searchTerm: ''));
+    // _adminCreationBloc.add(AdminCreationEvent.getRoles(
+    //     userId: adminUserID, searchTerm: ''));
   }
 
   @override
@@ -140,13 +167,9 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
 
   _bodyView(BuildContext context, AdminCreationState state) {
     if (state.viewResponse != null) {
-      firstName = state.viewResponse?.data?.firstName ?? "";
-      _fNameController.text = firstName ?? '';
-      _lNameController.text = state.viewResponse?.data?.lastName ?? "";
       _emailController.text = state.viewResponse?.data?.email ?? "";
       _mobileController.text = state.viewResponse?.data?.phoneNumber ?? "";
       selectedRole = state.viewResponse?.data?.roleId ?? '';
-      _adminCreationBloc.profileUrl = state.viewResponse?.data?.profile ?? '';
     }
     return CustomPadding.symmetric(
       horizontal: DBL.sixteen.val,
@@ -247,29 +270,33 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
   }
 
   _profileImageView(BuildContext context, String url) {
-    return CachedImage(
-      onTap: () {
-        showGeneralDialog(
-          barrierDismissible: true,
-          barrierLabel: "",
-          context: context,
-          pageBuilder: (BuildContext buildContext, Animation animation,
-              Animation secondaryAnimation) {
-            return CustomAlertDialogWidget(
-                showHeading: false,
-                width: 700,
-                heading: "",
-                child: CachedImage(
-                  fit: BoxFit.contain,
-                  imgUrl: url,
-                ));
-          },
-        );
-      },
-      imgUrl: url,
-      height: DBL.oneSeventyFive.val,
-      width: DBL.twoHundred.val,
-      isDetailPage: true,
+    return Center(
+      child: CachedImage(
+        onTap: () {
+          showGeneralDialog(
+            barrierDismissible: true,
+            barrierLabel: "",
+            context: context,
+            pageBuilder: (BuildContext buildContext, Animation animation,
+                Animation secondaryAnimation) {
+              return CustomAlertDialogWidget(
+                  showHeading: false,
+                  width: 700,
+                  heading: "",
+                  child: CachedImage(
+                    fit: BoxFit.contain,
+                    imgUrl: url,
+                  ));
+            },
+          );
+        },
+        imgUrl: url,
+        height: DBL.oneSeventyFive.val,
+        width: DBL.twoHundred.val,
+        isDetailPage: true,
+        isCircle: true,
+        circleRadius: 80,
+      ),
     );
   }
 
@@ -456,18 +483,23 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                           height: DBL.fortyFive.val,
                           minWidth: DBL.oneTwenty.val,
                           onPressed: () async {
-                            firstName = _fNameController.text;
-                            _emailController.text =
-                                state.viewResponse?.data?.email ?? "";
-                            _mobileController.text =
-                                state.viewResponse?.data?.phoneNumber ?? "";
-                            selectedRole =
-                                state.viewResponse?.data?.roleId ?? '';
-                            _adminCreationBloc.profileUrl =
-                                state.viewResponse?.data?.profile ?? '';
+                            // if (_isEdit!) {
+                            //   _fNameController.text =
+                            //       state.viewResponse?.data?.firstName ?? '';
+                            //   _emailController.text =
+                            //       state.viewResponse?.data?.email ?? "";
+                            //   _mobileController.text =
+                            //       state.viewResponse?.data?.phoneNumber ?? "";
+                            //   selectedRole =
+                            //       state.viewResponse?.data?.roleId ?? '';
+                            //   _adminCreationBloc.profileUrl =
+                            //       state.viewResponse?.data?.profile ?? '';
+                            // }
                             if (_adminCreationBloc
                                     .state.pickedProfilePic!.size >
                                 0) {
+                              _adminCreationBloc.emit(_adminCreationBloc.state
+                                  .copyWith(isLoadingButton: true));
                               await uploadProfilePicToAwsS3(
                                   AppString.profilePicture.val,
                                   SharedPreffUtil().getAdminId);

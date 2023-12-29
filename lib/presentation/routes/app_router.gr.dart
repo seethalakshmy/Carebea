@@ -73,11 +73,11 @@ import 'package:admin_580_tech/presentation/user_management/user_management_page
 import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart'
     as _i34;
 import 'package:admin_580_tech/presentation/verify_email/verify_email.dart'
-    as _i37;
-import 'package:admin_580_tech/presentation/video_management/video_management_view.dart'
     as _i35;
-import 'package:admin_580_tech/presentation/video_management_creation/video_management_creation_screen.dart'
+import 'package:admin_580_tech/presentation/video_management/video_management_view.dart'
     as _i36;
+import 'package:admin_580_tech/presentation/video_management_creation/video_management_creation_screen.dart'
+    as _i37;
 import 'package:auto_route/auto_route.dart' as _i38;
 import 'package:flutter/material.dart' as _i39;
 
@@ -99,6 +99,9 @@ abstract class $AppRouter extends _i38.RootStackRouter {
                 isView: queryParams.optString('view'),
                 isEdit: queryParams.optString('edit'),
                 id: queryParams.optString('id'),
+                fName: queryParams.optString('fName'),
+                lName: queryParams.optString('lName'),
+                profilePic: queryParams.optString('profilePic'),
               ));
       return _i38.AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -107,6 +110,9 @@ abstract class $AppRouter extends _i38.RootStackRouter {
           isView: args.isView,
           isEdit: args.isEdit,
           id: args.id,
+          fName: args.fName,
+          lName: args.lName,
+          profilePic: args.profilePic,
         ),
       );
     },
@@ -241,6 +247,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
                 isEdit: queryParams.optString('edit'),
                 id: queryParams.optString('id'),
                 item: queryParams.get('item'),
+                forWhom: queryParams.optInt('forWhom'),
               ));
       return _i38.AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -250,6 +257,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
           isEdit: args.isEdit,
           id: args.id,
           item: args.item,
+          forWhom: args.forWhom,
         ),
       );
     },
@@ -398,10 +406,16 @@ abstract class $AppRouter extends _i38.RootStackRouter {
         ),
       );
     },
+    VerifyEmailRoute.name: (routeData) {
+      return _i38.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i35.VerifyEmailPage(),
+      );
+    },
     VideoManagementRoute.name: (routeData) {
       return _i38.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i35.VideoManagementPage(),
+        child: const _i36.VideoManagementPage(),
       );
     },
     VideoUploadRoute.name: (routeData) {
@@ -416,7 +430,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
               ));
       return _i38.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i36.VideoUploadPage(
+        child: _i37.VideoUploadPage(
           key: args.key,
           isEdit: args.isEdit,
           title: args.title,
@@ -424,12 +438,6 @@ abstract class $AppRouter extends _i38.RootStackRouter {
           attachment: args.attachment,
           id: args.id,
         ),
-      );
-    },
-    VerifyEmailRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i37.VerifyEmailPage(),
       );
     },
   };
@@ -457,6 +465,9 @@ class AdminCreationRoute extends _i38.PageRouteInfo<AdminCreationRouteArgs> {
     String? isView,
     String? isEdit,
     String? id,
+    String? fName,
+    String? lName,
+    String? profilePic,
     List<_i38.PageRouteInfo>? children,
   }) : super(
           AdminCreationRoute.name,
@@ -465,11 +476,17 @@ class AdminCreationRoute extends _i38.PageRouteInfo<AdminCreationRouteArgs> {
             isView: isView,
             isEdit: isEdit,
             id: id,
+            fName: fName,
+            lName: lName,
+            profilePic: profilePic,
           ),
           rawQueryParams: {
             'view': isView,
             'edit': isEdit,
             'id': id,
+            'fName': fName,
+            'lName': lName,
+            'profilePic': profilePic,
           },
           initialChildren: children,
         );
@@ -486,6 +503,9 @@ class AdminCreationRouteArgs {
     this.isView,
     this.isEdit,
     this.id,
+    this.fName,
+    this.lName,
+    this.profilePic,
   });
 
   final _i39.Key? key;
@@ -496,9 +516,15 @@ class AdminCreationRouteArgs {
 
   final String? id;
 
+  final String? fName;
+
+  final String? lName;
+
+  final String? profilePic;
+
   @override
   String toString() {
-    return 'AdminCreationRouteArgs{key: $key, isView: $isView, isEdit: $isEdit, id: $id}';
+    return 'AdminCreationRouteArgs{key: $key, isView: $isView, isEdit: $isEdit, id: $id, fName: $fName, lName: $lName, profilePic: $profilePic}';
   }
 }
 
@@ -856,6 +882,7 @@ class FaqCreationRoute extends _i38.PageRouteInfo<FaqCreationRouteArgs> {
     String? isEdit,
     String? id,
     _i40.FaqListData? item,
+    int? forWhom,
     List<_i38.PageRouteInfo>? children,
   }) : super(
           FaqCreationRoute.name,
@@ -865,12 +892,14 @@ class FaqCreationRoute extends _i38.PageRouteInfo<FaqCreationRouteArgs> {
             isEdit: isEdit,
             id: id,
             item: item,
+            forWhom: forWhom,
           ),
           rawQueryParams: {
             'view': isView,
             'edit': isEdit,
             'id': id,
             'item': item,
+            'forWhom': forWhom,
           },
           initialChildren: children,
         );
@@ -888,6 +917,7 @@ class FaqCreationRouteArgs {
     this.isEdit,
     this.id,
     this.item,
+    this.forWhom,
   });
 
   final _i39.Key? key;
@@ -900,9 +930,11 @@ class FaqCreationRouteArgs {
 
   final _i40.FaqListData? item;
 
+  final int? forWhom;
+
   @override
   String toString() {
-    return 'FaqCreationRouteArgs{key: $key, isView: $isView, isEdit: $isEdit, id: $id, item: $item}';
+    return 'FaqCreationRouteArgs{key: $key, isView: $isView, isEdit: $isEdit, id: $id, item: $item, forWhom: $forWhom}';
   }
 }
 
@@ -1281,7 +1313,21 @@ class UserManagementDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i35.VideoManagementPage]
+/// [_i35.VerifyEmailPage]
+class VerifyEmailRoute extends _i38.PageRouteInfo<void> {
+  const VerifyEmailRoute({List<_i38.PageRouteInfo>? children})
+      : super(
+          VerifyEmailRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'VerifyEmailRoute';
+
+  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i36.VideoManagementPage]
 class VideoManagementRoute extends _i38.PageRouteInfo<void> {
   const VideoManagementRoute({List<_i38.PageRouteInfo>? children})
       : super(
@@ -1295,7 +1341,7 @@ class VideoManagementRoute extends _i38.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i36.VideoUploadPage]
+/// [_i37.VideoUploadPage]
 class VideoUploadRoute extends _i38.PageRouteInfo<VideoUploadRouteArgs> {
   VideoUploadRoute({
     _i39.Key? key,
@@ -1357,18 +1403,4 @@ class VideoUploadRouteArgs {
   String toString() {
     return 'VideoUploadRouteArgs{key: $key, isEdit: $isEdit, title: $title, type: $type, attachment: $attachment, id: $id}';
   }
-}
-
-/// generated route for
-/// [_i37.VerifyEmailPage]
-class VerifyEmailRoute extends _i38.PageRouteInfo<void> {
-  const VerifyEmailRoute({List<_i38.PageRouteInfo>? children})
-      : super(
-          VerifyEmailRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'VerifyEmailRoute';
-
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
 }

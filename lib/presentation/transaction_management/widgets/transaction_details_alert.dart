@@ -143,7 +143,9 @@ class TransactionDetailsAlert extends StatelessWidget {
                   return CustomAlertDialogWidget(
                     heading: AppString.services.val,
                     child: ServiceDetailsAlert(
-                      title: AppString.serviceDetails.val,
+                      title: transactionBloc
+                              .transactionDetailsData.serviceStatus ??
+                          '',
                       serviceBloc: serviceRequestManagementBloc,
                     ),
                   );
@@ -297,7 +299,7 @@ class TransactionDetailsAlert extends StatelessWidget {
                                     ),
                                     CustomSizedBox(height: DBL.five.val),
                                     CustomText(
-                                      "Txn Id : ${transactionBloc.detailsList[0].refund!.paymentStatus![index].paymentLogTxnId ?? ""}",
+                                      "Txn Id : ${transactionBloc.detailsList[0].refund!.paymentStatus![index].transactionId ?? ""}",
                                       style: TS().gRoboto(
                                           fontSize: FS.font12.val,
                                           fontWeight: FW.w400.val,

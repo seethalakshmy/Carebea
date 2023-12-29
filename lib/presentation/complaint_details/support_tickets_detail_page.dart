@@ -46,7 +46,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
     _complaintDetailBloc = ComplaintDetailBloc(ComplaintDetailsRepository());
     _commentController = TextEditingController();
     _complaintDetailBloc.compId = autoTabRouter?.currentChild?.queryParams
-        .getString("complaint_id", "") ??
+            .getString("complaint_id", "") ??
         "";
     _complaintDetailBloc.add(ComplaintDetailEvent.getComplaintDetails(
         complaintId: _complaintDetailBloc.compId));
@@ -67,8 +67,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
 
   BlocProvider<ComplaintDetailBloc> _reBuildView() {
     return BlocProvider(
-      create: (context) =>
-      _complaintDetailBloc
+      create: (context) => _complaintDetailBloc
         ..add(ComplaintDetailEvent.getComplaintDetails(
             complaintId: _complaintDetailBloc.compId)),
       child: _rebuildView(),
@@ -81,18 +80,15 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
         return state.isLoading
             ? (const LoaderView())
             : state.isError
-            ? ErrorView(isClientError: false, errorMessage: state.error)
-            : _bodyView();
+                ? ErrorView(isClientError: false, errorMessage: state.error)
+                : _bodyView();
       },
     );
   }
 
   _bodyView() {
     return CustomSizedBox(
-      height: MediaQuery
-          .of(context)
-          .size
-          .height,
+      height: MediaQuery.of(context).size.height,
       child: Scaffold(
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -137,36 +133,18 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
   CustomSizedBox _topRightView(BuildContext context) {
     return CustomSizedBox(
       width: isXs3(context)
-          ? MediaQuery
-          .of(context)
-          .size
-          .width - DBL.twoThirty.val
+          ? MediaQuery.of(context).size.width - DBL.twoThirty.val
           : isXs2(context)
-          ? MediaQuery
-          .of(context)
-          .size
-          .width - DBL.fourSeventy.val
-          : isXs(context)
-          ? MediaQuery
-          .of(context)
-          .size
-          .width - DBL.fiveTwenty.val
-          : isLg2(context)
-          ? MediaQuery
-          .of(context)
-          .size
-          .width - DBL.fiveTwenty.val
-          : isLg3(context)
-          ? MediaQuery
-          .of(context)
-          .size
-          .width -
-          DBL.eightSixtyFive.val
-          : MediaQuery
-          .of(context)
-          .size
-          .width -
-          DBL.nineFifty.val,
+              ? MediaQuery.of(context).size.width - DBL.fourSeventy.val
+              : isXs(context)
+                  ? MediaQuery.of(context).size.width - DBL.fiveTwenty.val
+                  : isLg2(context)
+                      ? MediaQuery.of(context).size.width - DBL.fiveTwenty.val
+                      : isLg3(context)
+                          ? MediaQuery.of(context).size.width -
+                              DBL.eightSixtyFive.val
+                          : MediaQuery.of(context).size.width -
+                              DBL.nineFifty.val,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -192,7 +170,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
           SVGText(
             path: IMG.phone.val,
             name:
-            _complaintDetailBloc.complaintDetailsList[0].phoneNumber ?? "",
+                _complaintDetailBloc.complaintDetailsList[0].phoneNumber ?? "",
             widthGap: DBL.nine.val,
           ),
           CustomSizedBox(height: DBL.forty.val),
@@ -225,6 +203,8 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
       height: DBL.oneSeventyFive.val,
       width: DBL.twoHundred.val,
       isDetailPage: true,
+      isCircle: true,
+      circleRadius: 80,
     );
   }
 
@@ -266,27 +246,24 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
           CustomSizedBox(height: DBL.thirty.val),
           _complaintDetailBloc.complaintDetailsList[0].attachments!.isNotEmpty
               ? CustomText(
-            AppString.attachments.val,
-            style: TS().gRoboto(
-                fontSize: FS.font16.val,
-                fontWeight: FW.w500.val,
-                color: AppColor.black.val),
-          )
+                  AppString.attachments.val,
+                  style: TS().gRoboto(
+                      fontSize: FS.font16.val,
+                      fontWeight: FW.w500.val,
+                      color: AppColor.black.val),
+                )
               : CustomText(AppString.noAttachments.val,
-              style: TS().gRoboto(
-                  fontSize: FS.font16.val,
-                  fontWeight: FW.w500.val,
-                  color: AppColor.red.val)),
+                  style: TS().gRoboto(
+                      fontSize: FS.font16.val,
+                      fontWeight: FW.w500.val,
+                      color: AppColor.red.val)),
           _documentShowingWidget(),
           CustomSizedBox(height: DBL.thirty.val),
           _statusUpdateWidget(),
           CustomSizedBox(height: DBL.twenty.val),
-
-
           CustomSizedBox(height: DBL.twenty.val),
           Divider(color: AppColor.lightGrey.val),
           _statusDetailsView()
-
         ],
       ),
     );
@@ -341,92 +318,89 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
           return Padding(
             padding: const EdgeInsets.only(right: 20),
             child: _complaintDetailBloc
-                .complaintDetailsList[0].attachments![index]
-                .contains(".pdf")
+                    .complaintDetailsList[0].attachments![index]
+                    .contains(".pdf")
                 ? InkWell(
-              onTap: () {
-                showGeneralDialog(
-                  barrierDismissible: true,
-                  barrierLabel: "",
-                  context: context,
-                  pageBuilder: (BuildContext buildContext,
-                      Animation animation, Animation secondaryAnimation) {
-                    return CustomAlertDialogWidget(
-                        showHeading: false,
-                        width: 700,
-                        height: 600,
-                        heading: "",
-                        child: SizedBox(
-                          width: double.infinity,
-                          height:
-                          MediaQuery
-                              .of(context)
-                              .size
-                              .height * 0.9,
-                          child: PdfViewer.openFile(
-                            _complaintDetailBloc.complaintDetailsList[0]
-                                .attachments![index],
-                            viewerController: pdfController,
-                            params: const PdfViewerParams(
-                                minScale: 0.2,
-                                scrollDirection: Axis.vertical,
-                                padding: 10,
-                                scaleEnabled: false,
-                                maxScale: 100),
-                          ),
-                        ));
-                  },
-                );
-              },
-              child: Container(
-                  padding: const EdgeInsets.all(3),
-                  alignment: Alignment.center,
-                  width: DBL.fifty.val,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                          color: AppColor.primaryColor.val, width: 1.5)),
-                  child: Icon(
-                    Icons.text_snippet_outlined,
-                    size: 25,
-                    color: AppColor.primaryColor.val,
-                  )),
-            )
-                : ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: CachedImage(
-                onTap: () {
-                  showGeneralDialog(
-                    barrierDismissible: true,
-                    barrierLabel: "",
-                    context: context,
-                    pageBuilder: (BuildContext buildContext,
-                        Animation animation,
-                        Animation secondaryAnimation) {
-                      return CustomAlertDialogWidget(
-                          showHeading: false,
-                          width: 700,
-                          heading: "",
-                          child: CachedImage(
-                            fit: BoxFit.contain,
-                            imgUrl: _complaintDetailBloc
-                                .complaintDetailsList[0]
-                                .attachments![index],
-                          ));
+                    onTap: () {
+                      showGeneralDialog(
+                        barrierDismissible: true,
+                        barrierLabel: "",
+                        context: context,
+                        pageBuilder: (BuildContext buildContext,
+                            Animation animation, Animation secondaryAnimation) {
+                          return CustomAlertDialogWidget(
+                              showHeading: false,
+                              width: 700,
+                              height: 600,
+                              heading: "",
+                              child: SizedBox(
+                                width: double.infinity,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.9,
+                                child: PdfViewer.openFile(
+                                  _complaintDetailBloc.complaintDetailsList[0]
+                                      .attachments![index],
+                                  viewerController: pdfController,
+                                  params: const PdfViewerParams(
+                                      minScale: 0.2,
+                                      scrollDirection: Axis.vertical,
+                                      padding: 10,
+                                      scaleEnabled: false,
+                                      maxScale: 100),
+                                ),
+                              ));
+                        },
+                      );
                     },
-                  );
-                },
-                imgUrl: _complaintDetailBloc
-                    .complaintDetailsList[0].attachments![index],
-                height: DBL.fifty.val,
-                width: DBL.fifty.val,
-                isDetailPage: true,
-              ),
-            ),
+                    child: Container(
+                        padding: const EdgeInsets.all(3),
+                        alignment: Alignment.center,
+                        width: DBL.fifty.val,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                color: AppColor.primaryColor.val, width: 1.5)),
+                        child: Icon(
+                          Icons.text_snippet_outlined,
+                          size: 25,
+                          color: AppColor.primaryColor.val,
+                        )),
+                  )
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CachedImage(
+                      onTap: () {
+                        showGeneralDialog(
+                          barrierDismissible: true,
+                          barrierLabel: "",
+                          context: context,
+                          pageBuilder: (BuildContext buildContext,
+                              Animation animation,
+                              Animation secondaryAnimation) {
+                            return CustomAlertDialogWidget(
+                                showHeading: false,
+                                width: 700,
+                                heading: "",
+                                child: CachedImage(
+                                  fit: BoxFit.contain,
+                                  imgUrl: _complaintDetailBloc
+                                      .complaintDetailsList[0]
+                                      .attachments![index],
+                                ));
+                          },
+                        );
+                      },
+                      imgUrl: _complaintDetailBloc
+                          .complaintDetailsList[0].attachments![index],
+                      height: DBL.fifty.val,
+                      width: DBL.fifty.val,
+                      isDetailPage: true,
+                    ),
+                  ),
           );
         },
         itemCount:
-        _complaintDetailBloc.complaintDetailsList[0].attachments!.length,
+            _complaintDetailBloc.complaintDetailsList[0].attachments!.length,
       ),
     );
   }
@@ -452,7 +426,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
     return RowColonCombo.twoHundred(
         customWidthLg1: 180,
         label: AppString.createdDateTime.val,
-        value:_complaintDetailBloc.complaintDetailsList[0].createdDate ?? '',
+        value: _complaintDetailBloc.complaintDetailsList[0].createdDate ?? '',
         // _complaintDetailBloc.generateFormattedDate(
         //     DateTime.parse(_complaintDetailBloc.complaintDetailsList[0].createdDate ?? "").toLocal().toString()),
         fontSize: FS.font13PointFive.val);
@@ -474,97 +448,71 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
   _complaintServiceIdWidget() {
     return RowColonCombo.twoHundred(
         customWidthLg1: 180,
-        label: _complaintDetailBloc.complaintDetailsList[0].isServiceRelated ??
-            false
+        label: _complaintDetailBloc.complaintDetailsList[0].isServiceRelated ?? false
             ? AppString.serviceId.val
             : AppString.transactionId.val,
         value: _complaintDetailBloc.complaintDetailsList[0].isServiceRelated ??
-            false
-            ? _complaintDetailBloc.complaintDetailsList[0].serviceBookingId ==
-            null ||
-            _complaintDetailBloc.complaintDetailsList[0].serviceBookingId ==
-                ""
-            ? "-"
-            : _complaintDetailBloc.complaintDetailsList[0].serviceBookingId ??
-            ""
+                false
+            ? _complaintDetailBloc.complaintDetailsList[0].serviceBookingId == null ||
+                    _complaintDetailBloc.complaintDetailsList[0].serviceBookingId ==
+                        ""
+                ? "-"
+                : _complaintDetailBloc.complaintDetailsList[0].serviceBookingId ??
+                    ""
             : _complaintDetailBloc.complaintDetailsList[0].isPaymentRelated ??
-            false
-            ? _complaintDetailBloc.complaintDetailsList[0]
-            .uniqueTransactionId == null ||
-            _complaintDetailBloc
-                .complaintDetailsList[0].uniqueTransactionId ==
-                ""
-            ? "-"
-            : _complaintDetailBloc
-            .complaintDetailsList[0].uniqueTransactionId ??
-            ""
-            : "-",
-        onValueTap: _complaintDetailBloc.complaintDetailsList[0]
-            .isServiceRelated ??
-            false
-            ? _complaintDetailBloc.complaintDetailsList[0].serviceBookingId ==
-            "" ||
-            _complaintDetailBloc.complaintDetailsList[0].serviceBookingId ==
-                null
-            ? null
-            : () {
-          _complaintDetailBloc.add(ComplaintDetailEvent.getService(
-              serviceId: _complaintDetailBloc
-                  .complaintDetailsList[0].serviceId ??
-                  "",
-              context: context));
-        }
-            : _complaintDetailBloc.complaintDetailsList[0].isPaymentRelated ??
-            false
-            ? _complaintDetailBloc.complaintDetailsList[0]
-            .uniqueTransactionId == "" ||
-            _complaintDetailBloc.complaintDetailsList[0].uniqueTransactionId ==
-                null
-            ? null
-            : () {
-          _transactionDetails(
-              _complaintDetailBloc
-                  .complaintDetailsList[0].transactionId ??
-                  "",
-              _complaintDetailBloc
-                  .complaintDetailsList[0].serviceId ??
-                  "");
-        }
-            : null,
-        needUnderLine: _complaintDetailBloc.complaintDetailsList[0]
-            .isServiceRelated ?? false
-            ? _complaintDetailBloc.complaintDetailsList[0].serviceBookingId ==
-            "" ||
-            _complaintDetailBloc.complaintDetailsList[0].serviceBookingId ==
-                null
-            ? false
-            : true
-            : _complaintDetailBloc.complaintDetailsList[0].isPaymentRelated ??
-            false
-            ? _complaintDetailBloc.complaintDetailsList[0]
-            .uniqueTransactionId == "" ||
-            _complaintDetailBloc.complaintDetailsList[0].uniqueTransactionId ==
-                null
-            ? false
-            : true
-            : false,
-        valueColor: _complaintDetailBloc.complaintDetailsList[0]
-            .isServiceRelated ?? false
-            ? _complaintDetailBloc.complaintDetailsList[0].serviceBookingId ==
-            "" ||
-            _complaintDetailBloc.complaintDetailsList[0].serviceBookingId ==
-                null
-            ? AppColor.black.val
-            : AppColor.blue.val
-            : _complaintDetailBloc.complaintDetailsList[0].isPaymentRelated ??
-            false
-            ? _complaintDetailBloc.complaintDetailsList[0]
-            .uniqueTransactionId == "" ||
-            _complaintDetailBloc.complaintDetailsList[0].uniqueTransactionId ==
-                null
-            ? AppColor.black.val
-            : AppColor.blue.val
-            : AppColor.black.val,
+                    false
+                ? _complaintDetailBloc.complaintDetailsList[0].uniqueTransactionId == null ||
+                        _complaintDetailBloc
+                                .complaintDetailsList[0].uniqueTransactionId ==
+                            ""
+                    ? "-"
+                    : _complaintDetailBloc
+                            .complaintDetailsList[0].uniqueTransactionId ??
+                        ""
+                : "-",
+        onValueTap: _complaintDetailBloc.complaintDetailsList[0].isServiceRelated ??
+                false
+            ? _complaintDetailBloc.complaintDetailsList[0].serviceBookingId == "" ||
+                    _complaintDetailBloc.complaintDetailsList[0].serviceBookingId == null
+                ? null
+                : () {
+                    _complaintDetailBloc.add(ComplaintDetailEvent.getService(
+                        serviceId: _complaintDetailBloc
+                                .complaintDetailsList[0].serviceId ??
+                            "",
+                        context: context));
+                  }
+            : _complaintDetailBloc.complaintDetailsList[0].isPaymentRelated ?? false
+                ? _complaintDetailBloc.complaintDetailsList[0].uniqueTransactionId == "" || _complaintDetailBloc.complaintDetailsList[0].uniqueTransactionId == null
+                    ? null
+                    : () {
+                        _transactionDetails(
+                            _complaintDetailBloc
+                                    .complaintDetailsList[0].transactionId ??
+                                "",
+                            _complaintDetailBloc
+                                    .complaintDetailsList[0].serviceId ??
+                                "");
+                      }
+                : null,
+        needUnderLine: _complaintDetailBloc.complaintDetailsList[0].isServiceRelated ?? false
+            ? _complaintDetailBloc.complaintDetailsList[0].serviceBookingId == "" || _complaintDetailBloc.complaintDetailsList[0].serviceBookingId == null
+                ? false
+                : true
+            : _complaintDetailBloc.complaintDetailsList[0].isPaymentRelated ?? false
+                ? _complaintDetailBloc.complaintDetailsList[0].uniqueTransactionId == "" || _complaintDetailBloc.complaintDetailsList[0].uniqueTransactionId == null
+                    ? false
+                    : true
+                : false,
+        valueColor: _complaintDetailBloc.complaintDetailsList[0].isServiceRelated ?? false
+            ? _complaintDetailBloc.complaintDetailsList[0].serviceBookingId == "" || _complaintDetailBloc.complaintDetailsList[0].serviceBookingId == null
+                ? AppColor.black.val
+                : AppColor.blue.val
+            : _complaintDetailBloc.complaintDetailsList[0].isPaymentRelated ?? false
+                ? _complaintDetailBloc.complaintDetailsList[0].uniqueTransactionId == "" || _complaintDetailBloc.complaintDetailsList[0].uniqueTransactionId == null
+                    ? AppColor.black.val
+                    : AppColor.blue.val
+                : AppColor.black.val,
         fontSize: FS.font13PointFive.val);
   }
 
@@ -572,39 +520,31 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
     return RowColonCombo.twoHundred(
         customWidthLg1: 180,
         label: AppString.clientName.val,
-        value: _complaintDetailBloc.complaintDetailsList[0].clientName!
-            .firstName == "" ||
-            _complaintDetailBloc.complaintDetailsList[0].clientName!
-                .firstName ==
-                null
+        value: _complaintDetailBloc.complaintDetailsList[0].clientName!.firstName == "" ||
+                _complaintDetailBloc.complaintDetailsList[0].clientName!.firstName ==
+                    null
             ? "-"
-            : "${_complaintDetailBloc.complaintDetailsList[0].clientName!
-            .firstName} ${_complaintDetailBloc.complaintDetailsList[0]
-            .clientName!.lastName}",
-        onValueTap: _complaintDetailBloc.complaintDetailsList[0].clientName!
-            .firstName == "" ||
-            _complaintDetailBloc.complaintDetailsList[0].clientName!
-                .firstName ==
-                null
+            : "${_complaintDetailBloc.complaintDetailsList[0].clientName!.firstName} ${_complaintDetailBloc.complaintDetailsList[0].clientName!.lastName}",
+        onValueTap: _complaintDetailBloc.complaintDetailsList[0].clientName!.firstName == "" ||
+                _complaintDetailBloc.complaintDetailsList[0].clientName!.firstName ==
+                    null
             ? null
             : () {
-          autoTabRouter?.navigate(UserManagementDetailRoute(
-              id: _complaintDetailBloc.complaintDetailsList[0].clientId ??
-                  ""));
-        },
+                autoTabRouter?.navigate(UserManagementDetailRoute(
+                    id: _complaintDetailBloc.complaintDetailsList[0].clientId ??
+                        ""));
+              },
         needUnderLine:
-        _complaintDetailBloc.complaintDetailsList[0].clientName!.firstName ==
-            "" ||
-            _complaintDetailBloc
-                .complaintDetailsList[0].clientName!.firstName ==
-                null
-            ? false
-            : true,
+            _complaintDetailBloc.complaintDetailsList[0].clientName!.firstName == "" ||
+                    _complaintDetailBloc
+                            .complaintDetailsList[0].clientName!.firstName ==
+                        null
+                ? false
+                : true,
         valueColor: _complaintDetailBloc
-            .complaintDetailsList[0].clientName!.firstName ==
-            "" ||
-            _complaintDetailBloc.complaintDetailsList[0].clientName!
-                .firstName == null
+                        .complaintDetailsList[0].clientName!.firstName ==
+                    "" ||
+                _complaintDetailBloc.complaintDetailsList[0].clientName!.firstName == null
             ? AppColor.black.val
             : AppColor.blue.val,
         fontSize: FS.font13PointFive.val);
@@ -615,35 +555,32 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
         customWidthLg1: 180,
         label: AppString.caName.val,
         value: _complaintDetailBloc.complaintDetailsList[0].caName!.firstName ==
-            "" ||
-            _complaintDetailBloc.complaintDetailsList[0].caName!.firstName ==
-                null
+                    "" ||
+                _complaintDetailBloc.complaintDetailsList[0].caName!.firstName ==
+                    null
             ? "-"
-            : "${_complaintDetailBloc.complaintDetailsList[0].caName!
-            .firstName} ${_complaintDetailBloc.complaintDetailsList[0].caName!
-            .lastName}",
+            : "${_complaintDetailBloc.complaintDetailsList[0].caName!.firstName} ${_complaintDetailBloc.complaintDetailsList[0].caName!.lastName}",
         onValueTap:
-        _complaintDetailBloc.complaintDetailsList[0].caName!.firstName == "" ||
-            _complaintDetailBloc.complaintDetailsList[0].caName!.firstName ==
-                null
-            ? null
-            : () {
-          autoTabRouter?.navigate(CareGiverDetailRoute(
-              id: _complaintDetailBloc.complaintDetailsList[0].caId ??
-                  ""));
-        },
+            _complaintDetailBloc.complaintDetailsList[0].caName!.firstName == "" ||
+                    _complaintDetailBloc.complaintDetailsList[0].caName!.firstName ==
+                        null
+                ? null
+                : () {
+                    autoTabRouter?.navigate(CareGiverDetailRoute(
+                        id: _complaintDetailBloc.complaintDetailsList[0].caId ??
+                            ""));
+                  },
         needUnderLine:
-        _complaintDetailBloc.complaintDetailsList[0].caName!.firstName == "" ||
-            _complaintDetailBloc.complaintDetailsList[0].caName!.firstName ==
-                null
-            ? false
-            : true,
+            _complaintDetailBloc.complaintDetailsList[0].caName!.firstName == "" ||
+                    _complaintDetailBloc.complaintDetailsList[0].caName!.firstName ==
+                        null
+                ? false
+                : true,
         valueColor:
-        _complaintDetailBloc.complaintDetailsList[0].caName!.firstName == "" ||
-            _complaintDetailBloc.complaintDetailsList[0].caName!.firstName ==
-                null
-            ? AppColor.black.val
-            : AppColor.blue.val,
+            _complaintDetailBloc.complaintDetailsList[0].caName!.firstName == "" ||
+                    _complaintDetailBloc.complaintDetailsList[0].caName!.firstName == null
+                ? AppColor.black.val
+                : AppColor.blue.val,
         fontSize: FS.font13PointFive.val);
   }
 
@@ -659,7 +596,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
           heading: AppString.transactionManagement.val,
           child: serviceId != ""
               ? TransactionDetailsAlertWidget(
-              complaintDetailBloc: _complaintDetailBloc)
+                  complaintDetailBloc: _complaintDetailBloc)
               : _notServiceTransactionWidget(),
         );
       },
@@ -669,10 +606,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
   _notServiceTransactionWidget() {
     return Container(
       width: Responsive.isWeb(context)
-          ? MediaQuery
-          .of(context)
-          .size
-          .width * .35
+          ? MediaQuery.of(context).size.width * .35
           : double.infinity,
       height: 500,
       color: AppColor.white.val,
@@ -692,41 +626,17 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
     return Responsive.isLg(context) ? fontSize - 2 : fontSize;
   }
 
-  bool isLg2(context) =>
-      MediaQuery
-          .of(context)
-          .size
-          .width <= 1096;
+  bool isLg2(context) => MediaQuery.of(context).size.width <= 1096;
 
-  bool isLg3(context) =>
-      MediaQuery
-          .of(context)
-          .size
-          .width <= 1385;
+  bool isLg3(context) => MediaQuery.of(context).size.width <= 1385;
 
-  bool isXs(context) =>
-      MediaQuery
-          .of(context)
-          .size
-          .width <= 990;
+  bool isXs(context) => MediaQuery.of(context).size.width <= 990;
 
-  bool isXs2(context) =>
-      MediaQuery
-          .of(context)
-          .size
-          .width <= 930;
+  bool isXs2(context) => MediaQuery.of(context).size.width <= 930;
 
-  bool isXs3(context) =>
-      MediaQuery
-          .of(context)
-          .size
-          .width <= 805;
+  bool isXs3(context) => MediaQuery.of(context).size.width <= 805;
 
-  bool isXs4(context) =>
-      MediaQuery
-          .of(context)
-          .size
-          .width <= 590;
+  bool isXs4(context) => MediaQuery.of(context).size.width <= 590;
 
   CustomDropdown<int> _statusDropDown(BuildContext context) {
     return CustomDropdown<int>(
@@ -737,7 +647,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         width: DBL.twoEighty.val,
         height:
-        Responsive.isMobile(context) ? DBL.fortyFive.val : DBL.forty.val,
+            Responsive.isMobile(context) ? DBL.fortyFive.val : DBL.forty.val,
         elevation: DBL.zero.val,
         padding: EdgeInsets.only(left: DBL.fifteen.val),
         backgroundColor: Colors.white,
@@ -758,8 +668,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
           .asMap()
           .entries
           .map(
-            (item) =>
-            DropdownItem<int>(
+            (item) => DropdownItem<int>(
               value: item.key + 1,
               child: Padding(
                 padding: EdgeInsets.all(DBL.eight.val),
@@ -772,7 +681,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
                 ),
               ),
             ),
-      )
+          )
           .toList(),
       child: CustomText(
         generateStatusText(
@@ -815,13 +724,13 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
                           radius: 6,
                         ),
                         index + 1 <
-                            _complaintDetailBloc.complaintDetailsList[0]
-                                .statusHistory!.length
+                                _complaintDetailBloc.complaintDetailsList[0]
+                                    .statusHistory!.length
                             ? Container(
-                          width: 5,
-                          color: AppColor.lightGrey.val,
-                          height: 100,
-                        )
+                                width: 5,
+                                color: AppColor.lightGrey.val,
+                                height: 100,
+                              )
                             : Container()
                       ],
                     ),
@@ -835,9 +744,13 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
                             children: [
                               CustomText(
                                 _complaintDetailBloc.generateFormattedDate(
-                                   DateTime.parse( _complaintDetailBloc.complaintDetailsList[0]
-                                        .statusHistory![index].date ??
-                                        "").toLocal().toString()),
+                                    DateTime.parse(_complaintDetailBloc
+                                                .complaintDetailsList[0]
+                                                .statusHistory![index]
+                                                .date ??
+                                            "")
+                                        .toLocal()
+                                        .toString()),
                                 style: TS().gRoboto(
                                     fontSize: FS.font12.val,
                                     fontWeight: FW.w400.val,
@@ -877,13 +790,10 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
                           ),
                           CustomSizedBox(width: DBL.ten.val),
                           SizedBox(
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width * 0.4,
+                            width: MediaQuery.of(context).size.width * 0.4,
                             child: CustomText(
                               _complaintDetailBloc.complaintDetailsList[0]
-                                  .statusHistory![index].comment ??
+                                      .statusHistory![index].comment ??
                                   "",
                               style: TS().gRoboto(
                                   fontSize: FS.font12.val,

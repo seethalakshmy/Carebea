@@ -1,4 +1,7 @@
+import 'dart:html';
+
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/link.dart';
 
 import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
@@ -48,6 +51,7 @@ import '../transaction_management/transaction_management_page.dart';
 import '../user_management/user_management_page.dart';
 import '../user_mangement_detail/user_managemet_detail_page.dart';
 import '../widget/dropdown/dropdown.dart';
+import 'package:universal_html/html.dart' as html;
 
 TabsRouter? autoTabRouter;
 
@@ -63,27 +67,47 @@ class _MenuBarState extends State<SideMenuPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<ScaffoldState> _scaffoldDrawerKey =
       GlobalKey<ScaffoldState>();
-  Map<String, String> mainData = {};
+  Map<String?, String> mainData = {};
   var version;
   SharedPreffUtil sharedPreffUtil = SharedPreffUtil();
   Future getVersionNumber() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     version = packageInfo.version;
+    if (version.runtimeType == String) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        setState(() {});
+      });
+    }
   }
 
   @override
   void initState() {
+    debugPrint("permission ${sharedPreffUtil.getViewUser}");
     getVersionNumber();
 
     super.initState();
     mainData = {
       AppString.dashboard.val: "",
-      AppString.roleManagement.val: "",
-      AppString.adminManagement.val: "",
-      AppString.careAmbassador.val: "",
-      AppString.userManagement.val: "",
-      AppString.transactionManagement.val: "",
-      AppString.serviceRequestManagement.val: "",
+      sharedPreffUtil.getViewRole ||
+              sharedPreffUtil.getEditRole ||
+              sharedPreffUtil.getDeleteRole
+          ? AppString.roleManagement.val
+          : "": "",
+      sharedPreffUtil.getViewAdmin ||
+              sharedPreffUtil.getDeleteAdmin ||
+              sharedPreffUtil.getEditAdmin
+          ? AppString.adminManagement.val
+          : "": "",
+      sharedPreffUtil.getViewCareGiver || sharedPreffUtil.getEditCareGiver
+          ? AppString.careAmbassador.val
+          : "": "",
+      sharedPreffUtil.getViewUser ? AppString.userManagement.val : "": "",
+      sharedPreffUtil.getViewTransaction
+          ? AppString.transactionManagement.val
+          : "": "",
+      sharedPreffUtil.getViewServiceRequest
+          ? AppString.serviceRequestManagement.val
+          : "": "",
       AppString.clientAnalytics.val: "",
       AppString.careAmbassadorAnalytics.val: "",
       AppString.subscription.val: "",
@@ -434,7 +458,7 @@ class _MenuBarState extends State<SideMenuPage> {
   /// menu list
   Widget _menuList({
     required TabsRouter tabsRouter,
-    required Map<String, String> items,
+    required Map<String?, String> items,
     required bool isOpened,
   }) {
     return ListView.builder(
@@ -483,9 +507,9 @@ class _MenuBarState extends State<SideMenuPage> {
                 } else {
                   isOpen.value = true;
                   tabsRouter.setActiveIndex(
-                      getRouteIndex(items.keys.elementAt(index)));
+                      getRouteIndex(items.keys.elementAt(index) ?? "0"));
                   HiveUtils.set(AppString.selectedMenuIndex.val,
-                      getRouteIndex(items.keys.elementAt(index)));
+                      getRouteIndex(items.keys.elementAt(index) ?? "0"));
                   _scaffoldDrawerKey.currentState?.closeDrawer();
                   SharedPreffUtil().setPage = 0;
                   SharedPreffUtil().setTab = 0;
@@ -498,10 +522,10 @@ class _MenuBarState extends State<SideMenuPage> {
     );
   }
 
-  CustomText buildText(Map<String, String> items, int index,
+  CustomText buildText(Map<String?, String> items, int index,
       TabsRouter tabsRouter, Color color) {
     return CustomText(
-      items.keys.elementAt(index).capitalize(),
+      items.keys.elementAt(index)!.capitalize(),
       style: TS().gRoboto(
           color: isSelected(items, index, tabsRouter)
               ? AppColor.primaryColor.val
@@ -510,7 +534,8 @@ class _MenuBarState extends State<SideMenuPage> {
     );
   }
 
-  bool isSelected(Map<String, String> items, int index, TabsRouter tabsRouter) {
+  bool isSelected(
+      Map<String?, String> items, int index, TabsRouter tabsRouter) {
     print('item:: ${items.keys.elementAt(index)}');
 
     if (items.keys.elementAt(index) != AppString.logout.val) {
@@ -683,4 +708,11 @@ class _MenuBarState extends State<SideMenuPage> {
   }
 
   bool isXs(context) => MediaQuery.of(context).size.width <= 805;
+
+  static openNewTab({required String setUrl, required String setTitle}) {
+    return html.window.open(
+      setUrl,
+      setTitle,
+    );
+  }
 }

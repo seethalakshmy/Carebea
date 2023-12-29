@@ -59,11 +59,15 @@ class _AdminsPageState extends State<AdminsPage> {
   int _end = 10;
   final _searchNode = FocusNode();
 
+  bool ascending = false;
+
   late AdminsBloc _adminsBloc;
   SharedPreffUtil sharedPrefUtil = SharedPreffUtil();
   String? filterId;
   String? roleId;
   String _adminUserId = '';
+  bool? isSort;
+  int? index;
 
   @override
   void initState() {
@@ -450,12 +454,22 @@ class _AdminsPageState extends State<AdminsPage> {
             size: ColumnSize.S,
             fixedWidth: DBL.eighty.val,
             label: _tableColumnView(AppString.slNo.val),
+            onSort: (columnIndex, ascending) {
+              setState(() {
+                this.ascending = ascending;
+              });
+            },
           ),
           DataColumn2(
             size: ColumnSize.L,
             label: _tableColumnView(
               AppString.firstName.val,
             ),
+            onSort: (columnIndex, ascending) {
+              setState(() {
+                this.ascending = ascending;
+              });
+            },
           ),
           DataColumn2(
             size: ColumnSize.L,
@@ -515,8 +529,12 @@ class _AdminsPageState extends State<AdminsPage> {
                   isView: sharedPrefUtil.getViewAdmin,
                   onViewTap: sharedPrefUtil.getViewAdmin
                       ? () {
-                          autoTabRouter?.navigate(
-                              AdminCreationRoute(isView: "view", id: item.id));
+                          autoTabRouter?.navigate(AdminCreationRoute(
+                              isView: "view",
+                              id: item.id,
+                              fName: item.name?.firstName,
+                              lName: item.name?.lastName,
+                              profilePic: item.profile));
                         }
                       : null,
                   isDelete: sharedPrefUtil.getDeleteAdmin,
@@ -528,8 +546,12 @@ class _AdminsPageState extends State<AdminsPage> {
                   isEdit: sharedPrefUtil.getEditAdmin,
                   onEditTap: sharedPrefUtil.getEditAdmin
                       ? () {
-                          autoTabRouter?.navigate(
-                              AdminCreationRoute(isEdit: "edit", id: item.id));
+                          autoTabRouter?.navigate(AdminCreationRoute(
+                              isEdit: "edit",
+                              id: item.id,
+                              fName: item.name?.firstName,
+                              lName: item.name?.lastName,
+                              profilePic: item.profile));
                         }
                       : null,
                 ),

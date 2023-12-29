@@ -8,6 +8,7 @@ class FaqCreationState with _$FaqCreationState {
     required bool isError,
     required String? error,
     required int isForClient,
+    required int radioValue,
     required Option<Either<ApiErrorHandler, FaqDetailsResponseModel>>
         faqDetailOption,
     @Default(false) bool isClientError,
@@ -22,6 +23,7 @@ class FaqCreationState with _$FaqCreationState {
       faqDetailOption: None(),
       error: null,
       isLoadingButton: false,
+      radioValue: 0,
     );
   }
 }

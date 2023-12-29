@@ -36,54 +36,63 @@ class FaqCreationBloc extends Bloc<FaqCreationEvent, FaqCreationState> {
     final Either<ApiErrorHandler, FaqDetailsResponseModel> faqDetailsResult =
         await faqCreationRepository.getFaqDetails(event.id);
     FaqCreationState faqState = faqDetailsResult.fold((l) {
-      return state.copyWith(isLoading: false, faqDetailOption: Some(Left(l)));
+      return state.copyWith(
+          isLoading: false,
+          faqDetailOption: Some(Left(l)),
+          radioValue: radioValue);
     }, (r) {
       faqListData.add(r.data!);
       questionController.text = faqListData.first.question ?? "";
       answerController.text = faqListData.first.answer ?? "";
-      return state.copyWith(isLoading: false, faqDetailOption: Some(Right(r)));
+      return state.copyWith(
+          isLoading: false,
+          faqDetailOption: Some(Right(r)),
+          radioValue: radioValue);
     });
     emit(faqState);
   }
 
   _addFaq(_AddFaq event, Emitter<FaqCreationState> emit) async {
-    emit(state.copyWith(isLoadingButton: true));
+    emit(state.copyWith(isLoadingButton: true, radioValue: radioValue));
+    debugPrint('loading inside bloc ${state.isLoadingButton}');
     final Either<ApiErrorHandler, CommonResponse> faqDetailsResult =
         await faqCreationRepository.createFaqDetails(
             event.question, event.answer, event.status, event.forClient);
     FaqCreationState faqState = faqDetailsResult.fold((l) {
       CSnackBar.showError(event.context, msg: l.error ?? "");
 
-      return state.copyWith(isLoadingButton: false);
+      return state.copyWith(isLoadingButton: false, radioValue: radioValue);
     }, (r) {
       CSnackBar.showSuccess(event.context,
           msg: "Successfully create the new faq");
 
       event.context.router.navigate(const FaqRoute());
-      return state.copyWith(isLoadingButton: false);
+      return state.copyWith(isLoadingButton: false, radioValue: radioValue);
     });
     emit(faqState);
   }
 
   _updateFaq(_UpdateFaq event, Emitter<FaqCreationState> emit) async {
-    emit(state.copyWith(isLoadingButton: true));
+    emit(state.copyWith(isLoadingButton: true, radioValue: radioValue));
     final Either<ApiErrorHandler, CommonResponse> faqDetailsResult =
         await faqCreationRepository.updateFaqDetails(event.id, event.question,
             event.answer, event.status, event.forClient);
     FaqCreationState faqState = faqDetailsResult.fold((l) {
       CSnackBar.showError(event.context, msg: l.error ?? "");
 
-      return state.copyWith(isLoadingButton: false);
+      return state.copyWith(isLoadingButton: false, radioValue: radioValue);
     }, (r) {
       CSnackBar.showSuccess(event.context, msg: "Successfully update the faq");
 
       event.context.router.navigate(const FaqRoute());
-      return state.copyWith(isLoadingButton: false);
+      return state.copyWith(isLoadingButton: false, radioValue: radioValue);
     });
     emit(faqState);
   }
 
   _radioForClient(_RadioForClient event, Emitter<FaqCreationState> emit) {
+    radioValue = event.isSelected != null ? event.isSelected : radioValue;
+
     emit(state.copyWith(isForClient: event.isSelected));
   }
 }

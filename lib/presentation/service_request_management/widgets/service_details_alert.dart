@@ -144,6 +144,7 @@ class ServiceDetailsAlert extends StatelessWidget {
       ServiceDetailsData service, BuildContext context) {
     return ProfileWidget(
       // width: DBL.threeFifty.val,
+      needUnderLine: true,
       imageUrl: service.parentProPic ?? "",
       name:
           "${service.parentName!.firstName ?? ""} ${service.parentName!.lastName ?? ""}",
@@ -649,6 +650,11 @@ class ServiceDetailsAlert extends StatelessWidget {
             SizedBox(width: DBL.eight.val),
             CustomText(
               subText,
+              style: TextStyle(
+                  decoration: (needUnderLine ?? false)
+                      ? TextDecoration.underline
+                      : null,
+                  color: needUnderLine ?? false ? AppColor.blue.val : null),
               width: Responsive.isMobile(context)
                   ? DBL.oneFifty.val
                   : Responsive.isMobile(context) || Responsive.isTablet(context)
@@ -728,6 +734,9 @@ class ServiceDetailsAlert extends StatelessWidget {
   }
 
   _transactionDetailsData(ServiceDetailsData service, BuildContext context) {
+    TransactionManagementBloc _transactionBloc =
+        TransactionManagementBloc(TransactionsRepository());
+
     return Container(
       // width: DBL.fiveFifty.val,
       padding: EdgeInsets.all(DBL.ten.val),
@@ -768,21 +777,31 @@ class ServiceDetailsAlert extends StatelessWidget {
                       '\$ ${Utility.formatAmount(double.tryParse(service.extraServiceFee.toString() ?? "0.0") ?? 0.0)}')
               : const CustomSizedBox(),
           InkWell(
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return CustomAlertDialogWidget(
-                    heading: AppString.transactionManagement.val,
-                    child: TransactionDetailsAlert(
-                        transactionBloc: TransactionManagementBloc(
-                            TransactionsRepository())),
-                  );
-                },
-              );
-            },
+            // onTap: () {
+            //   showDialog(
+            //     context: context,
+            //     builder: (BuildContext context) {
+            //       return CustomAlertDialogWidget(
+            //           heading: AppString.transactionManagement.val,
+            //           child: Container()
+            //           // _transactionBloc.add(TransactionManagementEvent.getTransactionDetails(
+            //           //     transactionId: item.transactionId ?? "",
+            //           //     serviceId: item.serviceId ?? ''));
+            //           //   showDialog(
+            //           //   context: context,
+            //           //   builder: (BuildContext context) {
+            //           //     return CustomAlertDialogWidget(
+            //           //       heading: AppString.transactionManagement.val,
+            //           //       child: TransactionDetailsAlert(transactionBloc: _transactionBloc),
+            //           //     );
+            //           //   },
+            //           // );,
+            //           );
+            //     },
+            //   );
+            // },
             child: _textAndSubText(
-                needUnderLine: true,
+                // needUnderLine: true,
                 context: context,
                 height: DBL.eight.val,
                 text: AppString.transactionId.val,
@@ -792,6 +811,23 @@ class ServiceDetailsAlert extends StatelessWidget {
       ),
     );
   }
+
+  // _transactionDetails(ServiceDetailsData item,BuildContext context) {
+  //   debugPrint('service id on demand ${item.serviceId}');
+  //   debugPrint('transaction id on demand ${item.transactionId}');
+  //   _transactionBloc.add(TransactionManagementEvent.getTransactionDetails(
+  //       transactionId: item.transactionId ?? "",
+  //       serviceId: item.serviceId ?? ''));
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return CustomAlertDialogWidget(
+  //         heading: AppString.transactionManagement.val,
+  //         child: TransactionDetailsAlert(transactionBloc: _transactionBloc),
+  //       );
+  //     },
+  //   );
+  // }
 
   _refundDetailsData(ServiceDetailsData service, BuildContext context) {
     return Container(

@@ -19,6 +19,7 @@ import '../../../../core/time_utils.dart';
 import '../../../../infrastructure/api_service_s3.dart';
 import '../../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../../../caregiver_creation/caregiver_creation_page.dart';
 import '../../../routes/app_router.gr.dart';
 import '../../../widget/commonImageview.dart';
 import '../../../widget/common_date_picker_widget.dart';
@@ -75,7 +76,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   PlatformFile? file;
   SharedPreffUtil sharedPreffUtil = SharedPreffUtil();
   final pdfController = PdfViewerController();
-
+  final GlobalKey<ScrollableState> _scrollableKey =
+      GlobalKey<ScrollableState>();
   final FocusNode _dateFocusNode = FocusNode();
   String selectedDate = "";
   String selectedGender = "";
@@ -200,6 +202,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           builder: (context, state) {
             return CommonPaddingWidget(
               child: SingleChildScrollView(
+                key: _scrollableKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -279,49 +282,47 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           : isWeb
               ? MediaQuery.of(context).size.width * 0.52
               : MediaQuery.of(context).size.width,
-      child: SingleChildScrollView(
-        child: CForm(
-          formKey: _formKey,
-          autoValidateMode: _validateMode,
-          child: Wrap(
-            alignment: Responsive.isWeb(context)
-                ? WrapAlignment.start
-                : WrapAlignment.center,
-            spacing: 20,
-            runSpacing: state.isInitialLoading ? DBL.twenty.val : DBL.zero.val,
-            children: [
-              _dateWidget(state),
-              _genderWidget(state),
-              _addressLineWidget(state),
-              _locationWidget(state),
-              _streetWidget(state),
-              _stateWidget(state),
-              _cityWidget(state),
-              _zipWidget(state),
-              _socialSecurityNoWidget(state),
-              state.isInitialLoading
-                  ? const CustomSizedBox()
-                  : DocumentDetailsView(
-                      onChanged: (value) {
-                        selectedDocument = value;
-                      },
-                      selectedDocumentType: selectedDocument,
-                      dateController: expiryDateController,
-                      documentNumberController: documentNumberController,
-                      onboardingBloc: widget.onboardingBloc,
-                      nextClicked: widget.onboardingBloc.state.nextClicked,
-                      pageController: widget.pageController,
-                    ),
-              state.securityDocumentList.length > 1
-                  ? CustomContainer(height: DBL.twenty.val)
-                  : state.isInitialLoading
-                      ? const CustomSizedBox()
-                      : _uploadDocumentWidget(),
-              state.securityDocumentList.isNotEmpty
-                  ? _previewShowingWidget(state)
-                  : const CustomContainer(),
-            ],
-          ),
+      child: CForm(
+        formKey: _formKey,
+        autoValidateMode: _validateMode,
+        child: Wrap(
+          alignment: Responsive.isWeb(context)
+              ? WrapAlignment.start
+              : WrapAlignment.center,
+          spacing: 20,
+          runSpacing: state.isInitialLoading ? DBL.twenty.val : DBL.zero.val,
+          children: [
+            _dateWidget(state),
+            _genderWidget(state),
+            _addressLineWidget(state),
+            _locationWidget(state),
+            _streetWidget(state),
+            _stateWidget(state),
+            _cityWidget(state),
+            _zipWidget(state),
+            _socialSecurityNoWidget(state),
+            state.isInitialLoading
+                ? const CustomSizedBox()
+                : DocumentDetailsView(
+                    onChanged: (value) {
+                      selectedDocument = value;
+                    },
+                    selectedDocumentType: selectedDocument,
+                    dateController: expiryDateController,
+                    documentNumberController: documentNumberController,
+                    onboardingBloc: widget.onboardingBloc,
+                    nextClicked: widget.onboardingBloc.state.nextClicked,
+                    pageController: widget.pageController,
+                  ),
+            state.securityDocumentList.length > 1
+                ? CustomContainer(height: DBL.twenty.val)
+                : state.isInitialLoading
+                    ? const CustomSizedBox()
+                    : _uploadDocumentWidget(),
+            state.securityDocumentList.isNotEmpty
+                ? _previewShowingWidget(state)
+                : const CustomContainer(),
+          ],
         ),
       ),
     );
@@ -476,6 +477,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
 
   _genderWidget(OnboardingState state) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         state.isInitialLoading
@@ -978,7 +980,21 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           onLeftButtonPressed: () {
             widget.isFromSignUp
                 ? context.router.navigate(const SignUpRoute())
-                : context.router.navigate(const CaregiverCreationRoute());
+                : Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CaregiverCreationPage(),
+                    ),
+                  ).then((_) {
+                    addressLineController.text =
+                        addressLineController.text.trim();
+                    documentNumberController.text =
+                        documentNumberController.text.trim();
+                    streetController.text = streetController.text.trim();
+// Here you will get callback after coming back from NextPage()
+// Do your code here
+                  });
+            // : context.router.navigate(const CaregiverCreationRoute());
             // widget.pageController
             //     .jumpToPage(widget.pageController.page!.toInt() - 1);
           },
@@ -1039,9 +1055,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   }
 
   checkInputData() {
-    addressLineController.text = addressLineController.text.trim();
-    documentNumberController.text = documentNumberController.text.trim();
-    streetController.text = streetController.text.trim();
+    // addressLineController.text = addressLineController.text.trim();
+    // documentNumberController.text = documentNumberController.text.trim();
+    // streetController.text = streetController.text.trim();
     if (_validateMode != AutovalidateMode.always) {
       formValidationBloc.add(const FormValidationEvent.submit());
       formValidationBloc.add(const FormValidationEvent.dropDown("true"));

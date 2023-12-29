@@ -191,8 +191,11 @@ class _FaqPageState extends State<FaqPage> {
             _pageIndex = e.key + 1;
             return DataRow2(
               onTap: () {
-                autoTabRouter?.navigate(
-                    FaqCreationRoute(isEdit: "edit", id: item.id, item: item));
+                autoTabRouter?.navigate(FaqCreationRoute(
+                    isEdit: "edit",
+                    id: item.id,
+                    item: item,
+                    forWhom: item.forClient == true ? 1 : 2));
               },
               cells: [
                 DataCell(_tableRowView("", _pageIndex.toString())),
@@ -216,7 +219,10 @@ class _FaqPageState extends State<FaqPage> {
                   onEditTap: sharedPrefUtil.getEditAdmin
                       ? () {
                           autoTabRouter?.navigate(FaqCreationRoute(
-                              isEdit: "edit", id: item.id, item: item));
+                              isEdit: "edit",
+                              id: item.id,
+                              item: item,
+                              forWhom: item.forClient == true ? 1 : 2));
                         }
                       : null,
                   onDeleteTap: () {

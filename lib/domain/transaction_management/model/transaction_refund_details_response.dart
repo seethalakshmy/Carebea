@@ -86,18 +86,19 @@ PaymentStatus paymentStatusFromJson(String str) =>
 String paymentStatusToJson(PaymentStatus data) => json.encode(data.toJson());
 
 class PaymentStatus {
-  PaymentStatus({
-    num? status,
-    String? title,
-    String? date,
-    String? id,
-    String? paymentLogTxnId,
-  }) {
+  PaymentStatus(
+      {num? status,
+      String? title,
+      String? date,
+      String? id,
+      String? paymentLogTxnId,
+      String? transactionId}) {
     _status = status;
     _title = title;
     _date = date;
     _id = id;
     _paymentLogTxnId = paymentLogTxnId;
+    _transactionId = transactionId;
   }
 
   PaymentStatus.fromJson(dynamic json) {
@@ -106,31 +107,34 @@ class PaymentStatus {
     _date = json['date'];
     _id = json['_id'];
     _paymentLogTxnId = json['paymentLogTxnId'];
+    _transactionId = json['transactionId'];
   }
   num? _status;
   String? _title;
   String? _date;
   String? _id;
   String? _paymentLogTxnId;
-  PaymentStatus copyWith({
-    num? status,
-    String? title,
-    String? date,
-    String? id,
-    String? paymentLogTxnId,
-  }) =>
+  String? _transactionId;
+  PaymentStatus copyWith(
+          {num? status,
+          String? title,
+          String? date,
+          String? id,
+          String? paymentLogTxnId,
+          String? transactionId}) =>
       PaymentStatus(
-        status: status ?? _status,
-        title: title ?? _title,
-        date: date ?? _date,
-        id: id ?? _id,
-        paymentLogTxnId: paymentLogTxnId ?? _paymentLogTxnId,
-      );
+          status: status ?? _status,
+          title: title ?? _title,
+          date: date ?? _date,
+          id: id ?? _id,
+          paymentLogTxnId: paymentLogTxnId ?? _paymentLogTxnId,
+          transactionId: transactionId ?? _transactionId);
   num? get status => _status;
   String? get title => _title;
   String? get date => _date;
   String? get id => _id;
   String? get paymentLogTxnId => _paymentLogTxnId;
+  String? get transactionId => _transactionId;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -139,6 +143,7 @@ class PaymentStatus {
     map['date'] = _date;
     map['_id'] = _id;
     map['paymentLogTxnId'] = _paymentLogTxnId;
+    map['transactionId'] = _transactionId;
     return map;
   }
 }

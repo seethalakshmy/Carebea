@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../../application/bloc/dashboard/dashboard_bloc.dart';
 import '../../../core/custom_debugger.dart';
+import '../../../core/custom_snackbar.dart';
 import '../../../core/enum.dart';
 import '../../../core/responsive.dart';
 import '../../../core/text_styles.dart';
@@ -63,6 +64,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var _startdate;
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (context, state) {
         return Column(
@@ -102,50 +104,102 @@ class BarChartWidgetState extends State<BarChartWidget> {
                         : const CustomSizedBox(
                             height: 50,
                           ),
-                    DashBoardDatePickerWidget(
-                      initialDate: DateFormat('MMM dd yyyy')
-                          .parse(widget.startDate.text),
-                      firstDate: DateFormat('MMM dd yyyy')
-                          .parse(widget.startDate.text),
-                      lastDate: DateTime(3000),
-                      bloc: widget.bloc,
-                      dateController: widget.startDate,
-                      dropDownValue: state.filterId,
-                      onChanged: () {
-                        debugPrint("filter value ${state.filterId}");
-                        widget.bloc.add(DashboardEvent.getDashboard(
-                            userId: SharedPreffUtil().getAdminId,
-                            year: state.filterId == 1
-                                ? (DateTime.now().year - 1).toString()
-                                : DateTime.now().year.toString(),
-                            fromData: widget.startDate.text,
-                            toDate: widget.endDate.text,
-                            isCallAlertApiCall: false));
-                      },
-                    ),
-                    const CustomSizedBox(
-                      width: 10,
-                    ),
-                    DashBoardDatePickerWidget(
-                      initialDate:
-                          DateFormat('MMM dd yyyy').parse(widget.endDate.text),
-                      firstDate:
-                          DateFormat('MMM dd yyyy').parse(widget.endDate.text),
-                      lastDate: DateTime(3000),
-                      bloc: widget.bloc,
-                      dateController: widget.endDate,
-                      dropDownValue: state.filterId,
-                      onChanged: () {
-                        widget.bloc.add(DashboardEvent.getDashboard(
-                            userId: SharedPreffUtil().getAdminId,
-                            year: state.filterId == 1
-                                ? (DateTime.now().year - 1).toString()
-                                : DateTime.now().year.toString(),
-                            fromData: widget.startDate.text,
-                            toDate: widget.endDate.text,
-                            isCallAlertApiCall: false));
-                      },
-                    )
+                    StatefulBuilder(builder: (context, refresh) {
+                      return Wrap(
+                        children: [
+                          BlocBuilder<DashboardBloc, DashboardState>(
+                            builder: (context, state) {
+                              return DashBoardDatePickerWidget(
+                                initialDate: DateFormat('MMM dd yyyy')
+                                    .parse(_startdate ?? widget.startDate.text),
+                                firstDate: DateFormat('MMM dd yyyy')
+                                    .parse(_startdate ?? widget.startDate.text),
+                                lastDate: state.filterId == 0
+                                    ? DateTime(DateTime.now().year + 10)
+                                    : state.filterId == 1
+                                        ? DateTime(DateTime.now().year, 12, 31)
+                                        : state.filterId == 2
+                                            ? DateTime(
+                                                DateTime.now().year - 1, 12, 31)
+                                            : DateTime(
+                                                DateTime.now().year,
+                                                DateTime.now().month,
+                                                DateTime.now().day),
+                                bloc: widget.bloc,
+                                dateController: widget.startDate,
+                                dropDownValue: state.filterId,
+                                onChanged: () {
+                                  refresh(() {
+                                    _startdate = widget.startDate.text;
+                                    debugPrint(
+                                        "filter value ${state.filterId}");
+                                    widget.bloc.add(DashboardEvent.getDashboard(
+                                        userId: SharedPreffUtil().getAdminId,
+                                        year: state.filterId == 0
+                                            ? ""
+                                            : state.filterId == 1
+                                                ? DateTime.now().year.toString()
+                                                : state.filterId == 2
+                                                    ? (DateTime.now().year - 1)
+                                                        .toString()
+                                                    : DateTime.now()
+                                                        .year
+                                                        .toString(),
+                                        fromData: widget.startDate.text,
+                                        toDate: widget.endDate.text,
+                                        isCallAlertApiCall: false));
+                                  });
+                                },
+                              );
+                            },
+                          ),
+                          const CustomSizedBox(
+                            width: 10,
+                          ),
+                          BlocBuilder<DashboardBloc, DashboardState>(
+                            builder: (context, state) {
+                              return DashBoardDatePickerWidget(
+                                initialDate: DateFormat('MMM dd yyyy')
+                                    .parse(widget.startDate.text),
+                                firstDate: DateFormat('MMM dd yyyy')
+                                    .parse(widget.startDate.text),
+                                lastDate: state.filterId == 0
+                                    ? DateTime(DateTime.now().year + 10)
+                                    : state.filterId == 1
+                                        ? DateTime(DateTime.now().year, 12, 31)
+                                        : state.filterId == 2
+                                            ? DateTime(
+                                                DateTime.now().year - 1, 12, 31)
+                                            : DateTime(
+                                                DateTime.now().year,
+                                                DateTime.now().month,
+                                                DateTime.now().day),
+                                bloc: widget.bloc,
+                                dateController: widget.endDate,
+                                dropDownValue: state.filterId,
+                                onChanged: () {
+                                  widget.bloc.add(DashboardEvent.getDashboard(
+                                      userId: SharedPreffUtil().getAdminId,
+                                      year: state.filterId == 0
+                                          ? ""
+                                          : state.filterId == 1
+                                              ? DateTime.now().year.toString()
+                                              : state.filterId == 2
+                                                  ? (DateTime.now().year - 1)
+                                                      .toString()
+                                                  : DateTime.now()
+                                                      .year
+                                                      .toString(),
+                                      fromData: widget.startDate.text,
+                                      toDate: widget.endDate.text,
+                                      isCallAlertApiCall: false));
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      );
+                    })
                   ],
                 ),
               ),
@@ -267,20 +321,21 @@ class BarChartWidgetState extends State<BarChartWidget> {
       BuildContext context, DashboardBloc bloc) {
     return CustomDropdown<int>(
       onChange: (int value, int index) {
+        debugPrint("aaasd  ${value}");
         bloc.add(DashboardEvent.changeAxis(filterId: value));
 
         var now = DateTime.now();
-        if (value == 0) {
+        if (value == 0 || value == 1) {
           widget.startDate.text = Utility.detailDate(DateTime(now.year, 1, 1));
           widget.endDate.text = Utility.detailDate(DateTime(now.year, 12, 31));
-        } else if (value == 1) {
+        } else if (value == 2) {
           var pastYear =
               DateTime(now.year, 1, 1).subtract(const Duration(days: 1));
           widget.startDate.text =
               Utility.detailDate(DateTime(pastYear.year, 1, 1));
           widget.endDate.text =
               Utility.detailDate(DateTime(pastYear.year, 12, 31));
-        } else if (value == 2) {
+        } else if (value == 3) {
           widget.endDate.text = Utility.detailDate(DateTime.now());
           var startDate = DateTime.now().subtract(const Duration(days: 7));
           widget.startDate.text = Utility.detailDate(startDate);
@@ -288,9 +343,13 @@ class BarChartWidgetState extends State<BarChartWidget> {
 
         bloc.add(DashboardEvent.getDashboard(
             userId: SharedPreffUtil().getAdminId,
-            year: value == 1
-                ? (DateTime.now().year - 1).toString()
-                : DateTime.now().year.toString(),
+            year: value == 0
+                ? ""
+                : value == 1
+                    ? DateTime.now().year.toString()
+                    : value == 2
+                        ? (DateTime.now().year - 1).toString()
+                        : DateTime.now().year.toString(),
             fromData: widget.startDate.text,
             toDate: widget.endDate.text,
             isCallAlertApiCall: false));
@@ -298,7 +357,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
       },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
-        width: DBL.oneForty.val,
+        width: DBL.oneNinety.val,
         height:
             Responsive.isMobile(context) ? DBL.fortyFive.val : DBL.forty.val,
         elevation: DBL.zero.val,
@@ -312,7 +371,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
         color: AppColor.white.val,
         padding: EdgeInsets.all(DBL.five.val),
       ),
-      items: ["Current Year", "Last Year", "Past 7 Days"]
+      items: ["Service Completed", "Current Year", "Last Year", "Past 7 Days"]
           .asMap()
           .entries
           .map(
@@ -332,7 +391,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
           )
           .toList(),
       child: CustomText(
-        "Current Year",
+        "Service Completed",
         style: TS().gRoboto(
             fontWeight: FW.w500.val,
             fontSize: FS.font15.val,

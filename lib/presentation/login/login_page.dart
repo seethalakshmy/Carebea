@@ -192,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
                 CustomSizedBox(
                   height: DBL.fortyEight.val,
                 ),
-                CustomText('Version ${_loginBloc.version}')
+                // CustomText('Version ${_loginBloc.version}')
               ],
             ),
           ),

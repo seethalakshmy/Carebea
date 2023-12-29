@@ -109,7 +109,6 @@ class Data {
     _diet = diet;
     _services = services;
     _advanceDirective = advanceDirective;
-
   }
 
   Data.fromJson(dynamic json) {
@@ -168,7 +167,6 @@ class Data {
         _address?.add(Address.fromJson(v));
       });
     }
-
   }
   String? _id;
   int? _profileCompletionPercentage;
@@ -227,7 +225,6 @@ class Data {
     List<String>? diet,
     Services? services,
     AdvanceDirective? advanceDirective,
-
   }) =>
       Data(
         id: id ?? _id,
@@ -259,7 +256,6 @@ class Data {
         diet: diet ?? _diet,
         services: services ?? _services,
         advanceDirective: advanceDirective ?? _advanceDirective,
-
       );
   String? get id => _id;
   int? get profileCompletionPercentage => _profileCompletionPercentage;
@@ -290,7 +286,6 @@ class Data {
   List<String>? get diet => _diet;
   Services? get services => _services;
   AdvanceDirective? get advanceDirective => _advanceDirective;
-
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -379,7 +374,7 @@ class AdvanceDirective {
       AdvanceDirective(
         status: status ?? _status,
         advanceDirectiveLocation:
-        advanceDirectiveLocation ?? _advanceDirectiveLocation,
+            advanceDirectiveLocation ?? _advanceDirectiveLocation,
       );
   bool? get status => _status;
   String? get advanceDirectiveLocation => _advanceDirectiveLocation;
@@ -396,21 +391,22 @@ Address addressFromJson(String str) => Address.fromJson(json.decode(str));
 String addressToJson(Address data) => json.encode(data.toJson());
 
 class Address {
-  Address({
-    Location? location,
-    dynamic locationTag,
-    String? streetName,
-    String? lattitude,
-    String? longitude,
-    String? city,
-    String? state,
-    String? address,
-    String? zipCode,
-    bool? isDelete,
-    bool? isDefault,
-    String? id,
-    String? region,
-  }) {
+  Address(
+      {Location? location,
+      dynamic locationTag,
+      String? streetName,
+      String? lattitude,
+      String? longitude,
+      String? city,
+      String? state,
+      String? address,
+      String? zipCode,
+      bool? isDelete,
+      bool? isDefault,
+      String? id,
+      String? region,
+      String? stateName,
+      String? cityName}) {
     _location = location;
     _locationTag = locationTag;
     _streetName = streetName;
@@ -424,6 +420,8 @@ class Address {
     _isDefault = isDefault;
     _id = id;
     _region = region;
+    _stateName = stateName;
+    _cityName = cityName;
   }
 
   Address.fromJson(dynamic json) {
@@ -441,6 +439,8 @@ class Address {
     _isDefault = json['is_default'];
     _id = json['_id'];
     _region = json['region'];
+    _stateName = json['stateName'];
+    _cityName = json['cityName'];
   }
   Location? _location;
   dynamic _locationTag;
@@ -455,36 +455,40 @@ class Address {
   bool? _isDefault;
   String? _id;
   String? _region;
-  Address copyWith({
-    Location? location,
-    dynamic locationTag,
-    String? streetName,
-    String? lattitude,
-    String? longitude,
-    String? city,
-    String? state,
-    String? address,
-    String? zipCode,
-    bool? isDelete,
-    bool? isDefault,
-    String? id,
-    String? region,
-  }) =>
+  String? _stateName;
+  String? _cityName;
+  Address copyWith(
+          {Location? location,
+          dynamic locationTag,
+          String? streetName,
+          String? lattitude,
+          String? longitude,
+          String? city,
+          String? state,
+          String? address,
+          String? zipCode,
+          bool? isDelete,
+          bool? isDefault,
+          String? id,
+          String? region,
+          String? stateName,
+          String? cityName}) =>
       Address(
-        location: location ?? _location,
-        locationTag: locationTag ?? _locationTag,
-        streetName: streetName ?? _streetName,
-        lattitude: lattitude ?? _lattitude,
-        longitude: longitude ?? _longitude,
-        city: city ?? _city,
-        state: state ?? _state,
-        address: address ?? _address,
-        zipCode: zipCode ?? _zipCode,
-        isDelete: isDelete ?? _isDelete,
-        isDefault: isDefault ?? _isDefault,
-        id: id ?? _id,
-        region: region ?? _region,
-      );
+          location: location ?? _location,
+          locationTag: locationTag ?? _locationTag,
+          streetName: streetName ?? _streetName,
+          lattitude: lattitude ?? _lattitude,
+          longitude: longitude ?? _longitude,
+          city: city ?? _city,
+          state: state ?? _state,
+          address: address ?? _address,
+          zipCode: zipCode ?? _zipCode,
+          isDelete: isDelete ?? _isDelete,
+          isDefault: isDefault ?? _isDefault,
+          id: id ?? _id,
+          region: region ?? _region,
+          stateName: stateName ?? _stateName,
+          cityName: cityName ?? _cityName);
   Location? get location => _location;
   dynamic get locationTag => _locationTag;
   String? get streetName => _streetName;
@@ -498,6 +502,8 @@ class Address {
   bool? get isDefault => _isDefault;
   String? get id => _id;
   String? get region => _region;
+  String? get stateName => _stateName;
+  String? get cityName => _cityName;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -516,6 +522,8 @@ class Address {
     map['is_default'] = _isDefault;
     map['_id'] = _id;
     map['region'] = _region;
+    map['stateName'] = _stateName;
+    map['cityName'] = _cityName;
     return map;
   }
 }
