@@ -66,6 +66,7 @@ import '../subProfile_details/model/sub_profile_detail_response.dart';
 import '../transaction_management/model/get_filters_response.dart';
 import '../transaction_management/model/transaction_details_response.dart';
 import '../transaction_management/model/transaction_list_response.dart';
+import '../upcoming_birthdays/model/upcoming_birthday_response.dart';
 import '../user_management/model/user_list_response.dart';
 import '../user_management_detail/model/client_service_response.dart';
 import '../video_management/models/video_management_response.dart';
@@ -863,5 +864,20 @@ abstract class ApiClient {
     @Field("otp") String otp,
     @Field("user_id") String userId,
     @Field("type") int type,
+  );
+
+  @POST('/admin/caregivers-birthday-today')
+  Future<UpcomingBirthdayResponse> upcomingBirthdays(
+    @Field("user_id") String userId,
+    @Field("type") String type,
+    @Field("page") String page,
+    @Field("limit") String limit,
+  );
+
+  @POST('/admin/send-birthday-wish')
+  Future<CommonResponse> sendGift(
+    @Field("user_id") String userId,
+    @Field("subject") String subject,
+    @Field("body") String body,
   );
 }

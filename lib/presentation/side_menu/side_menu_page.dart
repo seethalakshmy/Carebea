@@ -46,8 +46,10 @@ import '../faq/faq_screen.dart';
 import '../page/page_view.dart';
 import '../page_creation/page_creation_view.dart';
 import '../role_creation/role_creation_page.dart';
+import '../send_gift/send_gift.dart';
 import '../service_request_management/service_request_management_page.dart';
 import '../transaction_management/transaction_management_page.dart';
+import '../upcoming_birthdays/upcoming_birthdays.dart';
 import '../user_management/user_management_page.dart';
 import '../user_mangement_detail/user_managemet_detail_page.dart';
 import '../widget/dropdown/dropdown.dart';
@@ -111,6 +113,7 @@ class _MenuBarState extends State<SideMenuPage> {
       AppString.clientAnalytics.val: "",
       AppString.careAmbassadorAnalytics.val: "",
       AppString.subscription.val: "",
+      AppString.upcomingBirthdays.val: "",
       AppString.videoManagement.val: "",
       AppString.supportTickets.val: "",
       AppString.faq.val: "",
@@ -586,7 +589,9 @@ class _MenuBarState extends State<SideMenuPage> {
     ClientAnalyticsRoute(),
     RouteListRoute(),
     RouteCreationRoute(),
-    CareAmbassadorAnalysisRoute()
+    CareAmbassadorAnalysisRoute(),
+    UpcomingBirthdayRoute(),
+    SendGiftRoute()
   ];
 
   int getRouteIndex(String route) {
@@ -643,6 +648,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return 25;
     } else if (route == AppString.careAmbassadorAnalytics.val) {
       return 26;
+    } else if (route == AppString.upcomingBirthdays.val) {
+      return 27;
+    } else if (route == AppString.sendGift.val) {
+      return 28;
     } else {
       return 0;
     }
@@ -702,6 +711,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return const PageListPage();
     } else if (index == 25) {
       return PageCreationPage();
+    } else if (index == 27) {
+      return const UpcomingBirthdayPage();
+    } else if (index == 28) {
+      return const SendGiftPage();
     } else {
       return const DashboardPage();
     }
