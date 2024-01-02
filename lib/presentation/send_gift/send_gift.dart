@@ -150,19 +150,24 @@ class _sendGiftPageState extends State<SendGiftPage> {
                 ),
                 BlocBuilder<SendGiftBloc, SendGiftState>(
                   builder: (context, state) {
-                    return CustomButton(
-                      isLoading: state.isLoadingButton,
-                      height: DBL.fortyFive.val,
-                      minWidth: DBL.oneTwenty.val,
-                      onPressed: () async {
-                        debugPrint("loading test ${state.isLoadingButton}");
-                        await checkInputData(state);
-                        debugPrint(
-                            "loading test after function ${state.isLoadingButton}");
-                      },
-                      text: AppString.sendGift.val,
-                      color: AppColor.primaryColor.val,
-                      textColor: AppColor.white.val,
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        CustomButton(
+                          isLoading: state.isLoadingButton,
+                          height: DBL.fortyFive.val,
+                          minWidth: DBL.oneTwenty.val,
+                          onPressed: () async {
+                            debugPrint("loading test ${state.isLoadingButton}");
+                            await checkInputData(state);
+                            debugPrint(
+                                "loading test after function ${state.isLoadingButton}");
+                          },
+                          text: AppString.sendGift.val,
+                          color: AppColor.primaryColor.val,
+                          textColor: AppColor.white.val,
+                        ),
+                      ],
                     );
                   },
                 )
