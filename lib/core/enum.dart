@@ -15,6 +15,8 @@ enum AppString {
   deletedCareRecipient("Deleted Care Recipient"),
   deletedCareAmbassador("Deleted Care Ambassador"),
   createNew("Create New"),
+  thisWeek("This Week"),
+  thisMonth("This Month"),
   updatePolicy("Update Policy"),
   profileIncomplete("Profile Incomplete"),
   achDetails('ACH details'),

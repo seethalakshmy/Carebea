@@ -92,7 +92,7 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
       create: (context) => _upcomingBirthdaysBloc
         ..add(UpcomingBirthdayEvent.getUpcomingBirthdays(
           userId: adminId ?? '',
-          type: _upcomingBirthdaysBloc.filterId.toString(),
+          type: '1',
           page: _upcomingBirthdaysBloc.page.toString(),
           limit: _upcomingBirthdaysBloc.limit.toString(),
         )),
@@ -214,7 +214,7 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
     return CustomDropdown<int>(
       onChange: (int value, int index) {
         _upcomingBirthdaysBloc.page = 1;
-        _upcomingBirthdaysBloc.filterId = 1;
+        _upcomingBirthdaysBloc.filterId = index + 1;
         _upcomingBirthdaysBloc.add(UpcomingBirthdayEvent.getUpcomingBirthdays(
             userId: adminId ?? '',
             type: _upcomingBirthdaysBloc.filterId.toString(),
@@ -237,12 +237,12 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
         color: AppColor.white.val,
         padding: EdgeInsets.all(DBL.five.val),
       ),
-      items: [AppString.all.val, AppString.active.val, AppString.inActive.val]
+      items: [AppString.thisWeek.val, AppString.thisMonth.val]
           .asMap()
           .entries
           .map(
             (item) => DropdownItem<int>(
-              value: item.key,
+              value: item.key + 1,
               child: Padding(
                 padding: EdgeInsets.all(DBL.eight.val),
                 child: Text(
@@ -257,7 +257,7 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
           )
           .toList(),
       child: CustomText(
-        AppString.status.val,
+        AppString.thisWeek.val,
         style: TS().gRoboto(
             fontWeight: FW.w500.val,
             fontSize: FS.font15.val,
