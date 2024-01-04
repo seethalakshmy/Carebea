@@ -404,8 +404,8 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
                   item.profile ?? "")),
               DataCell(_rowsView(text: item.email ?? "")),
               DataCell(_rowsView(
-                  text: Utility.detailDate(
-                      (DateTime.parse(item.dob ?? '').toLocal())))),
+                  text: Utility.detailDate((DateTime.tryParse(item.dob ?? '') ??
+                      DateTime.now().toLocal())))),
               //     DataCell(_rowsView(text: item.clientID)),
               //   DataCell(_rowsView(text: item.date)),
               // DataCell(_tableSwitchBox(item)),

@@ -58,18 +58,18 @@ Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
 
 class Data {
-  Data({
-    String? id,
-    num? v,
-    String? attachment,
-    String? createdAt,
-    String? description,
-    bool? isDelete,
-    bool? status,
-    String? title,
-    String? updatedAt,
-    num? userType,
-  }) {
+  Data(
+      {String? id,
+      num? v,
+      String? attachment,
+      String? createdAt,
+      String? description,
+      bool? isDelete,
+      bool? status,
+      String? title,
+      String? updatedAt,
+      num? userType,
+      String? videoUrl}) {
     _id = id;
     _v = v;
     _attachment = attachment;
@@ -80,6 +80,7 @@ class Data {
     _title = title;
     _updatedAt = updatedAt;
     _userType = userType;
+    _videoUrl = videoUrl;
   }
 
   Data.fromJson(dynamic json) {
@@ -93,6 +94,7 @@ class Data {
     _title = json['title'];
     _updatedAt = json['updatedAt'];
     _userType = json['userType'];
+    _videoUrl = json['video_url'];
   }
   String? _id;
   num? _v;
@@ -104,30 +106,31 @@ class Data {
   String? _title;
   String? _updatedAt;
   num? _userType;
-  Data copyWith({
-    String? id,
-    num? v,
-    String? attachment,
-    String? createdAt,
-    String? description,
-    bool? isDelete,
-    bool? status,
-    String? title,
-    String? updatedAt,
-    num? userType,
-  }) =>
+  String? _videoUrl;
+  Data copyWith(
+          {String? id,
+          num? v,
+          String? attachment,
+          String? createdAt,
+          String? description,
+          bool? isDelete,
+          bool? status,
+          String? title,
+          String? updatedAt,
+          num? userType,
+          String? videoUrl}) =>
       Data(
-        id: id ?? _id,
-        v: v ?? _v,
-        attachment: attachment ?? _attachment,
-        createdAt: createdAt ?? _createdAt,
-        description: description ?? _description,
-        isDelete: isDelete ?? _isDelete,
-        status: status ?? _status,
-        title: title ?? _title,
-        updatedAt: updatedAt ?? _updatedAt,
-        userType: userType ?? _userType,
-      );
+          id: id ?? _id,
+          v: v ?? _v,
+          attachment: attachment ?? _attachment,
+          createdAt: createdAt ?? _createdAt,
+          description: description ?? _description,
+          isDelete: isDelete ?? _isDelete,
+          status: status ?? _status,
+          title: title ?? _title,
+          updatedAt: updatedAt ?? _updatedAt,
+          userType: userType ?? _userType,
+          videoUrl: videoUrl ?? _videoUrl);
   String? get id => _id;
   num? get v => _v;
   String? get attachment => _attachment;
@@ -138,6 +141,7 @@ class Data {
   String? get title => _title;
   String? get updatedAt => _updatedAt;
   num? get userType => _userType;
+  String? get videoUrl => _videoUrl;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -151,6 +155,7 @@ class Data {
     map['title'] = _title;
     map['updatedAt'] = _updatedAt;
     map['userType'] = _userType;
+    map['video_url'] = _videoUrl;
     return map;
   }
 }

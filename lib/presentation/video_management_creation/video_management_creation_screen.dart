@@ -1,14 +1,17 @@
 import 'dart:developer';
+import 'dart:html';
 
 import 'package:admin_580_tech/infrastructure/upload_video/upload_video_repository.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:chewie/chewie.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:video_player/video_player.dart';
 
 import '../../application/bloc/upload_video/upload_video_bloc.dart';
 import '../../core/custom_snackbar.dart';
@@ -223,54 +226,64 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
                       ],
                     ),
                   ),
-                  bytesList.isNotEmpty || attachment != ''
-                      ?
-                      // Chewie(
-                      //         controller: ChewieController(
-                      //           overlay: Container(
-                      //             color: Colors.transparent,
-                      //           ),
-                      //           videoPlayerController:
-                      //               VideoPlayerController.file(convertedFile as File),
-                      //           autoPlay: false,
-                      //           looping: false,
-                      //           allowFullScreen: true,
-                      //           showOptions: false,
-                      //           aspectRatio: 16 /
-                      //               9, // Adjust this as per your video's aspect ratio
-                      //           // Placeholder image for the thumbnail
-                      //           placeholder: AspectRatio(
-                      //             aspectRatio: 16 / 9,
-                      //             // child: Container(
-                      //             //   alignment: Alignment.center,
-                      //             //   // color: Colors.black,
-                      //             //   child: Image.asset(
-                      //             //     fit: BoxFit.fill,
-                      //             //   ),
-                      //             // ),
-                      //           ),
-                      //         ),
-                      //       )
-                      Row(
+                  attachment != ''
+                      ? Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            CustomText(file?.name ?? attachment),
-                            IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    bytesList.remove(file);
-                                    attachment = '';
-                                  });
-                                  log('bytlist ${bytesList.length}');
-                                  log('attachment ${attachment}');
-                                },
-                                icon: Icon(
-                                  Icons.close,
-                                  size: 10,
-                                ))
+                            SizedBox(
+                              height: 100,
+                              width: 250,
+                              child: Chewie(
+                                controller: ChewieController(
+                                  overlay: Container(
+                                    color: Colors.transparent,
+                                  ),
+                                  videoPlayerController:
+                                      VideoPlayerController.networkUrl(
+                                          Uri.parse(attachment)),
+                                  autoPlay: false,
+                                  looping: false,
+                                  allowFullScreen: true,
+                                  showOptions: false,
+                                  aspectRatio: 16 /
+                                      9, // Adjust this as per your video's aspect ratio
+                                  // Placeholder image for the thumbnail
+                                  placeholder: const AspectRatio(
+                                    aspectRatio: 16 / 9,
+                                    // child: Container(
+                                    //   alignment: Alignment.center,
+                                    //   // color: Colors.black,
+                                    //   child: Image.asset(
+                                    //     fit: BoxFit.fill,
+                                    //   ),
+                                    // ),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         )
-                      : _uploadDocumentWidget(rebuild),
+                      : bytesList.isNotEmpty
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                CustomText(file?.name ?? attachment),
+                                IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        bytesList.remove(file);
+                                        attachment = '';
+                                      });
+                                      log('bytlist ${bytesList.length}');
+                                      log('attachment ${attachment}');
+                                    },
+                                    icon: Icon(
+                                      Icons.close,
+                                      size: 10,
+                                    ))
+                              ],
+                            )
+                          : _uploadDocumentWidget(rebuild),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
