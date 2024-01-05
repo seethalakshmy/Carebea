@@ -173,6 +173,7 @@ class ServiceDetailsData {
     String? serviceFeeTransactionId,
     String? extraServiceFee,
     String? extraServiceFeeTransactionId,
+    String? transactionObjectId,
     num? tip,
     String? tipTransactionId,
     bool? isRated,
@@ -245,6 +246,7 @@ class ServiceDetailsData {
     _serviceFeeTransactionId = serviceFeeTransactionId;
     _extraServiceFee = extraServiceFee;
     _extraServiceFeeTransactionId = extraServiceFeeTransactionId;
+    _transactionObjectId = transactionObjectId;
     _tip = tip;
     _tipTransactionId = tipTransactionId;
     _isRated = isRated;
@@ -359,6 +361,7 @@ class ServiceDetailsData {
     _serviceFeeTransactionId = json['service_fee_transaction_id'];
     _extraServiceFee = json['extra_service_fee'];
     _extraServiceFeeTransactionId = json['extra_service_fee_transaction_id'];
+    _transactionObjectId = json['transaction_object_id'];
     _tip = json['tip'];
     _tipTransactionId = json['tip_transaction_id'];
     _isRated = json['is_rated'];
@@ -493,6 +496,7 @@ class ServiceDetailsData {
     String? serviceFeeTransactionId,
     String? extraServiceFee,
     String? extraServiceFeeTransactionId,
+    String? transactionObjectId,
     num? tip,
     String? tipTransactionId,
     bool? isRated,
@@ -576,6 +580,7 @@ class ServiceDetailsData {
         extraServiceFee: extraServiceFee ?? _extraServiceFee,
         extraServiceFeeTransactionId:
             extraServiceFeeTransactionId ?? _extraServiceFeeTransactionId,
+        transactionObjectId: transactionObjectId ?? _transactionObjectId,
         tip: tip ?? _tip,
         tipTransactionId: tipTransactionId ?? _tipTransactionId,
         isRated: isRated ?? _isRated,
@@ -594,6 +599,7 @@ class ServiceDetailsData {
         caregiverInfo: caregiverInfo ?? _caregiverInfo,
       );
   String? _extraServiceFeeTransactionId;
+  String? _transactionObjectId;
   num? _tip;
   String? _tipTransactionId;
   bool? _isRated;
@@ -665,6 +671,7 @@ class ServiceDetailsData {
   String? get serviceFeeTransactionId => _serviceFeeTransactionId;
   String? get extraServiceFee => _extraServiceFee;
   String? get extraServiceFeeTransactionId => _extraServiceFeeTransactionId;
+  String? get transationObjectId => _transactionObjectId;
   num? get tip => _tip;
   String? get tipTransactionId => _tipTransactionId;
   bool? get isRated => _isRated;
@@ -773,6 +780,7 @@ class ServiceDetailsData {
     map['service_fee_transaction_id'] = _serviceFeeTransactionId;
     map['extra_service_fee'] = _extraServiceFee;
     map['extra_service_fee_transaction_id'] = _extraServiceFeeTransactionId;
+    map['transaction_object_id'] = _transactionObjectId;
     map['tip'] = _tip;
     map['tip_transaction_id'] = _tipTransactionId;
     map['is_rated'] = _isRated;

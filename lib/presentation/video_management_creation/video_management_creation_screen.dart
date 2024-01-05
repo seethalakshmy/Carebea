@@ -261,6 +261,19 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
                                 ),
                               ),
                             ),
+                            IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    bytesList.remove(file);
+                                    attachment = '';
+                                  });
+                                  log('bytlist ${bytesList.length}');
+                                  log('attachment ${attachment}');
+                                },
+                                icon: const Icon(
+                                  Icons.close,
+                                  size: 10,
+                                ))
                           ],
                         )
                       : bytesList.isNotEmpty

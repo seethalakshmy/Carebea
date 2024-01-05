@@ -118,6 +118,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
     _fNameController.text = fName ?? '';
     _lNameController.text = lName ?? '';
     _adminCreationBloc.profileUrl = profilePic ?? '';
+    debugPrint("gavstasvagsvagsvasgavs ${_adminCreationBloc.profileUrl}");
 
     // _adminCreationBloc.add(AdminCreationEvent.viewAdmin(
     //     userId: adminUserID, adminId: adminId, searchTerm: ''));
@@ -309,9 +310,10 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                 ? AdminProfilePictureWidget(
                     adminCreationBloc: _adminCreationBloc,
                     size: Responsive.isWeb(context) ? 180 : 140,
+                    url: _adminCreationBloc.profileUrl,
                   )
                 : _profileImageView(
-                    context, state.viewResponse?.data?.profile ?? ""),
+                    context, _adminCreationBloc.profileUrl ?? ""),
         CustomSizedBox(height: DBL.six.val),
         state.isLoading
             ? CustomShimmerWidget.rectangular(
