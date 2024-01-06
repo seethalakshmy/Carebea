@@ -110,7 +110,7 @@ class TransactionView extends StatelessWidget {
                 text: AppString.paidFor.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.S,
+            size: ColumnSize.M,
             label: _columnsView(context,
                 text: AppString.amount.val, fontWeight: FontWeight.bold),
           ),
@@ -160,7 +160,7 @@ class TransactionView extends StatelessWidget {
               DataCell(_rowsView(context, text: item.transactionType)),
               DataCell(_rowsView(context, text: item.paidFor)),
               DataCell(_rowsView(context, text: item.amount)),
-              DataCell(_rowsView(context, text: '')),
+              DataCell(_rowsView(context, text: item.receiverName)),
 
               DataCell(_rowsView(
                 context,

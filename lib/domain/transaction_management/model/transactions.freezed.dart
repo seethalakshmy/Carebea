@@ -38,6 +38,8 @@ mixin _$Transactions {
   String? get receivedFrom => throw _privateConstructorUsedError;
   @JsonKey(name: "paid_for")
   String? get paidFor => throw _privateConstructorUsedError;
+  @JsonKey(name: "receiverName")
+  String? get receiverName => throw _privateConstructorUsedError;
   String? get amount => throw _privateConstructorUsedError;
   String? get cardNumber => throw _privateConstructorUsedError;
   Name? get name => throw _privateConstructorUsedError;
@@ -67,6 +69,7 @@ abstract class $TransactionsCopyWith<$Res> {
       @JsonKey(name: "paid_to") String? paidTo,
       @JsonKey(name: "recieved_from") String? receivedFrom,
       @JsonKey(name: "paid_for") String? paidFor,
+      @JsonKey(name: "receiverName") String? receiverName,
       String? amount,
       String? cardNumber,
       Name? name,
@@ -100,6 +103,7 @@ class _$TransactionsCopyWithImpl<$Res, $Val extends Transactions>
     Object? paidTo = freezed,
     Object? receivedFrom = freezed,
     Object? paidFor = freezed,
+    Object? receiverName = freezed,
     Object? amount = freezed,
     Object? cardNumber = freezed,
     Object? name = freezed,
@@ -143,6 +147,10 @@ class _$TransactionsCopyWithImpl<$Res, $Val extends Transactions>
       paidFor: freezed == paidFor
           ? _value.paidFor
           : paidFor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      receiverName: freezed == receiverName
+          ? _value.receiverName
+          : receiverName // ignore: cast_nullable_to_non_nullable
               as String?,
       amount: freezed == amount
           ? _value.amount
@@ -214,6 +222,7 @@ abstract class _$$_TransactionsCopyWith<$Res>
       @JsonKey(name: "paid_to") String? paidTo,
       @JsonKey(name: "recieved_from") String? receivedFrom,
       @JsonKey(name: "paid_for") String? paidFor,
+      @JsonKey(name: "receiverName") String? receiverName,
       String? amount,
       String? cardNumber,
       Name? name,
@@ -247,6 +256,7 @@ class __$$_TransactionsCopyWithImpl<$Res>
     Object? paidTo = freezed,
     Object? receivedFrom = freezed,
     Object? paidFor = freezed,
+    Object? receiverName = freezed,
     Object? amount = freezed,
     Object? cardNumber = freezed,
     Object? name = freezed,
@@ -291,6 +301,10 @@ class __$$_TransactionsCopyWithImpl<$Res>
           ? _value.paidFor
           : paidFor // ignore: cast_nullable_to_non_nullable
               as String?,
+      receiverName: freezed == receiverName
+          ? _value.receiverName
+          : receiverName // ignore: cast_nullable_to_non_nullable
+              as String?,
       amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
@@ -333,6 +347,7 @@ class _$_Transactions implements _Transactions {
       @JsonKey(name: "paid_to") this.paidTo,
       @JsonKey(name: "recieved_from") this.receivedFrom,
       @JsonKey(name: "paid_for") this.paidFor,
+      @JsonKey(name: "receiverName") this.receiverName,
       this.amount,
       this.cardNumber,
       this.name,
@@ -371,6 +386,9 @@ class _$_Transactions implements _Transactions {
   @JsonKey(name: "paid_for")
   final String? paidFor;
   @override
+  @JsonKey(name: "receiverName")
+  final String? receiverName;
+  @override
   final String? amount;
   @override
   final String? cardNumber;
@@ -385,7 +403,7 @@ class _$_Transactions implements _Transactions {
 
   @override
   String toString() {
-    return 'Transactions(serviceId: $serviceId, serviceIdPublic: $serviceIdPublic, transactionId: $transactionId, transactionIdPublic: $transactionIdPublic, transactionType: $transactionType, dateTime: $dateTime, paidTo: $paidTo, receivedFrom: $receivedFrom, paidFor: $paidFor, amount: $amount, cardNumber: $cardNumber, name: $name, user: $user, status: $status, id: $id)';
+    return 'Transactions(serviceId: $serviceId, serviceIdPublic: $serviceIdPublic, transactionId: $transactionId, transactionIdPublic: $transactionIdPublic, transactionType: $transactionType, dateTime: $dateTime, paidTo: $paidTo, receivedFrom: $receivedFrom, paidFor: $paidFor, receiverName: $receiverName, amount: $amount, cardNumber: $cardNumber, name: $name, user: $user, status: $status, id: $id)';
   }
 
   @override
@@ -409,6 +427,8 @@ class _$_Transactions implements _Transactions {
             (identical(other.receivedFrom, receivedFrom) ||
                 other.receivedFrom == receivedFrom) &&
             (identical(other.paidFor, paidFor) || other.paidFor == paidFor) &&
+            (identical(other.receiverName, receiverName) ||
+                other.receiverName == receiverName) &&
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.cardNumber, cardNumber) ||
                 other.cardNumber == cardNumber) &&
@@ -431,6 +451,7 @@ class _$_Transactions implements _Transactions {
       paidTo,
       receivedFrom,
       paidFor,
+      receiverName,
       amount,
       cardNumber,
       name,
@@ -463,6 +484,7 @@ abstract class _Transactions implements Transactions {
       @JsonKey(name: "paid_to") final String? paidTo,
       @JsonKey(name: "recieved_from") final String? receivedFrom,
       @JsonKey(name: "paid_for") final String? paidFor,
+      @JsonKey(name: "receiverName") final String? receiverName,
       final String? amount,
       final String? cardNumber,
       final Name? name,
@@ -500,6 +522,9 @@ abstract class _Transactions implements Transactions {
   @override
   @JsonKey(name: "paid_for")
   String? get paidFor;
+  @override
+  @JsonKey(name: "receiverName")
+  String? get receiverName;
   @override
   String? get amount;
   @override

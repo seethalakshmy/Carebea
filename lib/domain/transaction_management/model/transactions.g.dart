@@ -17,6 +17,7 @@ _$_Transactions _$$_TransactionsFromJson(Map<String, dynamic> json) =>
       paidTo: json['paid_to'] as String?,
       receivedFrom: json['recieved_from'] as String?,
       paidFor: json['paid_for'] as String?,
+      receiverName: json['receiverName'] as String?,
       amount: json['amount'] as String?,
       cardNumber: json['cardNumber'] as String?,
       name: json['name'] == null
@@ -47,6 +48,7 @@ Map<String, dynamic> _$$_TransactionsToJson(_$_Transactions instance) {
   writeNotNull('paid_to', instance.paidTo);
   writeNotNull('recieved_from', instance.receivedFrom);
   writeNotNull('paid_for', instance.paidFor);
+  writeNotNull('receiverName', instance.receiverName);
   writeNotNull('amount', instance.amount);
   writeNotNull('cardNumber', instance.cardNumber);
   writeNotNull('name', instance.name?.toJson());
