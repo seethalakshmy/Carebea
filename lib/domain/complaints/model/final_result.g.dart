@@ -10,6 +10,7 @@ _$_FinalResult _$$_FinalResultFromJson(Map<String, dynamic> json) =>
     _$_FinalResult(
       id: json['id'] as String?,
       complaintId: json['complaint_id'] as String?,
+      userName: json['user_name'] as String?,
       userId: json['user_id'] as String?,
       clientName: json['client_name'] == null
           ? null
@@ -36,6 +37,7 @@ Map<String, dynamic> _$$_FinalResultToJson(_$_FinalResult instance) {
 
   writeNotNull('id', instance.id);
   writeNotNull('complaint_id', instance.complaintId);
+  writeNotNull('user_name', instance.userName);
   writeNotNull('user_id', instance.userId);
   writeNotNull('client_name', instance.clientName?.toJson());
   writeNotNull('caregiver_name', instance.caregiverName?.toJson());

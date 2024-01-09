@@ -1,28 +1,28 @@
 import 'dart:convert';
 
-import 'package:admin_580_tech/application/bloc/role_creation/role_creation_bloc.dart';
-import 'package:admin_580_tech/core/custom_snackbar.dart';
-import 'package:admin_580_tech/core/enum.dart';
-import 'package:admin_580_tech/core/text_styles.dart';
-import 'package:admin_580_tech/domain/role_creation/model/module_response.dart';
-import 'package:admin_580_tech/infrastructure/role_creation/role_creation_repository.dart';
-import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
-import 'package:admin_580_tech/presentation/role_creation/widgets/custom_check_label.dart';
-import 'package:admin_580_tech/presentation/widget/custom_button.dart';
-import 'package:admin_580_tech/presentation/widget/custom_container.dart';
-import 'package:admin_580_tech/presentation/widget/custom_icon.dart';
-import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
-import 'package:admin_580_tech/presentation/widget/custom_text.dart';
-import 'package:admin_580_tech/presentation/widget/custom_text_field.dart';
-import 'package:admin_580_tech/presentation/widget/header_view.dart';
-import 'package:admin_580_tech/presentation/widget/loader_view.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../application/bloc/role_creation/role_creation_bloc.dart';
 import '../../core/custom_debugger.dart';
+import '../../core/custom_snackbar.dart';
+import '../../core/enum.dart';
+import '../../core/text_styles.dart';
+import '../../domain/role_creation/model/module_response.dart';
+import '../../infrastructure/role_creation/role_creation_repository.dart';
+import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../side_menu/side_menu_page.dart';
+import '../widget/custom_button.dart';
+import '../widget/custom_container.dart';
+import '../widget/custom_icon.dart';
+import '../widget/custom_sizedbox.dart';
+import '../widget/custom_text.dart';
+import '../widget/custom_text_field.dart';
+import '../widget/header_view.dart';
+import '../widget/loader_view.dart';
+import 'widgets/custom_check_label.dart';
 
 @RoutePage()
 class RoleCreationPage extends StatefulWidget {
