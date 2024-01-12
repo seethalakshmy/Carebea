@@ -313,19 +313,17 @@ class _ServiceRequestManagementPageState
                 searchTerm: _searchController.text));
       },
       onChanged: (String value) {
-        if (_searchController.text == '') {
-          _serviceRequestBloc.add(
-              ServiceRequestManagementEvent.getServiceRequests(
-                  statusFilterId: _serviceRequestBloc.statusFilterId == 0
-                      ? null
-                      : _serviceRequestBloc.statusFilterId,
-                  fromDate: _serviceRequestBloc.selectedFromDate,
-                  toDate: _serviceRequestBloc.selectedToDate,
-                  context: context,
-                  page: _page,
-                  limit: _limit,
-                  searchTerm: _searchController.text));
-        }
+        _serviceRequestBloc.add(
+            ServiceRequestManagementEvent.getServiceRequests(
+                statusFilterId: _serviceRequestBloc.statusFilterId == 0
+                    ? null
+                    : _serviceRequestBloc.statusFilterId,
+                fromDate: _serviceRequestBloc.selectedFromDate,
+                toDate: _serviceRequestBloc.selectedToDate,
+                context: context,
+                page: _page,
+                limit: _limit,
+                searchTerm: _searchController.text));
       },
       width: DBL.twoTen.val,
       height: DBL.fortySeven.val,

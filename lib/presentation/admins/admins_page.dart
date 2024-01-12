@@ -504,7 +504,9 @@ class _AdminsPageState extends State<AdminsPage> {
           sharedPrefUtil.getEditAdmin || sharedPrefUtil.getViewAdmin
               ? const DataColumn2(
                   size: ColumnSize.S,
-                  label: CustomText(""),
+                  label: CustomText(
+                    "",
+                  ),
                 )
               : emptyColumn(),
         ],

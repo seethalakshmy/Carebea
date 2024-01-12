@@ -439,6 +439,16 @@ class _MenuBarState extends State<SideMenuPage> {
                       items: mainData,
                       isOpened: value,
                     ),
+                    // Link(
+                    //   uri: Uri.parse("/admin/main/role-management"),
+                    //   builder: (BuildContext context,
+                    //           Future<void> Function()? followLink) =>
+                    //       _menuList(
+                    //     tabsRouter: tabsRouter,
+                    //     items: mainData,
+                    //     isOpened: value,
+                    //   ),
+                    // ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 20, horizontal: 20),
@@ -473,50 +483,104 @@ class _MenuBarState extends State<SideMenuPage> {
           builder: (isHover) {
             Color color =
                 isHover ? AppColor.primaryColor.val : AppColor.menuDisable.val;
-            return ListTile(
-              leading: isHover || isSelected(items, index, tabsRouter)
-                  ? Padding(
-                      padding: EdgeInsets.symmetric(horizontal: DBL.five.val),
-                      child: CustomContainer(
-                        width: DBL.four.val,
-                        color: AppColor.primaryColor.val,
-                        height: DBL.twentyFive.val,
-                      ),
-                    )
-                  : CustomSizedBox(
-                      width: DBL.ten.val,
-                    ),
-              title: isOpened || isSelected(items, index, tabsRouter)
-                  ? buildText(items, index, tabsRouter, color)
-                  : null,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-              mouseCursor: SystemMouseCursors.click,
-              horizontalTitleGap: DBL.zero.val,
-              onTap: () {
-                if (items.keys.elementAt(index) == AppString.logout.val) {
-                  showDialog<void>(
-                    context: context,
-                    builder: (BuildContext dialogContext) {
-                      return CommonAlertWidget(
-                        heading: AppString.logout.val,
-                        label: AppString.logoutMsg.val,
-                        onTapYes: () {
-                          SharedPreffUtil().logoutClear();
-                          context.router.replace(const LoginRoute());
+            return Link(
+              uri: Uri.parse(items.keys.elementAt(index) ==
+                      AppString.dashboard.val
+                  ? "/admin/main/dashboard"
+                  : items.keys.elementAt(index) == AppString.roleManagement.val
+                      ? "/admin/main/role-management"
+                      : items.keys.elementAt(index) ==
+                              AppString.adminManagement.val
+                          ? "/admin/main/admin-management"
+                          : items.keys.elementAt(index) ==
+                                  AppString.careAmbassador.val
+                              ? "/admin/main/care-ambassador"
+                              : items.keys.elementAt(index) ==
+                                      AppString.userManagement.val
+                                  ? "/admin/main/user-management"
+                                  : items.keys.elementAt(index) ==
+                                          AppString.transactionManagement.val
+                                      ? "/admin/main/transaction-management"
+                                      : items.keys.elementAt(index) ==
+                                              AppString
+                                                  .serviceRequestManagement.val
+                                          ? "/admin/main/service-request"
+                                          : items.keys.elementAt(index) ==
+                                                  AppString.clientAnalytics.val
+                                              ? "/admin/main/client-analytics"
+                                              : items.keys.elementAt(index) ==
+                                                      AppString
+                                                          .careAmbassadorAnalytics
+                                                          .val
+                                                  ? "/admin/main/care-Ambassador-analytics"
+                                                  : items.keys.elementAt(index) ==
+                                                          AppString
+                                                              .subscription.val
+                                                      ? "/admin/main/subscription"
+                                                      : items.keys.elementAt(index) ==
+                                                              AppString
+                                                                  .upcomingBirthdays
+                                                                  .val
+                                                          ? "/admin/main/upcoming_birthdays"
+                                                          : items.keys.elementAt(index) ==
+                                                                  AppString
+                                                                      .videoManagement
+                                                                      .val
+                                                              ? "/admin/main/video-management"
+                                                              : items.keys.elementAt(index) == AppString.supportTickets.val
+                                                                  ? "/admin/main/help-support"
+                                                                  : items.keys.elementAt(index) == AppString.faq.val
+                                                                      ? "/admin/main/faq"
+                                                                      : "/admin/main/page_list"),
+              builder:
+                  (BuildContext context, Future<void> Function()? followLink) {
+                return ListTile(
+                  leading: isHover || isSelected(items, index, tabsRouter)
+                      ? Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: DBL.five.val),
+                          child: CustomContainer(
+                            width: DBL.four.val,
+                            color: AppColor.primaryColor.val,
+                            height: DBL.twentyFive.val,
+                          ),
+                        )
+                      : CustomSizedBox(
+                          width: DBL.ten.val,
+                        ),
+                  title: isOpened || isSelected(items, index, tabsRouter)
+                      ? buildText(items, index, tabsRouter, color)
+                      : null,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+                  mouseCursor: SystemMouseCursors.click,
+                  horizontalTitleGap: DBL.zero.val,
+                  onTap: () {
+                    if (items.keys.elementAt(index) == AppString.logout.val) {
+                      showDialog<void>(
+                        context: context,
+                        builder: (BuildContext dialogContext) {
+                          return CommonAlertWidget(
+                            heading: AppString.logout.val,
+                            label: AppString.logoutMsg.val,
+                            onTapYes: () {
+                              SharedPreffUtil().logoutClear();
+                              context.router.replace(const LoginRoute());
+                            },
+                          );
                         },
                       );
-                    },
-                  );
-                } else {
-                  isOpen.value = true;
-                  tabsRouter.setActiveIndex(
-                      getRouteIndex(items.keys.elementAt(index) ?? "0"));
-                  HiveUtils.set(AppString.selectedMenuIndex.val,
-                      getRouteIndex(items.keys.elementAt(index) ?? "0"));
-                  _scaffoldDrawerKey.currentState?.closeDrawer();
-                  SharedPreffUtil().setPage = 0;
-                  SharedPreffUtil().setTab = 0;
-                }
+                    } else {
+                      isOpen.value = true;
+                      tabsRouter.setActiveIndex(
+                          getRouteIndex(items.keys.elementAt(index) ?? "0"));
+                      HiveUtils.set(AppString.selectedMenuIndex.val,
+                          getRouteIndex(items.keys.elementAt(index) ?? "0"));
+                      _scaffoldDrawerKey.currentState?.closeDrawer();
+                      SharedPreffUtil().setPage = 0;
+                      SharedPreffUtil().setTab = 0;
+                    }
+                  },
+                );
               },
             );
           },
@@ -525,9 +589,9 @@ class _MenuBarState extends State<SideMenuPage> {
     );
   }
 
-  CustomText buildText(Map<String?, String> items, int index,
-      TabsRouter tabsRouter, Color color) {
-    return CustomText(
+  Text buildText(Map<String?, String> items, int index, TabsRouter tabsRouter,
+      Color color) {
+    return Text(
       items.keys.elementAt(index)!.capitalize(),
       style: TS().gRoboto(
           color: isSelected(items, index, tabsRouter)

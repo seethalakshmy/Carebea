@@ -195,11 +195,13 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CustomText(AppString.role.val,
-                  style: TS().gRoboto(
-                      fontWeight: FW.w400.val,
-                      color: AppColor.label8.val,
-                      fontSize: FS.font16.val)),
+              CustomText(
+                AppString.role.val,
+                style: TS().gRoboto(
+                    fontWeight: FW.w400.val,
+                    color: AppColor.label8.val,
+                    fontSize: FS.font16.val),
+              ),
               CustomPadding.only(
                 left: DBL.five.val,
                 child: CustomText(
