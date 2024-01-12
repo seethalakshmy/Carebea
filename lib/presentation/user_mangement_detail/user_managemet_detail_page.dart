@@ -81,6 +81,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
       BuildContext context, UserManagementDetailState state) {
     CustomLog.log('width :${MediaQuery.of(context).size.width}');
     UserDetailResponse? response = state.response;
+    Caregiver? caregiver;
     print('testing${state.response?.data?.name?.firstName}');
     print('testing${userId}');
     print(state.response?.data?.profilePic);

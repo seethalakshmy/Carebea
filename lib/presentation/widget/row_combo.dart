@@ -66,45 +66,45 @@ class RowColonCombo extends StatelessWidget {
     this.needComma,
   }) : width = DBL.twoHundred.val;
 
-  RowColonCombo.threeEighty(
-      {super.key,
-      this.list,
-      this.petList,
-      required this.value,
-      required this.label,
-      this.color,
-      this.valueColor,
-      this.onValueTap,
-      this.fontSize,
-      this.fontWeight,
-      this.customWidthLg1,
-      this.needUnderLine = false,
-      this.hasColon = true,
-      this.tierOneServiceList,
-      this.valueFlex,
-      this.tierTwoServiceList,
-      this.needComma})
-      : width = DBL.threeEighty.val;
+  RowColonCombo.threeEighty({
+    super.key,
+    this.list,
+    this.petList,
+    required this.value,
+    required this.label,
+    this.color,
+    this.valueColor,
+    this.onValueTap,
+    this.fontSize,
+    this.fontWeight,
+    this.customWidthLg1,
+    this.needUnderLine = false,
+    this.hasColon = true,
+    this.tierOneServiceList,
+    this.valueFlex,
+    this.tierTwoServiceList,
+    this.needComma,
+  }) : width = DBL.threeEighty.val;
 
-  RowColonCombo.threeSeventy(
-      {super.key,
-      this.list,
-      this.petList,
-      required this.value,
-      required this.label,
-      this.color,
-      this.valueColor,
-      this.onValueTap,
-      this.fontSize,
-      this.fontWeight,
-      this.customWidthLg1,
-      this.needUnderLine = false,
-      this.hasColon = true,
-      this.tierOneServiceList,
-      this.valueFlex,
-      this.tierTwoServiceList,
-      this.needComma})
-      : width = DBL.threeSeventeen.val;
+  RowColonCombo.threeSeventy({
+    super.key,
+    this.list,
+    this.petList,
+    required this.value,
+    required this.label,
+    this.color,
+    this.valueColor,
+    this.onValueTap,
+    this.fontSize,
+    this.fontWeight,
+    this.customWidthLg1,
+    this.needUnderLine = false,
+    this.hasColon = true,
+    this.tierOneServiceList,
+    this.valueFlex,
+    this.tierTwoServiceList,
+    this.needComma,
+  }) : width = DBL.threeSeventeen.val;
 
   @override
   Widget build(BuildContext context) {

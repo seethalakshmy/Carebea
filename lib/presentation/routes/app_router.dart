@@ -172,6 +172,16 @@ class AppRouter extends $AppRouter {
           page: RouteCreationRoute.page,
           maintainState: false,
           initial: false),
+      AutoRoute(
+          path: "upcoming_birthdays",
+          page: UpcomingBirthdayRoute.page,
+          maintainState: false,
+          initial: false),
+      AutoRoute(
+          path: "send_gift",
+          page: SendGiftRoute.page,
+          maintainState: false,
+          initial: false),
     ]),
   ];
 }

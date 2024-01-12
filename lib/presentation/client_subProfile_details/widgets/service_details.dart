@@ -15,8 +15,10 @@ class ServiceDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText(AppString.basicServices.val,
-              style: TextStyle(color: AppColor.primaryColor.val)),
+          SelectionArea(
+            child: CustomText(AppString.basicServices.val,
+                style: TextStyle(color: AppColor.primaryColor.val)),
+          ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Wrap(
@@ -24,9 +26,11 @@ class ServiceDetails extends StatelessWidget {
               state.response?.data?.services?.tier1?.length ?? 0,
               (index) => Wrap(
                 children: [
-                  CustomText(
-                    state.response?.data?.services?.tier1?[index].name ?? '',
-                    style: const TextStyle(fontSize: 16),
+                  SelectionArea(
+                    child: CustomText(
+                      state.response?.data?.services?.tier1?[index].name ?? '',
+                      style: const TextStyle(fontSize: 16),
+                    ),
                   ),
                   index <
                           (state.response?.data?.services?.tier1?.length ?? 1) -

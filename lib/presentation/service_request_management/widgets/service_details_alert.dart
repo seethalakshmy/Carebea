@@ -41,6 +41,8 @@ class ServiceDetailsAlert extends StatelessWidget {
   final String? canceledBy;
   final TextEditingController controller = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final TransactionManagementBloc transactionManagementBloc =
+      TransactionManagementBloc(TransactionsRepository());
 
   @override
   Widget build(BuildContext context) {
@@ -777,31 +779,14 @@ class ServiceDetailsAlert extends StatelessWidget {
                       '\$ ${Utility.formatAmount(double.tryParse(service.extraServiceFee.toString() ?? "0.0") ?? 0.0)}')
               : const CustomSizedBox(),
           InkWell(
-            // onTap: () {
-            //   showDialog(
-            //     context: context,
-            //     builder: (BuildContext context) {
-            //       return CustomAlertDialogWidget(
-            //           heading: AppString.transactionManagement.val,
-            //           child: Container()
-            //           // _transactionBloc.add(TransactionManagementEvent.getTransactionDetails(
-            //           //     transactionId: item.transactionId ?? "",
-            //           //     serviceId: item.serviceId ?? ''));
-            //           //   showDialog(
-            //           //   context: context,
-            //           //   builder: (BuildContext context) {
-            //           //     return CustomAlertDialogWidget(
-            //           //       heading: AppString.transactionManagement.val,
-            //           //       child: TransactionDetailsAlert(transactionBloc: _transactionBloc),
-            //           //     );
-            //           //   },
-            //           // );,
-            //           );
-            //     },
-            //   );
-            // },
+            onTap: () {
+              _transactionDetails(
+                  serviceId: service.serviceId ?? '',
+                  transactionId: service.transationObjectId ?? "",
+                  context: context);
+            },
             child: _textAndSubText(
-                // needUnderLine: true,
+                needUnderLine: true,
                 context: context,
                 height: DBL.eight.val,
                 text: AppString.transactionId.val,
@@ -809,6 +794,26 @@ class ServiceDetailsAlert extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  _transactionDetails(
+      {required String serviceId,
+      required String transactionId,
+      required BuildContext context}) {
+    print('asas $serviceId');
+    transactionManagementBloc.add(
+        TransactionManagementEvent.getTransactionDetails(
+            transactionId: transactionId, serviceId: serviceId));
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CustomAlertDialogWidget(
+          heading: AppString.transactionManagement.val,
+          child: TransactionDetailsAlert(
+              transactionBloc: transactionManagementBloc),
+        );
+      },
     );
   }
 

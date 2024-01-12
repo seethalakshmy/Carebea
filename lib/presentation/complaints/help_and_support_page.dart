@@ -446,9 +446,10 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
               DataCell(_rowsView(
                 text: item.complaintId.toString(),
               )),
-              DataCell(_rowsView(
-                  text:
-                      "${item.clientName?.firstName} ${item.clientName?.lastName}")),
+              DataCell(_rowsView(text: '${item.userName}'
+                  // text:
+                  //     "${item.clientName?.firstName} ${item.clientName?.lastName}"
+                  )),
               DataCell(_rowsView(text: item.category ?? "")),
               DataCell(_rowsView(text: item.title)),
               DataCell(_rowsView(

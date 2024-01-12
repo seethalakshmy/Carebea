@@ -9,7 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:admin_580_tech/domain/faq/models/faq_list_response_model.dart'
-    as _i40;
+    as _i42;
 import 'package:admin_580_tech/presentation/admin_creation/admin_creation_page.dart'
     as _i2;
 import 'package:admin_580_tech/presentation/admins/admins_page.dart' as _i1;
@@ -59,6 +59,7 @@ import 'package:admin_580_tech/presentation/reset_password/reset_password_page.d
 import 'package:admin_580_tech/presentation/role_creation/role_creation_page.dart'
     as _i27;
 import 'package:admin_580_tech/presentation/roles/role_page.dart' as _i26;
+import 'package:admin_580_tech/presentation/send_gift/send_gift.dart' as _i39;
 import 'package:admin_580_tech/presentation/service_request_management/service_request_management_page.dart'
     as _i28;
 import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart'
@@ -68,6 +69,8 @@ import 'package:admin_580_tech/presentation/subscription/subscription_view.dart'
     as _i31;
 import 'package:admin_580_tech/presentation/transaction_management/transaction_management_page.dart'
     as _i32;
+import 'package:admin_580_tech/presentation/upcoming_birthdays/upcoming_birthdays.dart'
+    as _i38;
 import 'package:admin_580_tech/presentation/user_management/user_management_page.dart'
     as _i33;
 import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart'
@@ -78,16 +81,16 @@ import 'package:admin_580_tech/presentation/video_management/video_management_vi
     as _i36;
 import 'package:admin_580_tech/presentation/video_management_creation/video_management_creation_screen.dart'
     as _i37;
-import 'package:auto_route/auto_route.dart' as _i38;
-import 'package:flutter/material.dart' as _i39;
+import 'package:auto_route/auto_route.dart' as _i40;
+import 'package:flutter/material.dart' as _i41;
 
-abstract class $AppRouter extends _i38.RootStackRouter {
+abstract class $AppRouter extends _i40.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i38.PageFactory> pagesMap = {
+  final Map<String, _i40.PageFactory> pagesMap = {
     AdminsRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i1.AdminsPage(),
       );
@@ -103,7 +106,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
                 lName: queryParams.optString('lName'),
                 profilePic: queryParams.optString('profilePic'),
               ));
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i2.AdminCreationPage(
           key: args.key,
@@ -120,7 +123,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<CareGiversRouteArgs>(
           orElse: () => CareGiversRouteArgs(tab: queryParams.optInt('tab')));
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i3.CareGiversPage(
           key: args.key,
@@ -129,7 +132,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
       );
     },
     CaregiverCreationRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i4.CaregiverCreationPage(),
       );
@@ -139,7 +142,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
       final args = routeData.argsAs<CareGiverDetailRouteArgs>(
           orElse: () =>
               CareGiverDetailRouteArgs(id: queryParams.optString('id')));
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i5.CareGiverDetailPage(
           key: args.key,
@@ -152,7 +155,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
       final args = routeData.argsAs<CareGiverProfileRouteArgs>(
           orElse: () =>
               CareGiverProfileRouteArgs(id: queryParams.optString('id')));
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i6.CareGiverProfilePage(
           key: args.key,
@@ -168,7 +171,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
                 isOnboardingCompleted:
                     queryParams.optBool('isOnboardingCompleted'),
               ));
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i7.CaregiverVerificationPage(
           key: args.key,
@@ -178,19 +181,19 @@ abstract class $AppRouter extends _i38.RootStackRouter {
       );
     },
     CareAmbassadorAnalysisRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i8.CareAmbassadorAnalysisPage(),
       );
     },
     CareAmbassadorRegistrationRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i9.CareAmbassadorRegistrationPage(),
       );
     },
     ClientAnalyticsRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i10.ClientAnalyticsPage(),
       );
@@ -200,7 +203,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
       final args = routeData.argsAs<ClientSubProfileDetailsRouteArgs>(
           orElse: () => ClientSubProfileDetailsRouteArgs(
               id: queryParams.optString('id')));
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i11.ClientSubProfileDetailsPage(
           key: args.key,
@@ -209,7 +212,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
       );
     },
     HelpAndSupportRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i12.HelpAndSupportPage(),
       );
@@ -219,7 +222,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
       final args = routeData.argsAs<SupportTicketsDetailRouteArgs>(
           orElse: () => SupportTicketsDetailRouteArgs(
               complaintId: queryParams.optString('complaint_id')));
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i13.SupportTicketsDetailPage(
           key: args.key,
@@ -228,13 +231,13 @@ abstract class $AppRouter extends _i38.RootStackRouter {
       );
     },
     DashboardRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i14.DashboardPage(),
       );
     },
     FaqRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i15.FaqPage(),
       );
@@ -249,7 +252,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
                 item: queryParams.get('item'),
                 forWhom: queryParams.optInt('forWhom'),
               ));
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i16.FaqCreationPage(
           key: args.key,
@@ -262,37 +265,37 @@ abstract class $AppRouter extends _i38.RootStackRouter {
       );
     },
     ForgotPasswordRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i17.ForgotPasswordPage(),
       );
     },
     LoginRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i18.LoginPage(),
       );
     },
     MobileOtpVerificationRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i19.MobileOtpVerificationPage(),
       );
     },
     EmailOtpVerificationRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i20.EmailOtpVerificationPage(),
       );
     },
     OnboardingRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i21.OnboardingPage(),
       );
     },
     RouteListRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i22.PageListPage(),
       );
@@ -308,7 +311,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
                 isEdit: queryParams.optBool('isEdit'),
                 forWhom: queryParams.optNum('forWhom'),
               ));
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i23.PageCreationPage(
           key: args.key,
@@ -322,19 +325,19 @@ abstract class $AppRouter extends _i38.RootStackRouter {
       );
     },
     RegionAnalyticsRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i24.RegionAnalyticsPage(),
       );
     },
     ResetPasswordRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i25.ResetPasswordPage(),
       );
     },
     RolesRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i26.RolesPage(),
       );
@@ -347,7 +350,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
                 isEdit: queryParams.optString('edit'),
                 roleId: queryParams.optString('role_id'),
               ));
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i27.RoleCreationPage(
           key: args.key,
@@ -358,37 +361,37 @@ abstract class $AppRouter extends _i38.RootStackRouter {
       );
     },
     ServiceRequestManagementRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i28.ServiceRequestManagementPage(),
       );
     },
     SideMenuRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i29.SideMenuPage(),
       );
     },
     SignUpRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i30.SignUpPage(),
       );
     },
     SubscriptionRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i31.SubscriptionPage(),
       );
     },
     TransactionManagementRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i32.TransactionManagementPage(),
       );
     },
     UserManagementRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i33.UserManagementPage(),
       );
@@ -398,7 +401,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
       final args = routeData.argsAs<UserManagementDetailRouteArgs>(
           orElse: () =>
               UserManagementDetailRouteArgs(id: queryParams.optString('id')));
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i34.UserManagementDetailPage(
           key: args.key,
@@ -407,13 +410,13 @@ abstract class $AppRouter extends _i38.RootStackRouter {
       );
     },
     VerifyEmailRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i35.VerifyEmailPage(),
       );
     },
     VideoManagementRoute.name: (routeData) {
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i36.VideoManagementPage(),
       );
@@ -428,7 +431,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
                 attachment: queryParams.optString('attachment'),
                 id: queryParams.optString('id'),
               ));
-      return _i38.AutoRoutePage<dynamic>(
+      return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i37.VideoUploadPage(
           key: args.key,
@@ -440,13 +443,31 @@ abstract class $AppRouter extends _i38.RootStackRouter {
         ),
       );
     },
+    UpcomingBirthdayRoute.name: (routeData) {
+      return _i40.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i38.UpcomingBirthdayPage(),
+      );
+    },
+    SendGiftRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<SendGiftRouteArgs>(
+          orElse: () => SendGiftRouteArgs(userId: queryParams.optString('id')));
+      return _i40.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i39.SendGiftPage(
+          key: args.key,
+          userId: args.userId,
+        ),
+      );
+    },
   };
 }
 
 /// generated route for
 /// [_i1.AdminsPage]
-class AdminsRoute extends _i38.PageRouteInfo<void> {
-  const AdminsRoute({List<_i38.PageRouteInfo>? children})
+class AdminsRoute extends _i40.PageRouteInfo<void> {
+  const AdminsRoute({List<_i40.PageRouteInfo>? children})
       : super(
           AdminsRoute.name,
           initialChildren: children,
@@ -454,21 +475,21 @@ class AdminsRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'AdminsRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i2.AdminCreationPage]
-class AdminCreationRoute extends _i38.PageRouteInfo<AdminCreationRouteArgs> {
+class AdminCreationRoute extends _i40.PageRouteInfo<AdminCreationRouteArgs> {
   AdminCreationRoute({
-    _i39.Key? key,
+    _i41.Key? key,
     String? isView,
     String? isEdit,
     String? id,
     String? fName,
     String? lName,
     String? profilePic,
-    List<_i38.PageRouteInfo>? children,
+    List<_i40.PageRouteInfo>? children,
   }) : super(
           AdminCreationRoute.name,
           args: AdminCreationRouteArgs(
@@ -493,8 +514,8 @@ class AdminCreationRoute extends _i38.PageRouteInfo<AdminCreationRouteArgs> {
 
   static const String name = 'AdminCreationRoute';
 
-  static const _i38.PageInfo<AdminCreationRouteArgs> page =
-      _i38.PageInfo<AdminCreationRouteArgs>(name);
+  static const _i40.PageInfo<AdminCreationRouteArgs> page =
+      _i40.PageInfo<AdminCreationRouteArgs>(name);
 }
 
 class AdminCreationRouteArgs {
@@ -508,7 +529,7 @@ class AdminCreationRouteArgs {
     this.profilePic,
   });
 
-  final _i39.Key? key;
+  final _i41.Key? key;
 
   final String? isView;
 
@@ -530,11 +551,11 @@ class AdminCreationRouteArgs {
 
 /// generated route for
 /// [_i3.CareGiversPage]
-class CareGiversRoute extends _i38.PageRouteInfo<CareGiversRouteArgs> {
+class CareGiversRoute extends _i40.PageRouteInfo<CareGiversRouteArgs> {
   CareGiversRoute({
-    _i39.Key? key,
+    _i41.Key? key,
     int? tab,
-    List<_i38.PageRouteInfo>? children,
+    List<_i40.PageRouteInfo>? children,
   }) : super(
           CareGiversRoute.name,
           args: CareGiversRouteArgs(
@@ -547,8 +568,8 @@ class CareGiversRoute extends _i38.PageRouteInfo<CareGiversRouteArgs> {
 
   static const String name = 'CareGiversRoute';
 
-  static const _i38.PageInfo<CareGiversRouteArgs> page =
-      _i38.PageInfo<CareGiversRouteArgs>(name);
+  static const _i40.PageInfo<CareGiversRouteArgs> page =
+      _i40.PageInfo<CareGiversRouteArgs>(name);
 }
 
 class CareGiversRouteArgs {
@@ -557,7 +578,7 @@ class CareGiversRouteArgs {
     this.tab,
   });
 
-  final _i39.Key? key;
+  final _i41.Key? key;
 
   final int? tab;
 
@@ -569,8 +590,8 @@ class CareGiversRouteArgs {
 
 /// generated route for
 /// [_i4.CaregiverCreationPage]
-class CaregiverCreationRoute extends _i38.PageRouteInfo<void> {
-  const CaregiverCreationRoute({List<_i38.PageRouteInfo>? children})
+class CaregiverCreationRoute extends _i40.PageRouteInfo<void> {
+  const CaregiverCreationRoute({List<_i40.PageRouteInfo>? children})
       : super(
           CaregiverCreationRoute.name,
           initialChildren: children,
@@ -578,17 +599,17 @@ class CaregiverCreationRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'CaregiverCreationRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i5.CareGiverDetailPage]
 class CareGiverDetailRoute
-    extends _i38.PageRouteInfo<CareGiverDetailRouteArgs> {
+    extends _i40.PageRouteInfo<CareGiverDetailRouteArgs> {
   CareGiverDetailRoute({
-    _i39.Key? key,
+    _i41.Key? key,
     String? id,
-    List<_i38.PageRouteInfo>? children,
+    List<_i40.PageRouteInfo>? children,
   }) : super(
           CareGiverDetailRoute.name,
           args: CareGiverDetailRouteArgs(
@@ -601,8 +622,8 @@ class CareGiverDetailRoute
 
   static const String name = 'CareGiverDetailRoute';
 
-  static const _i38.PageInfo<CareGiverDetailRouteArgs> page =
-      _i38.PageInfo<CareGiverDetailRouteArgs>(name);
+  static const _i40.PageInfo<CareGiverDetailRouteArgs> page =
+      _i40.PageInfo<CareGiverDetailRouteArgs>(name);
 }
 
 class CareGiverDetailRouteArgs {
@@ -611,7 +632,7 @@ class CareGiverDetailRouteArgs {
     this.id,
   });
 
-  final _i39.Key? key;
+  final _i41.Key? key;
 
   final String? id;
 
@@ -624,11 +645,11 @@ class CareGiverDetailRouteArgs {
 /// generated route for
 /// [_i6.CareGiverProfilePage]
 class CareGiverProfileRoute
-    extends _i38.PageRouteInfo<CareGiverProfileRouteArgs> {
+    extends _i40.PageRouteInfo<CareGiverProfileRouteArgs> {
   CareGiverProfileRoute({
-    _i39.Key? key,
+    _i41.Key? key,
     String? id,
-    List<_i38.PageRouteInfo>? children,
+    List<_i40.PageRouteInfo>? children,
   }) : super(
           CareGiverProfileRoute.name,
           args: CareGiverProfileRouteArgs(
@@ -641,8 +662,8 @@ class CareGiverProfileRoute
 
   static const String name = 'CareGiverProfileRoute';
 
-  static const _i38.PageInfo<CareGiverProfileRouteArgs> page =
-      _i38.PageInfo<CareGiverProfileRouteArgs>(name);
+  static const _i40.PageInfo<CareGiverProfileRouteArgs> page =
+      _i40.PageInfo<CareGiverProfileRouteArgs>(name);
 }
 
 class CareGiverProfileRouteArgs {
@@ -651,7 +672,7 @@ class CareGiverProfileRouteArgs {
     this.id,
   });
 
-  final _i39.Key? key;
+  final _i41.Key? key;
 
   final String? id;
 
@@ -664,12 +685,12 @@ class CareGiverProfileRouteArgs {
 /// generated route for
 /// [_i7.CaregiverVerificationPage]
 class CaregiverVerificationRoute
-    extends _i38.PageRouteInfo<CaregiverVerificationRouteArgs> {
+    extends _i40.PageRouteInfo<CaregiverVerificationRouteArgs> {
   CaregiverVerificationRoute({
-    _i39.Key? key,
+    _i41.Key? key,
     String? id,
     bool? isOnboardingCompleted,
-    List<_i38.PageRouteInfo>? children,
+    List<_i40.PageRouteInfo>? children,
   }) : super(
           CaregiverVerificationRoute.name,
           args: CaregiverVerificationRouteArgs(
@@ -686,8 +707,8 @@ class CaregiverVerificationRoute
 
   static const String name = 'CaregiverVerificationRoute';
 
-  static const _i38.PageInfo<CaregiverVerificationRouteArgs> page =
-      _i38.PageInfo<CaregiverVerificationRouteArgs>(name);
+  static const _i40.PageInfo<CaregiverVerificationRouteArgs> page =
+      _i40.PageInfo<CaregiverVerificationRouteArgs>(name);
 }
 
 class CaregiverVerificationRouteArgs {
@@ -697,7 +718,7 @@ class CaregiverVerificationRouteArgs {
     this.isOnboardingCompleted,
   });
 
-  final _i39.Key? key;
+  final _i41.Key? key;
 
   final String? id;
 
@@ -711,8 +732,8 @@ class CaregiverVerificationRouteArgs {
 
 /// generated route for
 /// [_i8.CareAmbassadorAnalysisPage]
-class CareAmbassadorAnalysisRoute extends _i38.PageRouteInfo<void> {
-  const CareAmbassadorAnalysisRoute({List<_i38.PageRouteInfo>? children})
+class CareAmbassadorAnalysisRoute extends _i40.PageRouteInfo<void> {
+  const CareAmbassadorAnalysisRoute({List<_i40.PageRouteInfo>? children})
       : super(
           CareAmbassadorAnalysisRoute.name,
           initialChildren: children,
@@ -720,13 +741,13 @@ class CareAmbassadorAnalysisRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'CareAmbassadorAnalysisRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i9.CareAmbassadorRegistrationPage]
-class CareAmbassadorRegistrationRoute extends _i38.PageRouteInfo<void> {
-  const CareAmbassadorRegistrationRoute({List<_i38.PageRouteInfo>? children})
+class CareAmbassadorRegistrationRoute extends _i40.PageRouteInfo<void> {
+  const CareAmbassadorRegistrationRoute({List<_i40.PageRouteInfo>? children})
       : super(
           CareAmbassadorRegistrationRoute.name,
           initialChildren: children,
@@ -734,13 +755,13 @@ class CareAmbassadorRegistrationRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'CareAmbassadorRegistrationRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i10.ClientAnalyticsPage]
-class ClientAnalyticsRoute extends _i38.PageRouteInfo<void> {
-  const ClientAnalyticsRoute({List<_i38.PageRouteInfo>? children})
+class ClientAnalyticsRoute extends _i40.PageRouteInfo<void> {
+  const ClientAnalyticsRoute({List<_i40.PageRouteInfo>? children})
       : super(
           ClientAnalyticsRoute.name,
           initialChildren: children,
@@ -748,17 +769,17 @@ class ClientAnalyticsRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'ClientAnalyticsRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i11.ClientSubProfileDetailsPage]
 class ClientSubProfileDetailsRoute
-    extends _i38.PageRouteInfo<ClientSubProfileDetailsRouteArgs> {
+    extends _i40.PageRouteInfo<ClientSubProfileDetailsRouteArgs> {
   ClientSubProfileDetailsRoute({
-    _i39.Key? key,
+    _i41.Key? key,
     String? id,
-    List<_i38.PageRouteInfo>? children,
+    List<_i40.PageRouteInfo>? children,
   }) : super(
           ClientSubProfileDetailsRoute.name,
           args: ClientSubProfileDetailsRouteArgs(
@@ -771,8 +792,8 @@ class ClientSubProfileDetailsRoute
 
   static const String name = 'ClientSubProfileDetailsRoute';
 
-  static const _i38.PageInfo<ClientSubProfileDetailsRouteArgs> page =
-      _i38.PageInfo<ClientSubProfileDetailsRouteArgs>(name);
+  static const _i40.PageInfo<ClientSubProfileDetailsRouteArgs> page =
+      _i40.PageInfo<ClientSubProfileDetailsRouteArgs>(name);
 }
 
 class ClientSubProfileDetailsRouteArgs {
@@ -781,7 +802,7 @@ class ClientSubProfileDetailsRouteArgs {
     this.id,
   });
 
-  final _i39.Key? key;
+  final _i41.Key? key;
 
   final String? id;
 
@@ -793,8 +814,8 @@ class ClientSubProfileDetailsRouteArgs {
 
 /// generated route for
 /// [_i12.HelpAndSupportPage]
-class HelpAndSupportRoute extends _i38.PageRouteInfo<void> {
-  const HelpAndSupportRoute({List<_i38.PageRouteInfo>? children})
+class HelpAndSupportRoute extends _i40.PageRouteInfo<void> {
+  const HelpAndSupportRoute({List<_i40.PageRouteInfo>? children})
       : super(
           HelpAndSupportRoute.name,
           initialChildren: children,
@@ -802,17 +823,17 @@ class HelpAndSupportRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'HelpAndSupportRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i13.SupportTicketsDetailPage]
 class SupportTicketsDetailRoute
-    extends _i38.PageRouteInfo<SupportTicketsDetailRouteArgs> {
+    extends _i40.PageRouteInfo<SupportTicketsDetailRouteArgs> {
   SupportTicketsDetailRoute({
-    _i39.Key? key,
+    _i41.Key? key,
     String? complaintId,
-    List<_i38.PageRouteInfo>? children,
+    List<_i40.PageRouteInfo>? children,
   }) : super(
           SupportTicketsDetailRoute.name,
           args: SupportTicketsDetailRouteArgs(
@@ -825,8 +846,8 @@ class SupportTicketsDetailRoute
 
   static const String name = 'SupportTicketsDetailRoute';
 
-  static const _i38.PageInfo<SupportTicketsDetailRouteArgs> page =
-      _i38.PageInfo<SupportTicketsDetailRouteArgs>(name);
+  static const _i40.PageInfo<SupportTicketsDetailRouteArgs> page =
+      _i40.PageInfo<SupportTicketsDetailRouteArgs>(name);
 }
 
 class SupportTicketsDetailRouteArgs {
@@ -835,7 +856,7 @@ class SupportTicketsDetailRouteArgs {
     this.complaintId,
   });
 
-  final _i39.Key? key;
+  final _i41.Key? key;
 
   final String? complaintId;
 
@@ -847,8 +868,8 @@ class SupportTicketsDetailRouteArgs {
 
 /// generated route for
 /// [_i14.DashboardPage]
-class DashboardRoute extends _i38.PageRouteInfo<void> {
-  const DashboardRoute({List<_i38.PageRouteInfo>? children})
+class DashboardRoute extends _i40.PageRouteInfo<void> {
+  const DashboardRoute({List<_i40.PageRouteInfo>? children})
       : super(
           DashboardRoute.name,
           initialChildren: children,
@@ -856,13 +877,13 @@ class DashboardRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'DashboardRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i15.FaqPage]
-class FaqRoute extends _i38.PageRouteInfo<void> {
-  const FaqRoute({List<_i38.PageRouteInfo>? children})
+class FaqRoute extends _i40.PageRouteInfo<void> {
+  const FaqRoute({List<_i40.PageRouteInfo>? children})
       : super(
           FaqRoute.name,
           initialChildren: children,
@@ -870,20 +891,20 @@ class FaqRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'FaqRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i16.FaqCreationPage]
-class FaqCreationRoute extends _i38.PageRouteInfo<FaqCreationRouteArgs> {
+class FaqCreationRoute extends _i40.PageRouteInfo<FaqCreationRouteArgs> {
   FaqCreationRoute({
-    _i39.Key? key,
+    _i41.Key? key,
     String? isView,
     String? isEdit,
     String? id,
-    _i40.FaqListData? item,
+    _i42.FaqListData? item,
     int? forWhom,
-    List<_i38.PageRouteInfo>? children,
+    List<_i40.PageRouteInfo>? children,
   }) : super(
           FaqCreationRoute.name,
           args: FaqCreationRouteArgs(
@@ -906,8 +927,8 @@ class FaqCreationRoute extends _i38.PageRouteInfo<FaqCreationRouteArgs> {
 
   static const String name = 'FaqCreationRoute';
 
-  static const _i38.PageInfo<FaqCreationRouteArgs> page =
-      _i38.PageInfo<FaqCreationRouteArgs>(name);
+  static const _i40.PageInfo<FaqCreationRouteArgs> page =
+      _i40.PageInfo<FaqCreationRouteArgs>(name);
 }
 
 class FaqCreationRouteArgs {
@@ -920,7 +941,7 @@ class FaqCreationRouteArgs {
     this.forWhom,
   });
 
-  final _i39.Key? key;
+  final _i41.Key? key;
 
   final String? isView;
 
@@ -928,7 +949,7 @@ class FaqCreationRouteArgs {
 
   final String? id;
 
-  final _i40.FaqListData? item;
+  final _i42.FaqListData? item;
 
   final int? forWhom;
 
@@ -940,8 +961,8 @@ class FaqCreationRouteArgs {
 
 /// generated route for
 /// [_i17.ForgotPasswordPage]
-class ForgotPasswordRoute extends _i38.PageRouteInfo<void> {
-  const ForgotPasswordRoute({List<_i38.PageRouteInfo>? children})
+class ForgotPasswordRoute extends _i40.PageRouteInfo<void> {
+  const ForgotPasswordRoute({List<_i40.PageRouteInfo>? children})
       : super(
           ForgotPasswordRoute.name,
           initialChildren: children,
@@ -949,13 +970,13 @@ class ForgotPasswordRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'ForgotPasswordRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i18.LoginPage]
-class LoginRoute extends _i38.PageRouteInfo<void> {
-  const LoginRoute({List<_i38.PageRouteInfo>? children})
+class LoginRoute extends _i40.PageRouteInfo<void> {
+  const LoginRoute({List<_i40.PageRouteInfo>? children})
       : super(
           LoginRoute.name,
           initialChildren: children,
@@ -963,13 +984,13 @@ class LoginRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'LoginRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i19.MobileOtpVerificationPage]
-class MobileOtpVerificationRoute extends _i38.PageRouteInfo<void> {
-  const MobileOtpVerificationRoute({List<_i38.PageRouteInfo>? children})
+class MobileOtpVerificationRoute extends _i40.PageRouteInfo<void> {
+  const MobileOtpVerificationRoute({List<_i40.PageRouteInfo>? children})
       : super(
           MobileOtpVerificationRoute.name,
           initialChildren: children,
@@ -977,13 +998,13 @@ class MobileOtpVerificationRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'MobileOtpVerificationRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i20.EmailOtpVerificationPage]
-class EmailOtpVerificationRoute extends _i38.PageRouteInfo<void> {
-  const EmailOtpVerificationRoute({List<_i38.PageRouteInfo>? children})
+class EmailOtpVerificationRoute extends _i40.PageRouteInfo<void> {
+  const EmailOtpVerificationRoute({List<_i40.PageRouteInfo>? children})
       : super(
           EmailOtpVerificationRoute.name,
           initialChildren: children,
@@ -991,13 +1012,13 @@ class EmailOtpVerificationRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'EmailOtpVerificationRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i21.OnboardingPage]
-class OnboardingRoute extends _i38.PageRouteInfo<void> {
-  const OnboardingRoute({List<_i38.PageRouteInfo>? children})
+class OnboardingRoute extends _i40.PageRouteInfo<void> {
+  const OnboardingRoute({List<_i40.PageRouteInfo>? children})
       : super(
           OnboardingRoute.name,
           initialChildren: children,
@@ -1005,13 +1026,13 @@ class OnboardingRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'OnboardingRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i22.PageListPage]
-class RouteListRoute extends _i38.PageRouteInfo<void> {
-  const RouteListRoute({List<_i38.PageRouteInfo>? children})
+class RouteListRoute extends _i40.PageRouteInfo<void> {
+  const RouteListRoute({List<_i40.PageRouteInfo>? children})
       : super(
           RouteListRoute.name,
           initialChildren: children,
@@ -1019,21 +1040,21 @@ class RouteListRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'RouteListRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i23.PageCreationPage]
-class RouteCreationRoute extends _i38.PageRouteInfo<RouteCreationRouteArgs> {
+class RouteCreationRoute extends _i40.PageRouteInfo<RouteCreationRouteArgs> {
   RouteCreationRoute({
-    _i39.Key? key,
+    _i41.Key? key,
     String? heading,
     String? title,
     String? id,
     String? description,
     bool? isEdit,
     num? forWhom,
-    List<_i38.PageRouteInfo>? children,
+    List<_i40.PageRouteInfo>? children,
   }) : super(
           RouteCreationRoute.name,
           args: RouteCreationRouteArgs(
@@ -1058,8 +1079,8 @@ class RouteCreationRoute extends _i38.PageRouteInfo<RouteCreationRouteArgs> {
 
   static const String name = 'RouteCreationRoute';
 
-  static const _i38.PageInfo<RouteCreationRouteArgs> page =
-      _i38.PageInfo<RouteCreationRouteArgs>(name);
+  static const _i40.PageInfo<RouteCreationRouteArgs> page =
+      _i40.PageInfo<RouteCreationRouteArgs>(name);
 }
 
 class RouteCreationRouteArgs {
@@ -1073,7 +1094,7 @@ class RouteCreationRouteArgs {
     this.forWhom,
   });
 
-  final _i39.Key? key;
+  final _i41.Key? key;
 
   final String? heading;
 
@@ -1095,8 +1116,8 @@ class RouteCreationRouteArgs {
 
 /// generated route for
 /// [_i24.RegionAnalyticsPage]
-class RegionAnalyticsRoute extends _i38.PageRouteInfo<void> {
-  const RegionAnalyticsRoute({List<_i38.PageRouteInfo>? children})
+class RegionAnalyticsRoute extends _i40.PageRouteInfo<void> {
+  const RegionAnalyticsRoute({List<_i40.PageRouteInfo>? children})
       : super(
           RegionAnalyticsRoute.name,
           initialChildren: children,
@@ -1104,13 +1125,13 @@ class RegionAnalyticsRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'RegionAnalyticsRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i25.ResetPasswordPage]
-class ResetPasswordRoute extends _i38.PageRouteInfo<void> {
-  const ResetPasswordRoute({List<_i38.PageRouteInfo>? children})
+class ResetPasswordRoute extends _i40.PageRouteInfo<void> {
+  const ResetPasswordRoute({List<_i40.PageRouteInfo>? children})
       : super(
           ResetPasswordRoute.name,
           initialChildren: children,
@@ -1118,13 +1139,13 @@ class ResetPasswordRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'ResetPasswordRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i26.RolesPage]
-class RolesRoute extends _i38.PageRouteInfo<void> {
-  const RolesRoute({List<_i38.PageRouteInfo>? children})
+class RolesRoute extends _i40.PageRouteInfo<void> {
+  const RolesRoute({List<_i40.PageRouteInfo>? children})
       : super(
           RolesRoute.name,
           initialChildren: children,
@@ -1132,18 +1153,18 @@ class RolesRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'RolesRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i27.RoleCreationPage]
-class RoleCreationRoute extends _i38.PageRouteInfo<RoleCreationRouteArgs> {
+class RoleCreationRoute extends _i40.PageRouteInfo<RoleCreationRouteArgs> {
   RoleCreationRoute({
-    _i39.Key? key,
+    _i41.Key? key,
     String? isView,
     String? isEdit,
     String? roleId,
-    List<_i38.PageRouteInfo>? children,
+    List<_i40.PageRouteInfo>? children,
   }) : super(
           RoleCreationRoute.name,
           args: RoleCreationRouteArgs(
@@ -1162,8 +1183,8 @@ class RoleCreationRoute extends _i38.PageRouteInfo<RoleCreationRouteArgs> {
 
   static const String name = 'RoleCreationRoute';
 
-  static const _i38.PageInfo<RoleCreationRouteArgs> page =
-      _i38.PageInfo<RoleCreationRouteArgs>(name);
+  static const _i40.PageInfo<RoleCreationRouteArgs> page =
+      _i40.PageInfo<RoleCreationRouteArgs>(name);
 }
 
 class RoleCreationRouteArgs {
@@ -1174,7 +1195,7 @@ class RoleCreationRouteArgs {
     this.roleId,
   });
 
-  final _i39.Key? key;
+  final _i41.Key? key;
 
   final String? isView;
 
@@ -1190,8 +1211,8 @@ class RoleCreationRouteArgs {
 
 /// generated route for
 /// [_i28.ServiceRequestManagementPage]
-class ServiceRequestManagementRoute extends _i38.PageRouteInfo<void> {
-  const ServiceRequestManagementRoute({List<_i38.PageRouteInfo>? children})
+class ServiceRequestManagementRoute extends _i40.PageRouteInfo<void> {
+  const ServiceRequestManagementRoute({List<_i40.PageRouteInfo>? children})
       : super(
           ServiceRequestManagementRoute.name,
           initialChildren: children,
@@ -1199,13 +1220,13 @@ class ServiceRequestManagementRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'ServiceRequestManagementRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i29.SideMenuPage]
-class SideMenuRoute extends _i38.PageRouteInfo<void> {
-  const SideMenuRoute({List<_i38.PageRouteInfo>? children})
+class SideMenuRoute extends _i40.PageRouteInfo<void> {
+  const SideMenuRoute({List<_i40.PageRouteInfo>? children})
       : super(
           SideMenuRoute.name,
           initialChildren: children,
@@ -1213,13 +1234,13 @@ class SideMenuRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'SideMenuRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i30.SignUpPage]
-class SignUpRoute extends _i38.PageRouteInfo<void> {
-  const SignUpRoute({List<_i38.PageRouteInfo>? children})
+class SignUpRoute extends _i40.PageRouteInfo<void> {
+  const SignUpRoute({List<_i40.PageRouteInfo>? children})
       : super(
           SignUpRoute.name,
           initialChildren: children,
@@ -1227,13 +1248,13 @@ class SignUpRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'SignUpRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i31.SubscriptionPage]
-class SubscriptionRoute extends _i38.PageRouteInfo<void> {
-  const SubscriptionRoute({List<_i38.PageRouteInfo>? children})
+class SubscriptionRoute extends _i40.PageRouteInfo<void> {
+  const SubscriptionRoute({List<_i40.PageRouteInfo>? children})
       : super(
           SubscriptionRoute.name,
           initialChildren: children,
@@ -1241,13 +1262,13 @@ class SubscriptionRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'SubscriptionRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i32.TransactionManagementPage]
-class TransactionManagementRoute extends _i38.PageRouteInfo<void> {
-  const TransactionManagementRoute({List<_i38.PageRouteInfo>? children})
+class TransactionManagementRoute extends _i40.PageRouteInfo<void> {
+  const TransactionManagementRoute({List<_i40.PageRouteInfo>? children})
       : super(
           TransactionManagementRoute.name,
           initialChildren: children,
@@ -1255,13 +1276,13 @@ class TransactionManagementRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'TransactionManagementRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i33.UserManagementPage]
-class UserManagementRoute extends _i38.PageRouteInfo<void> {
-  const UserManagementRoute({List<_i38.PageRouteInfo>? children})
+class UserManagementRoute extends _i40.PageRouteInfo<void> {
+  const UserManagementRoute({List<_i40.PageRouteInfo>? children})
       : super(
           UserManagementRoute.name,
           initialChildren: children,
@@ -1269,17 +1290,17 @@ class UserManagementRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'UserManagementRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i34.UserManagementDetailPage]
 class UserManagementDetailRoute
-    extends _i38.PageRouteInfo<UserManagementDetailRouteArgs> {
+    extends _i40.PageRouteInfo<UserManagementDetailRouteArgs> {
   UserManagementDetailRoute({
-    _i39.Key? key,
+    _i41.Key? key,
     String? id,
-    List<_i38.PageRouteInfo>? children,
+    List<_i40.PageRouteInfo>? children,
   }) : super(
           UserManagementDetailRoute.name,
           args: UserManagementDetailRouteArgs(
@@ -1292,8 +1313,8 @@ class UserManagementDetailRoute
 
   static const String name = 'UserManagementDetailRoute';
 
-  static const _i38.PageInfo<UserManagementDetailRouteArgs> page =
-      _i38.PageInfo<UserManagementDetailRouteArgs>(name);
+  static const _i40.PageInfo<UserManagementDetailRouteArgs> page =
+      _i40.PageInfo<UserManagementDetailRouteArgs>(name);
 }
 
 class UserManagementDetailRouteArgs {
@@ -1302,7 +1323,7 @@ class UserManagementDetailRouteArgs {
     this.id,
   });
 
-  final _i39.Key? key;
+  final _i41.Key? key;
 
   final String? id;
 
@@ -1314,8 +1335,8 @@ class UserManagementDetailRouteArgs {
 
 /// generated route for
 /// [_i35.VerifyEmailPage]
-class VerifyEmailRoute extends _i38.PageRouteInfo<void> {
-  const VerifyEmailRoute({List<_i38.PageRouteInfo>? children})
+class VerifyEmailRoute extends _i40.PageRouteInfo<void> {
+  const VerifyEmailRoute({List<_i40.PageRouteInfo>? children})
       : super(
           VerifyEmailRoute.name,
           initialChildren: children,
@@ -1323,13 +1344,13 @@ class VerifyEmailRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'VerifyEmailRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i36.VideoManagementPage]
-class VideoManagementRoute extends _i38.PageRouteInfo<void> {
-  const VideoManagementRoute({List<_i38.PageRouteInfo>? children})
+class VideoManagementRoute extends _i40.PageRouteInfo<void> {
+  const VideoManagementRoute({List<_i40.PageRouteInfo>? children})
       : super(
           VideoManagementRoute.name,
           initialChildren: children,
@@ -1337,20 +1358,20 @@ class VideoManagementRoute extends _i38.PageRouteInfo<void> {
 
   static const String name = 'VideoManagementRoute';
 
-  static const _i38.PageInfo<void> page = _i38.PageInfo<void>(name);
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i37.VideoUploadPage]
-class VideoUploadRoute extends _i38.PageRouteInfo<VideoUploadRouteArgs> {
+class VideoUploadRoute extends _i40.PageRouteInfo<VideoUploadRouteArgs> {
   VideoUploadRoute({
-    _i39.Key? key,
+    _i41.Key? key,
     String? isEdit,
     String? title,
     num? type,
     String? attachment,
     String? id,
-    List<_i38.PageRouteInfo>? children,
+    List<_i40.PageRouteInfo>? children,
   }) : super(
           VideoUploadRoute.name,
           args: VideoUploadRouteArgs(
@@ -1373,8 +1394,8 @@ class VideoUploadRoute extends _i38.PageRouteInfo<VideoUploadRouteArgs> {
 
   static const String name = 'VideoUploadRoute';
 
-  static const _i38.PageInfo<VideoUploadRouteArgs> page =
-      _i38.PageInfo<VideoUploadRouteArgs>(name);
+  static const _i40.PageInfo<VideoUploadRouteArgs> page =
+      _i40.PageInfo<VideoUploadRouteArgs>(name);
 }
 
 class VideoUploadRouteArgs {
@@ -1387,7 +1408,7 @@ class VideoUploadRouteArgs {
     this.id,
   });
 
-  final _i39.Key? key;
+  final _i41.Key? key;
 
   final String? isEdit;
 
@@ -1402,5 +1423,58 @@ class VideoUploadRouteArgs {
   @override
   String toString() {
     return 'VideoUploadRouteArgs{key: $key, isEdit: $isEdit, title: $title, type: $type, attachment: $attachment, id: $id}';
+  }
+}
+
+/// generated route for
+/// [_i38.UpcomingBirthdayPage]
+class UpcomingBirthdayRoute extends _i40.PageRouteInfo<void> {
+  const UpcomingBirthdayRoute({List<_i40.PageRouteInfo>? children})
+      : super(
+          UpcomingBirthdayRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'UpcomingBirthdayRoute';
+
+  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i39.SendGiftPage]
+class SendGiftRoute extends _i40.PageRouteInfo<SendGiftRouteArgs> {
+  SendGiftRoute({
+    _i41.Key? key,
+    String? userId,
+    List<_i40.PageRouteInfo>? children,
+  }) : super(
+          SendGiftRoute.name,
+          args: SendGiftRouteArgs(
+            key: key,
+            userId: userId,
+          ),
+          rawQueryParams: {'id': userId},
+          initialChildren: children,
+        );
+
+  static const String name = 'SendGiftRoute';
+
+  static const _i40.PageInfo<SendGiftRouteArgs> page =
+      _i40.PageInfo<SendGiftRouteArgs>(name);
+}
+
+class SendGiftRouteArgs {
+  const SendGiftRouteArgs({
+    this.key,
+    this.userId,
+  });
+
+  final _i41.Key? key;
+
+  final String? userId;
+
+  @override
+  String toString() {
+    return 'SendGiftRouteArgs{key: $key, userId: $userId}';
   }
 }

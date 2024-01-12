@@ -139,10 +139,14 @@ import '../../widget/commonImageview.dart';
 
 class AdminProfilePictureWidget extends StatelessWidget {
   AdminProfilePictureWidget(
-      {Key? key, required this.size, required this.adminCreationBloc})
+      {Key? key,
+      required this.size,
+      required this.adminCreationBloc,
+      required this.url})
       : super(key: key);
   final double size;
   final AdminCreationBloc adminCreationBloc;
+  final String url;
   PlatformFile file = PlatformFile(name: "", size: 0);
 
   @override
@@ -157,16 +161,18 @@ class AdminProfilePictureWidget extends StatelessWidget {
               child: Container(
                 height: size,
                 width: size,
-                padding: state.pickedProfilePic!.name.isEmpty
+                padding: url == ""
                     ? const EdgeInsets.all(40)
                     : const EdgeInsets.all(0),
                 color: AppColor.skyBlueShade.val,
-                child: state.pickedProfilePic!.name.isEmpty
+                child: state.pickedProfilePic!.bytes!.isNotEmpty
                     ? CommonImageView(
-                        svgPath: IMG.userAvatar.val,
+                        bytes: state.pickedProfilePic!.bytes,
+                        fit: BoxFit.cover,
+                        isCircleImage: false,
                       )
                     : CommonImageView(
-                        bytes: state.pickedProfilePic!.bytes,
+                        url: url,
                         fit: BoxFit.cover,
                         isCircleImage: false,
                       ),

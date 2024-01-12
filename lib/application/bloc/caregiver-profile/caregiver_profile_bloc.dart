@@ -250,7 +250,16 @@ class CareGiverProfileBloc
       emit(state.copyWith(isLoadingStatusChangeApi: false));
       if (r.status ?? false) {
         if (event.status != Interview.started.val) {
-          _completedPopUp(event.context, msg: 'Interview process completed');
+          if (event.status == Interview.failed.val) {
+            (_completedPopUp(event.context,
+                msg:
+                    'The interview process has been completed, and the Care Ambassador did not pass the interview.'));
+          }
+          if (event.status == Interview.completed.val) {
+            (_completedPopUp(event.context,
+                msg:
+                    'The interview process has been completed, and the Care Ambassador pass the interview.'));
+          }
         } else {
           CSnackBar.showSuccess(event.context,
               msg: "Interview started status changed successfully");

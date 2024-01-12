@@ -22,6 +22,7 @@ FinalResult _$FinalResultFromJson(Map<String, dynamic> json) {
 mixin _$FinalResult {
   String? get id => throw _privateConstructorUsedError;
   String? get complaintId => throw _privateConstructorUsedError;
+  String? get userName => throw _privateConstructorUsedError;
   String? get userId => throw _privateConstructorUsedError;
   Name? get clientName => throw _privateConstructorUsedError;
   Name? get caregiverName => throw _privateConstructorUsedError;
@@ -47,6 +48,7 @@ abstract class $FinalResultCopyWith<$Res> {
   $Res call(
       {String? id,
       String? complaintId,
+      String? userName,
       String? userId,
       Name? clientName,
       Name? caregiverName,
@@ -76,6 +78,7 @@ class _$FinalResultCopyWithImpl<$Res, $Val extends FinalResult>
   $Res call({
     Object? id = freezed,
     Object? complaintId = freezed,
+    Object? userName = freezed,
     Object? userId = freezed,
     Object? clientName = freezed,
     Object? caregiverName = freezed,
@@ -94,6 +97,10 @@ class _$FinalResultCopyWithImpl<$Res, $Val extends FinalResult>
       complaintId: freezed == complaintId
           ? _value.complaintId
           : complaintId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userName: freezed == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String?,
       userId: freezed == userId
           ? _value.userId
@@ -170,6 +177,7 @@ abstract class _$$_FinalResultCopyWith<$Res>
   $Res call(
       {String? id,
       String? complaintId,
+      String? userName,
       String? userId,
       Name? clientName,
       Name? caregiverName,
@@ -199,6 +207,7 @@ class __$$_FinalResultCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? complaintId = freezed,
+    Object? userName = freezed,
     Object? userId = freezed,
     Object? clientName = freezed,
     Object? caregiverName = freezed,
@@ -217,6 +226,10 @@ class __$$_FinalResultCopyWithImpl<$Res>
       complaintId: freezed == complaintId
           ? _value.complaintId
           : complaintId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userName: freezed == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String?,
       userId: freezed == userId
           ? _value.userId
@@ -266,6 +279,7 @@ class _$_FinalResult implements _FinalResult {
   const _$_FinalResult(
       {this.id,
       this.complaintId,
+      this.userName,
       this.userId,
       this.clientName,
       this.caregiverName,
@@ -283,6 +297,8 @@ class _$_FinalResult implements _FinalResult {
   final String? id;
   @override
   final String? complaintId;
+  @override
+  final String? userName;
   @override
   final String? userId;
   @override
@@ -304,7 +320,7 @@ class _$_FinalResult implements _FinalResult {
 
   @override
   String toString() {
-    return 'FinalResult(id: $id, complaintId: $complaintId, userId: $userId, clientName: $clientName, caregiverName: $caregiverName, category: $category, createdDate: $createdDate, repliedOn: $repliedOn, title: $title, role: $role, status: $status)';
+    return 'FinalResult(id: $id, complaintId: $complaintId, userName: $userName, userId: $userId, clientName: $clientName, caregiverName: $caregiverName, category: $category, createdDate: $createdDate, repliedOn: $repliedOn, title: $title, role: $role, status: $status)';
   }
 
   @override
@@ -315,6 +331,8 @@ class _$_FinalResult implements _FinalResult {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.complaintId, complaintId) ||
                 other.complaintId == complaintId) &&
+            (identical(other.userName, userName) ||
+                other.userName == userName) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.clientName, clientName) ||
                 other.clientName == clientName) &&
@@ -337,6 +355,7 @@ class _$_FinalResult implements _FinalResult {
       runtimeType,
       id,
       complaintId,
+      userName,
       userId,
       clientName,
       caregiverName,
@@ -365,6 +384,7 @@ abstract class _FinalResult implements FinalResult {
   const factory _FinalResult(
       {final String? id,
       final String? complaintId,
+      final String? userName,
       final String? userId,
       final Name? clientName,
       final Name? caregiverName,
@@ -382,6 +402,8 @@ abstract class _FinalResult implements FinalResult {
   String? get id;
   @override
   String? get complaintId;
+  @override
+  String? get userName;
   @override
   String? get userId;
   @override

@@ -28,6 +28,7 @@ class Transactions with _$Transactions {
     @JsonKey(name: "paid_to") String? paidTo,
     @JsonKey(name: "recieved_from") String? receivedFrom,
     @JsonKey(name: "paid_for") String? paidFor,
+    @JsonKey(name: "receiverName") String? receiverName,
     String? amount,
     String? cardNumber,
     Name? name,

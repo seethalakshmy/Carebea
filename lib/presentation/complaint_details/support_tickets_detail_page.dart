@@ -519,7 +519,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
   _complaintClientNameWidget() {
     return RowColonCombo.twoHundred(
         customWidthLg1: 180,
-        label: AppString.clientName.val,
+        label: AppString.careRecipient.val,
         value: _complaintDetailBloc.complaintDetailsList[0].clientName!.firstName == "" ||
                 _complaintDetailBloc.complaintDetailsList[0].clientName!.firstName ==
                     null

@@ -14,6 +14,7 @@ class FinalResult with _$FinalResult {
   const factory FinalResult({
     String? id,
     String? complaintId,
+    String? userName,
     String? userId,
     Name? clientName,
     Name? caregiverName,

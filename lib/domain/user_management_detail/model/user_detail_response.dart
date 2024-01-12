@@ -217,6 +217,7 @@ class Transactions {
     String? transactionType,
     String? dateTime,
     String? amount,
+    String? receiverName,
     String? paidFor,
     String? transactionId,
     num? status,
@@ -228,6 +229,7 @@ class Transactions {
     _transactionType = transactionType;
     _dateTime = dateTime;
     _amount = amount;
+    _receiverName = receiverName;
     _paidFor = paidFor;
     _transactionId = transactionId;
     _status = status;
@@ -241,6 +243,7 @@ class Transactions {
     _transactionType = json['transaction_type'];
     _dateTime = json['date_time'];
     _amount = json['amount'];
+    _receiverName = json['receiverName'];
     _paidFor = json['paid_for'];
     _transactionId = json['transaction_id'];
     _status = json['status'];
@@ -252,6 +255,7 @@ class Transactions {
   String? _transactionType;
   String? _dateTime;
   String? _amount;
+  String? _receiverName;
   String? _paidFor;
   String? _transactionId;
   num? _status;
@@ -263,6 +267,7 @@ class Transactions {
     String? transactionType,
     String? dateTime,
     String? amount,
+    String? receiverName,
     String? paidFor,
     String? transactionId,
     num? status,
@@ -275,6 +280,7 @@ class Transactions {
         transactionType: transactionType ?? _transactionType,
         dateTime: dateTime ?? _dateTime,
         amount: amount ?? _amount,
+        receiverName: receiverName ?? _receiverName,
         paidFor: paidFor ?? _paidFor,
         transactionId: transactionId ?? _transactionId,
         status: status ?? _status,
@@ -286,6 +292,7 @@ class Transactions {
   String? get transactionType => _transactionType;
   String? get dateTime => _dateTime;
   String? get amount => _amount;
+  String? get receiverName => _receiverName;
   String? get paidFor => _paidFor;
   String? get transactionId => _transactionId;
   num? get status => _status;
@@ -299,6 +306,7 @@ class Transactions {
     map['transaction_type'] = _transactionType;
     map['date_time'] = _dateTime;
     map['amount'] = _amount;
+    map['receiverName'] = _receiverName;
     map['paid_for'] = _paidFor;
     map['transaction_id'] = _transactionId;
     map['status'] = _status;

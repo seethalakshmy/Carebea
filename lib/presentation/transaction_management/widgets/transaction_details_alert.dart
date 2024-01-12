@@ -141,11 +141,45 @@ class TransactionDetailsAlert extends StatelessWidget {
                                   .transactionDetailsData.serviceId ??
                               ''));
                   return CustomAlertDialogWidget(
-                    heading: AppString.services.val,
+                    heading:
+                        transactionBloc.transactionDetailsData.serviceStatus ==
+                                2
+                            ? 'Upcoming'
+                            : transactionBloc
+                                        .transactionDetailsData.serviceStatus ==
+                                    3
+                                ? 'Ongoing'
+                                : transactionBloc.transactionDetailsData
+                                            .serviceStatus ==
+                                        5
+                                    ? 'Completed'
+                                    : transactionBloc.transactionDetailsData
+                                                .serviceStatus ==
+                                            6
+                                        ? 'Canceled'
+                                        : 'Missed',
                     child: ServiceDetailsAlert(
                       title: transactionBloc
-                              .transactionDetailsData.serviceStatus ??
-                          '',
+                                  .transactionDetailsData.serviceStatus ==
+                              2
+                          ? 'Upcoming'
+                          : transactionBloc
+                                      .transactionDetailsData.serviceStatus ==
+                                  3
+                              ? 'Ongoing'
+                              : transactionBloc.transactionDetailsData
+                                          .serviceStatus ==
+                                      5
+                                  ? 'Completed'
+                                  : transactionBloc.transactionDetailsData
+                                              .serviceStatus ==
+                                          6
+                                      ? 'Canceled'
+                                      : 'Missed',
+
+                      // transactionBloc
+                      //         .transactionDetailsData.serviceStatus ??
+                      //     '',
                       serviceBloc: serviceRequestManagementBloc,
                     ),
                   );

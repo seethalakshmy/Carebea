@@ -188,7 +188,7 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
                     id: item.id,
                     title: item.title,
                     type: item.userType,
-                    attachment: item.attachment));
+                    attachment: item.videoUrl));
               },
               cells: [
                 DataCell(_tableRowView("", _pageIndex.toString())),
@@ -215,7 +215,7 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
                               id: item.id,
                               title: item.title,
                               type: item.userType,
-                              attachment: item.attachment));
+                              attachment: item.videoUrl));
                         }
                       : null,
                 )),
