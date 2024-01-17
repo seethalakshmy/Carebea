@@ -133,35 +133,44 @@ class RowColonCombo extends StatelessWidget {
             : const SizedBox.shrink(),
         InkWell(
           onTap: onValueTap,
-          child: AlertTextLabel(
-            value,
-            color: color ?? valueColor,
-            needUnderLine: needUnderLine,
-            fontWeight: fontWeight,
-            fontSize: fontSize,
+          child: Container(
+            constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width * 0.4),
+            child: AlertTextLabel(
+              value,
+              color: color ?? valueColor,
+              needUnderLine: needUnderLine,
+              fontWeight: fontWeight,
+              fontSize: fontSize,
+            ),
           ),
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: list
-                  ?.map(
-                    (e) => Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AlertTextLabel(
-                          e,
-                          color: color,
-                          fontWeight: fontWeight,
-                          fontSize: fontSize,
+        Flexible(
+          child: Wrap(
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: list
+                    ?.map(
+                      (e) => SizedBox(
+                        height: MediaQuery.of(context).size.height * .05,
+                        width: MediaQuery.of(context).size.width * .05,
+                        child: Row(
+                          children: [
+                            AlertTextLabel(
+                              e + ',',
+                              color: color,
+                              fontWeight: fontWeight,
+                              fontSize: fontSize,
+                            ),
+                            // const SizedBox(
+                            //   height: 10,
+                            // )
+                          ],
                         ),
-                        const SizedBox(
-                          height: 10,
-                        )
-                      ],
-                    ),
-                  )
-                  .toList() ??
-              [],
+                      ),
+                    )
+                    .toList() ??
+                [],
+          ),
         ),
         RichText(
           text: TextSpan(style: const TextStyle(fontSize: 12), children: [

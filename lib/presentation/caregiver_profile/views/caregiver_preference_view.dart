@@ -73,15 +73,16 @@ class CareGiverPreferenceView extends StatelessWidget {
     );
   }
 
-  Row petsList(BuildContext context, Size size, Preference? preference) {
-    return Row(
+  Wrap petsList(BuildContext context, Size size, Preference? preference) {
+    return Wrap(
       children: [
         CustomSizedBox(
           width: getWidth(context, size),
         ),
         CustomSizedBox(
-          height: DBL.forty.val,
+          height: DBL.fiftyFive.val,
           child: CustomListViewBuilder(
+            padding: EdgeInsets.all(10),
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemCount: preference?.pets?.length ?? 0,

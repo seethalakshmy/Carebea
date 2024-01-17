@@ -255,7 +255,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                         //   ),
                         // ),
                         DataColumn2(
-                          size: ColumnSize.S,
+                          size: ColumnSize.M,
                           label: _columnsView(
                             text: AppString.transactionType.val,
                           ),
@@ -500,9 +500,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
           //       text: AppString.serviceId.val, fontWeight: FontWeight.bold),
           // ),
           DataColumn2(
-            fixedWidth: Responsive.isWeb(context)
-                ? MediaQuery.of(context).size.width * .08
-                : 110,
+            size: ColumnSize.L,
             label: _columnsView(
                 text: AppString.transactionType.val,
                 fontWeight: FontWeight.bold),

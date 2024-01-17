@@ -152,7 +152,7 @@ class _FaqPageState extends State<FaqPage> {
   _faqTable(FaqState state, BuildContext context) {
     return CSelectionArea(
       child: CDataTable2(
-          minWidth: DBL.nineFifty.val,
+          // minWidth: DBL.nineFifty.val,
           dividerThickness: DBL.pointThree.val,
           headingRowHeight: DBL.fortyEight.val,
           dataRowHeight: DBL.sixty.val,
@@ -165,22 +165,22 @@ class _FaqPageState extends State<FaqPage> {
             DataColumn2(
               size: ColumnSize.L,
               label: _tableColumnView(
-                AppString.question.val,
+                AppString.questionAnswer.val,
               ),
             ),
             DataColumn2(
-              size: ColumnSize.M,
+              size: ColumnSize.S,
               label: _tableColumnView(
                 AppString.category.val,
               ),
             ),
             DataColumn2(
-                size: ColumnSize.M,
+                size: ColumnSize.S,
                 label: _tableColumnView(
                   AppString.lastUpdateDate.val,
                 )),
             DataColumn2(
-              size: ColumnSize.M,
+              size: ColumnSize.S,
               label: _tableColumnView(
                 "",
               ),

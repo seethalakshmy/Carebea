@@ -132,9 +132,9 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
               children: [
                 CareGiverScheduleView(
                     state: state, caregiverDetailBloc: _caregiverDetailBloc),
-                CareGiverBankAccountInfoView(
-                  state: state,
-                ),
+                // CareGiverBankAccountInfoView(
+                //   state: state,
+                // ),
                 CareGiverServiceView(
                   bloc: _caregiverDetailBloc,
                   userId: userId,
@@ -167,7 +167,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
       padding: EdgeInsets.only(left: DBL.twenty.val, top: DBL.twelve.val),
       tabs: [
         Tab(icon: _buildText(AppString.schedules.val)),
-        Tab(icon: _buildText(AppString.accountDetails.val)),
+        // Tab(icon: _buildText(AppString.accountDetails.val)),
         Tab(icon: _buildText(AppString.services.val)),
         Tab(icon: _buildText(AppString.earnings.val)),
         Tab(icon: _buildText(AppString.newServiceRequest.val)),

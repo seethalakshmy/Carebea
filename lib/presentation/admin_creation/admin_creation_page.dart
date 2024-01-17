@@ -530,30 +530,32 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
     _adminCreationBloc.add(AdminCreationEvent.dropDownErrorDisplay(
         value: state.selectedRole == null));
     if (_formKey.currentState!.validate() && !state.isDropDownError) {
-      if (!_isEdit! && _adminCreationBloc.state.pickedProfilePic?.size == 0) {
+      if (_adminCreationBloc.state.pickedProfilePic?.size == 0 &&
+          profilePic == "") {
         CSnackBar.showError(context, msg: 'Please select a profile picture');
       } else {
-        _adminCreationBloc.add(AdminCreationEvent.addAdmin(
-            userId: adminUserID,
-            roleId: state.selectedRole?.id ?? "",
-            context: context,
-            firstName: _fNameController.text.trim(),
-            lastName: _lNameController.text.trim(),
-            email: _emailController.text.trim().toLowerCase(),
-            mobile: _mobileController.text.trim(),
-            profilePic: _adminCreationBloc.profileUrl));
-      }
-      if (_isEdit!) {
-        _adminCreationBloc.add(AdminCreationEvent.updateAdmin(
-            adminId: adminId,
-            userId: adminUserID,
-            roleId: state.selectedRole?.id ?? "",
-            context: context,
-            firstName: _fNameController.text.trim(),
-            lastName: _lNameController.text.trim(),
-            email: _emailController.text.trim().toLowerCase(),
-            mobile: _mobileController.text.trim(),
-            profilePic: _adminCreationBloc.profileUrl));
+        if (_isEdit!) {
+          _adminCreationBloc.add(AdminCreationEvent.updateAdmin(
+              adminId: adminId,
+              userId: adminUserID,
+              roleId: state.selectedRole?.id ?? "",
+              context: context,
+              firstName: _fNameController.text.trim(),
+              lastName: _lNameController.text.trim(),
+              email: _emailController.text.trim().toLowerCase(),
+              mobile: _mobileController.text.trim(),
+              profilePic: _adminCreationBloc.profileUrl));
+        } else {
+          _adminCreationBloc.add(AdminCreationEvent.addAdmin(
+              userId: adminUserID,
+              roleId: state.selectedRole?.id ?? "",
+              context: context,
+              firstName: _fNameController.text.trim(),
+              lastName: _lNameController.text.trim(),
+              email: _emailController.text.trim().toLowerCase(),
+              mobile: _mobileController.text.trim(),
+              profilePic: _adminCreationBloc.profileUrl));
+        }
       }
     }
   }

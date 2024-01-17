@@ -600,6 +600,7 @@ enum AppString {
   extraFee("Extra Fee"),
   tip("Tip"),
   question("Questions"),
+  questionAnswer("Questions/Answers"),
   visibility("Visibility"),
   forClient("For Client"),
   forCa("For Care Ambassador"),
