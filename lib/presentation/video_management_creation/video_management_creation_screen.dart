@@ -241,7 +241,7 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
                                   videoPlayerController:
                                       VideoPlayerController.networkUrl(
                                           Uri.parse(attachment)),
-                                  autoPlay: false,
+                                  autoPlay: true,
                                   looping: false,
                                   allowFullScreen: true,
                                   showOptions: false,
@@ -270,9 +270,10 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
                                   log('bytlist ${bytesList.length}');
                                   log('attachment ${attachment}');
                                 },
-                                icon: const Icon(
-                                  Icons.close,
-                                  size: 10,
+                                icon: Icon(
+                                  Icons.delete,
+                                  size: 24,
+                                  color: AppColor.red.val,
                                 ))
                           ],
                         )

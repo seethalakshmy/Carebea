@@ -352,7 +352,8 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
                 ? MediaQuery.of(context).size.width * .17
                 : DBL.twoHundred.val,
             label: _columnsView(
-                text: AppString.clientName.val, fontWeight: FontWeight.bold),
+                text: AppString.careAmbassadorName.val,
+                fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.L,

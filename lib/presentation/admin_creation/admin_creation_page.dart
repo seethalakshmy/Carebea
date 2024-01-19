@@ -23,6 +23,7 @@ import '../../core/text_styles.dart';
 import '../../infrastructure/api_service_s3.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../on_boarding/modules/personal_details/widgets/mobile_number_formatter.dart';
+import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
 import '../widget/custom_alert_dialog_widget.dart';
@@ -472,7 +473,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                           height: DBL.fortyFive.val,
                           minWidth: DBL.oneTwenty.val,
                           onPressed: () {
-                            // context.router.navigate(const AdminsRoute());
+                            context.router.navigate(const AdminsRoute());
                           },
                           text: AppString.cancel.val,
                           color: AppColor.white.val,

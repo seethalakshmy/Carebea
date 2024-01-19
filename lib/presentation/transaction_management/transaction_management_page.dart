@@ -129,16 +129,14 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                                   userId: adminId ?? ''));
                         },
                         onChanged: (val) {
-                          if (_searchController.text == '') {
-                            _transactionBloc.add(
-                                TransactionManagementEvent.getTransactions(
-                                    page: _transactionBloc.paginationPage
-                                        .toString(),
-                                    limit: _transactionBloc.limit,
-                                    filterId: _transactionBloc.filterId,
-                                    searchTerm: _searchController.text,
-                                    userId: adminId ?? ''));
-                          }
+                          _transactionBloc.add(
+                              TransactionManagementEvent.getTransactions(
+                                  page: _transactionBloc.paginationPage
+                                      .toString(),
+                                  limit: _transactionBloc.limit,
+                                  filterId: _transactionBloc.filterId,
+                                  searchTerm: _searchController.text,
+                                  userId: adminId ?? ''));
                         },
                         width: Responsive.isWeb(context)
                             ? DBL.threeFifteen.val

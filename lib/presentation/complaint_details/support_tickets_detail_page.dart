@@ -240,9 +240,9 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
           _complaintDetailBloc.complaintDetailsList[0].isGeneral ?? false
               ? const CustomSizedBox()
               : CustomSizedBox(height: DBL.six.val),
-          _complaintClientNameWidget(),
+          _complaintDetailBloc.complaintDetailsList[0].isGeneral ?? false ? const SizedBox.shrink() :  _complaintClientNameWidget(),
           CustomSizedBox(height: DBL.six.val),
-          _complaintCANameWidget(),
+          _complaintDetailBloc.complaintDetailsList[0].isGeneral ?? false ? const SizedBox.shrink() : _complaintCANameWidget(),
           CustomSizedBox(height: DBL.thirty.val),
           _complaintDetailBloc.complaintDetailsList[0].attachments!.isNotEmpty
               ? CustomText(

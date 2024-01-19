@@ -514,6 +514,14 @@ class _AdminsPageState extends State<AdminsPage> {
           _setIndex(e.key);
           var item = e.value;
           return DataRow2(
+            onTap: () {
+              autoTabRouter?.navigate(AdminCreationRoute(
+                  isView: "view",
+                  id: item.id,
+                  fName: item.name?.firstName,
+                  lName: item.name?.lastName,
+                  profilePic: item.profile));
+            },
             cells: [
               DataCell(_tableRowView(_pageIndex.toString())),
               DataCell(TableRowImageView(
