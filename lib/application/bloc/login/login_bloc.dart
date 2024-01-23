@@ -67,7 +67,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             r.data?.permissions?.transactions?.view ?? false;
 
         event.context.router.replace(const SideMenuRoute());
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context,
+            msg: "You have successfully logged in");
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }

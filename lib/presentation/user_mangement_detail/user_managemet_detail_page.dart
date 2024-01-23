@@ -20,8 +20,10 @@ import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../infrastructure/user_management_detail/user_management_detail_repository.dart';
 import '../caregiver_detail/widgets/service_completion_and_rewards.dart';
 import '../caregiver_detail/widgets/svg_text.dart';
+import '../service_request_management/service_request_management_page.dart';
 import '../service_request_management/widgets/profile_widget.dart';
 import '../side_menu/side_menu_page.dart';
+import '../transaction_management/transaction_management_page.dart';
 import '../widget/header_view.dart';
 import 'views/sub_profile_view.dart';
 
@@ -387,15 +389,21 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
               child: TabBarView(
                 controller: tabController,
                 children: [
-                  SubProfileView(state: state),
+                  SubProfileView(userId: state.response?.data?.id ?? ""),
                   // PaymentMethodView(
                   //   state: state,
                   // ),
-                  ServiceView(
-                    state: state,
-                    userId: state.response?.data?.id ?? '',
+                  ServiceRequestManagementPage(
+                    clientId: state.response?.data?.id ?? "",
                   ),
-                  TransactionView(state: state)
+                  // ServiceView(
+                  //   state: state,
+                  //   userId: state.response?.data?.id ?? '',
+                  // ),
+                  TransactionManagementPage(
+                    clientId: state.response?.data?.id ?? '',
+                  )
+                  // TransactionView(state: state)
                   /*buildOffersListView(),*/
                 ],
               ),

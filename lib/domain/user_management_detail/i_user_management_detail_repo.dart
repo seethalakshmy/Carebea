@@ -3,6 +3,7 @@ import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_r
 import 'package:dartz/dartz.dart';
 
 import 'model/client_service_response.dart';
+import 'model/sub_client_response.dart';
 
 abstract class IClientDetailRepo {
   Future<Either<ApiErrorHandler, UserDetailResponse>> getUserDetail(
@@ -10,4 +11,10 @@ abstract class IClientDetailRepo {
 
   Future<Either<ApiErrorHandler, ClientServiceResponse>> getClientService(
       {required String userId, required String adminId});
+
+  Future<Either<ApiErrorHandler, SubClientResponse>> getSubClients(
+      {required String userId,
+      required String page,
+      required String limit,
+      required String searchTerm});
 }

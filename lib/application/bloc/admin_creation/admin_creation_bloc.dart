@@ -145,7 +145,8 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
       );
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context,
+            msg: "Admin User created successfully");
         autoTabRouter?.setActiveIndex(12);
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
@@ -184,7 +185,7 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
       );
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context, msg: "Updated successfully");
         autoTabRouter?.setActiveIndex(12);
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");

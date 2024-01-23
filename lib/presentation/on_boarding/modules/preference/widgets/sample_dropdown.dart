@@ -61,69 +61,66 @@ class _SampleDropdownState extends State<SampleDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              widget.isFromLangauge
-                  ? Container(
-                      width: 100,
-                      height: 30,
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppColor.amber2.val),
-                          color: AppColor.white.val),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            'English',
-                            style: TextStyle(fontSize: 13),
-                          ),
-                        ],
-                      ),
-                    )
-                  : const SizedBox.shrink(),
-              Expanded(
-                child: Wrap(
-                    runSpacing: 5.0,
-                    spacing: 8.0,
-                    children: generateSelectedItemsList()),
-              ),
-            ],
-          ),
-          CustomSizedBox(height: DBL.ten.val),
-          InkWell(
-            borderRadius: BorderRadius.circular(10),
-            onTap: () => openDropdown(context),
-            child: Container(
-                decoration: BoxDecoration(
-                    border: Border.all(color: AppColor.borderColor.val),
-                    borderRadius: BorderRadius.circular(10)),
-                width: DBL.twoEighty.val,
-                padding: const EdgeInsets.all(8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomText(
-                      widget.isFromLangauge
-                          ? AppString.selectLanguage.val
-                          : AppString.selectPets.val,
-                      style: TS().gRoboto(
-                          fontSize: FS.font16.val,
-                          fontWeight: FW.w400.val,
-                          color: AppColor.label.val),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            widget.isFromLangauge
+                ? Container(
+                    width: 100,
+                    height: 30,
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: AppColor.amber2.val),
+                        color: AppColor.white.val),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          'English',
+                          style: TextStyle(fontSize: 13),
+                        ),
+                      ],
                     ),
-                    const Icon(Icons.arrow_drop_down),
-                  ],
-                )),
-          ),
-        ],
-      ),
+                  )
+                : const SizedBox.shrink(),
+            Expanded(
+              child: Wrap(
+                  runSpacing: 5.0,
+                  spacing: 8.0,
+                  children: generateSelectedItemsList()),
+            ),
+          ],
+        ),
+        CustomSizedBox(height: DBL.ten.val),
+        InkWell(
+          borderRadius: BorderRadius.circular(10),
+          onTap: () => openDropdown(context),
+          child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: AppColor.borderColor.val),
+                  borderRadius: BorderRadius.circular(10)),
+              width: DBL.twoEighty.val,
+              padding: const EdgeInsets.all(8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomText(
+                    widget.isFromLangauge
+                        ? AppString.selectLanguage.val
+                        : AppString.selectPets.val,
+                    style: TS().gRoboto(
+                        fontSize: FS.font16.val,
+                        fontWeight: FW.w400.val,
+                        color: AppColor.label.val),
+                  ),
+                  const Icon(Icons.arrow_drop_down),
+                ],
+              )),
+        ),
+      ],
     );
   }
 

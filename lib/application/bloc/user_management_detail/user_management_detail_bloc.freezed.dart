@@ -17,23 +17,31 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$UserManagementDetailEvent {
   String get userId => throw _privateConstructorUsedError;
-  String get adminId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, String adminId) getUserDetail,
     required TResult Function(String userId, String adminId) getClientService,
+    required TResult Function(
+            String userId, String page, String limit, String searchTerm)
+        getSubClients,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId, String adminId)? getUserDetail,
     TResult? Function(String userId, String adminId)? getClientService,
+    TResult? Function(
+            String userId, String page, String limit, String searchTerm)?
+        getSubClients,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, String adminId)? getUserDetail,
     TResult Function(String userId, String adminId)? getClientService,
+    TResult Function(
+            String userId, String page, String limit, String searchTerm)?
+        getSubClients,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -41,18 +49,21 @@ mixin _$UserManagementDetailEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetUserDetail value) getUserDetail,
     required TResult Function(_GetClientService value) getClientService,
+    required TResult Function(_GetSubClients value) getSubClients,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetUserDetail value)? getUserDetail,
     TResult? Function(_GetClientService value)? getClientService,
+    TResult? Function(_GetSubClients value)? getSubClients,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetUserDetail value)? getUserDetail,
     TResult Function(_GetClientService value)? getClientService,
+    TResult Function(_GetSubClients value)? getSubClients,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -68,7 +79,7 @@ abstract class $UserManagementDetailEventCopyWith<$Res> {
           $Res Function(UserManagementDetailEvent) then) =
       _$UserManagementDetailEventCopyWithImpl<$Res, UserManagementDetailEvent>;
   @useResult
-  $Res call({String userId, String adminId});
+  $Res call({String userId});
 }
 
 /// @nodoc
@@ -86,16 +97,11 @@ class _$UserManagementDetailEventCopyWithImpl<$Res,
   @override
   $Res call({
     Object? userId = null,
-    Object? adminId = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      adminId: null == adminId
-          ? _value.adminId
-          : adminId // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -177,6 +183,9 @@ class _$_GetUserDetail implements _GetUserDetail {
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, String adminId) getUserDetail,
     required TResult Function(String userId, String adminId) getClientService,
+    required TResult Function(
+            String userId, String page, String limit, String searchTerm)
+        getSubClients,
   }) {
     return getUserDetail(userId, adminId);
   }
@@ -186,6 +195,9 @@ class _$_GetUserDetail implements _GetUserDetail {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId, String adminId)? getUserDetail,
     TResult? Function(String userId, String adminId)? getClientService,
+    TResult? Function(
+            String userId, String page, String limit, String searchTerm)?
+        getSubClients,
   }) {
     return getUserDetail?.call(userId, adminId);
   }
@@ -195,6 +207,9 @@ class _$_GetUserDetail implements _GetUserDetail {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, String adminId)? getUserDetail,
     TResult Function(String userId, String adminId)? getClientService,
+    TResult Function(
+            String userId, String page, String limit, String searchTerm)?
+        getSubClients,
     required TResult orElse(),
   }) {
     if (getUserDetail != null) {
@@ -208,6 +223,7 @@ class _$_GetUserDetail implements _GetUserDetail {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetUserDetail value) getUserDetail,
     required TResult Function(_GetClientService value) getClientService,
+    required TResult Function(_GetSubClients value) getSubClients,
   }) {
     return getUserDetail(this);
   }
@@ -217,6 +233,7 @@ class _$_GetUserDetail implements _GetUserDetail {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetUserDetail value)? getUserDetail,
     TResult? Function(_GetClientService value)? getClientService,
+    TResult? Function(_GetSubClients value)? getSubClients,
   }) {
     return getUserDetail?.call(this);
   }
@@ -226,6 +243,7 @@ class _$_GetUserDetail implements _GetUserDetail {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetUserDetail value)? getUserDetail,
     TResult Function(_GetClientService value)? getClientService,
+    TResult Function(_GetSubClients value)? getSubClients,
     required TResult orElse(),
   }) {
     if (getUserDetail != null) {
@@ -242,7 +260,6 @@ abstract class _GetUserDetail implements UserManagementDetailEvent {
 
   @override
   String get userId;
-  @override
   String get adminId;
   @override
   @JsonKey(ignore: true)
@@ -326,6 +343,9 @@ class _$_GetClientService implements _GetClientService {
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, String adminId) getUserDetail,
     required TResult Function(String userId, String adminId) getClientService,
+    required TResult Function(
+            String userId, String page, String limit, String searchTerm)
+        getSubClients,
   }) {
     return getClientService(userId, adminId);
   }
@@ -335,6 +355,9 @@ class _$_GetClientService implements _GetClientService {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId, String adminId)? getUserDetail,
     TResult? Function(String userId, String adminId)? getClientService,
+    TResult? Function(
+            String userId, String page, String limit, String searchTerm)?
+        getSubClients,
   }) {
     return getClientService?.call(userId, adminId);
   }
@@ -344,6 +367,9 @@ class _$_GetClientService implements _GetClientService {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, String adminId)? getUserDetail,
     TResult Function(String userId, String adminId)? getClientService,
+    TResult Function(
+            String userId, String page, String limit, String searchTerm)?
+        getSubClients,
     required TResult orElse(),
   }) {
     if (getClientService != null) {
@@ -357,6 +383,7 @@ class _$_GetClientService implements _GetClientService {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetUserDetail value) getUserDetail,
     required TResult Function(_GetClientService value) getClientService,
+    required TResult Function(_GetSubClients value) getSubClients,
   }) {
     return getClientService(this);
   }
@@ -366,6 +393,7 @@ class _$_GetClientService implements _GetClientService {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetUserDetail value)? getUserDetail,
     TResult? Function(_GetClientService value)? getClientService,
+    TResult? Function(_GetSubClients value)? getSubClients,
   }) {
     return getClientService?.call(this);
   }
@@ -375,6 +403,7 @@ class _$_GetClientService implements _GetClientService {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetUserDetail value)? getUserDetail,
     TResult Function(_GetClientService value)? getClientService,
+    TResult Function(_GetSubClients value)? getSubClients,
     required TResult orElse(),
   }) {
     if (getClientService != null) {
@@ -391,7 +420,6 @@ abstract class _GetClientService implements UserManagementDetailEvent {
 
   @override
   String get userId;
-  @override
   String get adminId;
   @override
   @JsonKey(ignore: true)
@@ -400,11 +428,199 @@ abstract class _GetClientService implements UserManagementDetailEvent {
 }
 
 /// @nodoc
+abstract class _$$_GetSubClientsCopyWith<$Res>
+    implements $UserManagementDetailEventCopyWith<$Res> {
+  factory _$$_GetSubClientsCopyWith(
+          _$_GetSubClients value, $Res Function(_$_GetSubClients) then) =
+      __$$_GetSubClientsCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String userId, String page, String limit, String searchTerm});
+}
+
+/// @nodoc
+class __$$_GetSubClientsCopyWithImpl<$Res>
+    extends _$UserManagementDetailEventCopyWithImpl<$Res, _$_GetSubClients>
+    implements _$$_GetSubClientsCopyWith<$Res> {
+  __$$_GetSubClientsCopyWithImpl(
+      _$_GetSubClients _value, $Res Function(_$_GetSubClients) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? page = null,
+    Object? limit = null,
+    Object? searchTerm = null,
+  }) {
+    return _then(_$_GetSubClients(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as String,
+      limit: null == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as String,
+      searchTerm: null == searchTerm
+          ? _value.searchTerm
+          : searchTerm // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetSubClients implements _GetSubClients {
+  const _$_GetSubClients(
+      {required this.userId,
+      required this.page,
+      required this.limit,
+      required this.searchTerm});
+
+  @override
+  final String userId;
+  @override
+  final String page;
+  @override
+  final String limit;
+  @override
+  final String searchTerm;
+
+  @override
+  String toString() {
+    return 'UserManagementDetailEvent.getSubClients(userId: $userId, page: $page, limit: $limit, searchTerm: $searchTerm)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetSubClients &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.limit, limit) || other.limit == limit) &&
+            (identical(other.searchTerm, searchTerm) ||
+                other.searchTerm == searchTerm));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userId, page, limit, searchTerm);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetSubClientsCopyWith<_$_GetSubClients> get copyWith =>
+      __$$_GetSubClientsCopyWithImpl<_$_GetSubClients>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId) getUserDetail,
+    required TResult Function(String userId, String adminId) getClientService,
+    required TResult Function(
+            String userId, String page, String limit, String searchTerm)
+        getSubClients,
+  }) {
+    return getSubClients(userId, page, limit, searchTerm);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getUserDetail,
+    TResult? Function(String userId, String adminId)? getClientService,
+    TResult? Function(
+            String userId, String page, String limit, String searchTerm)?
+        getSubClients,
+  }) {
+    return getSubClients?.call(userId, page, limit, searchTerm);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getUserDetail,
+    TResult Function(String userId, String adminId)? getClientService,
+    TResult Function(
+            String userId, String page, String limit, String searchTerm)?
+        getSubClients,
+    required TResult orElse(),
+  }) {
+    if (getSubClients != null) {
+      return getSubClients(userId, page, limit, searchTerm);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetUserDetail value) getUserDetail,
+    required TResult Function(_GetClientService value) getClientService,
+    required TResult Function(_GetSubClients value) getSubClients,
+  }) {
+    return getSubClients(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetUserDetail value)? getUserDetail,
+    TResult? Function(_GetClientService value)? getClientService,
+    TResult? Function(_GetSubClients value)? getSubClients,
+  }) {
+    return getSubClients?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetUserDetail value)? getUserDetail,
+    TResult Function(_GetClientService value)? getClientService,
+    TResult Function(_GetSubClients value)? getSubClients,
+    required TResult orElse(),
+  }) {
+    if (getSubClients != null) {
+      return getSubClients(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetSubClients implements UserManagementDetailEvent {
+  const factory _GetSubClients(
+      {required final String userId,
+      required final String page,
+      required final String limit,
+      required final String searchTerm}) = _$_GetSubClients;
+
+  @override
+  String get userId;
+  String get page;
+  String get limit;
+  String get searchTerm;
+  @override
+  @JsonKey(ignore: true)
+  _$$_GetSubClientsCopyWith<_$_GetSubClients> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$UserManagementDetailState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   UserDetailResponse? get response => throw _privateConstructorUsedError;
+  List<dynamic> get subUserList => throw _privateConstructorUsedError;
   ClientServiceResponse? get clientServiceResponse =>
+      throw _privateConstructorUsedError;
+  SubClientResponse? get subClientResponse =>
       throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
@@ -423,7 +639,9 @@ abstract class $UserManagementDetailStateCopyWith<$Res> {
       {bool isLoading,
       bool isError,
       UserDetailResponse? response,
+      List<dynamic> subUserList,
       ClientServiceResponse? clientServiceResponse,
+      SubClientResponse? subClientResponse,
       String? error});
 }
 
@@ -444,7 +662,9 @@ class _$UserManagementDetailStateCopyWithImpl<$Res,
     Object? isLoading = null,
     Object? isError = null,
     Object? response = freezed,
+    Object? subUserList = null,
     Object? clientServiceResponse = freezed,
+    Object? subClientResponse = freezed,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -460,10 +680,18 @@ class _$UserManagementDetailStateCopyWithImpl<$Res,
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as UserDetailResponse?,
+      subUserList: null == subUserList
+          ? _value.subUserList
+          : subUserList // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
       clientServiceResponse: freezed == clientServiceResponse
           ? _value.clientServiceResponse
           : clientServiceResponse // ignore: cast_nullable_to_non_nullable
               as ClientServiceResponse?,
+      subClientResponse: freezed == subClientResponse
+          ? _value.subClientResponse
+          : subClientResponse // ignore: cast_nullable_to_non_nullable
+              as SubClientResponse?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -485,7 +713,9 @@ abstract class _$$_UserManagementDetailStateCopyWith<$Res>
       {bool isLoading,
       bool isError,
       UserDetailResponse? response,
+      List<dynamic> subUserList,
       ClientServiceResponse? clientServiceResponse,
+      SubClientResponse? subClientResponse,
       String? error});
 }
 
@@ -505,7 +735,9 @@ class __$$_UserManagementDetailStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? isError = null,
     Object? response = freezed,
+    Object? subUserList = null,
     Object? clientServiceResponse = freezed,
+    Object? subClientResponse = freezed,
     Object? error = freezed,
   }) {
     return _then(_$_UserManagementDetailState(
@@ -521,10 +753,18 @@ class __$$_UserManagementDetailStateCopyWithImpl<$Res>
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as UserDetailResponse?,
+      subUserList: null == subUserList
+          ? _value._subUserList
+          : subUserList // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
       clientServiceResponse: freezed == clientServiceResponse
           ? _value.clientServiceResponse
           : clientServiceResponse // ignore: cast_nullable_to_non_nullable
               as ClientServiceResponse?,
+      subClientResponse: freezed == subClientResponse
+          ? _value.subClientResponse
+          : subClientResponse // ignore: cast_nullable_to_non_nullable
+              as SubClientResponse?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -540,8 +780,11 @@ class _$_UserManagementDetailState implements _UserManagementDetailState {
       {required this.isLoading,
       required this.isError,
       required this.response,
+      required final List<dynamic> subUserList,
       required this.clientServiceResponse,
-      required this.error});
+      required this.subClientResponse,
+      required this.error})
+      : _subUserList = subUserList;
 
   @override
   final bool isLoading;
@@ -549,14 +792,24 @@ class _$_UserManagementDetailState implements _UserManagementDetailState {
   final bool isError;
   @override
   final UserDetailResponse? response;
+  final List<dynamic> _subUserList;
+  @override
+  List<dynamic> get subUserList {
+    if (_subUserList is EqualUnmodifiableListView) return _subUserList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_subUserList);
+  }
+
   @override
   final ClientServiceResponse? clientServiceResponse;
+  @override
+  final SubClientResponse? subClientResponse;
   @override
   final String? error;
 
   @override
   String toString() {
-    return 'UserManagementDetailState(isLoading: $isLoading, isError: $isError, response: $response, clientServiceResponse: $clientServiceResponse, error: $error)';
+    return 'UserManagementDetailState(isLoading: $isLoading, isError: $isError, response: $response, subUserList: $subUserList, clientServiceResponse: $clientServiceResponse, subClientResponse: $subClientResponse, error: $error)';
   }
 
   @override
@@ -569,14 +822,25 @@ class _$_UserManagementDetailState implements _UserManagementDetailState {
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.response, response) ||
                 other.response == response) &&
+            const DeepCollectionEquality()
+                .equals(other._subUserList, _subUserList) &&
             (identical(other.clientServiceResponse, clientServiceResponse) ||
                 other.clientServiceResponse == clientServiceResponse) &&
+            (identical(other.subClientResponse, subClientResponse) ||
+                other.subClientResponse == subClientResponse) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, isLoading, isError, response, clientServiceResponse, error);
+      runtimeType,
+      isLoading,
+      isError,
+      response,
+      const DeepCollectionEquality().hash(_subUserList),
+      clientServiceResponse,
+      subClientResponse,
+      error);
 
   @JsonKey(ignore: true)
   @override
@@ -591,7 +855,9 @@ abstract class _UserManagementDetailState implements UserManagementDetailState {
       {required final bool isLoading,
       required final bool isError,
       required final UserDetailResponse? response,
+      required final List<dynamic> subUserList,
       required final ClientServiceResponse? clientServiceResponse,
+      required final SubClientResponse? subClientResponse,
       required final String? error}) = _$_UserManagementDetailState;
 
   @override
@@ -601,7 +867,11 @@ abstract class _UserManagementDetailState implements UserManagementDetailState {
   @override
   UserDetailResponse? get response;
   @override
+  List<dynamic> get subUserList;
+  @override
   ClientServiceResponse? get clientServiceResponse;
+  @override
+  SubClientResponse? get subClientResponse;
   @override
   String? get error;
   @override

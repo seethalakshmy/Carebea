@@ -73,6 +73,8 @@ class ServiceRequestManagementEvent with _$ServiceRequestManagementEvent {
     String? searchTerm,
     String? fromDate,
     String? toDate,
+    String? clientId,
+    String? caregiverId,
   }) = _GetServiceRequests;
 
   const factory ServiceRequestManagementEvent.getServiceDetails({

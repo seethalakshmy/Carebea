@@ -59,28 +59,28 @@ import 'package:admin_580_tech/presentation/reset_password/reset_password_page.d
 import 'package:admin_580_tech/presentation/role_creation/role_creation_page.dart'
     as _i27;
 import 'package:admin_580_tech/presentation/roles/role_page.dart' as _i26;
-import 'package:admin_580_tech/presentation/send_gift/send_gift.dart' as _i39;
+import 'package:admin_580_tech/presentation/send_gift/send_gift.dart' as _i28;
 import 'package:admin_580_tech/presentation/service_request_management/service_request_management_page.dart'
-    as _i28;
-import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart'
     as _i29;
-import 'package:admin_580_tech/presentation/signup/sign_up.dart' as _i30;
+import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart'
+    as _i30;
+import 'package:admin_580_tech/presentation/signup/sign_up.dart' as _i31;
 import 'package:admin_580_tech/presentation/subscription/subscription_view.dart'
-    as _i31;
-import 'package:admin_580_tech/presentation/transaction_management/transaction_management_page.dart'
     as _i32;
-import 'package:admin_580_tech/presentation/upcoming_birthdays/upcoming_birthdays.dart'
-    as _i38;
-import 'package:admin_580_tech/presentation/user_management/user_management_page.dart'
+import 'package:admin_580_tech/presentation/transaction_management/transaction_management_page.dart'
     as _i33;
-import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart'
+import 'package:admin_580_tech/presentation/upcoming_birthdays/upcoming_birthdays.dart'
     as _i34;
-import 'package:admin_580_tech/presentation/verify_email/verify_email.dart'
+import 'package:admin_580_tech/presentation/user_management/user_management_page.dart'
     as _i35;
-import 'package:admin_580_tech/presentation/video_management/video_management_view.dart'
+import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart'
     as _i36;
-import 'package:admin_580_tech/presentation/video_management_creation/video_management_creation_screen.dart'
+import 'package:admin_580_tech/presentation/verify_email/verify_email.dart'
     as _i37;
+import 'package:admin_580_tech/presentation/video_management/video_management_view.dart'
+    as _i38;
+import 'package:admin_580_tech/presentation/video_management_creation/video_management_creation_screen.dart'
+    as _i39;
 import 'package:auto_route/auto_route.dart' as _i40;
 import 'package:flutter/material.dart' as _i41;
 
@@ -360,40 +360,67 @@ abstract class $AppRouter extends _i40.RootStackRouter {
         ),
       );
     },
-    ServiceRequestManagementRoute.name: (routeData) {
+    SendGiftRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<SendGiftRouteArgs>(
+          orElse: () => SendGiftRouteArgs(userId: queryParams.optString('id')));
       return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i28.ServiceRequestManagementPage(),
+        child: _i28.SendGiftPage(
+          key: args.key,
+          userId: args.userId,
+        ),
+      );
+    },
+    ServiceRequestManagementRoute.name: (routeData) {
+      final args = routeData.argsAs<ServiceRequestManagementRouteArgs>();
+      return _i40.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i29.ServiceRequestManagementPage(
+          key: args.key,
+          clientId: args.clientId,
+        ),
       );
     },
     SideMenuRoute.name: (routeData) {
       return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i29.SideMenuPage(),
+        child: const _i30.SideMenuPage(),
       );
     },
     SignUpRoute.name: (routeData) {
       return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i30.SignUpPage(),
+        child: const _i31.SignUpPage(),
       );
     },
     SubscriptionRoute.name: (routeData) {
       return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i31.SubscriptionPage(),
+        child: const _i32.SubscriptionPage(),
       );
     },
     TransactionManagementRoute.name: (routeData) {
+      final args = routeData.argsAs<TransactionManagementRouteArgs>(
+          orElse: () => const TransactionManagementRouteArgs());
       return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i32.TransactionManagementPage(),
+        child: _i33.TransactionManagementPage(
+          key: args.key,
+          clientId: args.clientId,
+        ),
+      );
+    },
+    UpcomingBirthdayRoute.name: (routeData) {
+      return _i40.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i34.UpcomingBirthdayPage(),
       );
     },
     UserManagementRoute.name: (routeData) {
       return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i33.UserManagementPage(),
+        child: const _i35.UserManagementPage(),
       );
     },
     UserManagementDetailRoute.name: (routeData) {
@@ -403,7 +430,7 @@ abstract class $AppRouter extends _i40.RootStackRouter {
               UserManagementDetailRouteArgs(id: queryParams.optString('id')));
       return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i34.UserManagementDetailPage(
+        child: _i36.UserManagementDetailPage(
           key: args.key,
           id: args.id,
         ),
@@ -412,13 +439,13 @@ abstract class $AppRouter extends _i40.RootStackRouter {
     VerifyEmailRoute.name: (routeData) {
       return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i35.VerifyEmailPage(),
+        child: const _i37.VerifyEmailPage(),
       );
     },
     VideoManagementRoute.name: (routeData) {
       return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i36.VideoManagementPage(),
+        child: const _i38.VideoManagementPage(),
       );
     },
     VideoUploadRoute.name: (routeData) {
@@ -433,31 +460,13 @@ abstract class $AppRouter extends _i40.RootStackRouter {
               ));
       return _i40.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i37.VideoUploadPage(
+        child: _i39.VideoUploadPage(
           key: args.key,
           isEdit: args.isEdit,
           title: args.title,
           type: args.type,
           attachment: args.attachment,
           id: args.id,
-        ),
-      );
-    },
-    UpcomingBirthdayRoute.name: (routeData) {
-      return _i40.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i38.UpcomingBirthdayPage(),
-      );
-    },
-    SendGiftRoute.name: (routeData) {
-      final queryParams = routeData.queryParams;
-      final args = routeData.argsAs<SendGiftRouteArgs>(
-          orElse: () => SendGiftRouteArgs(userId: queryParams.optString('id')));
-      return _i40.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i39.SendGiftPage(
-          key: args.key,
-          userId: args.userId,
         ),
       );
     },
@@ -1210,21 +1219,85 @@ class RoleCreationRouteArgs {
 }
 
 /// generated route for
-/// [_i28.ServiceRequestManagementPage]
-class ServiceRequestManagementRoute extends _i40.PageRouteInfo<void> {
-  const ServiceRequestManagementRoute({List<_i40.PageRouteInfo>? children})
-      : super(
+/// [_i28.SendGiftPage]
+class SendGiftRoute extends _i40.PageRouteInfo<SendGiftRouteArgs> {
+  SendGiftRoute({
+    _i41.Key? key,
+    String? userId,
+    List<_i40.PageRouteInfo>? children,
+  }) : super(
+          SendGiftRoute.name,
+          args: SendGiftRouteArgs(
+            key: key,
+            userId: userId,
+          ),
+          rawQueryParams: {'id': userId},
+          initialChildren: children,
+        );
+
+  static const String name = 'SendGiftRoute';
+
+  static const _i40.PageInfo<SendGiftRouteArgs> page =
+      _i40.PageInfo<SendGiftRouteArgs>(name);
+}
+
+class SendGiftRouteArgs {
+  const SendGiftRouteArgs({
+    this.key,
+    this.userId,
+  });
+
+  final _i41.Key? key;
+
+  final String? userId;
+
+  @override
+  String toString() {
+    return 'SendGiftRouteArgs{key: $key, userId: $userId}';
+  }
+}
+
+/// generated route for
+/// [_i29.ServiceRequestManagementPage]
+class ServiceRequestManagementRoute
+    extends _i40.PageRouteInfo<ServiceRequestManagementRouteArgs> {
+  ServiceRequestManagementRoute({
+    _i41.Key? key,
+    required String clientId,
+    List<_i40.PageRouteInfo>? children,
+  }) : super(
           ServiceRequestManagementRoute.name,
+          args: ServiceRequestManagementRouteArgs(
+            key: key,
+            clientId: clientId,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ServiceRequestManagementRoute';
 
-  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
+  static const _i40.PageInfo<ServiceRequestManagementRouteArgs> page =
+      _i40.PageInfo<ServiceRequestManagementRouteArgs>(name);
+}
+
+class ServiceRequestManagementRouteArgs {
+  const ServiceRequestManagementRouteArgs({
+    this.key,
+    required this.clientId,
+  });
+
+  final _i41.Key? key;
+
+  final String clientId;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementRouteArgs{key: $key, clientId: $clientId}';
+  }
 }
 
 /// generated route for
-/// [_i29.SideMenuPage]
+/// [_i30.SideMenuPage]
 class SideMenuRoute extends _i40.PageRouteInfo<void> {
   const SideMenuRoute({List<_i40.PageRouteInfo>? children})
       : super(
@@ -1238,7 +1311,7 @@ class SideMenuRoute extends _i40.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i30.SignUpPage]
+/// [_i31.SignUpPage]
 class SignUpRoute extends _i40.PageRouteInfo<void> {
   const SignUpRoute({List<_i40.PageRouteInfo>? children})
       : super(
@@ -1252,7 +1325,7 @@ class SignUpRoute extends _i40.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i31.SubscriptionPage]
+/// [_i32.SubscriptionPage]
 class SubscriptionRoute extends _i40.PageRouteInfo<void> {
   const SubscriptionRoute({List<_i40.PageRouteInfo>? children})
       : super(
@@ -1266,21 +1339,60 @@ class SubscriptionRoute extends _i40.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i32.TransactionManagementPage]
-class TransactionManagementRoute extends _i40.PageRouteInfo<void> {
-  const TransactionManagementRoute({List<_i40.PageRouteInfo>? children})
-      : super(
+/// [_i33.TransactionManagementPage]
+class TransactionManagementRoute
+    extends _i40.PageRouteInfo<TransactionManagementRouteArgs> {
+  TransactionManagementRoute({
+    _i41.Key? key,
+    String? clientId,
+    List<_i40.PageRouteInfo>? children,
+  }) : super(
           TransactionManagementRoute.name,
+          args: TransactionManagementRouteArgs(
+            key: key,
+            clientId: clientId,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'TransactionManagementRoute';
 
+  static const _i40.PageInfo<TransactionManagementRouteArgs> page =
+      _i40.PageInfo<TransactionManagementRouteArgs>(name);
+}
+
+class TransactionManagementRouteArgs {
+  const TransactionManagementRouteArgs({
+    this.key,
+    this.clientId,
+  });
+
+  final _i41.Key? key;
+
+  final String? clientId;
+
+  @override
+  String toString() {
+    return 'TransactionManagementRouteArgs{key: $key, clientId: $clientId}';
+  }
+}
+
+/// generated route for
+/// [_i34.UpcomingBirthdayPage]
+class UpcomingBirthdayRoute extends _i40.PageRouteInfo<void> {
+  const UpcomingBirthdayRoute({List<_i40.PageRouteInfo>? children})
+      : super(
+          UpcomingBirthdayRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'UpcomingBirthdayRoute';
+
   static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i33.UserManagementPage]
+/// [_i35.UserManagementPage]
 class UserManagementRoute extends _i40.PageRouteInfo<void> {
   const UserManagementRoute({List<_i40.PageRouteInfo>? children})
       : super(
@@ -1294,7 +1406,7 @@ class UserManagementRoute extends _i40.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i34.UserManagementDetailPage]
+/// [_i36.UserManagementDetailPage]
 class UserManagementDetailRoute
     extends _i40.PageRouteInfo<UserManagementDetailRouteArgs> {
   UserManagementDetailRoute({
@@ -1334,7 +1446,7 @@ class UserManagementDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i35.VerifyEmailPage]
+/// [_i37.VerifyEmailPage]
 class VerifyEmailRoute extends _i40.PageRouteInfo<void> {
   const VerifyEmailRoute({List<_i40.PageRouteInfo>? children})
       : super(
@@ -1348,7 +1460,7 @@ class VerifyEmailRoute extends _i40.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i36.VideoManagementPage]
+/// [_i38.VideoManagementPage]
 class VideoManagementRoute extends _i40.PageRouteInfo<void> {
   const VideoManagementRoute({List<_i40.PageRouteInfo>? children})
       : super(
@@ -1362,7 +1474,7 @@ class VideoManagementRoute extends _i40.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i37.VideoUploadPage]
+/// [_i39.VideoUploadPage]
 class VideoUploadRoute extends _i40.PageRouteInfo<VideoUploadRouteArgs> {
   VideoUploadRoute({
     _i41.Key? key,
@@ -1423,58 +1535,5 @@ class VideoUploadRouteArgs {
   @override
   String toString() {
     return 'VideoUploadRouteArgs{key: $key, isEdit: $isEdit, title: $title, type: $type, attachment: $attachment, id: $id}';
-  }
-}
-
-/// generated route for
-/// [_i38.UpcomingBirthdayPage]
-class UpcomingBirthdayRoute extends _i40.PageRouteInfo<void> {
-  const UpcomingBirthdayRoute({List<_i40.PageRouteInfo>? children})
-      : super(
-          UpcomingBirthdayRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'UpcomingBirthdayRoute';
-
-  static const _i40.PageInfo<void> page = _i40.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i39.SendGiftPage]
-class SendGiftRoute extends _i40.PageRouteInfo<SendGiftRouteArgs> {
-  SendGiftRoute({
-    _i41.Key? key,
-    String? userId,
-    List<_i40.PageRouteInfo>? children,
-  }) : super(
-          SendGiftRoute.name,
-          args: SendGiftRouteArgs(
-            key: key,
-            userId: userId,
-          ),
-          rawQueryParams: {'id': userId},
-          initialChildren: children,
-        );
-
-  static const String name = 'SendGiftRoute';
-
-  static const _i40.PageInfo<SendGiftRouteArgs> page =
-      _i40.PageInfo<SendGiftRouteArgs>(name);
-}
-
-class SendGiftRouteArgs {
-  const SendGiftRouteArgs({
-    this.key,
-    this.userId,
-  });
-
-  final _i41.Key? key;
-
-  final String? userId;
-
-  @override
-  String toString() {
-    return 'SendGiftRouteArgs{key: $key, userId: $userId}';
   }
 }

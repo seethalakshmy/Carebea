@@ -10,6 +10,7 @@ abstract class TransactionManagementEvent with _$TransactionManagementEvent {
     required int limit,
     required String searchTerm,
     required int filterId,
+    String? clientId,
   }) = _GetTransactions;
 
   const factory TransactionManagementEvent.hideOrShowDetails(

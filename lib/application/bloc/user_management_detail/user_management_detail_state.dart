@@ -6,7 +6,9 @@ class UserManagementDetailState with _$UserManagementDetailState {
       {required bool isLoading,
       required bool isError,
       required UserDetailResponse? response,
+      required List<dynamic> subUserList,
       required ClientServiceResponse? clientServiceResponse,
+      required SubClientResponse? subClientResponse,
       required String? error}) = _UserManagementDetailState;
 
   factory UserManagementDetailState.initial() {
@@ -15,6 +17,8 @@ class UserManagementDetailState with _$UserManagementDetailState {
         isError: false,
         response: null,
         error: null,
-        clientServiceResponse: null);
+        clientServiceResponse: null,
+        subClientResponse: null,
+        subUserList: []);
   }
 }

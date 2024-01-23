@@ -69,6 +69,7 @@ import '../transaction_management/model/transaction_list_response.dart';
 import '../upcoming_birthdays/model/upcoming_birthday_response.dart';
 import '../user_management/model/user_list_response.dart';
 import '../user_management_detail/model/client_service_response.dart';
+import '../user_management_detail/model/sub_client_response.dart';
 import '../video_management/models/video_management_response.dart';
 
 part 'api_client.g.dart';
@@ -603,6 +604,8 @@ abstract class ApiClient {
     @Field('from_date') String? fromDate,
     @Field('to_date') String? toDate,
     @Field('filter_id') int? dateFilterId,
+    @Field('client_id') String? clientId,
+    @Field('caregiver_id') String? caregiverId,
   );
 
   @POST("/admin/service-info")
@@ -625,7 +628,8 @@ abstract class ApiClient {
       @Field('page') String page,
       @Field('limit') int limit,
       @Field('search_term') String searchTerm,
-      @Field('filter_id') int filterId);
+      @Field('filter_id') int filterId,
+      @Field('client_id') String clientId);
 
   @POST("/admin/transaction-details")
   Future<TransactionDetailsResponse> getTransactionDetails(
@@ -879,5 +883,13 @@ abstract class ApiClient {
     @Field("user_id") String userId,
     @Field("subject") String subject,
     @Field("body") String body,
+  );
+
+  @POST('/admin/get-sub-clients')
+  Future<SubClientResponse> subClients(
+    @Field("user_id") String userId,
+    @Field("page") String page,
+    @Field("limit") String limit,
+    @Field("search_term") String searchTerm,
   );
 }
