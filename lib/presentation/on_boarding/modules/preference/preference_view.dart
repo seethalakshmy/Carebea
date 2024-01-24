@@ -91,16 +91,26 @@ class PreferenceView extends StatelessWidget {
                 _transportationWidget(state),
                 CustomSizedBox(height: DBL.twenty.val),
                 _petsWidget(state),
+                SizedBox(
+                  height: 10,
+                ),
                 state.isPetsSelected == 0
-                    ? SampleDropdown(
-                        onboardingBloc: onboardingBloc,
-                        onSearchChanged: (val) {
-                          onboardingBloc.add(OnboardingEvent.petsList(
-                              val, onboardingBloc.petsList));
-                        },
-                        searchController: petSearchController,
-                        petList: onboardingBloc.petsList,
-                        isFromLangauge: false,
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const CustomText(
+                              'Select the pets the Care Ambassador not willing to work'),
+                          SampleDropdown(
+                            onboardingBloc: onboardingBloc,
+                            onSearchChanged: (val) {
+                              onboardingBloc.add(OnboardingEvent.petsList(
+                                  val, onboardingBloc.petsList));
+                            },
+                            searchController: petSearchController,
+                            petList: onboardingBloc.petsList,
+                            isFromLangauge: false,
+                          ),
+                        ],
                       )
                     : Container(),
                 CustomSizedBox(height: DBL.twenty.val),

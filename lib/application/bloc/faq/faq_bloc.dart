@@ -84,7 +84,7 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
       return state.copyWith(isLoading: false, error: l.error, isError: true);
     }, (r) {
       if (r.status!) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context, msg: "Faq deleted successfully");
         add(const FaqEvent.getFaqList());
 
         return state.copyWith(isLoading: false);

@@ -311,16 +311,17 @@ class ServiceRequestManagementBloc
     emit(state.copyWith(isListLoading: true));
     final Either<ApiErrorHandler, ServiceRequestListResponseModel> result =
         await serviceRequestManagementRepository.getServiceRequests(
-      page: event.page.toString(),
-      limit: event.limit,
-      userId: SharedPreffUtil().getAdminId,
-      serviceId: null,
-      searchTerm: event.searchTerm ?? "",
-      fromDate: event.fromDate,
-      toDate: event.toDate,
-      dateFilterId: event.dateFilterId,
-      statusFilterId: event.statusFilterId,
-    );
+            page: event.page.toString(),
+            limit: event.limit,
+            userId: SharedPreffUtil().getAdminId,
+            serviceId: null,
+            searchTerm: event.searchTerm ?? "",
+            fromDate: event.fromDate,
+            toDate: event.toDate,
+            dateFilterId: event.dateFilterId,
+            statusFilterId: event.statusFilterId,
+            clientId: event.clientId,
+            caregiverId: event.caregiverId);
     ServiceRequestManagementState serviceState = result.fold((l) {
       return state.copyWith(
           isListLoading: false, error: l.error, serviceOption: Some(Left(l)));

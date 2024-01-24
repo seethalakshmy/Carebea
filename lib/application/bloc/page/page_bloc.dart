@@ -145,7 +145,7 @@ class PageBloc extends Bloc<PageEvent, PageState> {
       //     isLoading: false, isError: true, radioValue: radioValue);
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context, msg: "Updated successfully");
         autoTabRouter?.setActiveIndex(24);
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
@@ -187,7 +187,7 @@ class PageBloc extends Bloc<PageEvent, PageState> {
       //     isLoading: false, isError: true, radioValue: radioValue);
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context, msg: "Deleted successfully");
         add(const PageEvent.getPages());
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");

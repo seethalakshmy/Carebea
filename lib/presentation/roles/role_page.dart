@@ -1,38 +1,38 @@
-import 'package:admin_580_tech/application/bloc/roles/roles_bloc.dart';
-import 'package:admin_580_tech/core/custom_debugger.dart';
-import 'package:admin_580_tech/core/enum.dart';
-import 'package:admin_580_tech/core/properties.dart';
-import 'package:admin_580_tech/core/text_styles.dart';
-import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
-import 'package:admin_580_tech/infrastructure/roles/roles_repository.dart';
-import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
-import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
-import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart';
-import 'package:admin_580_tech/presentation/widget/custom_button.dart';
-import 'package:admin_580_tech/presentation/widget/custom_card.dart';
-import 'package:admin_580_tech/presentation/widget/custom_container.dart';
-import 'package:admin_580_tech/presentation/widget/custom_data_table_2.dart';
-import 'package:admin_580_tech/presentation/widget/custom_selection_area.dart';
-import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
-import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
-import 'package:admin_580_tech/presentation/widget/empty_view.dart';
-import 'package:admin_580_tech/presentation/widget/pagination_view.dart';
-import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
-import 'package:admin_580_tech/presentation/widget/table_row_view.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../application/bloc/roles/roles_bloc.dart';
+import '../../core/custom_debugger.dart';
+import '../../core/enum.dart';
+import '../../core/properties.dart';
+import '../../core/text_styles.dart';
+import '../../domain/roles/model/get_role_response.dart';
+import '../../infrastructure/roles/roles_repository.dart';
+import '../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../routes/app_router.gr.dart';
+import '../side_menu/side_menu_page.dart';
 import '../widget/common_alert_widget.dart';
+import '../widget/custom_button.dart';
+import '../widget/custom_card.dart';
+import '../widget/custom_container.dart';
+import '../widget/custom_data_table_2.dart';
 import '../widget/custom_icon.dart';
+import '../widget/custom_selection_area.dart';
+import '../widget/custom_sizedbox.dart';
+import '../widget/custom_svg.dart';
 import '../widget/custom_text.dart';
 import '../widget/custom_text_field.dart';
+import '../widget/empty_view.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
 import '../widget/loader_view.dart';
+import '../widget/pagination_view.dart';
 import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
+import '../widget/table_loader_view.dart';
+import '../widget/table_row_view.dart';
 
 @RoutePage()
 class RolesPage extends StatefulWidget {
@@ -294,6 +294,12 @@ class _RolesPageState extends State<RolesPage> {
             }
           }
           return DataRow2(
+            onTap: () {
+              autoTabRouter?.navigate(RoleCreationRoute(
+                roleId: item.id,
+                isView: "view",
+              ));
+            },
             cells: [
               DataCell(_tableRowView(_pageIndex.toString())),
               DataCell(_tableRowView(item.role ?? "")),

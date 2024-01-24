@@ -75,6 +75,7 @@ class PetListView extends StatelessWidget {
                     children: [
                       SizedBox(
                         width: MediaQuery.of(context).size.width * .01,
+                        height: MediaQuery.of(context).size.height * .09,
                       ),
                       Container(
                         // height: 20,

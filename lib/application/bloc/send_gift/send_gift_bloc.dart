@@ -39,7 +39,7 @@ class SendGiftBloc extends Bloc<SendGiftEvent, SendGiftState> {
         isLoadingButton: false,
       );
     }, (r) {
-      CSnackBar.showSuccess(event.context, msg: "Successfully send gift");
+      CSnackBar.showSuccess(event.context, msg: "Successfully sent gift");
 
       event.context.router.navigate(const UpcomingBirthdayRoute());
       return state.copyWith(isLoadingButton: false);

@@ -54,7 +54,9 @@ mixin _$ServiceRequestManagementEvent {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -103,7 +105,9 @@ mixin _$ServiceRequestManagementEvent {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -152,7 +156,9 @@ mixin _$ServiceRequestManagementEvent {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -420,7 +426,9 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -472,7 +480,9 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -524,7 +534,9 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -762,7 +774,9 @@ class _$_Started implements _Started {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -814,7 +828,9 @@ class _$_Started implements _Started {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -866,7 +882,9 @@ class _$_Started implements _Started {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -1179,7 +1197,9 @@ class _$_IsSelectedTab implements _IsSelectedTab {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -1232,7 +1252,9 @@ class _$_IsSelectedTab implements _IsSelectedTab {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -1285,7 +1307,9 @@ class _$_IsSelectedTab implements _IsSelectedTab {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -1567,7 +1591,9 @@ class _$_Reschedule implements _Reschedule {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -1619,7 +1645,9 @@ class _$_Reschedule implements _Reschedule {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -1671,7 +1699,9 @@ class _$_Reschedule implements _Reschedule {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -1947,7 +1977,9 @@ class _$_AssignCaregiver implements _AssignCaregiver {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -1999,7 +2031,9 @@ class _$_AssignCaregiver implements _AssignCaregiver {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -2051,7 +2085,9 @@ class _$_AssignCaregiver implements _AssignCaregiver {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -2334,7 +2370,9 @@ class _$_StartService implements _StartService {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -2386,7 +2424,9 @@ class _$_StartService implements _StartService {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -2438,7 +2478,9 @@ class _$_StartService implements _StartService {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -2740,7 +2782,9 @@ class _$_CancelService implements _CancelService {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -2792,7 +2836,9 @@ class _$_CancelService implements _CancelService {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -2844,7 +2890,9 @@ class _$_CancelService implements _CancelService {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -3113,7 +3161,9 @@ class _$_SetDate implements _SetDate {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -3165,7 +3215,9 @@ class _$_SetDate implements _SetDate {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -3217,7 +3269,9 @@ class _$_SetDate implements _SetDate {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -3479,7 +3533,9 @@ class _$_SetFromTime implements _SetFromTime {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -3531,7 +3587,9 @@ class _$_SetFromTime implements _SetFromTime {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -3583,7 +3641,9 @@ class _$_SetFromTime implements _SetFromTime {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -3845,7 +3905,9 @@ class _$_SetToTime implements _SetToTime {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -3897,7 +3959,9 @@ class _$_SetToTime implements _SetToTime {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -3949,7 +4013,9 @@ class _$_SetToTime implements _SetToTime {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -4187,7 +4253,9 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -4239,7 +4307,9 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -4291,7 +4361,9 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -4525,7 +4597,9 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -4577,7 +4651,9 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -4629,7 +4705,9 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -4865,7 +4943,9 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -4917,7 +4997,9 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -4969,7 +5051,9 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -5205,7 +5289,9 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -5257,7 +5343,9 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -5309,7 +5397,9 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -5547,7 +5637,9 @@ class _$_IsRescheduleOtherMatchingViewView
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -5599,7 +5691,9 @@ class _$_IsRescheduleOtherMatchingViewView
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -5651,7 +5745,9 @@ class _$_IsRescheduleOtherMatchingViewView
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -5884,7 +5980,9 @@ class _$_GetFilters implements _GetFilters {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -5936,7 +6034,9 @@ class _$_GetFilters implements _GetFilters {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -5988,7 +6088,9 @@ class _$_GetFilters implements _GetFilters {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -6219,7 +6321,9 @@ class _$_GetServiceStatus implements _GetServiceStatus {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -6271,7 +6375,9 @@ class _$_GetServiceStatus implements _GetServiceStatus {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -6323,7 +6429,9 @@ class _$_GetServiceStatus implements _GetServiceStatus {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -6494,7 +6602,9 @@ abstract class _$$_GetServiceRequestsCopyWith<$Res> {
       int? dateFilterId,
       String? searchTerm,
       String? fromDate,
-      String? toDate});
+      String? toDate,
+      String? clientId,
+      String? caregiverId});
 }
 
 /// @nodoc
@@ -6516,6 +6626,8 @@ class __$$_GetServiceRequestsCopyWithImpl<$Res>
     Object? searchTerm = freezed,
     Object? fromDate = freezed,
     Object? toDate = freezed,
+    Object? clientId = freezed,
+    Object? caregiverId = freezed,
   }) {
     return _then(_$_GetServiceRequests(
       context: null == context
@@ -6550,6 +6662,14 @@ class __$$_GetServiceRequestsCopyWithImpl<$Res>
           ? _value.toDate
           : toDate // ignore: cast_nullable_to_non_nullable
               as String?,
+      clientId: freezed == clientId
+          ? _value.clientId
+          : clientId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      caregiverId: freezed == caregiverId
+          ? _value.caregiverId
+          : caregiverId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -6565,7 +6685,9 @@ class _$_GetServiceRequests implements _GetServiceRequests {
       this.dateFilterId,
       this.searchTerm,
       this.fromDate,
-      this.toDate});
+      this.toDate,
+      this.clientId,
+      this.caregiverId});
 
   @override
   final BuildContext context;
@@ -6583,10 +6705,14 @@ class _$_GetServiceRequests implements _GetServiceRequests {
   final String? fromDate;
   @override
   final String? toDate;
+  @override
+  final String? clientId;
+  @override
+  final String? caregiverId;
 
   @override
   String toString() {
-    return 'ServiceRequestManagementEvent.getServiceRequests(context: $context, page: $page, limit: $limit, statusFilterId: $statusFilterId, dateFilterId: $dateFilterId, searchTerm: $searchTerm, fromDate: $fromDate, toDate: $toDate)';
+    return 'ServiceRequestManagementEvent.getServiceRequests(context: $context, page: $page, limit: $limit, statusFilterId: $statusFilterId, dateFilterId: $dateFilterId, searchTerm: $searchTerm, fromDate: $fromDate, toDate: $toDate, clientId: $clientId, caregiverId: $caregiverId)';
   }
 
   @override
@@ -6605,12 +6731,26 @@ class _$_GetServiceRequests implements _GetServiceRequests {
                 other.searchTerm == searchTerm) &&
             (identical(other.fromDate, fromDate) ||
                 other.fromDate == fromDate) &&
-            (identical(other.toDate, toDate) || other.toDate == toDate));
+            (identical(other.toDate, toDate) || other.toDate == toDate) &&
+            (identical(other.clientId, clientId) ||
+                other.clientId == clientId) &&
+            (identical(other.caregiverId, caregiverId) ||
+                other.caregiverId == caregiverId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, context, page, limit,
-      statusFilterId, dateFilterId, searchTerm, fromDate, toDate);
+  int get hashCode => Object.hash(
+      runtimeType,
+      context,
+      page,
+      limit,
+      statusFilterId,
+      dateFilterId,
+      searchTerm,
+      fromDate,
+      toDate,
+      clientId,
+      caregiverId);
 
   @JsonKey(ignore: true)
   @override
@@ -6658,7 +6798,9 @@ class _$_GetServiceRequests implements _GetServiceRequests {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -6672,7 +6814,7 @@ class _$_GetServiceRequests implements _GetServiceRequests {
     required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return getServiceRequests(context, page, limit, statusFilterId,
-        dateFilterId, searchTerm, fromDate, toDate);
+        dateFilterId, searchTerm, fromDate, toDate, clientId, caregiverId);
   }
 
   @override
@@ -6711,7 +6853,9 @@ class _$_GetServiceRequests implements _GetServiceRequests {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -6725,7 +6869,7 @@ class _$_GetServiceRequests implements _GetServiceRequests {
     TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return getServiceRequests?.call(context, page, limit, statusFilterId,
-        dateFilterId, searchTerm, fromDate, toDate);
+        dateFilterId, searchTerm, fromDate, toDate, clientId, caregiverId);
   }
 
   @override
@@ -6764,7 +6908,9 @@ class _$_GetServiceRequests implements _GetServiceRequests {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -6779,7 +6925,7 @@ class _$_GetServiceRequests implements _GetServiceRequests {
   }) {
     if (getServiceRequests != null) {
       return getServiceRequests(context, page, limit, statusFilterId,
-          dateFilterId, searchTerm, fromDate, toDate);
+          dateFilterId, searchTerm, fromDate, toDate, clientId, caregiverId);
     }
     return orElse();
   }
@@ -6927,7 +7073,9 @@ abstract class _GetServiceRequests implements ServiceRequestManagementEvent {
       final int? dateFilterId,
       final String? searchTerm,
       final String? fromDate,
-      final String? toDate}) = _$_GetServiceRequests;
+      final String? toDate,
+      final String? clientId,
+      final String? caregiverId}) = _$_GetServiceRequests;
 
   BuildContext get context;
   int get page;
@@ -6937,6 +7085,8 @@ abstract class _GetServiceRequests implements ServiceRequestManagementEvent {
   String? get searchTerm;
   String? get fromDate;
   String? get toDate;
+  String? get clientId;
+  String? get caregiverId;
   @JsonKey(ignore: true)
   _$$_GetServiceRequestsCopyWith<_$_GetServiceRequests> get copyWith =>
       throw _privateConstructorUsedError;
@@ -7052,7 +7202,9 @@ class _$_GetServiceDetails implements _GetServiceDetails {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -7104,7 +7256,9 @@ class _$_GetServiceDetails implements _GetServiceDetails {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -7156,7 +7310,9 @@ class _$_GetServiceDetails implements _GetServiceDetails {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -7426,7 +7582,9 @@ class _$_ShowOrHideTransactionDetails implements _ShowOrHideTransactionDetails {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -7478,7 +7636,9 @@ class _$_ShowOrHideTransactionDetails implements _ShowOrHideTransactionDetails {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -7530,7 +7690,9 @@ class _$_ShowOrHideTransactionDetails implements _ShowOrHideTransactionDetails {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -7798,7 +7960,9 @@ class _$_ShowOrHideNeededServices implements _ShowOrHideNeededServices {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -7850,7 +8014,9 @@ class _$_ShowOrHideNeededServices implements _ShowOrHideNeededServices {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -7902,7 +8068,9 @@ class _$_ShowOrHideNeededServices implements _ShowOrHideNeededServices {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -8171,7 +8339,9 @@ class _$_ShowOrHideCompletedServices implements _ShowOrHideCompletedServices {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -8223,7 +8393,9 @@ class _$_ShowOrHideCompletedServices implements _ShowOrHideCompletedServices {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -8275,7 +8447,9 @@ class _$_ShowOrHideCompletedServices implements _ShowOrHideCompletedServices {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -8544,7 +8718,9 @@ class _$_ShowOrHideIncompleteServices implements _ShowOrHideIncompleteServices {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -8596,7 +8772,9 @@ class _$_ShowOrHideIncompleteServices implements _ShowOrHideIncompleteServices {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -8648,7 +8826,9 @@ class _$_ShowOrHideIncompleteServices implements _ShowOrHideIncompleteServices {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -8916,7 +9096,9 @@ class _$_ShowOrHideExtraServices implements _ShowOrHideExtraServices {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -8968,7 +9150,9 @@ class _$_ShowOrHideExtraServices implements _ShowOrHideExtraServices {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -9020,7 +9204,9 @@ class _$_ShowOrHideExtraServices implements _ShowOrHideExtraServices {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -9288,7 +9474,9 @@ class _$_ShowOrHideRefundDetails implements _ShowOrHideRefundDetails {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -9340,7 +9528,9 @@ class _$_ShowOrHideRefundDetails implements _ShowOrHideRefundDetails {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -9392,7 +9582,9 @@ class _$_ShowOrHideRefundDetails implements _ShowOrHideRefundDetails {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -9662,7 +9854,9 @@ class _$_WhoRequestedCancelRadioButton
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -9714,7 +9908,9 @@ class _$_WhoRequestedCancelRadioButton
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -9766,7 +9962,9 @@ class _$_WhoRequestedCancelRadioButton
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,
@@ -10032,7 +10230,9 @@ class _$_ShowOrHideTimeline implements _ShowOrHideTimeline {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)
+            String? toDate,
+            String? clientId,
+            String? caregiverId)
         getServiceRequests,
     required TResult Function(BuildContext context, String serviceId)
         getServiceDetails,
@@ -10084,7 +10284,9 @@ class _$_ShowOrHideTimeline implements _ShowOrHideTimeline {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult? Function(BuildContext context, String serviceId)?
         getServiceDetails,
@@ -10136,7 +10338,9 @@ class _$_ShowOrHideTimeline implements _ShowOrHideTimeline {
             int? dateFilterId,
             String? searchTerm,
             String? fromDate,
-            String? toDate)?
+            String? toDate,
+            String? clientId,
+            String? caregiverId)?
         getServiceRequests,
     TResult Function(BuildContext context, String serviceId)? getServiceDetails,
     TResult Function(bool isShowing)? showOrHideTransactionDetails,

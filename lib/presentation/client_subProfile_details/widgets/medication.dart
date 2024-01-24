@@ -42,7 +42,6 @@ class MedicationWidget extends StatelessWidget {
             height: 10,
           ),
           SizedBox(
-              height: 200,
               child: Wrap(
                   spacing: 10,
                   runSpacing: 10,

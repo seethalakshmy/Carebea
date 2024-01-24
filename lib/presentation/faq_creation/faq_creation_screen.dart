@@ -1,24 +1,25 @@
 import 'dart:developer';
 
-import 'package:admin_580_tech/infrastructure/faq_creation/faq_creation_repository.dart';
-import 'package:admin_580_tech/presentation/widget/custom_button.dart';
-import 'package:admin_580_tech/presentation/widget/custom_form.dart';
-import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quill_html_editor/quill_html_editor.dart';
 
 import '../../application/bloc/faq-creation/faq_creation_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
 import '../../domain/faq/models/faq_list_response_model.dart';
+import '../../infrastructure/faq_creation/faq_creation_repository.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../on_boarding/modules/qualification_details/widgets/yes_no_radio_button_widget.dart';
 import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
+import '../widget/custom_button.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
+import '../widget/custom_form.dart';
+import '../widget/custom_padding.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text.dart';
 import '../widget/details_text_field_with_label.dart';
@@ -48,6 +49,8 @@ class FaqCreationPage extends StatefulWidget {
 }
 
 class _faqCreationPageState extends State<FaqCreationPage> {
+  final QuillEditorController controller = QuillEditorController();
+
   final FocusNode questionFocusNode = FocusNode();
   final FocusNode answerFocusNode = FocusNode();
 
@@ -63,6 +66,32 @@ class _faqCreationPageState extends State<FaqCreationPage> {
 
   bool? _isEdit;
   int? forWhom;
+  String? htmlText;
+  final customToolBarList = [
+    ToolBarStyle.bold,
+    ToolBarStyle.italic,
+    ToolBarStyle.align,
+    ToolBarStyle.color,
+    ToolBarStyle.background,
+    ToolBarStyle.listBullet,
+    ToolBarStyle.listOrdered,
+    ToolBarStyle.clean,
+    ToolBarStyle.addTable,
+    ToolBarStyle.editTable,
+    ToolBarStyle.size,
+    ToolBarStyle.underline,
+    ToolBarStyle.redo,
+    ToolBarStyle.undo,
+    ToolBarStyle.headerOne,
+    ToolBarStyle.headerTwo,
+    ToolBarStyle.link,
+  ];
+
+  getText(QuillEditorController controller) async {
+    htmlText = await controller.getText();
+    debugPrint('text $htmlText');
+    return htmlText;
+  }
 
   @override
   void initState() {
@@ -187,25 +216,60 @@ class _faqCreationPageState extends State<FaqCreationPage> {
                   suffixIcon: const CustomContainer(width: 0),
                 ),
               ),
+              // ToolBar(
+              //   controller: controller,
+              //   toolBarConfig: customToolBarList,
+              //   toolBarColor: AppColor.lightGrey.val,
+              //   activeIconColor: Colors.green,
+              //   padding: const EdgeInsets.all(8),
+              //   iconSize: 20,
+              // ),
+              // ToolBar(
+              //   toolBarColor: AppColor.lightGrey.val,
+              //   activeIconColor: Colors.green,
+              //   padding: const EdgeInsets.all(8),
+              //   iconSize: 20,
+              //   controller: controller,
+              // ),
+
               CustomSizedBox(
-                width: DBL.twoEighty.val,
-                child: DetailsTextFieldWithLabel(
-                  maxLines: 10,
-                  isIgnore: _isView!,
-                  isMandatory: true,
-                  labelName: AppString.answer.val,
-                  focusNode: answerFocusNode,
-                  controller: _faqCreationBloc.answerController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return AppString.answerError.val;
-                    }
-                    return null;
-                  },
-                  textInputAction: TextInputAction.next,
-                  textInputType: TextInputType.text,
-                  suffixIcon: const CustomContainer(width: 0),
-                ),
+                  width: MediaQuery.of(context).size.width,
+                  child: TextFormField(
+                    maxLines: 10,
+                    keyboardType: TextInputType.multiline,
+                    focusNode: answerFocusNode,
+                    controller: _faqCreationBloc.answerController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return AppString.answerError.val;
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                        filled: true, hintText: AppString.answer.val),
+                  )
+                  //     DetailsTextFieldWithLabel(
+                  //   width: MediaQuery.of(context).size.width,
+                  //   height: 100 * 2,
+                  //   maxLines: 100,
+                  //   isIgnore: _isView!,
+                  //   isMandatory: true,
+                  //   labelName: AppString.answer.val,
+                  //   focusNode: answerFocusNode,
+                  //   controller: _faqCreationBloc.answerController,
+                  //   validator: (value) {
+                  //     if (value == null || value.isEmpty) {
+                  //       return AppString.answerError.val;
+                  //     }
+                  //     return null;
+                  //   },
+                  //   textInputAction: TextInputAction.next,
+                  //   textInputType: TextInputType.text,
+                  //   suffixIcon: const CustomContainer(width: 0),
+                  // ),
+                  ),
+              SizedBox(
+                height: 50,
               ),
               BlocBuilder<FaqCreationBloc, FaqCreationState>(
                 builder: (context, state) {

@@ -39,7 +39,12 @@ import 'widgets/service_details_alert.dart';
 
 @RoutePage()
 class ServiceRequestManagementPage extends StatefulWidget {
-  const ServiceRequestManagementPage({Key? key}) : super(key: key);
+  ServiceRequestManagementPage({
+    Key? key,
+    required this.clientId,
+  }) : super(key: key);
+
+  String clientId;
 
   @override
   State<ServiceRequestManagementPage> createState() =>
@@ -69,6 +74,7 @@ class _ServiceRequestManagementPageState
     _serviceRequestBloc.add(const ServiceRequestManagementEvent.getFilters());
     _serviceRequestBloc
         .add(const ServiceRequestManagementEvent.getServiceStatus());
+    debugPrint("clientID inside service request ${widget.clientId}");
   }
 
   @override
@@ -81,72 +87,81 @@ class _ServiceRequestManagementPageState
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        HeaderView(
-          title: AppString.serviceRequestManagement.val,
-        ),
-        CustomSizedBox(height: DBL.fifty.val),
-        BlocProvider(
-          create: (context) => _serviceRequestBloc
-            ..add(ServiceRequestManagementEvent.getServiceRequests(
-                context: context, page: _page, limit: _limit)),
-          child: BlocBuilder<ServiceRequestManagementBloc,
-              ServiceRequestManagementState>(
-            builder: (context, state) {
-              log("serviceRequest is ${state.serviceRequestsList.length}");
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  /*_tabView(state),
-                const SizedBox(height: 20),*/
-                  Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.start,
-                    alignment: WrapAlignment.start,
-                    runAlignment: WrapAlignment.center,
-                    spacing: 20,
-                    runSpacing: 10,
-                    children: [
-                      /*state.isLoading ?? false
-                        ? _shimmerForFilterWidgets()
-                        : _dateFilterDropDown(context),*/
-                      // _bookingStatusDropDown(context),
-                      state.isLoading ?? false
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          widget.clientId == ""
+              ? HeaderView(
+                  title: AppString.serviceRequestManagement.val,
+                )
+              : SizedBox.shrink(),
+          widget.clientId == ""
+              ? CustomSizedBox(height: DBL.fifty.val)
+              : SizedBox.shrink(),
+          BlocProvider(
+            create: (context) => _serviceRequestBloc
+              ..add(ServiceRequestManagementEvent.getServiceRequests(
+                  context: context,
+                  page: _page,
+                  limit: _limit,
+                  clientId: widget.clientId)),
+            child: BlocBuilder<ServiceRequestManagementBloc,
+                ServiceRequestManagementState>(
+              builder: (context, state) {
+                log("serviceRequest is ${state.serviceRequestsList.length}");
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    /*_tabView(state),
+                  const SizedBox(height: 20),*/
+                    Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.start,
+                      alignment: WrapAlignment.start,
+                      runAlignment: WrapAlignment.center,
+                      spacing: 20,
+                      runSpacing: 10,
+                      children: [
+                        /*state.isLoading ?? false
                           ? _shimmerForFilterWidgets()
-                          : _serviceStatusDropDown(context),
-                      state.isLoading ?? false
-                          ? _shimmerForFilterWidgets()
-                          : _buildDatePicker(state, fromDateController,
-                              AppString.startDate.val, () {
-                              _selectFromDate(context, state);
-                            }),
-                      state.isLoading ?? false
-                          ? _shimmerForFilterWidgets()
-                          : _buildDatePicker(
-                              state, toDateController, AppString.endDate.val,
-                              () {
-                              _serviceRequestBloc.selectedFromDate != "" ||
-                                      fromDateController.text.isNotEmpty
-                                  ? _selectToDate(context, state)
-                                  : CSnackBar.showError(context,
-                                      msg: 'Please select a startDate');
-                            }),
-                      state.isLoading ?? false
-                          ? _shimmerForFilterWidgets()
-                          : _searchWidget(context),
-                      state.isLoading ?? false
-                          ? _shimmerForFilterWidgets(width: DBL.oneTwenty.val)
-                          : _clearAllFiltersButtonWidget()
-                    ],
-                  ),
-                  const SizedBox(height: 30),
-                  _cardView(state, context),
-                ],
-              );
-            },
-          ),
-        )
-      ],
+                          : _dateFilterDropDown(context),*/
+                        // _bookingStatusDropDown(context),
+                        state.isLoading ?? false
+                            ? _shimmerForFilterWidgets()
+                            : _serviceStatusDropDown(context),
+                        state.isLoading ?? false
+                            ? _shimmerForFilterWidgets()
+                            : _buildDatePicker(state, fromDateController,
+                                AppString.startDate.val, () {
+                                _selectFromDate(context, state);
+                              }),
+                        state.isLoading ?? false
+                            ? _shimmerForFilterWidgets()
+                            : _buildDatePicker(
+                                state, toDateController, AppString.endDate.val,
+                                () {
+                                _serviceRequestBloc.selectedFromDate != "" ||
+                                        fromDateController.text.isNotEmpty
+                                    ? _selectToDate(context, state)
+                                    : CSnackBar.showError(context,
+                                        msg: 'Please select a startDate');
+                              }),
+                        state.isLoading ?? false
+                            ? _shimmerForFilterWidgets()
+                            : _searchWidget(context),
+                        state.isLoading ?? false
+                            ? _shimmerForFilterWidgets(width: DBL.oneTwenty.val)
+                            : _clearAllFiltersButtonWidget()
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                    _cardView(state, context),
+                  ],
+                );
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 
@@ -208,7 +223,10 @@ class _ServiceRequestManagementPageState
                 .add(const ServiceRequestManagementEvent.getServiceStatus());
             _serviceRequestBloc.add(
                 ServiceRequestManagementEvent.getServiceRequests(
-                    context: context, page: _page, limit: _limit));
+                    context: context,
+                    page: _page,
+                    limit: _limit,
+                    clientId: widget.clientId));
             debugPrint("date test ${fromDateController.text}");
           },
           text: AppString.clear.val,
@@ -246,7 +264,8 @@ class _ServiceRequestManagementPageState
                   page: _page,
                   limit: _limit,
                   fromDate: _serviceRequestBloc.selectedFromDate,
-                  toDate: _serviceRequestBloc.selectedToDate));
+                  toDate: _serviceRequestBloc.selectedToDate,
+                  clientId: widget.clientId));
         }
         fromDateController.text =
             value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
@@ -283,7 +302,8 @@ class _ServiceRequestManagementPageState
                   page: _page,
                   limit: _limit,
                   fromDate: _serviceRequestBloc.selectedFromDate,
-                  toDate: _serviceRequestBloc.selectedToDate));
+                  toDate: _serviceRequestBloc.selectedToDate,
+                  clientId: widget.clientId));
         }
         toDateController.text =
             value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
@@ -310,7 +330,8 @@ class _ServiceRequestManagementPageState
                 context: context,
                 page: _page,
                 limit: _limit,
-                searchTerm: _searchController.text));
+                searchTerm: _searchController.text,
+                clientId: widget.clientId));
       },
       onChanged: (String value) {
         _serviceRequestBloc.add(
@@ -323,7 +344,8 @@ class _ServiceRequestManagementPageState
                 context: context,
                 page: _page,
                 limit: _limit,
-                searchTerm: _searchController.text));
+                searchTerm: _searchController.text,
+                clientId: widget.clientId));
       },
       width: DBL.twoTen.val,
       height: DBL.fortySeven.val,
@@ -697,7 +719,8 @@ class _ServiceRequestManagementPageState
                 limit: _limit,
                 statusFilterId: _serviceRequestBloc.statusFilterId == 0
                     ? null
-                    : _serviceRequestBloc.statusFilterId));
+                    : _serviceRequestBloc.statusFilterId,
+                clientId: widget.clientId));
       },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -785,7 +808,8 @@ class _ServiceRequestManagementPageState
                         searchTerm: _searchController.text,
                         statusFilterId: _serviceRequestBloc.statusFilterId,
                         fromDate: _serviceRequestBloc.selectedFromDate,
-                        toDate: _serviceRequestBloc.selectedToDate));
+                        toDate: _serviceRequestBloc.selectedToDate,
+                        clientId: widget.clientId));
                 updateData();
               }
             },
@@ -799,7 +823,8 @@ class _ServiceRequestManagementPageState
                       searchTerm: _searchController.text,
                       statusFilterId: _serviceRequestBloc.statusFilterId,
                       fromDate: _serviceRequestBloc.selectedFromDate,
-                      toDate: _serviceRequestBloc.selectedToDate));
+                      toDate: _serviceRequestBloc.selectedToDate,
+                      clientId: widget.clientId));
               updateData();
             },
             onPreviousPressed: () {
@@ -813,7 +838,8 @@ class _ServiceRequestManagementPageState
                         searchTerm: _searchController.text,
                         statusFilterId: _serviceRequestBloc.statusFilterId,
                         fromDate: _serviceRequestBloc.selectedFromDate,
-                        toDate: _serviceRequestBloc.selectedToDate));
+                        toDate: _serviceRequestBloc.selectedToDate,
+                        clientId: widget.clientId));
                 updateData();
               }
             });

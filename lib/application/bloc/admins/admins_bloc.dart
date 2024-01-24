@@ -89,7 +89,7 @@ class AdminsBloc extends Bloc<AdminEvent, AdminsState> {
       );
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context, msg: "Deleted successfully");
         add(AdminEvent.getAdmins(
             userId: event.userID,
             page: page,

@@ -641,7 +641,7 @@ class _MenuBarState extends State<SideMenuPage> {
     RoleCreationRoute(),
     AdminsRoute(),
     AdminCreationRoute(),
-    ServiceRequestManagementRoute(),
+    ServiceRequestManagementRoute(clientId: ''),
     HelpAndSupportRoute(),
     SupportTicketsDetailRoute(),
     FaqRoute(),
@@ -732,7 +732,7 @@ class _MenuBarState extends State<SideMenuPage> {
     } else if (index == 4) {
       return const UserManagementDetailPage();
     } else if (index == 5) {
-      return const TransactionManagementPage();
+      return TransactionManagementPage();
     } else if (index == 6) {
       return const CareGiverProfilePage();
     } else if (index == 7) {
@@ -750,7 +750,7 @@ class _MenuBarState extends State<SideMenuPage> {
     } else if (index == 13) {
       return const AdminCreationPage();
     } else if (index == 14) {
-      return const ServiceRequestManagementPage();
+      return ServiceRequestManagementPage(clientId: '');
     } else if (index == 15) {
       return const HelpAndSupportPage();
     } else if (index == 16) {

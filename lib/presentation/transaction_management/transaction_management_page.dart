@@ -37,7 +37,9 @@ import 'widgets/transaction_details_alert.dart';
 
 @RoutePage()
 class TransactionManagementPage extends StatefulWidget {
-  const TransactionManagementPage({Key? key}) : super(key: key);
+  TransactionManagementPage({Key? key, this.clientId}) : super(key: key);
+
+  String? clientId;
 
   @override
   State<TransactionManagementPage> createState() =>
@@ -74,15 +76,19 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
             _transactionBloc.paginationPage = sharedPrefUtil.getPage;
           }
 
-          return Column(
-            children: [
-              HeaderView(title: AppString.transactionManagement.val),
-              CustomSizedBox(height: DBL.twenty.val),
-              BlocProvider(
-                create: (context) => _transactionBloc,
-                child: _reBuildView(),
-              ),
-            ],
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                widget.clientId == ""
+                    ? HeaderView(title: AppString.transactionManagement.val)
+                    : SizedBox.shrink(),
+                CustomSizedBox(height: DBL.twenty.val),
+                BlocProvider(
+                  create: (context) => _transactionBloc,
+                  child: _reBuildView(),
+                ),
+              ],
+            ),
           );
         });
   }
@@ -95,7 +101,8 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
             limit: _transactionBloc.limit,
             searchTerm: _searchController.text,
             filterId: 0,
-            userId: adminId ?? '')),
+            userId: adminId ?? '',
+            clientId: widget.clientId)),
       child: CustomCard(
         shape: PR().roundedRectangleBorder(DBL.eighteen.val),
         elevation: DBL.seven.val,
@@ -126,19 +133,19 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                                   limit: _transactionBloc.limit,
                                   filterId: _transactionBloc.filterId,
                                   searchTerm: _searchController.text,
-                                  userId: adminId ?? ''));
+                                  userId: adminId ?? '',
+                                  clientId: widget.clientId));
                         },
                         onChanged: (val) {
-                          if (_searchController.text == '') {
-                            _transactionBloc.add(
-                                TransactionManagementEvent.getTransactions(
-                                    page: _transactionBloc.paginationPage
-                                        .toString(),
-                                    limit: _transactionBloc.limit,
-                                    filterId: _transactionBloc.filterId,
-                                    searchTerm: _searchController.text,
-                                    userId: adminId ?? ''));
-                          }
+                          _transactionBloc.add(
+                              TransactionManagementEvent.getTransactions(
+                                  page: _transactionBloc.paginationPage
+                                      .toString(),
+                                  limit: _transactionBloc.limit,
+                                  filterId: _transactionBloc.filterId,
+                                  searchTerm: _searchController.text,
+                                  userId: adminId ?? '',
+                                  clientId: widget.clientId));
                         },
                         width: Responsive.isWeb(context)
                             ? DBL.threeFifteen.val
@@ -157,7 +164,8 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                                     limit: _transactionBloc.limit,
                                     filterId: _transactionBloc.filterId,
                                     searchTerm: _transactionBloc.searchQuery,
-                                    userId: adminId ?? ''));
+                                    userId: adminId ?? '',
+                                    clientId: widget.clientId));
                           },
                           child: CustomSvg(
                             path: IMG.search.val,
@@ -255,7 +263,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                         //   ),
                         // ),
                         DataColumn2(
-                          size: ColumnSize.S,
+                          size: ColumnSize.M,
                           label: _columnsView(
                             text: AppString.transactionType.val,
                           ),
@@ -329,7 +337,8 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                 limit: _transactionBloc.limit,
                 searchTerm: _searchController.text,
                 filterId: 0,
-                userId: adminId ?? ''));
+                userId: adminId ?? '',
+                clientId: widget.clientId));
           },
           text: AppString.clearFilters.val,
         ),
@@ -440,7 +449,8 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                     limit: _transactionBloc.limit,
                     filterId: _transactionBloc.filterId,
                     searchTerm: _searchController.text,
-                    userId: adminId ?? ''));
+                    userId: adminId ?? '',
+                    clientId: widget.clientId));
                 updateData();
               }
             },
@@ -451,7 +461,8 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                   limit: _transactionBloc.limit,
                   filterId: _transactionBloc.filterId,
                   searchTerm: _searchController.text,
-                  userId: adminId ?? ''));
+                  userId: adminId ?? '',
+                  clientId: widget.clientId));
               updateData();
             },
             onPreviousPressed: () {
@@ -463,7 +474,8 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                     limit: _transactionBloc.limit,
                     filterId: _transactionBloc.filterId,
                     searchTerm: _transactionBloc.searchQuery,
-                    userId: adminId ?? ''));
+                    userId: adminId ?? '',
+                    clientId: widget.clientId));
                 updateData();
               }
             });
@@ -500,9 +512,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
           //       text: AppString.serviceId.val, fontWeight: FontWeight.bold),
           // ),
           DataColumn2(
-            fixedWidth: Responsive.isWeb(context)
-                ? MediaQuery.of(context).size.width * .08
-                : 110,
+            size: ColumnSize.L,
             label: _columnsView(
                 text: AppString.transactionType.val,
                 fontWeight: FontWeight.bold),
@@ -663,7 +673,8 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
             limit: _transactionBloc.limit,
             searchTerm: _searchController.text,
             filterId: _transactionBloc.filterId,
-            userId: adminId ?? ''));
+            userId: adminId ?? '',
+            clientId: widget.clientId));
       },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,

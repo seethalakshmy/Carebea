@@ -481,6 +481,20 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
           setIndex(e.key);
           var item = e.value;
           return DataRow2(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return CustomAlertDialogWidget(
+                    heading: AppString.subscriptionDetails.val,
+                    child: SizedBox(
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
+                        child: SubscriptionDetailScreen(item: item)),
+                  );
+                },
+              );
+            },
             cells: [
               DataCell(_rowsView(
                 text: pageIndex.toString(),

@@ -338,20 +338,23 @@ class ServiceRequestManagementRepository
           int? statusFilterId,
           String? fromDate,
           String? toDate,
-          int? dateFilterId}) async {
+          int? dateFilterId,
+          String? clientId,
+          String? caregiverId}) async {
     try {
       final response = await _apiClient.getServiceRequests(
-        "",
-        userId,
-        serviceId,
-        page,
-        limit,
-        searchTerm,
-        statusFilterId,
-        fromDate,
-        toDate,
-        dateFilterId,
-      );
+          "",
+          userId,
+          serviceId,
+          page,
+          limit,
+          searchTerm,
+          statusFilterId,
+          fromDate,
+          toDate,
+          dateFilterId,
+          clientId,
+          caregiverId);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");

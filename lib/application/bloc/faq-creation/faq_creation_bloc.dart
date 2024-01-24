@@ -64,7 +64,7 @@ class FaqCreationBloc extends Bloc<FaqCreationEvent, FaqCreationState> {
       return state.copyWith(isLoadingButton: false, radioValue: radioValue);
     }, (r) {
       CSnackBar.showSuccess(event.context,
-          msg: "Successfully create the new faq");
+          msg: " The FAQ created successfully");
 
       event.context.router.navigate(const FaqRoute());
       return state.copyWith(isLoadingButton: false, radioValue: radioValue);
@@ -82,7 +82,7 @@ class FaqCreationBloc extends Bloc<FaqCreationEvent, FaqCreationState> {
 
       return state.copyWith(isLoadingButton: false, radioValue: radioValue);
     }, (r) {
-      CSnackBar.showSuccess(event.context, msg: "Successfully update the faq");
+      CSnackBar.showSuccess(event.context, msg: "The FAQ updated successfully");
 
       event.context.router.navigate(const FaqRoute());
       return state.copyWith(isLoadingButton: false, radioValue: radioValue);

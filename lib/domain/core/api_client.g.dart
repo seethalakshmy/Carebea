@@ -2181,6 +2181,8 @@ class _ApiClient implements ApiClient {
     fromDate,
     toDate,
     dateFilterId,
+    clientId,
+    caregiverId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2197,6 +2199,8 @@ class _ApiClient implements ApiClient {
       'from_date': fromDate,
       'to_date': toDate,
       'filter_id': dateFilterId,
+      'client_id': clientId,
+      'caregiver_id': caregiverId,
     };
     _data.removeWhere((k, v) => v == null);
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -2303,6 +2307,7 @@ class _ApiClient implements ApiClient {
     limit,
     searchTerm,
     filterId,
+    clientId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2314,6 +2319,7 @@ class _ApiClient implements ApiClient {
       'limit': limit,
       'search_term': searchTerm,
       'filter_id': filterId,
+      'client_id': clientId,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<TransactionListResponse>(Options(
@@ -3468,6 +3474,39 @@ class _ApiClient implements ApiClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SubClientResponse> subClients(
+    userId,
+    page,
+    limit,
+    searchTerm,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'page': page,
+      'limit': limit,
+      'search_term': searchTerm,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SubClientResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-sub-clients',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SubClientResponse.fromJson(_result.data!);
     return value;
   }
 

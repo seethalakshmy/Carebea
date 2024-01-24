@@ -7,6 +7,7 @@ import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart';
 import 'package:dartz/dartz.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -144,7 +145,8 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
       );
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context,
+            msg: "Admin User created successfully");
         autoTabRouter?.setActiveIndex(12);
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
@@ -183,7 +185,7 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
       );
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context, msg: "Updated successfully");
         autoTabRouter?.setActiveIndex(12);
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");

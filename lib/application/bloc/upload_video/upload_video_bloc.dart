@@ -42,6 +42,12 @@ class UploadVideoBloc extends Bloc<VideoUploadEvent, VideoUploadState> {
       return state.copyWith(isLoadingButton: false, radioValue: radioValue);
     }, (r) {
       event.context.router.navigate(const VideoManagementRoute());
+      if (event.settingsId == "") {
+        CSnackBar.showSuccess(event.context, msg: 'Created successfully');
+      } else {
+        CSnackBar.showSuccess(event.context, msg: 'Updated successfully');
+      }
+
       return state.copyWith(isLoadingButton: false, radioValue: radioValue);
     });
     emit(videoUploadState);

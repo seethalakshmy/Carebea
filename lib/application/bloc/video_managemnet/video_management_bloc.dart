@@ -54,7 +54,7 @@ class VideoManagementBloc
       return state.copyWith(error: l.error, isLoading: false);
     }, (r) {
       if (r.status!) {
-        CSnackBar.showSuccess(event.context, msg: 'Video deleted successfully');
+        CSnackBar.showSuccess(event.context, msg: 'Deleted successfully');
         add(VideoManagementEvent.getSettings(userId: event.userId));
         return state.copyWith(deleteResponse: r, isLoading: false);
       }

@@ -14,6 +14,7 @@ import '../../infrastructure/page/page_repository.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../caregiver_creation/widgets/details_text_field_with_label.dart';
 import '../side_menu/side_menu_page.dart';
+import '../widget/alert_text_label.dart';
 import '../widget/custom_button.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_form.dart';
@@ -158,6 +159,7 @@ class _PageCreationPageState extends State<PageCreationPage> {
                   //   iconSize: 20,
                   //   controller: controller,
                   // ),
+
                   BlocBuilder<PageBloc, PageState>(
                     builder: (context, state) {
                       return QuillHtmlEditor(
@@ -193,7 +195,7 @@ class _PageCreationPageState extends State<PageCreationPage> {
                       return CustomButton(
                           minWidth: 100,
                           height: 50,
-                          isLoading: false,
+                          isLoading: isLoading,
                           text:
                               // id == ''
                               //     ? AppString.submit.val
