@@ -195,7 +195,7 @@ class _PageCreationPageState extends State<PageCreationPage> {
                       return CustomButton(
                           minWidth: 100,
                           height: 50,
-                          isLoading: false,
+                          isLoading: isLoading,
                           text:
                               // id == ''
                               //     ? AppString.submit.val

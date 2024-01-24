@@ -40,7 +40,8 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
     }, (r) {
       if (r.status ?? false) {
         event.context.router.navigate(const LoginRoute());
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context,
+            msg: "Password reset successfully");
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }

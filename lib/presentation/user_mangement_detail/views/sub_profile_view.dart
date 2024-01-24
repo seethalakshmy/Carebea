@@ -336,10 +336,12 @@ class _SubProfileViewState extends State<SubProfileView> {
             return LoaderView();
           }
 
-          return Column(
-            children: [
-              _reBuildView(),
-            ],
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                _reBuildView(),
+              ],
+            ),
           );
         });
   }
@@ -626,17 +628,19 @@ class _SubProfileViewState extends State<SubProfileView> {
                 ? MediaQuery.of(context).size.width * .17
                 : DBL.twoHundred.val,
             label: _columnsView(
-                text: AppString.clientName.val, fontWeight: FontWeight.bold),
+                text: AppString.name.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(
-                text: AppString.emailAddress.val, fontWeight: FontWeight.bold),
+                text: AppString.totalServiceCompleted.val,
+                fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.M,
             label: _columnsView(
-                text: AppString.phoneNumber.val, fontWeight: FontWeight.bold),
+                text: AppString.subscriptionLabel.val,
+                fontWeight: FontWeight.bold),
           ),
           /*  DataColumn2(
             size: ColumnSize.L,
@@ -672,6 +676,7 @@ class _SubProfileViewState extends State<SubProfileView> {
             },
             cells: [
               DataCell(_rowsView(
+                context,
                 text: pageIndex.toString(),
               )),
               // DataCell(_rowsView(
@@ -679,9 +684,13 @@ class _SubProfileViewState extends State<SubProfileView> {
               // )),
               DataCell(_tableRowImage(
                   "${item.name?.firstName} ${item.name?.lastName}",
-                  item.profile ?? "")),
-              DataCell(_rowsView(text: item.email ?? "")),
-              DataCell(_rowsView(text: item.mobile)),
+                  item.profilePic ?? "")),
+              DataCell(_rowsView(context,
+                  text: item.completedServices.toString() ?? "")),
+              DataCell(_rowsView(context,
+                  icon: item.isSubscriptionActive == true
+                      ? Icons.check
+                      : Icons.close)),
               //     DataCell(_rowsView(text: item.clientID)),
               //   DataCell(_rowsView(text: item.date)),
               // DataCell(_tableSwitchBox(item)),
@@ -770,24 +779,28 @@ class _SubProfileViewState extends State<SubProfileView> {
     );
   }
 
-  Widget _rowsView({
+  Widget _rowsView(
+    BuildContext context, {
     String? text,
+    IconData? icon,
   }) {
-    return Tooltip(
-      message: text,
-      child: CustomText(
-        '$text',
-        softWrap: true,
-        style: TS().gRoboto(
-            fontSize: Responsive.isWeb(context)
-                ? DBL.thirteenPointFive.val
-                : DBL.twelve.val,
-            fontWeight: FW.w400.val,
-            color: AppColor.rowColor.val),
-        textAlign: TextAlign.start,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
+    return icon == null
+        ? CustomText(
+            '$text',
+            softWrap: true,
+            style: TS().gRoboto(
+                fontSize: Responsive.isWeb(context)
+                    ? DBL.thirteenPointFive.val
+                    : DBL.twelve.val,
+                fontWeight: FW.w400.val,
+                color: AppColor.rowColor.val),
+            textAlign: TextAlign.start,
+          )
+        : Icon(
+            icon,
+            size: 12,
+            color: AppColor.darkGrey.val,
+          );
   }
 
   Widget _columnsView(

@@ -168,7 +168,7 @@ enum AppString {
   analytics("Analytics"),
   resetPasswordDescription(
       "Enter your registered mail id to receive password\nreset verification code"),
-  enterTheCode("Enter the verification code send to your registered\nemail"),
+  enterTheCode("Enter the verification code sent to your registered\nemail"),
   sendRestInstructions("Send  Reset Instructions"),
   createNewPassword("Please create your new password"),
   newPassword("New Password"),

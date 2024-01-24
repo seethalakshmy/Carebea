@@ -150,7 +150,7 @@ class PieChartPageState extends State<PieChartPage> {
                 // ),
                 Indicator(
                   color: AppColor.pieChartColor.val,
-                  text: 'New clients ${widget.newClients}',
+                  text: 'New clients : ${widget.newClients}',
                   isSquare: false,
                   size:
                       Responsive.isWeb(context) ? FS.font12.val : FS.font10.val,
@@ -160,7 +160,7 @@ class PieChartPageState extends State<PieChartPage> {
                 ),
                 Indicator(
                   color: AppColor.lightGrey.val,
-                  text: 'Repeat clients ${widget.repeatedClients}',
+                  text: 'Repeat clients : ${widget.repeatedClients}',
                   size:
                       Responsive.isWeb(context) ? FS.font12.val : FS.font10.val,
                   isSquare: false,

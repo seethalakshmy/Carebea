@@ -21,7 +21,7 @@ class UserManagementDetailBloc
 
   int page = 1;
   int limit = 10;
-  List<dynamic> subUserList = [];
+  List<Profiles> subUserList = [];
   final TextEditingController searchController = TextEditingController();
 
   UserManagementDetailBloc(this.userDetailRepository)
