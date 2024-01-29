@@ -173,6 +173,8 @@ class _UserManagementPageState extends State<UserManagementPage> {
         // _userBloc.searchController.text.isEmpty ||
         //         _userBloc.searchController.text == ''
         //     ?
+        _userBloc.page = 1;
+
         _userBloc.add(UserManagementEvent.getUsers(
             userId: adminId ?? '',
             page: _userBloc.page.toString(),
@@ -193,6 +195,8 @@ class _UserManagementPageState extends State<UserManagementPage> {
       },
       suffixIcon: InkWell(
         onTap: () {
+          _userBloc.page = 1;
+
           _userBloc.add(UserManagementEvent.getUsers(
               userId: adminId ?? '',
               page: _userBloc.page.toString(),

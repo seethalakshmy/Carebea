@@ -315,20 +315,23 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
                       CustomSizedBox(width: DBL.twenty.val),
                       BlocBuilder<UploadVideoBloc, VideoUploadState>(
                         builder: (context, state) {
-                          return CustomButton(
-                            isLoading: state.isLoadingButton,
-                            height: DBL.fortyEight.val,
-                            minWidth: DBL.oneForty.val,
-                            onPressed: () async {
-                              await uploadVideo(state);
+                          return IgnorePointer(
+                            ignoring: state.isLoadingButton,
+                            child: CustomButton(
+                              isLoading: state.isLoadingButton,
+                              height: DBL.fortyEight.val,
+                              minWidth: DBL.oneForty.val,
+                              onPressed: () async {
+                                await uploadVideo(state);
 
-                              checkInputData(state);
-                            },
-                            text: _isEdit!
-                                ? AppString.update.val
-                                : AppString.save.val,
-                            color: AppColor.primaryColor.val,
-                            textColor: AppColor.white.val,
+                                checkInputData(state);
+                              },
+                              text: _isEdit!
+                                  ? AppString.update.val
+                                  : AppString.save.val,
+                              color: AppColor.primaryColor.val,
+                              textColor: AppColor.white.val,
+                            ),
                           );
                         },
                       )

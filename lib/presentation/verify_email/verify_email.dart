@@ -11,6 +11,7 @@ import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/forgot_password/forgot_password_bloc.dart';
@@ -173,8 +174,12 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
       width: DBL.fourFifty.val,
       onChanged: (String value) {},
       textCapitalization: TextCapitalization.none,
+      keyBoardType: TextInputType.number,
       textInputAction: TextInputAction.done,
       controller: _verificationCodeController,
+      inputFormatter: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly
+      ],
       validator: (value) {
         if (value == null || value.isEmpty) {
           return AppString.emptyOtp.val;

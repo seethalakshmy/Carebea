@@ -16,14 +16,17 @@ class TableRowView extends StatelessWidget {
     return _buildText(context);
   }
 
-  CustomText _buildText(BuildContext context) {
-    return CustomText(
-      text,
-      overflow: TextOverflow.ellipsis,
-      maxLines: maxLines,
-      softWrap: true,
-      style: _buildStyle(context),
-      textAlign: TextAlign.start,
+  _buildText(BuildContext context) {
+    return Tooltip(
+      message: text,
+      child: CustomText(
+        text,
+        overflow: TextOverflow.ellipsis,
+        maxLines: maxLines,
+        softWrap: true,
+        style: _buildStyle(context),
+        textAlign: TextAlign.start,
+      ),
     );
   }
 

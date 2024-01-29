@@ -521,9 +521,12 @@ class _CareGiversPageState extends State<CareGiversPage> {
     );
   }
 
-  TableRowView _tableRowView(String name) {
-    return TableRowView(
-      text: name,
+  _tableRowView(String name) {
+    return Tooltip(
+      message: name,
+      child: TableRowView(
+        text: name,
+      ),
     );
   }
 

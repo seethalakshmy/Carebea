@@ -390,16 +390,19 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
   Widget _rowsView({
     String? text,
   }) {
-    return CustomText(
-      '$text',
-      softWrap: true,
-      style: TS().gRoboto(
-          fontSize: Responsive.isWeb(context)
-              ? DBL.twelvePointFive.val
-              : DBL.twelve.val,
-          fontWeight: FW.w400.val,
-          color: AppColor.rowColor.val),
-      textAlign: TextAlign.start,
+    return Tooltip(
+      message: text,
+      child: CustomText(
+        '$text',
+        softWrap: true,
+        style: TS().gRoboto(
+            fontSize: Responsive.isWeb(context)
+                ? DBL.twelvePointFive.val
+                : DBL.twelve.val,
+            fontWeight: FW.w400.val,
+            color: AppColor.rowColor.val),
+        textAlign: TextAlign.start,
+      ),
     );
   }
 
