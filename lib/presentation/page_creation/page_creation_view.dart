@@ -119,6 +119,7 @@ class _PageCreationPageState extends State<PageCreationPage> {
             HeaderView(title: heading ?? ''),
             CustomSizedBox(height: DBL.twenty.val),
             _forWhoWidget(),
+            CustomSizedBox(height: DBL.twenty.val),
             CForm(
               formKey: _pageFormKey,
               autoValidateMode: _validateMode,

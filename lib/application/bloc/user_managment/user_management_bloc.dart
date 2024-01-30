@@ -83,7 +83,8 @@ class UserManagementBloc
             limit: limit.toString(),
             searchTerm: searchController.text.trim(),
             filterId: filterId));
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context,
+            msg: "Status changed successfully");
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }

@@ -127,14 +127,25 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         autoTabRouter?.navigate(CareGiversRoute(tab: 1));
         return true;
       },
-      child: BlocBuilder<CareGiverVerificationBloc, CareGiverVerificationState>(
-        builder: (context, state) {
-          return state.isLoading
-              ? const LoaderView()
-              : state.isError
-                  ? ErrorView(isClientError: false, errorMessage: state.error)
-                  : _bodyView(context, state);
-        },
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: HeaderView(
+              title: AppString.careAmbassador.val,
+            ),
+          ),
+          BlocBuilder<CareGiverVerificationBloc, CareGiverVerificationState>(
+            builder: (context, state) {
+              return state.isLoading
+                  ? const LoaderView()
+                  : state.isError
+                      ? ErrorView(
+                          isClientError: false, errorMessage: state.error)
+                      : _bodyView(context, state);
+            },
+          ),
+        ],
       ),
     );
   }

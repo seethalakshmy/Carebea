@@ -1884,7 +1884,7 @@ class PersonalDetails1 {
     String? zip,
     String? height,
     String? weight,
-    int? gender,
+    String? gender,
     String? mobile,
     String? alternativeNumber,
     String? email,
@@ -1925,7 +1925,7 @@ class PersonalDetails1 {
   String? _zip;
   String? _height;
   String? _weight;
-  int? _gender;
+  String? _gender;
   String? _mobile;
   String? _alternativeNumber;
   String? _email;
@@ -1938,7 +1938,7 @@ class PersonalDetails1 {
     String? zip,
     String? height,
     String? weight,
-    int? gender,
+    String? gender,
     String? mobile,
     String? alternativeNumber,
     String? email,
@@ -1965,7 +1965,7 @@ class PersonalDetails1 {
   String? get zip => _zip;
   String? get height => _height;
   String? get weight => _weight;
-  int? get gender => _gender;
+  String? get gender => _gender;
   String? get mobile => _mobile;
   String? get alternativeNumber => _alternativeNumber;
   String? get email => _email;

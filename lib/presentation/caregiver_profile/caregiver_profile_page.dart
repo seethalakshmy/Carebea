@@ -25,6 +25,7 @@ import '../widget/cached_image.dart';
 import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/custom_text.dart';
 import '../widget/error_view.dart';
+import '../widget/header_view.dart';
 import '../widget/table_verification_button.dart';
 
 @RoutePage()
@@ -76,16 +77,26 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
   }
 
   _rebuildView() {
-    return BlocBuilder<CareGiverProfileBloc, CareGiverProfileState>(
-      builder: (context, state) {
-        return state.isLoading
-            ? (const LoaderView())
-            : state.isError
-                ? ErrorView(
-                    isClientError: state.isClientError,
-                    errorMessage: state.error)
-                : _bodyView(state);
-      },
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: HeaderView(
+            title: AppString.careAmbassador.val,
+          ),
+        ),
+        BlocBuilder<CareGiverProfileBloc, CareGiverProfileState>(
+          builder: (context, state) {
+            return state.isLoading
+                ? (const LoaderView())
+                : state.isError
+                    ? ErrorView(
+                        isClientError: state.isClientError,
+                        errorMessage: state.error)
+                    : _bodyView(state);
+          },
+        ),
+      ],
     );
   }
 

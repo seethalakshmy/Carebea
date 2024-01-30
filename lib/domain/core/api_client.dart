@@ -81,7 +81,7 @@ abstract class ApiClient {
     Dio dio = Dio();
     dio.options = BaseOptions(
       receiveTimeout: 5000,
-      connectTimeout: 5000,
+      connectTimeout: 30000,
     );
 
     if (!kReleaseMode) {

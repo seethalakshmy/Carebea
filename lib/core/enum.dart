@@ -574,6 +574,7 @@ enum AppString {
   pleaseSelectProfilePicture("please select a profile picture"),
   errorUploadingFile("Error uploading file, Please try again"),
   fileSizeError("File size must be less than 20Mb"),
+  videoSizeError("File size must be less than 5Mb"),
   fileTypeNotSupport("File type not support"),
   serviceRequestManagement("Service Request Management"),
   supportTickets("Complaints Management"),
