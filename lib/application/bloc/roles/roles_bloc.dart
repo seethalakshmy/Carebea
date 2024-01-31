@@ -63,7 +63,10 @@ class RolesBloc extends Bloc<RolesEvent, RolesState> {
       );
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: AppString.successfullyDeleteRole.val);
+        CSnackBar.showSuccess(event.context,
+            msg: AppString.successfullyDeleteRole.val);
+        add(RolesEvent.getRoles(
+            userId: event.userId, page: 1, limit: 10, searchTerm: ''));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
@@ -75,7 +78,7 @@ class RolesBloc extends Bloc<RolesEvent, RolesState> {
     emit(
       homeState,
     );
-    add(RolesEvent.getRoles(
-        userId: event.userId, page: 1, limit: 10, searchTerm: ''));
+    // add(RolesEvent.getRoles(
+    //     userId: event.userId, page: 1, limit: 10, searchTerm: ''));
   }
 }

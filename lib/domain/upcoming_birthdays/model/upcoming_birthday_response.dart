@@ -161,6 +161,7 @@ class FinalResult {
     bool? isRejected,
     bool? isActive,
     num? verificationStatus,
+    bool? isGiftAlreadySent,
   }) {
     _userId = userId;
     _name = name;
@@ -174,6 +175,7 @@ class FinalResult {
     _isRejected = isRejected;
     _isActive = isActive;
     _verificationStatus = verificationStatus;
+    _isGiftAlreadySent = isGiftAlreadySent;
   }
 
   FinalResult.fromJson(dynamic json) {
@@ -189,6 +191,7 @@ class FinalResult {
     _isRejected = json['is_rejected'];
     _isActive = json['is_active'];
     _verificationStatus = json['verification_status'];
+    _isGiftAlreadySent = json['is_gift_already_sent'];
   }
   String? _userId;
   Name? _name;
@@ -202,34 +205,35 @@ class FinalResult {
   bool? _isRejected;
   bool? _isActive;
   num? _verificationStatus;
-  FinalResult copyWith({
-    String? userId,
-    Name? name,
-    String? email,
-    String? mobile,
-    String? dob,
-    num? gender,
-    String? profile,
-    bool? onBoardingStatus,
-    bool? isVerfied,
-    bool? isRejected,
-    bool? isActive,
-    num? verificationStatus,
-  }) =>
+  bool? _isGiftAlreadySent;
+  FinalResult copyWith(
+          {String? userId,
+          Name? name,
+          String? email,
+          String? mobile,
+          String? dob,
+          num? gender,
+          String? profile,
+          bool? onBoardingStatus,
+          bool? isVerfied,
+          bool? isRejected,
+          bool? isActive,
+          num? verificationStatus,
+          bool? isGiftAlreadySent}) =>
       FinalResult(
-        userId: userId ?? _userId,
-        name: name ?? _name,
-        email: email ?? _email,
-        mobile: mobile ?? _mobile,
-        dob: dob ?? _dob,
-        gender: gender ?? _gender,
-        profile: profile ?? _profile,
-        onBoardingStatus: onBoardingStatus ?? _onBoardingStatus,
-        isVerfied: isVerfied ?? _isVerfied,
-        isRejected: isRejected ?? _isRejected,
-        isActive: isActive ?? _isActive,
-        verificationStatus: verificationStatus ?? _verificationStatus,
-      );
+          userId: userId ?? _userId,
+          name: name ?? _name,
+          email: email ?? _email,
+          mobile: mobile ?? _mobile,
+          dob: dob ?? _dob,
+          gender: gender ?? _gender,
+          profile: profile ?? _profile,
+          onBoardingStatus: onBoardingStatus ?? _onBoardingStatus,
+          isVerfied: isVerfied ?? _isVerfied,
+          isRejected: isRejected ?? _isRejected,
+          isActive: isActive ?? _isActive,
+          verificationStatus: verificationStatus ?? _verificationStatus,
+          isGiftAlreadySent: isGiftAlreadySent ?? _isGiftAlreadySent);
   String? get userId => _userId;
   Name? get name => _name;
   String? get email => _email;
@@ -242,6 +246,7 @@ class FinalResult {
   bool? get isRejected => _isRejected;
   bool? get isActive => _isActive;
   num? get verificationStatus => _verificationStatus;
+  bool? get isGiftAlreadySent => _isGiftAlreadySent;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -259,6 +264,7 @@ class FinalResult {
     map['is_rejected'] = _isRejected;
     map['is_active'] = _isActive;
     map['verification_status'] = _verificationStatus;
+    map['is_gift_already_sent'] = _isGiftAlreadySent;
     return map;
   }
 }

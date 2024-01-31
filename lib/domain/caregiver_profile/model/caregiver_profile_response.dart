@@ -27,6 +27,7 @@ class Data {
   Name? name;
   String? age;
   String? agreement;
+  String? serviceAgreement;
   String? averageReview;
   int? reviewCount;
   PersonalDetails? personalDetails;
@@ -47,6 +48,7 @@ class Data {
       this.name,
       this.age,
       this.agreement,
+      this.serviceAgreement,
       this.averageReview,
       this.reviewCount,
       this.personalDetails,
@@ -64,7 +66,7 @@ class Data {
     name = json['name'] != null ? Name.fromJson(json['name']) : null;
     age = json['age'];
     agreement = json['agreement'];
-    agreement = json['agreement'];
+    serviceAgreement = json['service_agreement'];
     profileCompletion = json['profile_completion'];
     averageReview =
         json['average_review'] == null || json['average_review'] == 0
@@ -107,6 +109,7 @@ class Data {
     }
     data['age'] = age;
     data['agreement'] = agreement;
+    data['service_agreement'] = serviceAgreement;
     data['average_review'] = averageReview;
     data['review_count'] = reviewCount;
     if (personalDetails != null) {

@@ -633,8 +633,7 @@ class _SubProfileViewState extends State<SubProfileView> {
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(
-                text: AppString.totalServiceCompleted.val,
-                fontWeight: FontWeight.bold),
+                text: AppString.totalServices.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.M,

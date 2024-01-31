@@ -208,7 +208,8 @@ class _CareGiversPageState extends State<CareGiversPage> {
                     child: _caregiversTable(state, context),
                   ),
                   CustomSizedBox(height: DBL.twenty.val),
-                  if (_totalItems > 10) _paginationView()
+                  // if (_totalItems > 10)
+                  _paginationView()
                 ],
               )
             : EmptyView(title: AppString.emptyCareGivers.val),

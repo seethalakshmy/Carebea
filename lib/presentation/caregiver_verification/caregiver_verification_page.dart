@@ -349,11 +349,24 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           CustomSizedBox(
             height: DBL.six.val,
           ),
-          RowColonCombo.twoHundred(
-              customWidthLg1: DBL.twoHundred.val,
-              label: AppString.addressLine1.val,
-              value: personalDetails?.addressLine ?? "",
-              fontSize: FS.font13PointFive.val),
+          Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: RowColonCombo.twoHundred(
+                    customWidthLg1: DBL.twoHundred.val,
+                    label: AppString.addressLine1.val,
+                    value: personalDetails?.addressLine ?? "",
+                    fontSize: FS.font13PointFive.val),
+              ),
+              !isLarge(context)
+                  ? Expanded(
+                      flex: 1,
+                      child: _ssnView(personalDetails),
+                    )
+                  : CustomSizedBox.shrink(),
+            ],
+          ),
           CustomSizedBox(
             height: DBL.six.val,
           ),
@@ -961,11 +974,11 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         fontSize: FS.font13PointFive.val);
   }
 
-  RowColonCombo _alterNativeMobileNumberView(PersonalDetails? personalDetails) {
+  RowColonCombo _ssnView(PersonalDetails? personalDetails) {
     return RowColonCombo.twoHundred(
         customWidthLg1: DBL.twoHundred.val,
-        label: AppString.alternativeMobileNumber.val,
-        value: personalDetails?.alternativeMobileNumber ?? "",
+        label: AppString.socialSecurityNumber.val,
+        value: personalDetails?.ssn ?? "",
         fontSize: FS.font13PointFive.val);
   }
 
@@ -993,6 +1006,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         CustomSizedBox(
           height: DBL.six.val,
         ),
+        _ssnView(personalDetails),
       ],
     );
   }

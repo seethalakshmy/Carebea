@@ -425,6 +425,7 @@ class _RolesPageState extends State<RolesPage> {
               print("role id : $roleId\nuser id : $_adminUserId");
               _roleBloc.add(RolesEvent.roleDelete(
                   roleId: roleId, userId: _adminUserId, context: context));
+
               Navigator.pop(context);
             });
       },

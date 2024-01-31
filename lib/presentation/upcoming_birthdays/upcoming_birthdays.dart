@@ -381,7 +381,7 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
           //       text: AppString.status.val, fontWeight: FontWeight.bold),
           // ),
           DataColumn2(
-            size: ColumnSize.S,
+            size: ColumnSize.L,
             fixedWidth: Responsive.isWeb(context)
                 ? MediaQuery.of(context).size.width * .1
                 : DBL.oneSeventy.val,
@@ -415,18 +415,27 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
               DataCell(Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  CustomButton(
-                    height: 45,
-                    minWidth: 100,
-                    onPressed: () {
-                      autoTabRouter
-                          ?.navigate(SendGiftRoute(userId: item.userId));
-                    },
-                    text: AppString.sendGift.val,
-                    color: AppColor.primaryColor.val,
-                    textColor: AppColor.white.val,
-                    borderWidth: 1,
-                  ),
+                  item.isGiftAlreadySent
+                      ? Flexible(
+                          child: CustomText(
+                          "Gift Already Sent",
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: AppColor.green.val),
+                        ))
+                      : CustomButton(
+                          height: 45,
+                          minWidth: 100,
+                          onPressed: () {
+                            autoTabRouter
+                                ?.navigate(SendGiftRoute(userId: item.userId));
+                          },
+                          text: AppString.sendGift.val,
+                          color: AppColor.primaryColor.val,
+                          textColor: AppColor.white.val,
+                          borderWidth: 1,
+                        ),
 
                   CustomSizedBox(
                     width: DBL.twentyThree.val,

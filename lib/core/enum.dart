@@ -251,6 +251,7 @@ enum AppString {
   caName("Care Ambassador Name"),
   nameAndAge("Name & Age"),
   totalServiceCompleted("Total Service Completed"),
+  totalServices("Total Services"),
   totalServicePerMonth("Total Services Per Month"),
   service("Service"),
   serviceAgreement("Service Agreement"),
