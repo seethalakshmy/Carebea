@@ -98,17 +98,25 @@ class TransactionDetailsAlert extends StatelessWidget {
                   ],
                 ),
               )
-            : CustomText(
-                ":  $detail",
-                softWrap: true,
-                style: TS().gRoboto(
-                  needUnderLine: hasRedirection ? true : false,
-                  color:
-                      hasRedirection ? AppColor.blue.val : AppColor.black.val,
-                  fontSize:
-                      Responsive.isWeb(context) ? FS.font14.val : FS.font13.val,
-                  fontWeight: FW.w400.val,
-                ),
+            : Row(
+                children: [
+                  const CustomText(':'),
+                  SizedBox(width: DBL.eight.val),
+                  CustomText(
+                    "$detail",
+                    softWrap: true,
+                    style: TS().gRoboto(
+                      needUnderLine: hasRedirection ? true : false,
+                      color: hasRedirection
+                          ? AppColor.blue.val
+                          : AppColor.black.val,
+                      fontSize: Responsive.isWeb(context)
+                          ? FS.font14.val
+                          : FS.font13.val,
+                      fontWeight: FW.w400.val,
+                    ),
+                  ),
+                ],
               ),
       ],
     );

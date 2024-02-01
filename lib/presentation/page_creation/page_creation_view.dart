@@ -119,6 +119,7 @@ class _PageCreationPageState extends State<PageCreationPage> {
             HeaderView(title: heading ?? ''),
             CustomSizedBox(height: DBL.twenty.val),
             _forWhoWidget(),
+            CustomSizedBox(height: DBL.twenty.val),
             CForm(
               formKey: _pageFormKey,
               autoValidateMode: _validateMode,
@@ -186,7 +187,9 @@ class _PageCreationPageState extends State<PageCreationPage> {
               height: 100,
             ),
             BlocBuilder<PageBloc, PageState>(
+              bloc: pageBloc,
               builder: (context, state) {
+                log("state is ${state}");
                 return Row(
                   children: [
                     Spacer(),
@@ -242,13 +245,16 @@ class _PageCreationPageState extends State<PageCreationPage> {
                             }
                           });
                     }, loading: () {
-                      return CustomButton(
-                          isLoading: true,
-                          text:
-                              // id == ''
-                              //     ? AppString.submit.val
-                              AppString.update.val,
-                          onPressed: () {});
+                      return IgnorePointer(
+                        ignoring: true,
+                        child: CustomButton(
+                            isLoading: true,
+                            text:
+                                // id == ''
+                                //     ? AppString.submit.val
+                                AppString.update.val,
+                            onPressed: () {}),
+                      );
                     })
                   ],
                 );

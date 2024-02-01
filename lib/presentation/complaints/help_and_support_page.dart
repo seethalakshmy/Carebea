@@ -501,17 +501,20 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
   Widget _rowsView({
     String? text,
   }) {
-    return CustomText(
-      // overflow: TextOverflow.visible,
-      text ?? "",
-      softWrap: true,
-      style: TS().gRoboto(
-          fontSize: Responsive.isWeb(context)
-              ? DBL.thirteenPointFive.val
-              : DBL.twelve.val,
-          fontWeight: FW.w400.val,
-          color: AppColor.rowColor.val),
-      textAlign: TextAlign.start,
+    return Tooltip(
+      message: text,
+      child: CustomText(
+        // overflow: TextOverflow.visible,
+        text ?? "",
+        softWrap: true,
+        style: TS().gRoboto(
+            fontSize: Responsive.isWeb(context)
+                ? DBL.thirteenPointFive.val
+                : DBL.twelve.val,
+            fontWeight: FW.w400.val,
+            color: AppColor.rowColor.val),
+        textAlign: TextAlign.start,
+      ),
     );
   }
 

@@ -80,7 +80,7 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
           children: [
             Expanded(
               child: RowColonCombo.twoHundred(
-                  label: AppString.street.val,
+                  label: AppString.addressLine2.val,
                   value: state.response?.data?.address
                           ?.where((element) => element.isDefault == true)
                           .first

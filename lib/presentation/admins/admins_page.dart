@@ -219,7 +219,7 @@ class _AdminsPageState extends State<AdminsPage> {
                     child: _adminsTable(state, context),
                   ),
                   CustomSizedBox(height: DBL.twenty.val),
-                  if (_totalItems >= 10) _paginationView()
+                  _paginationView()
                 ],
               )
             : EmptyView(title: AppString.emptyadmin.val),

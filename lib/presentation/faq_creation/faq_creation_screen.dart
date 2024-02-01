@@ -279,7 +279,6 @@ class _faqCreationPageState extends State<FaqCreationPage> {
                       CustomButton(
                         height: DBL.fortyFive.val,
                         minWidth: DBL.oneTwenty.val,
-                        isLoading: state.isLoadingButton,
                         onPressed: () {
                           context.router.navigate(const FaqRoute());
                         },
@@ -295,22 +294,25 @@ class _faqCreationPageState extends State<FaqCreationPage> {
                               builder: (context, state) {
                                 log("${state.isLoadingButton}",
                                     name: "FAQBloc");
-                                return CustomButton(
-                                  isLoading: state.isLoadingButton,
-                                  height: DBL.fortyFive.val,
-                                  minWidth: DBL.oneTwenty.val,
-                                  onPressed: () async {
-                                    debugPrint(
-                                        "loading test ${state.isLoadingButton}");
-                                    await checkInputData(state);
-                                    debugPrint(
-                                        "loading test after function ${state.isLoadingButton}");
-                                  },
-                                  text: _isEdit!
-                                      ? AppString.update.val
-                                      : AppString.save.val,
-                                  color: AppColor.primaryColor.val,
-                                  textColor: AppColor.white.val,
+                                return IgnorePointer(
+                                  ignoring: state.isLoadingButton,
+                                  child: CustomButton(
+                                    isLoading: state.isLoadingButton,
+                                    height: DBL.fortyFive.val,
+                                    minWidth: DBL.oneTwenty.val,
+                                    onPressed: () async {
+                                      debugPrint(
+                                          "loading test ${state.isLoadingButton}");
+                                      await checkInputData(state);
+                                      debugPrint(
+                                          "loading test after function ${state.isLoadingButton}");
+                                    },
+                                    text: _isEdit!
+                                        ? AppString.update.val
+                                        : AppString.save.val,
+                                    color: AppColor.primaryColor.val,
+                                    textColor: AppColor.white.val,
+                                  ),
                                 );
                               },
                             )

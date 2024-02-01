@@ -152,7 +152,7 @@ class RowColonCombo extends StatelessWidget {
                     ?.map(
                       (e) => SizedBox(
                         height: MediaQuery.of(context).size.height * .05,
-                        width: MediaQuery.of(context).size.width * .05,
+                        width: MediaQuery.of(context).size.width * .15,
                         child: Row(
                           children: [
                             AlertTextLabel(

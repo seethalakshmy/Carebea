@@ -483,39 +483,42 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                       : CustomSizedBox.shrink(),
                   CustomSizedBox(width: DBL.twenty.val),
                   !_isView!
-                      ? CustomButton(
-                          isLoading: state.isLoadingButton,
-                          height: DBL.fortyFive.val,
-                          minWidth: DBL.oneTwenty.val,
-                          onPressed: () async {
-                            // if (_isEdit!) {
-                            //   _fNameController.text =
-                            //       state.viewResponse?.data?.firstName ?? '';
-                            //   _emailController.text =
-                            //       state.viewResponse?.data?.email ?? "";
-                            //   _mobileController.text =
-                            //       state.viewResponse?.data?.phoneNumber ?? "";
-                            //   selectedRole =
-                            //       state.viewResponse?.data?.roleId ?? '';
-                            //   _adminCreationBloc.profileUrl =
-                            //       state.viewResponse?.data?.profile ?? '';
-                            // }
-                            if (_adminCreationBloc
-                                    .state.pickedProfilePic!.size >
-                                0) {
-                              _adminCreationBloc.emit(_adminCreationBloc.state
-                                  .copyWith(isLoadingButton: true));
-                              await uploadProfilePicToAwsS3(
-                                  AppString.profilePicture.val,
-                                  SharedPreffUtil().getAdminId);
-                            }
-                            checkInputData(state);
-                          },
-                          text: _isEdit!
-                              ? AppString.update.val
-                              : AppString.save.val,
-                          color: AppColor.primaryColor.val,
-                          textColor: AppColor.white.val,
+                      ? IgnorePointer(
+                          ignoring: state.isLoadingButton,
+                          child: CustomButton(
+                            isLoading: state.isLoadingButton,
+                            height: DBL.fortyFive.val,
+                            minWidth: DBL.oneTwenty.val,
+                            onPressed: () async {
+                              // if (_isEdit!) {
+                              //   _fNameController.text =
+                              //       state.viewResponse?.data?.firstName ?? '';
+                              //   _emailController.text =
+                              //       state.viewResponse?.data?.email ?? "";
+                              //   _mobileController.text =
+                              //       state.viewResponse?.data?.phoneNumber ?? "";
+                              //   selectedRole =
+                              //       state.viewResponse?.data?.roleId ?? '';
+                              //   _adminCreationBloc.profileUrl =
+                              //       state.viewResponse?.data?.profile ?? '';
+                              // }
+                              if (_adminCreationBloc
+                                      .state.pickedProfilePic!.size >
+                                  0) {
+                                _adminCreationBloc.emit(_adminCreationBloc.state
+                                    .copyWith(isLoadingButton: true));
+                                await uploadProfilePicToAwsS3(
+                                    AppString.profilePicture.val,
+                                    SharedPreffUtil().getAdminId);
+                              }
+                              checkInputData(state);
+                            },
+                            text: _isEdit!
+                                ? AppString.update.val
+                                : AppString.save.val,
+                            color: AppColor.primaryColor.val,
+                            textColor: AppColor.white.val,
+                          ),
                         )
                       : CustomSizedBox.shrink(),
                 ],

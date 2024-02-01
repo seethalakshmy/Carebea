@@ -37,6 +37,7 @@ class UpcomingBirthdaysBloc
       type: event.type,
       page: event.page,
       limit: event.limit,
+      searchTerm: event.searchTerm,
     );
     var userState = result.fold((l) {
       return state.copyWith(

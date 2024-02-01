@@ -81,7 +81,7 @@ abstract class ApiClient {
     Dio dio = Dio();
     dio.options = BaseOptions(
       receiveTimeout: 5000,
-      connectTimeout: 5000,
+      connectTimeout: 30000,
     );
 
     if (!kReleaseMode) {
@@ -876,6 +876,7 @@ abstract class ApiClient {
     @Field("type") String type,
     @Field("page") String page,
     @Field("limit") String limit,
+    @Field("search_term") String searchTerm,
   );
 
   @POST('/admin/send-birthday-wish')

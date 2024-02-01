@@ -13,15 +13,15 @@ class UpcomingBirthdayRepository implements IUpcomingBirthdaysRepo {
 
   @override
   Future<Either<ApiErrorHandler, UpcomingBirthdayResponse>>
-      getUpcomingBirthdays({
-    required String userId,
-    required String type,
-    required String page,
-    required String limit,
-  }) async {
+      getUpcomingBirthdays(
+          {required String userId,
+          required String type,
+          required String page,
+          required String limit,
+          required String searchTerm}) async {
     try {
-      final response =
-          await _apiClient.upcomingBirthdays(userId, type, page, limit);
+      final response = await _apiClient.upcomingBirthdays(
+          userId, type, page, limit, searchTerm);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");

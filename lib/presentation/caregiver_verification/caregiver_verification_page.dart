@@ -127,14 +127,25 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         autoTabRouter?.navigate(CareGiversRoute(tab: 1));
         return true;
       },
-      child: BlocBuilder<CareGiverVerificationBloc, CareGiverVerificationState>(
-        builder: (context, state) {
-          return state.isLoading
-              ? const LoaderView()
-              : state.isError
-                  ? ErrorView(isClientError: false, errorMessage: state.error)
-                  : _bodyView(context, state);
-        },
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: HeaderView(
+              title: AppString.careAmbassador.val,
+            ),
+          ),
+          BlocBuilder<CareGiverVerificationBloc, CareGiverVerificationState>(
+            builder: (context, state) {
+              return state.isLoading
+                  ? const LoaderView()
+                  : state.isError
+                      ? ErrorView(
+                          isClientError: false, errorMessage: state.error)
+                      : _bodyView(context, state);
+            },
+          ),
+        ],
       ),
     );
   }
@@ -338,11 +349,24 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           CustomSizedBox(
             height: DBL.six.val,
           ),
-          RowColonCombo.twoHundred(
-              customWidthLg1: DBL.twoHundred.val,
-              label: AppString.addressLine1.val,
-              value: personalDetails?.addressLine ?? "",
-              fontSize: FS.font13PointFive.val),
+          Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: RowColonCombo.twoHundred(
+                    customWidthLg1: DBL.twoHundred.val,
+                    label: AppString.addressLine1.val,
+                    value: personalDetails?.addressLine ?? "",
+                    fontSize: FS.font13PointFive.val),
+              ),
+              !isLarge(context)
+                  ? Expanded(
+                      flex: 1,
+                      child: _ssnView(personalDetails),
+                    )
+                  : CustomSizedBox.shrink(),
+            ],
+          ),
           CustomSizedBox(
             height: DBL.six.val,
           ),
@@ -950,11 +974,11 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         fontSize: FS.font13PointFive.val);
   }
 
-  RowColonCombo _alterNativeMobileNumberView(PersonalDetails? personalDetails) {
+  RowColonCombo _ssnView(PersonalDetails? personalDetails) {
     return RowColonCombo.twoHundred(
         customWidthLg1: DBL.twoHundred.val,
-        label: AppString.alternativeMobileNumber.val,
-        value: personalDetails?.alternativeMobileNumber ?? "",
+        label: AppString.socialSecurityNumber.val,
+        value: personalDetails?.ssn ?? "",
         fontSize: FS.font13PointFive.val);
   }
 
@@ -982,6 +1006,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         CustomSizedBox(
           height: DBL.six.val,
         ),
+        _ssnView(personalDetails),
       ],
     );
   }
@@ -1342,16 +1367,29 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
     int? verificationStatus = state.response?.data?.verificationStatus;
     PersonalDetails? personalDetails =
         state.response?.data?.backgroundVerification?.personalDetails;
-    CertificateVerification? certificateVerification =
-        state.response?.data?.certificateVerification;
+    int? certificateVerification =
+        state.response?.data?.certificateVerification?.approvalStatus;
     if (personalDetails?.approvalStatus == Approve.approved.val &&
-        certificateVerification?.approvalStatus == Approve.approved.val &&
-        (verificationStatus == Verification.trainingStarted.val ||
-            verificationStatus == Verification.trainingCompleted.val)) {
+        certificateVerification == Approve.approved.val &&
+        verificationStatus == Verification.startedVerification.val &&
+        certificateVerification == 1) {
       return true;
     } else {
       return false;
     }
+
+    // if (personalDetails?.approvalStatus == Approve.approved.val &&
+    //         certificateVerification?.approvalStatus == Approve.approved.val &&
+    //         verificationStatus == Verification.startedVerification.val && certificateVerification = 1 )
+    //     // &&
+    //     // (verificationStatus == Verification.startedVerification.val
+    //     // ||
+    //     //     verificationStatus == Verification.trainingCompleted.val)
+    //      {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
   bool isLarge(BuildContext context) =>

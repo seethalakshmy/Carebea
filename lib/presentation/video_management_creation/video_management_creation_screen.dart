@@ -315,20 +315,23 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
                       CustomSizedBox(width: DBL.twenty.val),
                       BlocBuilder<UploadVideoBloc, VideoUploadState>(
                         builder: (context, state) {
-                          return CustomButton(
-                            isLoading: state.isLoadingButton,
-                            height: DBL.fortyEight.val,
-                            minWidth: DBL.oneForty.val,
-                            onPressed: () async {
-                              await uploadVideo(state);
+                          return IgnorePointer(
+                            ignoring: state.isLoadingButton,
+                            child: CustomButton(
+                              isLoading: state.isLoadingButton,
+                              height: DBL.fortyEight.val,
+                              minWidth: DBL.oneForty.val,
+                              onPressed: () async {
+                                await uploadVideo(state);
 
-                              checkInputData(state);
-                            },
-                            text: _isEdit!
-                                ? AppString.update.val
-                                : AppString.save.val,
-                            color: AppColor.primaryColor.val,
-                            textColor: AppColor.white.val,
+                                checkInputData(state);
+                              },
+                              text: _isEdit!
+                                  ? AppString.update.val
+                                  : AppString.save.val,
+                              color: AppColor.primaryColor.val,
+                              textColor: AppColor.white.val,
+                            ),
                           );
                         },
                       )
@@ -373,6 +376,8 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
         );
         if (result != null) {
           file = result.files.single;
+          int? sizeInBytes = file?.size;
+          double sizeInMb = sizeInBytes! / (1024 * 1024);
           if (file?.extension == 'avi' ||
               file?.extension == 'flv' ||
               file?.extension == 'mkv' ||
@@ -382,10 +387,14 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
               file?.extension == 'webm' ||
               file?.extension == 'wmv') {
             for (PlatformFile file in result.files) {
-              bytesList.add(file);
-              listUpdated = !listUpdated;
-              if (bytesList.length == 2) {
-                break;
+              if (sizeInMb < 5) {
+                bytesList.add(file);
+                listUpdated = !listUpdated;
+                if (bytesList.length == 2) {
+                  break;
+                }
+              } else {
+                CSnackBar.showError(context, msg: AppString.videoSizeError.val);
               }
             }
           } else {

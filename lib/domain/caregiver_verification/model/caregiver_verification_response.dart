@@ -126,6 +126,7 @@ class PersonalDetails {
   String? mobileNumber;
   String? alternativeMobileNumber;
   String? email;
+  String? ssn;
 
   PersonalDetails(
       {this.dob,
@@ -137,7 +138,8 @@ class PersonalDetails {
       this.state,
       this.mobileNumber,
       this.alternativeMobileNumber,
-      this.email});
+      this.email,
+      this.ssn});
 
   PersonalDetails.fromJson(Map<String, dynamic> json) {
     approvalStatus = json['approval_status'];
@@ -151,6 +153,7 @@ class PersonalDetails {
     mobileNumber = json['mobile'];
     alternativeMobileNumber = json['alternative_number'];
     email = json['email'];
+    ssn = json['ssn'];
   }
 
   Map<String, dynamic> toJson() {
@@ -165,6 +168,7 @@ class PersonalDetails {
     data['mobile'] = mobileNumber;
     data['alternative_number'] = alternativeMobileNumber;
     data['email'] = email;
+    data['ssn'] = ssn;
     return data;
   }
 }

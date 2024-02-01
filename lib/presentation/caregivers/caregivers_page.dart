@@ -208,7 +208,8 @@ class _CareGiversPageState extends State<CareGiversPage> {
                     child: _caregiversTable(state, context),
                   ),
                   CustomSizedBox(height: DBL.twenty.val),
-                  if (_totalItems > 10) _paginationView()
+                  // if (_totalItems > 10)
+                  _paginationView()
                 ],
               )
             : EmptyView(title: AppString.emptyCareGivers.val),
@@ -288,7 +289,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
         CustomDropdown<int>(
           onChange: (int value, int index) {
             CustomLog.log("val:::${value.toString()}");
-            _filterId = value == 2 ? null : value;
+            _filterId = value;
             _page = 1;
             _getCareGiverEvent();
           },
@@ -310,9 +311,9 @@ class _CareGiversPageState extends State<CareGiversPage> {
             padding: EdgeInsets.all(DBL.five.val),
           ),
           items: [
+            AppString.all.val,
             AppString.active.val,
             AppString.inActive.val,
-            AppString.all.val,
           ]
               .asMap()
               .entries
@@ -521,9 +522,12 @@ class _CareGiversPageState extends State<CareGiversPage> {
     );
   }
 
-  TableRowView _tableRowView(String name) {
-    return TableRowView(
-      text: name,
+  _tableRowView(String name) {
+    return Tooltip(
+      message: name,
+      child: TableRowView(
+        text: name,
+      ),
     );
   }
 

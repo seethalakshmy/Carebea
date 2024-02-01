@@ -61,6 +61,7 @@ class Data {
     List<Address>? address,
     bool? isSubscriptionActive,
     dynamic agreement,
+    String? serviceAgreement,
     int? serviceCompleted,
     int? cancelledRequests,
     double? averageReview,
@@ -86,6 +87,7 @@ class Data {
     _profileCompletionPercentage = profileCompletionPercentage;
     _profileCompletion = profileCompletion;
     _agreement = agreement;
+    _serviceAgreement = serviceAgreement;
     _isSubscriptionActive = isSubscriptionActive;
     _subscriptionDetails = subscriptionDetails;
     _serviceCompleted = serviceCompleted;
@@ -125,6 +127,7 @@ class Data {
       });
     }
     _agreement = json['agreement'];
+    _serviceAgreement = json['service_agreement'];
     _serviceCompleted = json['service_completed'];
     _cancelledRequests = json['cancelled_requests'];
     _averageReview = json['average_review'];
@@ -172,6 +175,7 @@ class Data {
   int? _profileCompletionPercentage;
   ProfileCompletion? _profileCompletion;
   dynamic _agreement;
+  String? _serviceAgreement;
   bool? _isSubscriptionActive;
   List<SubscriptionDetails>? _subscriptionDetails;
   int? _serviceCompleted;
@@ -204,6 +208,7 @@ class Data {
     List<SubscriptionDetails>? subscriptionDetails,
     ProfileCompletion? profileCompletion,
     dynamic agreement,
+    String? serviceAgreement,
     List<Address>? address,
     int? serviceCompleted,
     int? cancelledRequests,
@@ -234,6 +239,7 @@ class Data {
         subscriptionDetails: subscriptionDetails ?? _subscriptionDetails,
         profileCompletion: profileCompletion ?? _profileCompletion,
         agreement: agreement ?? _agreement,
+        serviceAgreement: serviceAgreement ?? _serviceAgreement,
         serviceCompleted: serviceCompleted ?? _serviceCompleted,
         cancelledRequests: cancelledRequests ?? _cancelledRequests,
         averageReview: averageReview ?? _averageReview,
@@ -263,6 +269,7 @@ class Data {
   bool? get isSubscriptionActive => _isSubscriptionActive;
   List<SubscriptionDetails>? get subscriptionDetails => _subscriptionDetails;
   dynamic get agreement => _agreement;
+  String? get serviceAgreement => _serviceAgreement;
   int? get serviceCompleted => _serviceCompleted;
   int? get cancelledRequests => _cancelledRequests;
   List<Address>? get address => _address;
@@ -303,6 +310,7 @@ class Data {
       map['address'] = _address?.map((v) => v.toJson()).toList();
     }
     map['agreement'] = _agreement;
+    map['service_agreement'] = _serviceAgreement;
     map['service_completed'] = _serviceCompleted;
     map['cancelled_requests'] = _cancelledRequests;
     map['average_review'] = _averageReview;
@@ -1596,7 +1604,7 @@ class SecondaryContact {
     _name = json['name'];
     _relationship = json['relationship'];
     _phoneNumber = json['phone_number'];
-    _relationshipDescription = json['relationship_description'];
+    _relationshipDescription = json['relationship_name'];
   }
   dynamic _name;
   dynamic _relationship;
@@ -1625,7 +1633,7 @@ class SecondaryContact {
     map['name'] = _name;
     map['relationship'] = _relationship;
     map['phone_number'] = _phoneNumber;
-    map['relationship_description'] = _relationshipDescription;
+    map['relationship_name'] = _relationshipDescription;
     return map;
   }
 }
@@ -1651,7 +1659,7 @@ class PrimaryContact {
     _name = json['name'];
     _relationship = json['relationship'];
     _phoneNumber = json['phone_number'];
-    _relationshipDescription = json['relationship_description'];
+    _relationshipDescription = json['relationship_name'];
   }
   String? _name;
   String? _relationship;
@@ -1680,7 +1688,7 @@ class PrimaryContact {
     map['name'] = _name;
     map['relationship'] = _relationship;
     map['phone_number'] = _phoneNumber;
-    map['relationship_description'] = _relationshipDescription;
+    map['relationship_name'] = _relationshipDescription;
     return map;
   }
 }
@@ -1881,10 +1889,12 @@ class PersonalDetails1 {
     String? street,
     String? city,
     String? state,
+    String? stateName,
+    String? cityName,
     String? zip,
     String? height,
     String? weight,
-    int? gender,
+    String? gender,
     String? mobile,
     String? alternativeNumber,
     String? email,
@@ -1894,6 +1904,8 @@ class PersonalDetails1 {
     _street = street;
     _city = city;
     _state = state;
+    _stateName = stateName;
+    _cityName = cityName;
     _zip = zip;
     _height = height;
     _weight = weight;
@@ -1909,6 +1921,8 @@ class PersonalDetails1 {
     _street = json['street'];
     _city = json['city'];
     _state = json['state'];
+    _stateName = json['stateName'];
+    _cityName = json['cityName'];
     _zip = json['zip'];
     _height = json['height'];
     _weight = json['weight'];
@@ -1922,10 +1936,12 @@ class PersonalDetails1 {
   String? _street;
   String? _city;
   String? _state;
+  String? _stateName;
+  String? _cityName;
   String? _zip;
   String? _height;
   String? _weight;
-  int? _gender;
+  String? _gender;
   String? _mobile;
   String? _alternativeNumber;
   String? _email;
@@ -1935,10 +1951,12 @@ class PersonalDetails1 {
     String? street,
     String? city,
     String? state,
+    String? stateName,
+    String? cityName,
     String? zip,
     String? height,
     String? weight,
-    int? gender,
+    String? gender,
     String? mobile,
     String? alternativeNumber,
     String? email,
@@ -1949,6 +1967,8 @@ class PersonalDetails1 {
         street: street ?? _street,
         city: city ?? _city,
         state: state ?? _state,
+        stateName: stateName ?? _stateName,
+        cityName: cityName ?? _cityName,
         zip: zip ?? _zip,
         height: height ?? _height,
         weight: weight ?? _weight,
@@ -1962,10 +1982,12 @@ class PersonalDetails1 {
   String? get street => _street;
   String? get city => _city;
   String? get state => _state;
+  String? get stateName => _stateName;
+  String? get cityName => _cityName;
   String? get zip => _zip;
   String? get height => _height;
   String? get weight => _weight;
-  int? get gender => _gender;
+  String? get gender => _gender;
   String? get mobile => _mobile;
   String? get alternativeNumber => _alternativeNumber;
   String? get email => _email;
@@ -1977,6 +1999,8 @@ class PersonalDetails1 {
     map['street'] = _street;
     map['city'] = _city;
     map['state'] = _state;
+    map['state_name'] = _stateName;
+    map['city_name'] = _cityName;
     map['zip'] = _zip;
     map['height'] = _height;
     map['weight'] = _weight;

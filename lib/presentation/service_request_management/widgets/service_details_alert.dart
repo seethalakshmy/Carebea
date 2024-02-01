@@ -643,10 +643,10 @@ class ServiceDetailsAlert extends StatelessWidget {
                 width: DBL.oneEighty.val,
                 child: CustomText(
                   text,
-                  style: TextStyle(
-                      decoration: (needUnderLine ?? false)
-                          ? TextDecoration.underline
-                          : null),
+                  // style: TextStyle(
+                  //     decoration: (needUnderLine ?? false)
+                  //         ? TextDecoration.underline
+                  //         : null),
                 )),
             const CustomText(':'),
             SizedBox(width: DBL.eight.val),

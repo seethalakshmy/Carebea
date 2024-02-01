@@ -11,12 +11,15 @@ import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../application/bloc/reset_password/reset_password_bloc.dart';
 import '../../core/custom_debugger.dart';
+import '../../core/utility.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../signup/widgets/password_criteria_widget.dart';
 import '../widget/custom_text_field.dart';
 
 @RoutePage()
@@ -139,6 +142,10 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 CustomSizedBox(
                   height: DBL.sixty.val,
                 ),
+                const PasswordCriteriaWidget(),
+                CustomSizedBox(
+                  height: DBL.sixty.val,
+                ),
                 _confirmButton(),
               ],
             ),
@@ -201,16 +208,19 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               : Icons.visibility_off),
         ),
         obscureText: passwordVisibility ? true : false,
+        inputFormatter: [
+          FilteringTextInputFormatter.deny(RegExp(r'\s')),
+        ],
         width: DBL.fourFifty.val,
         onChanged: (String value) {},
         textCapitalization: TextCapitalization.none,
         textInputAction: TextInputAction.done,
         controller: _passwordController,
         validator: (value) {
-          if (value == null || value.isEmpty) {
+          if (value == null || value.trim().isEmpty) {
             return AppString.emptyPassword.val;
-          } else if (value.length < INT.eight.val) {
-            return AppString.passwordLengthError.val;
+          } else if (!Utility.validatePassword(value)) {
+            return AppString.invalidPassword.val;
           }
           return null;
         },
@@ -233,6 +243,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         ),
         obscureText: confirmPasswordVisibility ? true : false,
         width: DBL.fourFifty.val,
+        inputFormatter: [
+          FilteringTextInputFormatter.deny(RegExp(r'\s')),
+        ],
         onChanged: (String value) {},
         textCapitalization: TextCapitalization.none,
         textInputAction: TextInputAction.done,

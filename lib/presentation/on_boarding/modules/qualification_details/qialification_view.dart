@@ -459,8 +459,6 @@ class _QualificationViewState extends State<QualificationView> {
                                 widget.pageController.page!.toInt() - 1);
                           },
                           onRightButtonPressed: () async {
-                            checkInputData(onboardingState);
-
                             if ((onboardingState.isCovidSelected == 0 &&
                                     widget.onboardingBloc.state
                                         .covidDocumentList.isEmpty) ||
@@ -473,8 +471,13 @@ class _QualificationViewState extends State<QualificationView> {
                                 (onboardingState.isHHASelected == 0 &&
                                     widget.onboardingBloc.state.hhaDocumentList
                                         .isEmpty)) {
+                              _validationBloc
+                                  .add(const FormValidationEvent.submit());
+
                               CSnackBar.showError(context,
                                   msg: AppString.emptyDocument.val);
+                            } else {
+                              checkInputData(onboardingState);
                             }
                             widget.onboardingBloc.nextButtonClicked = true;
                             if (widget.onboardingBloc.hhaBytesList.isNotEmpty) {

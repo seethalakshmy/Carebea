@@ -8,7 +8,7 @@ class PasswordCriteriaWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
           color: Colors.orange.withOpacity(0.1),
           borderRadius: BorderRadius.circular(4)),

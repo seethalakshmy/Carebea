@@ -37,48 +37,6 @@ class PageBloc extends Bloc<PageEvent, PageState> {
     on<_DeletePage>(_deletePage);
   }
 
-  // _createPage(_CreatePage event, Emitter<PageState> emit) async {
-  //   emit(PageState.initial(
-  //       radioValue: 0,
-  //       isLoading: true,
-  //       getPagesResponse: null,
-  //       isError: false,
-  //       isForClient: 0,
-  //       response: null));
-  //   final Either<ApiErrorHandler, CommonResponse> result =
-  //       await pageRepo.createPage(
-  //           title: event.title,
-  //           description: event.description,
-  //           pageFor: event.pageFor ?? '');
-  //   PageState pageState = result.fold((l) {
-  //     CSnackBar.showError(event.context!, msg: l.error ?? "");
-  //     return PageState.initial(
-  //         radioValue: radioValue,
-  //         isLoading: false,
-  //         getPagesResponse: null,
-  //         isError: true,
-  //         isForClient: 0,
-  //         response: null);
-  //   }, (r) {
-  //     if (r.status ?? false) {
-  //       CSnackBar.showSuccess(event.context!, msg: r.message ?? "");
-  //       autoTabRouter?.setActiveIndex(24);
-  //     } else {
-  //       CSnackBar.showError(event.context!, msg: r.message ?? "");
-  //     }
-  //     return PageState.initial(
-  //         radioValue: radioValue,
-  //         isLoading: false,
-  //         getPagesResponse: null,
-  //         isError: true,
-  //         isForClient: 0,
-  //         response: r);
-  //   });
-  //   emit(
-  //     pageState,
-  //   );
-  // }
-
   _getPages(_GetPages event, Emitter<PageState> emit) async {
     emit(PageState.loading());
     final Either<ApiErrorHandler, GetPagesResponse> homeResult =
@@ -187,7 +145,7 @@ class PageBloc extends Bloc<PageEvent, PageState> {
       //     isLoading: false, isError: true, radioValue: radioValue);
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: "Deleted successfully");
+        CSnackBar.showSuccess(event.context, msg: "Page deleted successfully");
         add(const PageEvent.getPages());
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");

@@ -32,6 +32,7 @@ class SubProfileContactDetails extends StatelessWidget {
             title: AlertTextLabel(
               AppString.primaryEmergencyContact.val,
               fontSize: 14,
+              fontWeight: FontWeight.w500,
             ),
             leading: CommonImageView(
               svgPath: IMG.primaryEmergency.val,
@@ -47,6 +48,7 @@ class SubProfileContactDetails extends StatelessWidget {
             title: AlertTextLabel(
               AppString.secondaryEmergencyContact.val,
               fontSize: 14,
+              fontWeight: FontWeight.w500,
             ),
             leading: CommonImageView(
               svgPath: IMG.secondaryEmergency.val,
@@ -62,6 +64,7 @@ class SubProfileContactDetails extends StatelessWidget {
             title: AlertTextLabel(
               AppString.physicianContact.val,
               fontSize: 14,
+              fontWeight: FontWeight.w500,
             ),
             leading: CommonImageView(
               svgPath: IMG.stethoscope.val,
@@ -78,7 +81,8 @@ class SubProfileContactDetails extends StatelessWidget {
                         //     fontSize: FS.font13PointFive.val),
                         ),
                     !isLg(context)
-                        ? Expanded(child: _state(primaryCarePhysician?.state))
+                        ? Expanded(
+                            child: _state(primaryCarePhysician?.stateName))
                         : CustomSizedBox.shrink(),
                   ],
                 ),
@@ -126,7 +130,7 @@ class SubProfileContactDetails extends StatelessWidget {
                 padding: const EdgeInsets.all(20.0),
                 child: Row(
                   children: [
-                    Expanded(child: _city(primaryCarePhysician?.city)
+                    Expanded(child: _city(primaryCarePhysician?.cityName)
                         // RowColonCombo.twoHundred(
                         //     label: AppString.city.val,
                         //     value: "no value",
@@ -149,6 +153,7 @@ class SubProfileContactDetails extends StatelessWidget {
             title: AlertTextLabel(
               AppString.pharmacyContact.val,
               fontSize: 14,
+              fontWeight: FontWeight.w500,
             ),
             leading: CommonImageView(
               svgPath: IMG.pill.val,
@@ -166,7 +171,7 @@ class SubProfileContactDetails extends StatelessWidget {
                         ),
                     !isLg(context)
                         ? Expanded(
-                            child: _state(pharmacy?.state),
+                            child: _state(pharmacy?.stateName),
                           )
                         : CustomSizedBox.shrink(),
                   ],
@@ -212,7 +217,7 @@ class SubProfileContactDetails extends StatelessWidget {
                 padding: const EdgeInsets.all(20.0),
                 child: Row(
                   children: [
-                    Expanded(child: _city(pharmacy?.city)
+                    Expanded(child: _city(pharmacy?.cityName)
                         // RowColonCombo.twoHundred(
                         //     label: AppString.city.val,
                         //     value: "no value",
@@ -235,6 +240,7 @@ class SubProfileContactDetails extends StatelessWidget {
             title: AlertTextLabel(
               AppString.homeHealth.val,
               fontSize: 14,
+              fontWeight: FontWeight.w500,
             ),
             leading: CommonImageView(
               svgPath: IMG.firstAid.val,
@@ -252,7 +258,7 @@ class SubProfileContactDetails extends StatelessWidget {
                         ),
                     !isLg(context)
                         ? Expanded(
-                            child: _state(homeHealth?.state),
+                            child: _state(homeHealth?.stateName),
                           )
                         : CustomSizedBox.shrink(),
                   ],
@@ -298,7 +304,7 @@ class SubProfileContactDetails extends StatelessWidget {
                 padding: const EdgeInsets.all(20.0),
                 child: Row(
                   children: [
-                    Expanded(child: _city(homeHealth?.city)
+                    Expanded(child: _city(homeHealth?.cityName)
                         // RowColonCombo.twoHundred(
                         //     label: AppString.city.val,
                         //     value: "no value",
@@ -321,6 +327,7 @@ class SubProfileContactDetails extends StatelessWidget {
             title: AlertTextLabel(
               AppString.otherCareContact.val,
               fontSize: 14,
+              fontWeight: FontWeight.w500,
             ),
             leading: CommonImageView(
               svgPath: IMG.otherCareContact.val,
@@ -339,7 +346,7 @@ class SubProfileContactDetails extends StatelessWidget {
                     ),
                     !isLg(context)
                         ? Expanded(
-                            child: _state(otherCare?.state),
+                            child: _state(otherCare?.stateName),
                           )
                         : CustomSizedBox.shrink(),
                   ],
@@ -385,7 +392,7 @@ class SubProfileContactDetails extends StatelessWidget {
                 padding: const EdgeInsets.all(20.0),
                 child: Row(
                   children: [
-                    Expanded(child: _city(otherCare?.city)
+                    Expanded(child: _city(otherCare?.cityName)
                         // RowColonCombo.twoHundred(
                         //     label: AppString.city.val,
                         //     value: "no value",
@@ -473,7 +480,7 @@ class SubProfileContactDetails extends StatelessWidget {
         CustomSizedBox(
           height: DBL.six.val,
         ),
-        _relationShip(value?.relationship),
+        _relationShip(value?.relationshipDescription),
         CustomSizedBox(
           height: DBL.six.val,
         ),
@@ -493,7 +500,7 @@ class SubProfileContactDetails extends StatelessWidget {
         CustomSizedBox(
           height: DBL.six.val,
         ),
-        _relationShip(value?.relationship),
+        _relationShip(value?.relationshipDescription),
         CustomSizedBox(
           height: DBL.six.val,
         ),
@@ -511,7 +518,7 @@ class SubProfileContactDetails extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(20.0),
-          child: _state(value?.state),
+          child: _state(value?.stateName),
         ),
         CustomSizedBox(
           height: DBL.six.val,
@@ -540,7 +547,7 @@ class SubProfileContactDetails extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(20.0),
-          child: _state(value?.state),
+          child: _state(value?.stateName),
         ),
         CustomSizedBox(
           height: DBL.six.val,
@@ -569,7 +576,7 @@ class SubProfileContactDetails extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(20.0),
-          child: _state(value?.state),
+          child: _state(value?.stateName),
         ),
         CustomSizedBox(
           height: DBL.six.val,
@@ -598,7 +605,7 @@ class SubProfileContactDetails extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(20.0),
-          child: _state(value?.state),
+          child: _state(value?.stateName),
         ),
         CustomSizedBox(
           height: DBL.six.val,

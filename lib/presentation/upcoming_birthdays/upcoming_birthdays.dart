@@ -25,6 +25,7 @@ import '../widget/custom_selection_area.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_svg.dart';
 import '../widget/custom_text.dart';
+import '../widget/custom_text_field.dart';
 import '../widget/empty_view.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
@@ -49,6 +50,7 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
   int pageIndex = 0;
   int _start = 0;
   int _end = 10;
+  final _searchNode = FocusNode();
 
   // final TextEditingController _searchController = TextEditingController();
   String? adminId;
@@ -95,6 +97,7 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
           type: '1',
           page: _upcomingBirthdaysBloc.page.toString(),
           limit: _upcomingBirthdaysBloc.limit.toString(),
+          searchTerm: _upcomingBirthdaysBloc.searchController.text.trim(),
         )),
       child: _bodyView(),
     );
@@ -112,7 +115,7 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _statusDropDown(context),
-                // _searchField(),
+                _searchField(),
               ],
             ),
             BlocBuilder<UpcomingBirthdaysBloc, UpcomingBirthdayState>(
@@ -127,6 +130,54 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
               },
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  _searchField() {
+    return CTextField(
+      focusNode: _searchNode,
+      width: isXs(context) ? DBL.threeFifteen.val : DBL.threeHundred.val,
+      height: DBL.forty.val,
+      controller: _upcomingBirthdaysBloc.searchController,
+      hintText: AppString.search.val,
+      hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
+      onSubmitted: (String value) {
+        _upcomingBirthdaysBloc.page = 1;
+        _searchNode.requestFocus();
+        _upcomingBirthdaysBloc.add(UpcomingBirthdayEvent.getUpcomingBirthdays(
+          userId: adminId ?? '',
+          type: '1',
+          page: _upcomingBirthdaysBloc.page.toString(),
+          limit: _upcomingBirthdaysBloc.limit.toString(),
+          searchTerm: _upcomingBirthdaysBloc.searchController.text.trim(),
+        ));
+      },
+      onChanged: (String value) {
+        _upcomingBirthdaysBloc.page = 1;
+        _upcomingBirthdaysBloc.add(UpcomingBirthdayEvent.getUpcomingBirthdays(
+          userId: adminId ?? '',
+          type: '1',
+          page: _upcomingBirthdaysBloc.page.toString(),
+          limit: _upcomingBirthdaysBloc.limit.toString(),
+          searchTerm: _upcomingBirthdaysBloc.searchController.text.trim(),
+        ));
+      },
+      suffixIcon: InkWell(
+        onTap: () {
+          _upcomingBirthdaysBloc.add(UpcomingBirthdayEvent.getUpcomingBirthdays(
+            userId: adminId ?? '',
+            type: '1',
+            page: _upcomingBirthdaysBloc.page.toString(),
+            limit: _upcomingBirthdaysBloc.limit.toString(),
+            searchTerm: _upcomingBirthdaysBloc.searchController.text.trim(),
+          ));
+        },
+        child: CustomSvg(
+          path: IMG.search.val,
+          height: DBL.sixteen.val,
+          width: DBL.sixteen.val,
         ),
       ),
     );
@@ -163,53 +214,6 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
     );
   }
 
-  // CTextField _searchField() {
-  //   return CTextField(
-  //     width: DBL.threeFifteen.val,
-  //     height: DBL.forty.val,
-  //     controller: _upcomingBirthdaysBloc.searchController,
-  //     hintText: AppString.search.val,
-  //     hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
-  //     onChanged: (String value) {
-  //       // _userBloc.searchController.text.isEmpty ||
-  //       //         _userBloc.searchController.text == ''
-  //       //     ?
-  //       _userBloc.add(UserManagementEvent.getUsers(
-  //           userId: adminId ?? '',
-  //           page: _userBloc.page.toString(),
-  //           limit: _userBloc.limit.toString(),
-  //           searchTerm: _userBloc.searchController.text.trim(),
-  //           filterId: _userBloc.filterId));
-  //       // : null;
-  //     },
-  //     onSubmitted: (String value) {
-  //       _userBloc.page = 1;
-  //       _userBloc.add(UserManagementEvent.getUsers(
-  //           userId: adminId ?? '',
-  //           page: _userBloc.page.toString(),
-  //           limit: _userBloc.limit.toString(),
-  //           searchTerm: _userBloc.searchController.text.trim(),
-  //           filterId: _userBloc.filterId));
-  //       debugPrint('user list length ${_userBloc.mUserList.isEmpty}');
-  //     },
-  //     suffixIcon: InkWell(
-  //       onTap: () {
-  //         _userBloc.add(UserManagementEvent.getUsers(
-  //             userId: adminId ?? '',
-  //             page: _userBloc.page.toString(),
-  //             limit: _userBloc.limit.toString(),
-  //             searchTerm: _userBloc.searchController.text.trim(),
-  //             filterId: _userBloc.filterId));
-  //       },
-  //       child: CustomSvg(
-  //         path: IMG.search.val,
-  //         height: DBL.sixteen.val,
-  //         width: DBL.sixteen.val,
-  //       ),
-  //     ),
-  //   );
-  // }
-
   CustomDropdown<int> _statusDropDown(BuildContext context) {
     return CustomDropdown<int>(
       onChange: (int value, int index) {
@@ -219,7 +223,8 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
             userId: adminId ?? '',
             type: _upcomingBirthdaysBloc.filterId.toString(),
             page: _upcomingBirthdaysBloc.page.toString(),
-            limit: _upcomingBirthdaysBloc.limit.toString()));
+            limit: _upcomingBirthdaysBloc.limit.toString(),
+            searchTerm: _upcomingBirthdaysBloc.searchController.text.trim()));
       },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -296,7 +301,9 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
                         userId: adminId ?? '',
                         type: _upcomingBirthdaysBloc.filterId.toString(),
                         page: _upcomingBirthdaysBloc.page.toString(),
-                        limit: _upcomingBirthdaysBloc.limit.toString()));
+                        limit: _upcomingBirthdaysBloc.limit.toString(),
+                        searchTerm: _upcomingBirthdaysBloc.searchController.text
+                            .trim()));
                 updateData();
               }
             },
@@ -307,7 +314,9 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
                       userId: adminId ?? '',
                       type: _upcomingBirthdaysBloc.filterId.toString(),
                       page: _upcomingBirthdaysBloc.page.toString(),
-                      limit: _upcomingBirthdaysBloc.limit.toString()));
+                      limit: _upcomingBirthdaysBloc.limit.toString(),
+                      searchTerm:
+                          _upcomingBirthdaysBloc.searchController.text.trim()));
               updateData();
             },
             onPreviousPressed: () {
@@ -318,7 +327,9 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
                         userId: adminId ?? '',
                         type: _upcomingBirthdaysBloc.filterId.toString(),
                         page: _upcomingBirthdaysBloc.page.toString(),
-                        limit: _upcomingBirthdaysBloc.limit.toString()));
+                        limit: _upcomingBirthdaysBloc.limit.toString(),
+                        searchTerm: _upcomingBirthdaysBloc.searchController.text
+                            .trim()));
                 updateData();
               }
             });
@@ -381,7 +392,7 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
           //       text: AppString.status.val, fontWeight: FontWeight.bold),
           // ),
           DataColumn2(
-            size: ColumnSize.S,
+            size: ColumnSize.L,
             fixedWidth: Responsive.isWeb(context)
                 ? MediaQuery.of(context).size.width * .1
                 : DBL.oneSeventy.val,
@@ -415,18 +426,27 @@ class _UpcomingBirthdayPageState extends State<UpcomingBirthdayPage> {
               DataCell(Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  CustomButton(
-                    height: 45,
-                    minWidth: 100,
-                    onPressed: () {
-                      autoTabRouter
-                          ?.navigate(SendGiftRoute(userId: item.userId));
-                    },
-                    text: AppString.sendGift.val,
-                    color: AppColor.primaryColor.val,
-                    textColor: AppColor.white.val,
-                    borderWidth: 1,
-                  ),
+                  item.isGiftAlreadySent
+                      ? Flexible(
+                          child: CustomText(
+                          "Gift Already Sent",
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: AppColor.green.val),
+                        ))
+                      : CustomButton(
+                          height: 45,
+                          minWidth: 100,
+                          onPressed: () {
+                            autoTabRouter
+                                ?.navigate(SendGiftRoute(userId: item.userId));
+                          },
+                          text: AppString.sendGift.val,
+                          color: AppColor.primaryColor.val,
+                          textColor: AppColor.white.val,
+                          borderWidth: 1,
+                        ),
 
                   CustomSizedBox(
                     width: DBL.twentyThree.val,

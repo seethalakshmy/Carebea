@@ -4,6 +4,7 @@ import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/infrastructure/subprofile_details/subprofile_detail_repository.dart';
+import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/client_agreement.dart';
 import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/contact_details.dart';
 import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/health_profile.dart';
 import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/service_details.dart';
@@ -373,7 +374,9 @@ class _ClientSubProfileDetailsPageState
                   SubProfileContactDetails(state: state),
                   SubProfileHealthProfile(state: state),
                   ServiceDetails(state: state),
-                  Container(),
+                  ClientAgreementView(
+                    state: state,
+                  ),
                   SubscriptionDetailsView(state: state)
                 ],
               ),
