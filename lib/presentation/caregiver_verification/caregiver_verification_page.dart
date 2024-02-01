@@ -1367,16 +1367,29 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
     int? verificationStatus = state.response?.data?.verificationStatus;
     PersonalDetails? personalDetails =
         state.response?.data?.backgroundVerification?.personalDetails;
-    CertificateVerification? certificateVerification =
-        state.response?.data?.certificateVerification;
+    int? certificateVerification =
+        state.response?.data?.certificateVerification?.approvalStatus;
     if (personalDetails?.approvalStatus == Approve.approved.val &&
-        certificateVerification?.approvalStatus == Approve.approved.val &&
-        (verificationStatus == Verification.trainingStarted.val ||
-            verificationStatus == Verification.trainingCompleted.val)) {
+        certificateVerification == Approve.approved.val &&
+        verificationStatus == Verification.startedVerification.val &&
+        certificateVerification == 1) {
       return true;
     } else {
       return false;
     }
+
+    // if (personalDetails?.approvalStatus == Approve.approved.val &&
+    //         certificateVerification?.approvalStatus == Approve.approved.val &&
+    //         verificationStatus == Verification.startedVerification.val && certificateVerification = 1 )
+    //     // &&
+    //     // (verificationStatus == Verification.startedVerification.val
+    //     // ||
+    //     //     verificationStatus == Verification.trainingCompleted.val)
+    //      {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
   bool isLarge(BuildContext context) =>

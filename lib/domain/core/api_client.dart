@@ -876,6 +876,7 @@ abstract class ApiClient {
     @Field("type") String type,
     @Field("page") String page,
     @Field("limit") String limit,
+    @Field("search_term") String searchTerm,
   );
 
   @POST('/admin/send-birthday-wish')

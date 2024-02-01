@@ -78,7 +78,7 @@ String dataToJson(TransactionDetailsData data) => json.encode(data.toJson());
 class TransactionDetailsData {
   TransactionDetailsData({
     String? serviceId,
-    int? serviceStatus,
+    dynamic serviceStatus,
     String? uniqueServiceId,
     String? uniqueTransactionId,
     String? transactionType,
@@ -133,7 +133,7 @@ class TransactionDetailsData {
     _status = json['status'] != null ? Status.fromJson(json['status']) : null;
   }
   String? _serviceId;
-  int? _serviceStatus;
+  dynamic _serviceStatus;
   String? _uniqueServiceId;
   String? _uniqueTransactionId;
 
@@ -151,7 +151,7 @@ class TransactionDetailsData {
   Status? _status;
   TransactionDetailsData copyWith({
     String? serviceId,
-    int? serviceStatus,
+    dynamic serviceStatus,
     String? uniqueTransactionId,
     String? uniqueServiceId,
     String? transactionType,
@@ -186,7 +186,7 @@ class TransactionDetailsData {
         status: status ?? _status,
       );
   String? get serviceId => _serviceId;
-  int? get serviceStatus => _serviceStatus;
+  dynamic get serviceStatus => _serviceStatus;
   String? get uniqueServiceId => _uniqueServiceId;
   String? get uniqueTransactionId => _uniqueTransactionId;
 

@@ -3419,6 +3419,7 @@ class _ApiClient implements ApiClient {
     type,
     page,
     limit,
+    searchTerm,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -3428,6 +3429,7 @@ class _ApiClient implements ApiClient {
       'type': type,
       'page': page,
       'limit': limit,
+      'search_term': searchTerm,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<UpcomingBirthdayResponse>(Options(

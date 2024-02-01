@@ -20,22 +20,25 @@ mixin _$UpcomingBirthdayEvent {
   String get type => throw _privateConstructorUsedError;
   String get page => throw _privateConstructorUsedError;
   String get limit => throw _privateConstructorUsedError;
+  String get searchTerm => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String userId, String type, String page, String limit)
+    required TResult Function(String userId, String type, String page,
+            String limit, String searchTerm)
         getUpcomingBirthdays,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, String type, String page, String limit)?
+    TResult? Function(String userId, String type, String page, String limit,
+            String searchTerm)?
         getUpcomingBirthdays,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, String type, String page, String limit)?
+    TResult Function(String userId, String type, String page, String limit,
+            String searchTerm)?
         getUpcomingBirthdays,
     required TResult orElse(),
   }) =>
@@ -68,7 +71,12 @@ abstract class $UpcomingBirthdayEventCopyWith<$Res> {
           $Res Function(UpcomingBirthdayEvent) then) =
       _$UpcomingBirthdayEventCopyWithImpl<$Res, UpcomingBirthdayEvent>;
   @useResult
-  $Res call({String userId, String type, String page, String limit});
+  $Res call(
+      {String userId,
+      String type,
+      String page,
+      String limit,
+      String searchTerm});
 }
 
 /// @nodoc
@@ -89,6 +97,7 @@ class _$UpcomingBirthdayEventCopyWithImpl<$Res,
     Object? type = null,
     Object? page = null,
     Object? limit = null,
+    Object? searchTerm = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -107,6 +116,10 @@ class _$UpcomingBirthdayEventCopyWithImpl<$Res,
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
               as String,
+      searchTerm: null == searchTerm
+          ? _value.searchTerm
+          : searchTerm // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -119,7 +132,12 @@ abstract class _$$_GetUpcomingBirthdaysCopyWith<$Res>
       __$$_GetUpcomingBirthdaysCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String userId, String type, String page, String limit});
+  $Res call(
+      {String userId,
+      String type,
+      String page,
+      String limit,
+      String searchTerm});
 }
 
 /// @nodoc
@@ -137,6 +155,7 @@ class __$$_GetUpcomingBirthdaysCopyWithImpl<$Res>
     Object? type = null,
     Object? page = null,
     Object? limit = null,
+    Object? searchTerm = null,
   }) {
     return _then(_$_GetUpcomingBirthdays(
       userId: null == userId
@@ -155,6 +174,10 @@ class __$$_GetUpcomingBirthdaysCopyWithImpl<$Res>
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
               as String,
+      searchTerm: null == searchTerm
+          ? _value.searchTerm
+          : searchTerm // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -166,7 +189,8 @@ class _$_GetUpcomingBirthdays implements _GetUpcomingBirthdays {
       {required this.userId,
       required this.type,
       required this.page,
-      required this.limit});
+      required this.limit,
+      required this.searchTerm});
 
   @override
   final String userId;
@@ -176,10 +200,12 @@ class _$_GetUpcomingBirthdays implements _GetUpcomingBirthdays {
   final String page;
   @override
   final String limit;
+  @override
+  final String searchTerm;
 
   @override
   String toString() {
-    return 'UpcomingBirthdayEvent.getUpcomingBirthdays(userId: $userId, type: $type, page: $page, limit: $limit)';
+    return 'UpcomingBirthdayEvent.getUpcomingBirthdays(userId: $userId, type: $type, page: $page, limit: $limit, searchTerm: $searchTerm)';
   }
 
   @override
@@ -190,11 +216,14 @@ class _$_GetUpcomingBirthdays implements _GetUpcomingBirthdays {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.page, page) || other.page == page) &&
-            (identical(other.limit, limit) || other.limit == limit));
+            (identical(other.limit, limit) || other.limit == limit) &&
+            (identical(other.searchTerm, searchTerm) ||
+                other.searchTerm == searchTerm));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId, type, page, limit);
+  int get hashCode =>
+      Object.hash(runtimeType, userId, type, page, limit, searchTerm);
 
   @JsonKey(ignore: true)
   @override
@@ -206,31 +235,33 @@ class _$_GetUpcomingBirthdays implements _GetUpcomingBirthdays {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String userId, String type, String page, String limit)
+    required TResult Function(String userId, String type, String page,
+            String limit, String searchTerm)
         getUpcomingBirthdays,
   }) {
-    return getUpcomingBirthdays(userId, type, page, limit);
+    return getUpcomingBirthdays(userId, type, page, limit, searchTerm);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, String type, String page, String limit)?
+    TResult? Function(String userId, String type, String page, String limit,
+            String searchTerm)?
         getUpcomingBirthdays,
   }) {
-    return getUpcomingBirthdays?.call(userId, type, page, limit);
+    return getUpcomingBirthdays?.call(userId, type, page, limit, searchTerm);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, String type, String page, String limit)?
+    TResult Function(String userId, String type, String page, String limit,
+            String searchTerm)?
         getUpcomingBirthdays,
     required TResult orElse(),
   }) {
     if (getUpcomingBirthdays != null) {
-      return getUpcomingBirthdays(userId, type, page, limit);
+      return getUpcomingBirthdays(userId, type, page, limit, searchTerm);
     }
     return orElse();
   }
@@ -269,7 +300,8 @@ abstract class _GetUpcomingBirthdays implements UpcomingBirthdayEvent {
       {required final String userId,
       required final String type,
       required final String page,
-      required final String limit}) = _$_GetUpcomingBirthdays;
+      required final String limit,
+      required final String searchTerm}) = _$_GetUpcomingBirthdays;
 
   @override
   String get userId;
@@ -279,6 +311,8 @@ abstract class _GetUpcomingBirthdays implements UpcomingBirthdayEvent {
   String get page;
   @override
   String get limit;
+  @override
+  String get searchTerm;
   @override
   @JsonKey(ignore: true)
   _$$_GetUpcomingBirthdaysCopyWith<_$_GetUpcomingBirthdays> get copyWith =>

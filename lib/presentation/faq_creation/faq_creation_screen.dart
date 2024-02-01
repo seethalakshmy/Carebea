@@ -279,7 +279,6 @@ class _faqCreationPageState extends State<FaqCreationPage> {
                       CustomButton(
                         height: DBL.fortyFive.val,
                         minWidth: DBL.oneTwenty.val,
-                        isLoading: state.isLoadingButton,
                         onPressed: () {
                           context.router.navigate(const FaqRoute());
                         },
