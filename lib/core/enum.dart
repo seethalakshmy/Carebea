@@ -576,7 +576,7 @@ enum AppString {
   errorUploadingFile("Error uploading file, Please try again"),
   fileSizeError("File size must be less than 20Mb"),
   videoSizeError("File size must be less than 5Mb"),
-  fileTypeNotSupport("File type not support"),
+  fileTypeNotSupport("File type not supported"),
   serviceRequestManagement("Service Request Management"),
   supportTickets("Complaints Management"),
   faq("Faq Management"),

@@ -57,7 +57,8 @@ class _FaqPageState extends State<FaqPage> {
 
   @override
   Widget build(BuildContext context) {
-    _faqBloc.add(const FaqEvent.getFaqList());
+    _faqBloc
+        .add(FaqEvent.getFaqList(searchTerm: _searchController.text.trim()));
     return FutureBuilder(
       future: SharedPreffUtil().init(),
       builder: (context, snapshot) {
@@ -82,11 +83,7 @@ class _FaqPageState extends State<FaqPage> {
   BlocProvider<FaqBloc> _rebuildView() {
     return BlocProvider(
       create: (context) => _faqBloc
-        ..add(FaqEvent.getFaq(
-          userId: _adminUserId,
-          page: _page,
-          limit: _limit,
-        )),
+        ..add(FaqEvent.getFaqList(searchTerm: _searchController.text.trim())),
       child: _bodyView(),
     );
   }
@@ -101,18 +98,33 @@ class _FaqPageState extends State<FaqPage> {
 
   CustomCard _cardView(FaqState state, BuildContext context) {
     return CustomCard(
-      shape: PR().roundedRectangleBorder(DBL.five.val),
-      elevation: DBL.seven.val,
-      child: CustomContainer(
+        shape: PR().roundedRectangleBorder(DBL.five.val),
+        elevation: DBL.seven.val,
+        child: CustomContainer(
           padding: EdgeInsets.all(DBL.twenty.val),
-          child: state.isLoading
-              ? const TableLoaderView()
-              : state.isError
-                  ? ErrorView(
-                      isClientError: state.isClientError,
-                      errorMessage: state.error)
-                  : _faqView(context, state)),
-    );
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _searchField(),
+                  CustomSizedBox(
+                    width: DBL.ten.val,
+                  ),
+                  _faqCreate()
+                ],
+              ),
+              state.isLoading
+                  ? const TableLoaderView()
+                  : state.isError
+                      ? ErrorView(
+                          isClientError: state.isClientError,
+                          errorMessage: state.error)
+                      : _faqView(context, state)
+            ],
+          ),
+        ));
   }
 
   _faqView(BuildContext context, FaqState state) {
@@ -128,9 +140,9 @@ class _FaqPageState extends State<FaqPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        LayoutBuilder(builder: (context, constraints) {
-          return _actionView(constraints, context, state);
-        }),
+        // LayoutBuilder(builder: (context, constraints) {
+        //   return _actionView(constraints, context, state);
+        // }),
         // mAdmins.isNotEmpty
         //     ?
         Column(
@@ -270,34 +282,6 @@ class _FaqPageState extends State<FaqPage> {
     );
   }
 
-  SingleChildScrollView _actionView(
-      BoxConstraints constraints, BuildContext context, FaqState state) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(minWidth: constraints.maxWidth),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CustomSizedBox(
-              width: DBL.ten.val,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // _searchField(),
-                CustomSizedBox(
-                  width: DBL.ten.val,
-                ),
-                _faqCreate()
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   _faqCreate() {
     return CustomButton(
         onPressed: () {
@@ -332,6 +316,10 @@ class _FaqPageState extends State<FaqPage> {
         _searchNode.requestFocus();
         _getFaqEvent();
       },
+      onChanged: (String value) {
+        debugPrint("searchTerm ${_searchController.text.trim()}");
+        _getFaqEvent();
+      },
       suffixIcon: InkWell(
         onTap: () {
           _getFaqEvent();
@@ -346,14 +334,8 @@ class _FaqPageState extends State<FaqPage> {
   }
 
   _getFaqEvent() {
-    _faqBloc.add(FaqEvent.getFaq(
-      userId: _adminUserId,
-      page: _page,
-      limit: _limit,
-      // searchTerm: _searchController.text.trim().isNotEmpty
-      //     ? _searchController.text.trim()
-      //     : null
-    ));
+    _faqBloc
+        .add(FaqEvent.getFaqList(searchTerm: _searchController.text.trim()));
   }
 
   _paginationView() {

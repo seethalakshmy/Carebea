@@ -2622,9 +2622,9 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<FaqListResponseModel> getFaqList() async {
+  Future<FaqListResponseModel> getFaqList(searchTerm) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'search': searchTerm};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(

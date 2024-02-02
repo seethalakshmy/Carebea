@@ -22,6 +22,7 @@ import '../widget/custom_container.dart';
 import '../widget/custom_data_table_2.dart';
 import '../widget/custom_dropdown.dart';
 import '../widget/custom_selection_area.dart';
+import '../widget/custom_shimmer.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_svg.dart';
 import '../widget/custom_text.dart';
@@ -116,7 +117,8 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      _transactionBloc.state.isInitialLoading
+                      _transactionBloc.state.isInitialLoading &&
+                              _transactionBloc.filterId == 0
                           ? _filterLoader()
                           : _statusDropDown(context),
                       CustomSizedBox(width: DBL.fifteen.val),
@@ -332,6 +334,10 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
         child: CustomButton(
           onPressed: () {
             _searchController.clear();
+            setState(() {
+              _transactionBloc.filterId = 0;
+            });
+
             _transactionBloc.add(TransactionManagementEvent.getTransactions(
                 page: _transactionBloc.paginationPage.toString(),
                 limit: _transactionBloc.limit,

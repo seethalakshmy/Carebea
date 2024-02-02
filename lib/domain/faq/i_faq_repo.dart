@@ -5,7 +5,8 @@ import '../on_boarding/models/common_response.dart';
 import 'models/faq_list_response_model.dart';
 
 abstract class IFaqRepo {
-  Future<Either<ApiErrorHandler, FaqListResponseModel>> getFaqList();
+  Future<Either<ApiErrorHandler, FaqListResponseModel>> getFaqList(
+      {required String searchTerm});
   Future<Either<ApiErrorHandler, CommonResponse>> deleteFaq(
       {required String faqId});
 }

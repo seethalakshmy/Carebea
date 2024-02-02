@@ -18,43 +18,14 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
   List<FaqListData> faqList = [];
 
   FaqBloc(this.faqRepository) : super(FaqState.initial()) {
-    on<_GetFaq>(_getFaq);
     on<_GetFaqList>(_getFaqList);
     on<_DeleteFaq>(_deleteFaq);
-  }
-
-  _getFaq(_GetFaq event, Emitter<FaqState> emit) async {
-    // final Either<ApiErrorHandler, AdminGetResponse> adminResult =
-    // await adminsRepository.getAdmins(
-    //   userID: event.userId,
-    //   page: event.page,
-    //   limit: event.limit,
-    //   roleId: event.roleId,
-    //   status: event.status,
-    //   searchTerm: event.searchTerm,
-    // );
-    // AdminsState adminState = adminResult.fold((l) {
-    //   return state.copyWith(
-    //     error: l.error,
-    //     isLoading: false,
-    //     isError: true,
-    //     isClientError: l.isClientError ?? false,
-    //   );
-    // }, (r) {
-    //   return state.copyWith(
-    //     getAdminsResponse: r,
-    //     isLoading: false,
-    //   );
-    // });
-    // emit(
-    //   adminState,
-    // );
   }
 
   _getFaqList(_GetFaqList event, Emitter<FaqState> emit) async {
     emit(state.copyWith(isLoading: true));
     final Either<ApiErrorHandler, FaqListResponseModel> faqListResult =
-        await faqRepository.getFaqList();
+        await faqRepository.getFaqList(searchTerm: event.searchTerm);
     FaqState faqState = faqListResult.fold((l) {
       return state.copyWith(
           isLoading: false,
@@ -85,7 +56,7 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
     }, (r) {
       if (r.status!) {
         CSnackBar.showSuccess(event.context, msg: "Faq deleted successfully");
-        add(const FaqEvent.getFaqList());
+        add(const FaqEvent.getFaqList(searchTerm: ''));
 
         return state.copyWith(isLoading: false);
       } else {
