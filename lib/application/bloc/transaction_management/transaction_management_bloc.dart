@@ -42,6 +42,7 @@ class TransactionManagementBloc
   _getTransactions(
       _GetTransactions event, Emitter<TransactionManagementState> emit) async {
     emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isInitialLoading: true));
     final Either<ApiErrorHandler, TransactionListResponse> result =
         await transactionsRepository.getTransactions(
             userId: event.userId,
@@ -52,10 +53,12 @@ class TransactionManagementBloc
             token: '',
             clientId: event.clientId);
     var transactionState = result.fold((l) {
+      emit(state.copyWith(isInitialLoading: false));
       return state.copyWith(error: l.error, isLoading: false);
     }, (r) {
       mUserList.clear();
       mUserList.addAll(r.data!.transactions!);
+      emit(state.copyWith(isInitialLoading: false));
       return state.copyWith(response: r, isLoading: false);
     });
     emit(transactionState);

@@ -13,9 +13,10 @@ class FaqRepository implements IFaqRepo {
   ApiClient apiClient = ApiClient();
 
   @override
-  Future<Either<ApiErrorHandler, FaqListResponseModel>> getFaqList() async {
+  Future<Either<ApiErrorHandler, FaqListResponseModel>> getFaqList(
+      {required String searchTerm}) async {
     try {
-      final response = await apiClient.getFaqList();
+      final response = await apiClient.getFaqList(searchTerm);
       return Right(response);
     } on DioError catch (e) {
       if (e.message.contains("SocketException")) {

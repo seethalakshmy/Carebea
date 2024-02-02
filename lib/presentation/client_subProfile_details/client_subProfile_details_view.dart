@@ -53,6 +53,7 @@ class _ClientSubProfileDetailsPageState
     print('inside sub profile screen');
     adminId = SharedPreffUtil().getAdminId;
     userId = autoTabRouter?.currentChild?.queryParams.getString("id", "") ?? "";
+    debugPrint("userid inside details $userId");
 
     tabController = TabController(vsync: this, length: 7);
     _subProfileDetailBloc = SubProfileDetailBloc(SubProfileDetailRepository());

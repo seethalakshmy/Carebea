@@ -688,7 +688,7 @@ abstract class ApiClient {
   );
 
   @GET('/common-data/get-faqs')
-  Future<FaqListResponseModel> getFaqList();
+  Future<FaqListResponseModel> getFaqList(@Query("search") String searchTerm);
 
   @POST('/common-data/get-faq')
   Future<FaqDetailsResponseModel> getFaqDetails(
