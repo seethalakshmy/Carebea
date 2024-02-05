@@ -476,6 +476,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   }
 
   _genderWidget(OnboardingState state) {
+    debugPrint("gender lis t ${widget.onboardingBloc.genderList}");
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,

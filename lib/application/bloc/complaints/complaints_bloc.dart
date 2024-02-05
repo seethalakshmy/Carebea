@@ -18,6 +18,11 @@ class ComplaintsBloc extends Bloc<ComplaintsEvent, ComplaintsState> {
   List<FinalResult> complaintList = [];
   List<Pagination> paginationList = [];
   List count = [];
+  String selectedFromDate = "";
+  String selectedToDate = "";
+  DateTime selectedFromDateTime = DateTime(2020);
+  DateTime? selectedToDateTime;
+  bool isClearFilterClicked = false;
 
   ComplaintsBloc(this.complaintsRepository) : super(ComplaintsState.initial()) {
     on<_GetComplaints>(_getComplaints);
@@ -31,7 +36,9 @@ class ComplaintsBloc extends Bloc<ComplaintsEvent, ComplaintsState> {
             page: event.page,
             limit: event.limit,
             searchTerm: event.searchTerm,
-            status: event.status);
+            status: event.status,
+            startDate: event.startDate,
+            endDate: event.endDate);
     var userState = result.fold((l) {
       return state.copyWith(
           error: l.error, complaintListOption: Some(Left(l)), isLoading: false);

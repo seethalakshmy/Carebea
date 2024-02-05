@@ -128,9 +128,11 @@ class CustomButton extends StatelessWidget {
                   ? isLoading
                       ? buildProgress()
                       : Flexible(
-                          child: Text(
-                            text!,
-                            style: textStyle,
+                          child: IgnorePointer(
+                            child: Text(
+                              text!,
+                              style: textStyle,
+                            ),
                           ),
                         )
                   : CustomSizedBox.shrink(),

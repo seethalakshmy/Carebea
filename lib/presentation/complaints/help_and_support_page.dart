@@ -4,14 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/complaints/complaints_bloc.dart';
+import '../../core/custom_snackbar.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
+import '../../core/string_extension.dart';
 import '../../core/text_styles.dart';
 import '../../infrastructure/complaints/complaints_repository.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
+import '../widget/custom_button.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_data_table_2.dart';
@@ -49,6 +52,8 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
   int _filterId = 0;
   final TextEditingController _searchController = TextEditingController();
   String userId = SharedPreffUtil().getAdminId;
+  TextEditingController fromDateController = TextEditingController();
+  TextEditingController toDateController = TextEditingController();
 
   @override
   void initState() {
@@ -81,7 +86,9 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
             page: _page.toString(),
             limit: _limit.toString(),
             searchTerm: _searchController.text.trim(),
-            status: 0)),
+            status: 0,
+            startDate: _supportTicketsBloc.selectedFromDate,
+            endDate: _supportTicketsBloc.selectedToDate)),
       child: _bodyView(),
     );
   }
@@ -91,38 +98,78 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
       children: [
         _detailsCardView(),
         CustomSizedBox(height: DBL.twenty.val),
-        CustomCard(
-          shape: PR().roundedRectangleBorder(DBL.eighteen.val),
-          elevation: DBL.seven.val,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _statusDropDown(context),
-                    _searchField(),
-                  ],
-                ),
+        BlocBuilder<ComplaintsBloc, ComplaintsState>(
+          builder: (context, state) {
+            return CustomCard(
+              shape: PR().roundedRectangleBorder(DBL.eighteen.val),
+              elevation: DBL.seven.val,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.start,
+                      alignment: WrapAlignment.start,
+                      runAlignment: WrapAlignment.center,
+                      spacing: 20,
+                      runSpacing: 10,
+                      children: [
+                        _statusDropDown(context),
+                        _buildDatePicker(
+                            state, fromDateController, AppString.startDate.val,
+                            () {
+                          _selectFromDate(context, state);
+                        }),
+                        _buildDatePicker(
+                            state, toDateController, AppString.endDate.val, () {
+                          _supportTicketsBloc.selectedFromDate != "" ||
+                                  fromDateController.text.isNotEmpty
+                              ? _selectToDate(context, state)
+                              : CSnackBar.showError(context,
+                                  msg: 'Please select a startDate');
+                        }),
+                        _searchField(),
+                        _clearAllFiltersButtonWidget()
+                      ],
+                    ),
+
+                    // Wrap(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     _statusDropDown(context),
+                    //     _searchField(),
+                    //   ],
+                    // ),
+                  ),
+                  CustomContainer(
+                    padding: EdgeInsets.all(DBL.twenty.val),
+                    child: BlocBuilder<ComplaintsBloc, ComplaintsState>(
+                      builder: (context, state) {
+                        return state.isLoading
+                            ? const TableLoaderView()
+                            : state.isError
+                                ? ErrorView(
+                                    isClientError: false,
+                                    errorMessage: state.error)
+                                : _complaintsView(context);
+                      },
+                    ),
+                  ),
+                ],
               ),
-              CustomContainer(
-                padding: EdgeInsets.all(DBL.twenty.val),
-                child: BlocBuilder<ComplaintsBloc, ComplaintsState>(
-                  builder: (context, state) {
-                    return state.isLoading
-                        ? const TableLoaderView()
-                        : state.isError
-                            ? ErrorView(
-                                isClientError: false, errorMessage: state.error)
-                            : _complaintsView(context);
-                  },
-                ),
-              ),
-            ],
-          ),
+            );
+          },
         ),
       ],
+    );
+  }
+
+  CustomShimmerWidget _shimmerForFilterWidgets({double? width}) {
+    return CustomShimmerWidget.rectangular(
+      height: DBL.fortySeven.val,
+      width: width ?? DBL.twoTen.val,
+      baseColor: AppColor.rowBackgroundColor.val,
+      highlightColor: AppColor.lightGrey.val,
     );
   }
 
@@ -268,7 +315,9 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
         page: _page.toString(),
         limit: _limit.toString(),
         searchTerm: _searchController.text.trim(),
-        status: _filterId));
+        status: _filterId,
+        startDate: _supportTicketsBloc.selectedFromDate,
+        endDate: _supportTicketsBloc.selectedToDate));
   }
 
   CustomDropdown<int> _statusDropDown(BuildContext context) {
@@ -284,13 +333,16 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
             page: pages.toString(),
             limit: _limit.toString(),
             searchTerm: _searchController.text.trim(),
-            status: value));
+            status: value,
+            startDate: _supportTicketsBloc.selectedFromDate,
+            endDate: _supportTicketsBloc.selectedToDate));
       },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
         width: DBL.oneForty.val,
-        height:
-            Responsive.isMobile(context) ? DBL.fortyFive.val : DBL.forty.val,
+        height: Responsive.isMobile(context)
+            ? DBL.fortyFive.val
+            : DBL.fortySeven.val,
         elevation: DBL.zero.val,
         padding: EdgeInsets.only(left: DBL.fifteen.val),
         backgroundColor: Colors.white,
@@ -349,6 +401,14 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
         start: _start,
         onNextPressed: () {
           if (_page < totalPages) {
+            _supportTicketsBloc.add(ComplaintsEvent.getComplaints(
+                userId: userId,
+                page: _page.toString(),
+                limit: _limit.toString(),
+                searchTerm: _searchController.text.trim(),
+                status: _filterId,
+                startDate: _supportTicketsBloc.selectedFromDate,
+                endDate: _supportTicketsBloc.selectedToDate));
             updateData();
 
             _page = _page + 1;
@@ -356,6 +416,14 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
           }
         },
         onItemPressed: (i) {
+          _supportTicketsBloc.add(ComplaintsEvent.getComplaints(
+              userId: userId,
+              page: _page.toString(),
+              limit: _limit.toString(),
+              searchTerm: _searchController.text.trim(),
+              status: _filterId,
+              startDate: _supportTicketsBloc.selectedFromDate,
+              endDate: _supportTicketsBloc.selectedToDate));
           updateData();
 
           debugPrint('inside pagination');
@@ -365,6 +433,14 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
         },
         onPreviousPressed: () {
           if (_page > 1) {
+            _supportTicketsBloc.add(ComplaintsEvent.getComplaints(
+                userId: userId,
+                page: _page.toString(),
+                limit: _limit.toString(),
+                searchTerm: _searchController.text.trim(),
+                status: _filterId,
+                startDate: _supportTicketsBloc.selectedFromDate,
+                endDate: _supportTicketsBloc.selectedToDate));
             updateData();
 
             _page = _page - 1;
@@ -556,6 +632,142 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
       debugPrint("length ${_supportTicketsBloc.complaintList.length}");
       debugPrint("limit $_limit");
     }
+  }
+
+  Future<void> _selectFromDate(
+      BuildContext context, ComplaintsState state) async {
+    // debugPrint("date check ${_serviceRequestBloc.selectedToDateTime}");
+    final DateTime now = DateTime.now();
+    showDatePicker(
+            context: context,
+            initialDate: _supportTicketsBloc.selectedToDateTime ?? now,
+            firstDate: _supportTicketsBloc.selectedToDateTime
+                    ?.subtract(const Duration(days: 1825)) ??
+                DateTime(DateTime.now().year - 5),
+            lastDate: _supportTicketsBloc.selectedToDateTime ??
+                DateTime(DateTime.now().year + 5))
+        .then((value) {
+      if (value != null) {
+        _supportTicketsBloc.selectedFromDate = value
+            .toString()
+            .parseWithFormat(dateFormat: AppString.yyyyMMdd.val);
+        // print("selecteddd from date : ${_serviceRequestBloc.selectedFromDate}");
+        _supportTicketsBloc.selectedFromDateTime = value;
+        if (_supportTicketsBloc.selectedFromDate.isNotEmpty &&
+            _supportTicketsBloc.selectedToDate.isNotEmpty) {
+          _page = 1;
+          _supportTicketsBloc.add(ComplaintsEvent.getComplaints(
+              userId: userId,
+              page: _page.toString(),
+              limit: _limit.toString(),
+              searchTerm: _searchController.text.trim(),
+              status: _filterId,
+              startDate: _supportTicketsBloc.selectedFromDate,
+              endDate: _supportTicketsBloc.selectedToDate));
+        }
+        fromDateController.text =
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        FocusScope.of(context).unfocus();
+      }
+    });
+  }
+
+  Future<void> _selectToDate(
+      BuildContext context, ComplaintsState state) async {
+    final DateTime now = DateTime.now();
+    showDatePicker(
+            context: context,
+            initialDate:
+                _supportTicketsBloc.selectedToDateTime ?? state.selectedDate,
+            firstDate: _supportTicketsBloc.selectedFromDateTime,
+            lastDate: DateTime(DateTime.now().year + 5))
+        .then((value) {
+      if (value != null) {
+        _supportTicketsBloc.selectedToDateTime = value;
+        _supportTicketsBloc.selectedToDate = value
+            .toString()
+            .parseWithFormat(dateFormat: AppString.yyyyMMdd.val);
+        // print("selecteddd to date : ${_serviceRequestBloc.selectedToDate}");
+        if (_supportTicketsBloc.selectedFromDate.isNotEmpty &&
+            _supportTicketsBloc.selectedToDate.isNotEmpty) {
+          _page = 1;
+          _supportTicketsBloc.add(ComplaintsEvent.getComplaints(
+              userId: userId,
+              page: _page.toString(),
+              limit: _limit.toString(),
+              searchTerm: _searchController.text.trim(),
+              status: _filterId,
+              startDate: _supportTicketsBloc.selectedFromDate,
+              endDate: _supportTicketsBloc.selectedToDate));
+        }
+        toDateController.text =
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        FocusScope.of(context).unfocus();
+        // debugPrint("toDatesss ${toDateController.text}");
+        // debugPrint("date check ${_serviceRequestBloc.selectedToDateTime}");
+      }
+    });
+  }
+
+  CTextField _buildDatePicker(ComplaintsState state,
+      TextEditingController controller, String hintText, Function() onTap) {
+    return CTextField(
+      width: DBL.twoTen.val,
+      height: DBL.fortySeven.val,
+      hintStyle: TS().gRoboto(
+          fontWeight: FW.w400.val,
+          fontSize: FS.font14.val,
+          color: AppColor.columColor2.val),
+      textColor: AppColor.columColor2.val,
+      hintText: hintText,
+      isReadOnly: true,
+      controller: controller,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return AppString.emptyDate.val;
+        }
+        return null;
+      },
+      onTap: onTap,
+      onChanged: (val) {},
+      textInputAction: TextInputAction.next,
+      keyBoardType: TextInputType.text,
+      suffixIcon: CustomSvg(
+        width: DBL.twentyFive.val,
+        height: DBL.twentyFive.val,
+        path: IMG.calenderOutLine.val,
+      ),
+    );
+  }
+
+  _clearAllFiltersButtonWidget() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 20.0),
+      child: CustomSizedBox(
+        height: 46,
+        child: CustomButton(
+          onPressed: () {
+            _page = 1;
+            _searchController.clear();
+            fromDateController.clear();
+            toDateController.clear();
+            _supportTicketsBloc.selectedFromDate = '';
+            _supportTicketsBloc.selectedToDate = '';
+            _filterId = 0;
+            _supportTicketsBloc.add(ComplaintsEvent.getComplaints(
+                userId: userId,
+                page: _page.toString(),
+                limit: _limit.toString(),
+                searchTerm: _searchController.text.trim(),
+                status: _filterId,
+                startDate: _supportTicketsBloc.selectedFromDate,
+                endDate: _supportTicketsBloc.selectedToDate));
+            debugPrint("date test ${fromDateController.text}");
+          },
+          text: AppString.clear.val,
+        ),
+      ),
+    );
   }
 
   bool isXs(context) => MediaQuery.of(context).size.width <= 560;

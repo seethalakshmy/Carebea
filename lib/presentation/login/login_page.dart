@@ -219,7 +219,7 @@ class _LoginPageState extends State<LoginPage> {
       child: Align(
         alignment: Alignment.centerRight,
         child: MouseRegion(
-          cursor: SystemMouseCursors.text,
+          cursor: SystemMouseCursors.click,
           child: CTextButton(
               text: AppString.forgotPassword.val,
               fontWeight: FW.w400.val,

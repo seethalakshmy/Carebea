@@ -2794,6 +2794,8 @@ class _ApiClient implements ApiClient {
     limit,
     searchTerm,
     status,
+    createdDateStart,
+    createdDateEnd,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2804,6 +2806,8 @@ class _ApiClient implements ApiClient {
       'limit': limit,
       'search_term': searchTerm,
       'status': status,
+      'createdDateStart': createdDateStart,
+      'createdDateEnd': createdDateEnd,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ComplaintsListResponseModel>(Options(

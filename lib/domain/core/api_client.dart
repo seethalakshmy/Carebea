@@ -725,12 +725,13 @@ abstract class ApiClient {
 
   @POST('/admin/get-complaints')
   Future<ComplaintsListResponseModel> getComplaints(
-    @Field('user_id') String userId,
-    @Field('page') String page,
-    @Field('limit') String limit,
-    @Field('search_term') String searchTerm,
-    @Field('status') int status,
-  );
+      @Field('user_id') String userId,
+      @Field('page') String page,
+      @Field('limit') String limit,
+      @Field('search_term') String searchTerm,
+      @Field('status') int status,
+      @Field('createdDateStart') String createdDateStart,
+      @Field('createdDateEnd') String createdDateEnd);
 
   @POST('/admin/client-service-view')
   Future<ClientServiceResponse> getClientService(

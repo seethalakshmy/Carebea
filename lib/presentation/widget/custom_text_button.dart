@@ -45,30 +45,22 @@ class CTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TranslateOnHover(
-      builder: (isHover) {
-        return TextButton(
-            autofocus: autofocus,
-            onPressed: onPressed,
-            onLongPress: onLongPress,
-            style: ButtonStyle(
-              mouseCursor: MaterialStatePropertyAll(mouseCursor),
-              maximumSize: MaterialStatePropertyAll(
-                  Size(width ?? DBL.fourFifty.val, height ?? DBL.fifty.val)),
-              overlayColor: MaterialStatePropertyAll(AppColor.transparent.val),
-            ),
-            child: FxHover(
-              builder: (isHover) {
-                Color color =
-                    isHover ? AppColor.darkBlue.val : AppColor.primaryColor.val;
-                return CustomText(
-                  text!,
-                  style: TS().gPoppins(
-                      fontWeight: fontWeight ?? FW.w600.val, color: color),
-                );
-              },
-            ));
-      },
-    );
+    return TextButton(
+        autofocus: autofocus,
+        onPressed: onPressed,
+        onLongPress: onLongPress,
+        style: ButtonStyle(
+          mouseCursor: MaterialStatePropertyAll(mouseCursor),
+          maximumSize: MaterialStatePropertyAll(
+              Size(width ?? DBL.fourFifty.val, height ?? DBL.fifty.val)),
+          overlayColor: MaterialStatePropertyAll(AppColor.transparent.val),
+        ),
+        child: IgnorePointer(
+          child: CustomText(
+            text!,
+            style: TS()
+                .gPoppins(fontWeight: fontWeight ?? FW.w600.val, color: color),
+          ),
+        ));
   }
 }

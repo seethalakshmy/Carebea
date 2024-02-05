@@ -135,6 +135,9 @@ class _MyAppState extends State<MyApp> {
         routeInformationProvider: _appRouter.routeInfoProvider(),
         debugShowCheckedModeBanner: false,
         theme: ThemeClass.themeData(context),
+        supportedLocales: const <Locale>[
+          Locale('en', ''),
+        ],
         builder: (_, child) {
           return FutureBuilder(
               future: SharedPreffUtil().init(),

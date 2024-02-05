@@ -9,5 +9,7 @@ abstract class IComplaintsRepo {
       required String page,
       required String limit,
       required String searchTerm,
-      required int status});
+      required int status,
+      required String startDate,
+      required String endDate});
 }

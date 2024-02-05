@@ -109,11 +109,13 @@ class CustomMaterialButton extends StatelessWidget {
                   ? isLoading
                       ? buildProgress()
                       : Flexible(
-                          child: CustomText(
-                            text!,
-                            style: TS().gPoppins(
-                                fontWeight: FW.w600.val,
-                                color: AppColor.white.val),
+                          child: IgnorePointer(
+                            child: CustomText(
+                              text!,
+                              style: TS().gPoppins(
+                                  fontWeight: FW.w600.val,
+                                  color: AppColor.white.val),
+                            ),
                           ),
                         )
                   : CustomSizedBox.shrink(),

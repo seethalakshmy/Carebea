@@ -217,12 +217,31 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                             CustomSizedBox(
                                               height: DBL.fourteen.val,
                                             ),
-                                            SVGText(
-                                              path: IMG.location.val,
-                                              name:
-                                                  response?.data?.locationTag ??
-                                                      "",
-                                              widthGap: DBL.twelve.val,
+                                            Expanded(
+                                              child: SVGText(
+                                                path: IMG.location.val,
+                                                name: (response?.data?.address?.first
+                                                            .address ??
+                                                        '') +
+                                                    (response?.data?.address
+                                                            ?.first.streetName ??
+                                                        '') +
+                                                    (',') +
+                                                    (response?.data
+                                                            ?.address?.first.cityName ??
+                                                        '') +
+                                                    (',') +
+                                                    (response?.data?.address
+                                                            ?.first.stateName ??
+                                                        '') +
+                                                    (',') +
+                                                    (response?.data?.address
+                                                            ?.first.zipCode ??
+                                                        '') +
+                                                    (',') +
+                                                    ('USA'),
+                                                widthGap: DBL.twelve.val,
+                                              ),
                                             ),
                                             // CustomSizedBox(
                                             //   height: isXs2(context)
