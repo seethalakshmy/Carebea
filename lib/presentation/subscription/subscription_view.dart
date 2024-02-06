@@ -444,12 +444,12 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                 text: AppString.careRecipientName.val,
                 fontWeight: FontWeight.bold),
           ),
-          DataColumn2(
-            size: ColumnSize.L,
-            label: _columnsView(
-                text: AppString.subscriptionId.val,
-                fontWeight: FontWeight.bold),
-          ),
+          // DataColumn2(
+          //   size: ColumnSize.L,
+          //   label: _columnsView(
+          //       text: AppString.subscriptionId.val,
+          //       fontWeight: FontWeight.bold),
+          // ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(
@@ -502,28 +502,28 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
               DataCell(_rowsView(
                 text: '${item.name?.firstName} ${item.name?.lastName}',
               )),
-              DataCell(_rowsView(
-                text: item.subscriptionDetails?.subscriptionId,
-              )),
+              // DataCell(_rowsView(
+              //   text: item.subscriptionDetails?.subscriptionId,
+              // )),
               DataCell(_rowsView(
                   text: Utility.serviceDate(
-                DateTime.parse(item.subscriptionDetails?.startedAt ?? "")
+                DateTime.parse(item.subscriptionDetails?.first.startedAt ?? "")
                     .toLocal(),
               ))),
               DataCell(_rowsView(
                 text: Utility.serviceDate(
-                  DateTime.parse(item.subscriptionDetails?.expiry ?? "")
+                  DateTime.parse(item.subscriptionDetails?.first.expiry ?? "")
                       .toLocal(),
                 ),
               )),
               DataCell(_rowsView(
-                  text: item.subscriptionDetails?.type == '1'
+                  text: item.subscriptionDetails?.first.type == '1'
                       ? 'Monthly'
-                      : item.subscriptionDetails?.type == '2'
+                      : item.subscriptionDetails?.first.type == '2'
                           ? 'Semi Annual'
                           : "Annually")),
               DataCell(_rowsView(
-                  text: item.subscriptionDetails?.isActive == true
+                  text: item.subscriptionDetails?.first.isActive == true
                       ? AppString.active.val
                       : AppString.inActive.val)),
               DataCell(Row(

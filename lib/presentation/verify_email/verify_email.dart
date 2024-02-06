@@ -14,11 +14,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../application/bloc/forgot_password/forgot_password_bloc.dart';
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
+import '../../application/bloc/resend_otp_bloc/resend_otp_bloc.dart';
 import '../../application/bloc/verify_email/verify_email_bloc.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
-import '../routes/app_router.gr.dart';
 import '../widget/custom_text_field.dart';
 
 @RoutePage()
@@ -126,9 +125,44 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                   height: DBL.eleven.val,
                 ),
                 _emailVerifyTextFormView(),
-                CustomSizedBox(
-                  height: DBL.fifty.val,
-                ),
+                // CustomSizedBox(
+                //   height: DBL.fifty.val,
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     BlocBuilder<FormValidationBloc, FormValidationState>(
+                //       // bloc: _emailOtpVerificationBloc,
+                //       builder: (context, state) {
+                //         return Text(
+                //           '${60}${"s"}',
+                //           style: const TextStyle(
+                //               color: Colors.red,
+                //               fontSize: 14,
+                //               fontWeight: FontWeight.w500,
+                //               decoration: TextDecoration.none),
+                //         );
+                //       },
+                //     ),
+                //     const Spacer(),
+                //     TextButton(
+                //         onPressed: () {
+                //           BlocProvider.of<FormValidationBloc>(context)
+                //               .add(const FormValidationEvent.count());
+                //           context.read<ResendOtpBloc>().add(ResendOtpEvent.resend(
+                //               userId: SharedPreffUtil().getAdminId,
+                //               type:
+                //                   1)); // Type 0=>registration, 1=>forgotPassword, 2=> verify phone number
+                //         },
+                //         child: Text(
+                //           AppString.resentOTP.val,
+                //           style: Theme.of(context)
+                //               .textTheme
+                //               .labelLarge
+                //               ?.copyWith(decoration: TextDecoration.underline),
+                //         ))
+                //   ],
+                // ),
                 _verifyButton(),
               ],
             ),

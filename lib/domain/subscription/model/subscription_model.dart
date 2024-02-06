@@ -54,7 +54,7 @@ String dataToJson(Data data) => json.encode(data.toJson());
 
 class Data {
   Data({
-    List<SubscriptionResult>? finalResult,
+    List<FinalResult>? finalResult,
     Pagination? pagination,
   }) {
     _finalResult = finalResult;
@@ -65,24 +65,24 @@ class Data {
     if (json['finalResult'] != null) {
       _finalResult = [];
       json['finalResult'].forEach((v) {
-        _finalResult?.add(SubscriptionResult.fromJson(v));
+        _finalResult?.add(FinalResult.fromJson(v));
       });
     }
     _pagination = json['pagination'] != null
         ? Pagination.fromJson(json['pagination'])
         : null;
   }
-  List<SubscriptionResult>? _finalResult;
+  List<FinalResult>? _finalResult;
   Pagination? _pagination;
   Data copyWith({
-    List<SubscriptionResult>? finalResult,
+    List<FinalResult>? finalResult,
     Pagination? pagination,
   }) =>
       Data(
         finalResult: finalResult ?? _finalResult,
         pagination: pagination ?? _pagination,
       );
-  List<SubscriptionResult>? get finalResult => _finalResult;
+  List<FinalResult>? get finalResult => _finalResult;
   Pagination? get pagination => _pagination;
 
   Map<String, dynamic> toJson() {
@@ -143,13 +143,12 @@ class Pagination {
   }
 }
 
-SubscriptionResult subscriptionResultFromJson(String str) =>
-    SubscriptionResult.fromJson(json.decode(str));
-String subscriptionResultToJson(SubscriptionResult data) =>
-    json.encode(data.toJson());
+FinalResult finalResultFromJson(String str) =>
+    FinalResult.fromJson(json.decode(str));
+String finalResultToJson(FinalResult data) => json.encode(data.toJson());
 
-class SubscriptionResult {
-  SubscriptionResult({
+class FinalResult {
+  FinalResult({
     String? id,
     String? userId,
     Name? name,
@@ -160,7 +159,7 @@ class SubscriptionResult {
     String? role,
     bool? status,
     bool? isSubscriptionActive,
-    SubscriptionDetails? subscriptionDetails,
+    List<SubscriptionDetails>? subscriptionDetails,
   }) {
     _id = id;
     _userId = userId;
@@ -175,7 +174,7 @@ class SubscriptionResult {
     _subscriptionDetails = subscriptionDetails;
   }
 
-  SubscriptionResult.fromJson(dynamic json) {
+  FinalResult.fromJson(dynamic json) {
     _id = json['id'];
     _userId = json['user_id'];
     _name = json['name'] != null ? Name.fromJson(json['name']) : null;
@@ -186,9 +185,12 @@ class SubscriptionResult {
     _role = json['role'];
     _status = json['status'];
     _isSubscriptionActive = json['is_subscription_active'];
-    _subscriptionDetails = json['subscription_details'] != null
-        ? SubscriptionDetails.fromJson(json['subscription_details'])
-        : null;
+    if (json['subscription_details'] != null) {
+      _subscriptionDetails = [];
+      json['subscription_details'].forEach((v) {
+        _subscriptionDetails?.add(SubscriptionDetails.fromJson(v));
+      });
+    }
   }
   String? _id;
   String? _userId;
@@ -200,8 +202,8 @@ class SubscriptionResult {
   String? _role;
   bool? _status;
   bool? _isSubscriptionActive;
-  SubscriptionDetails? _subscriptionDetails;
-  SubscriptionResult copyWith({
+  List<SubscriptionDetails>? _subscriptionDetails;
+  FinalResult copyWith({
     String? id,
     String? userId,
     Name? name,
@@ -212,9 +214,9 @@ class SubscriptionResult {
     String? role,
     bool? status,
     bool? isSubscriptionActive,
-    SubscriptionDetails? subscriptionDetails,
+    List<SubscriptionDetails>? subscriptionDetails,
   }) =>
-      SubscriptionResult(
+      FinalResult(
         id: id ?? _id,
         userId: userId ?? _userId,
         name: name ?? _name,
@@ -237,7 +239,7 @@ class SubscriptionResult {
   String? get role => _role;
   bool? get status => _status;
   bool? get isSubscriptionActive => _isSubscriptionActive;
-  SubscriptionDetails? get subscriptionDetails => _subscriptionDetails;
+  List<SubscriptionDetails>? get subscriptionDetails => _subscriptionDetails;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -254,7 +256,8 @@ class SubscriptionResult {
     map['status'] = _status;
     map['is_subscription_active'] = _isSubscriptionActive;
     if (_subscriptionDetails != null) {
-      map['subscription_details'] = _subscriptionDetails?.toJson();
+      map['subscription_details'] =
+          _subscriptionDetails?.map((v) => v.toJson()).toList();
     }
     return map;
   }
@@ -266,24 +269,29 @@ String subscriptionDetailsToJson(SubscriptionDetails data) =>
     json.encode(data.toJson());
 
 class SubscriptionDetails {
-  SubscriptionDetails(
-      {bool? isPaidMontly,
-      dynamic subscriptionCancelChargePerMonth,
-      String? subscriptionId,
-      String? expiry,
-      String? type,
-      String? color,
-      String? startedAt,
-      bool? isRecurring,
-      bool? isActive,
-      String? lastAlertDate,
-      bool? isAlertMailSend,
-      bool? isAlertSmsSend,
-      String? subscriptionPlanFee,
-      String? id,
-      String? monthlyExpiry}) {
-    _isPaidMontly = isPaidMontly;
-    _subscriptionCancelChargePerMonth = subscriptionCancelChargePerMonth;
+  SubscriptionDetails({
+    dynamic monthlyExpiry,
+    dynamic monthlyRenewalLeft,
+    dynamic monthlyFee,
+    String? subscriptionId,
+    String? expiry,
+    String? type,
+    String? color,
+    String? startedAt,
+    bool? isRecurring,
+    bool? isActive,
+    dynamic lastAlertDate,
+    bool? isAlertMailSend,
+    bool? isAlertSmsSend,
+    String? subscriptionPlanFee,
+    String? id,
+    bool? isPaidMontly,
+    String? subscriptionCancelChargePerMonth,
+    String? title,
+  }) {
+    _monthlyExpiry = monthlyExpiry;
+    _monthlyRenewalLeft = monthlyRenewalLeft;
+    _monthlyFee = monthlyFee;
     _subscriptionId = subscriptionId;
     _expiry = expiry;
     _type = type;
@@ -296,13 +304,15 @@ class SubscriptionDetails {
     _isAlertSmsSend = isAlertSmsSend;
     _subscriptionPlanFee = subscriptionPlanFee;
     _id = id;
-    _monthlyExpire = monthlyExpiry;
+    _isPaidMontly = isPaidMontly;
+    _subscriptionCancelChargePerMonth = subscriptionCancelChargePerMonth;
+    _title = title;
   }
 
   SubscriptionDetails.fromJson(dynamic json) {
-    _isPaidMontly = json['isPaidMontly'];
-    _subscriptionCancelChargePerMonth =
-        json['subscriptionCancelChargePerMonth'];
+    _monthlyExpiry = json['monthlyExpiry'];
+    _monthlyRenewalLeft = json['monthlyRenewalLeft'];
+    _monthlyFee = json['monthlyFee'];
     _subscriptionId = json['subscriptionId'];
     _expiry = json['expiry'];
     _type = json['type'];
@@ -315,10 +325,14 @@ class SubscriptionDetails {
     _isAlertSmsSend = json['isAlertSmsSend'];
     _subscriptionPlanFee = json['SubscriptionPlanFee'];
     _id = json['_id'];
-    _monthlyExpire = json['monthlyExpiry'];
+    _isPaidMontly = json['isPaidMontly'];
+    _subscriptionCancelChargePerMonth =
+        json['subscriptionCancelChargePerMonth'];
+    _title = json['title'];
   }
-  bool? _isPaidMontly;
-  dynamic _subscriptionCancelChargePerMonth;
+  dynamic _monthlyExpiry;
+  dynamic _monthlyRenewalLeft;
+  dynamic _monthlyFee;
   String? _subscriptionId;
   String? _expiry;
   String? _type;
@@ -326,48 +340,58 @@ class SubscriptionDetails {
   String? _startedAt;
   bool? _isRecurring;
   bool? _isActive;
-  String? _lastAlertDate;
+  dynamic _lastAlertDate;
   bool? _isAlertMailSend;
   bool? _isAlertSmsSend;
   String? _subscriptionPlanFee;
   String? _id;
-  String? _monthlyExpire;
-  SubscriptionDetails copyWith(
-          {bool? isPaidMontly,
-          dynamic subscriptionCancelChargePerMonth,
-          String? subscriptionId,
-          String? expiry,
-          String? type,
-          String? color,
-          String? startedAt,
-          bool? isRecurring,
-          bool? isActive,
-          String? lastAlertDate,
-          bool? isAlertMailSend,
-          bool? isAlertSmsSend,
-          String? subscriptionPlanFee,
-          String? id,
-          String? monthlyExpire}) =>
+  bool? _isPaidMontly;
+  String? _subscriptionCancelChargePerMonth;
+  String? _title;
+  SubscriptionDetails copyWith({
+    dynamic monthlyExpiry,
+    dynamic monthlyRenewalLeft,
+    dynamic monthlyFee,
+    String? subscriptionId,
+    String? expiry,
+    String? type,
+    String? color,
+    String? startedAt,
+    bool? isRecurring,
+    bool? isActive,
+    dynamic lastAlertDate,
+    bool? isAlertMailSend,
+    bool? isAlertSmsSend,
+    String? subscriptionPlanFee,
+    String? id,
+    bool? isPaidMontly,
+    String? subscriptionCancelChargePerMonth,
+    String? title,
+  }) =>
       SubscriptionDetails(
-          isPaidMontly: isPaidMontly ?? _isPaidMontly,
-          subscriptionCancelChargePerMonth: subscriptionCancelChargePerMonth ??
-              _subscriptionCancelChargePerMonth,
-          subscriptionId: subscriptionId ?? _subscriptionId,
-          expiry: expiry ?? _expiry,
-          type: type ?? _type,
-          color: color ?? _color,
-          startedAt: startedAt ?? _startedAt,
-          isRecurring: isRecurring ?? _isRecurring,
-          isActive: isActive ?? _isActive,
-          lastAlertDate: lastAlertDate ?? _lastAlertDate,
-          isAlertMailSend: isAlertMailSend ?? _isAlertMailSend,
-          isAlertSmsSend: isAlertSmsSend ?? _isAlertSmsSend,
-          subscriptionPlanFee: subscriptionPlanFee ?? _subscriptionPlanFee,
-          id: id ?? _id,
-          monthlyExpiry: monthlyExpire ?? _monthlyExpire);
-  bool? get isPaidMontly => _isPaidMontly;
-  dynamic get subscriptionCancelChargePerMonth =>
-      _subscriptionCancelChargePerMonth;
+        monthlyExpiry: monthlyExpiry ?? _monthlyExpiry,
+        monthlyRenewalLeft: monthlyRenewalLeft ?? _monthlyRenewalLeft,
+        monthlyFee: monthlyFee ?? _monthlyFee,
+        subscriptionId: subscriptionId ?? _subscriptionId,
+        expiry: expiry ?? _expiry,
+        type: type ?? _type,
+        color: color ?? _color,
+        startedAt: startedAt ?? _startedAt,
+        isRecurring: isRecurring ?? _isRecurring,
+        isActive: isActive ?? _isActive,
+        lastAlertDate: lastAlertDate ?? _lastAlertDate,
+        isAlertMailSend: isAlertMailSend ?? _isAlertMailSend,
+        isAlertSmsSend: isAlertSmsSend ?? _isAlertSmsSend,
+        subscriptionPlanFee: subscriptionPlanFee ?? _subscriptionPlanFee,
+        id: id ?? _id,
+        isPaidMontly: isPaidMontly ?? _isPaidMontly,
+        subscriptionCancelChargePerMonth: subscriptionCancelChargePerMonth ??
+            _subscriptionCancelChargePerMonth,
+        title: title ?? _title,
+      );
+  dynamic get monthlyExpiry => _monthlyExpiry;
+  dynamic get monthlyRenewalLeft => _monthlyRenewalLeft;
+  dynamic get monthlyFee => _monthlyFee;
   String? get subscriptionId => _subscriptionId;
   String? get expiry => _expiry;
   String? get type => _type;
@@ -375,17 +399,21 @@ class SubscriptionDetails {
   String? get startedAt => _startedAt;
   bool? get isRecurring => _isRecurring;
   bool? get isActive => _isActive;
-  String? get lastAlertDate => _lastAlertDate;
+  dynamic get lastAlertDate => _lastAlertDate;
   bool? get isAlertMailSend => _isAlertMailSend;
   bool? get isAlertSmsSend => _isAlertSmsSend;
   String? get subscriptionPlanFee => _subscriptionPlanFee;
   String? get id => _id;
-  String? get monthlyExpire => _monthlyExpire;
+  bool? get isPaidMontly => _isPaidMontly;
+  String? get subscriptionCancelChargePerMonth =>
+      _subscriptionCancelChargePerMonth;
+  String? get title => _title;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['isPaidMontly'] = _isPaidMontly;
-    map['subscriptionCancelChargePerMonth'] = _subscriptionCancelChargePerMonth;
+    map['monthlyExpiry'] = _monthlyExpiry;
+    map['monthlyRenewalLeft'] = _monthlyRenewalLeft;
+    map['monthlyFee'] = _monthlyFee;
     map['subscriptionId'] = _subscriptionId;
     map['expiry'] = _expiry;
     map['type'] = _type;
@@ -398,7 +426,9 @@ class SubscriptionDetails {
     map['isAlertSmsSend'] = _isAlertSmsSend;
     map['SubscriptionPlanFee'] = _subscriptionPlanFee;
     map['_id'] = _id;
-    map['monthlyExpiry'] = _monthlyExpire;
+    map['isPaidMontly'] = _isPaidMontly;
+    map['subscriptionCancelChargePerMonth'] = _subscriptionCancelChargePerMonth;
+    map['title'] = _title;
     return map;
   }
 }

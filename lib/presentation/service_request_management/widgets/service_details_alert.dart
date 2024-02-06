@@ -869,11 +869,20 @@ class ServiceDetailsAlert extends StatelessWidget {
           service.refundDetails?.length == 0
               ? _refundStatusWidget(context, service)
               : Container(),
-          _textAndSubText(
-              context: context,
-              height: DBL.eight.val,
-              text: AppString.transactionId.val,
-              subText: service.serviceFeeTransactionId ?? ""),
+          InkWell(
+            onTap: () {
+              _transactionDetails(
+                  serviceId: service.serviceId ?? '',
+                  transactionId: service.transationObjectId ?? "",
+                  context: context);
+            },
+            child: _textAndSubText(
+                needUnderLine: true,
+                context: context,
+                height: DBL.eight.val,
+                text: AppString.transactionId.val,
+                subText: service.serviceFeeTransactionId ?? ""),
+          ),
         ],
       ),
     );

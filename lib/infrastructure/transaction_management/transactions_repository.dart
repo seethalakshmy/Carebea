@@ -39,11 +39,11 @@ class TransactionsRepository implements ITransactionsRepo {
       required String page,
       required int limit,
       required String searchTerm,
-      required int filterId,
-      String? clientId}) async {
+      String? clientId,
+      required int statusId}) async {
     try {
       final response = await _apiClient.getTransactions(
-          token, userId, page, limit, searchTerm, filterId, clientId ?? '');
+          token, userId, page, limit, searchTerm, clientId ?? '', statusId);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");

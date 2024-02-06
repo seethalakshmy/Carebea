@@ -2306,8 +2306,8 @@ class _ApiClient implements ApiClient {
     page,
     limit,
     searchTerm,
-    filterId,
     clientId,
+    statusId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2318,8 +2318,8 @@ class _ApiClient implements ApiClient {
       'page': page,
       'limit': limit,
       'search_term': searchTerm,
-      'filter_id': filterId,
       'client_id': clientId,
+      'status_id': statusId,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<TransactionListResponse>(Options(

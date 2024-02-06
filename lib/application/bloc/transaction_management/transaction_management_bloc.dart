@@ -49,9 +49,9 @@ class TransactionManagementBloc
             page: event.page,
             limit: event.limit,
             searchTerm: event.searchTerm,
-            filterId: event.filterId,
             token: '',
-            clientId: event.clientId);
+            clientId: event.clientId,
+            statusId: event.statusId);
     var transactionState = result.fold((l) {
       emit(state.copyWith(isInitialLoading: false));
       return state.copyWith(error: l.error, isLoading: false);

@@ -628,8 +628,8 @@ abstract class ApiClient {
       @Field('page') String page,
       @Field('limit') int limit,
       @Field('search_term') String searchTerm,
-      @Field('filter_id') int filterId,
-      @Field('client_id') String clientId);
+      @Field('client_id') String clientId,
+      @Field('status_id') int statusId);
 
   @POST("/admin/transaction-details")
   Future<TransactionDetailsResponse> getTransactionDetails(

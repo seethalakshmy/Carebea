@@ -4,7 +4,6 @@ import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
 import 'package:admin_580_tech/infrastructure/caregiver_detail/caregiver_detail_repository.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
-import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_bank_account_info_view.dart';
 import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_earning_view.dart';
 import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_schedule_view.dart';
 import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_service_request_view.dart';

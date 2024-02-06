@@ -101,9 +101,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
             page: _transactionBloc.paginationPage.toString(),
             limit: _transactionBloc.limit,
             searchTerm: _searchController.text,
-            filterId: 0,
             userId: adminId ?? '',
-            clientId: widget.clientId)),
+            clientId: widget.clientId,
+            statusId: 0)),
       child: CustomCard(
         shape: PR().roundedRectangleBorder(DBL.eighteen.val),
         elevation: DBL.seven.val,
@@ -133,10 +133,10 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                                   page: _transactionBloc.paginationPage
                                       .toString(),
                                   limit: _transactionBloc.limit,
-                                  filterId: _transactionBloc.filterId,
                                   searchTerm: _searchController.text,
                                   userId: adminId ?? '',
-                                  clientId: widget.clientId));
+                                  clientId: widget.clientId,
+                                  statusId: _transactionBloc.filterId));
                         },
                         onChanged: (val) {
                           _transactionBloc.add(
@@ -144,10 +144,10 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                                   page: _transactionBloc.paginationPage
                                       .toString(),
                                   limit: _transactionBloc.limit,
-                                  filterId: _transactionBloc.filterId,
                                   searchTerm: _searchController.text,
                                   userId: adminId ?? '',
-                                  clientId: widget.clientId));
+                                  clientId: widget.clientId,
+                                  statusId: _transactionBloc.filterId));
                         },
                         width: Responsive.isWeb(context)
                             ? DBL.threeFifteen.val
@@ -164,10 +164,10 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                                     page: _transactionBloc.paginationPage
                                         .toString(),
                                     limit: _transactionBloc.limit,
-                                    filterId: _transactionBloc.filterId,
                                     searchTerm: _transactionBloc.searchQuery,
                                     userId: adminId ?? '',
-                                    clientId: widget.clientId));
+                                    clientId: widget.clientId,
+                                    statusId: _transactionBloc.filterId));
                           },
                           child: CustomSvg(
                             path: IMG.search.val,
@@ -342,9 +342,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                 page: _transactionBloc.paginationPage.toString(),
                 limit: _transactionBloc.limit,
                 searchTerm: _searchController.text,
-                filterId: 0,
                 userId: adminId ?? '',
-                clientId: widget.clientId));
+                clientId: widget.clientId,
+                statusId: 0));
           },
           text: AppString.clearFilters.val,
         ),
@@ -456,10 +456,10 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                 _transactionBloc.add(TransactionManagementEvent.getTransactions(
                     page: _transactionBloc.paginationPage.toString(),
                     limit: _transactionBloc.limit,
-                    filterId: _transactionBloc.filterId,
                     searchTerm: _searchController.text,
                     userId: adminId ?? '',
-                    clientId: widget.clientId));
+                    clientId: widget.clientId,
+                    statusId: _transactionBloc.filterId));
                 updateData();
               }
             },
@@ -468,10 +468,10 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
               _transactionBloc.add(TransactionManagementEvent.getTransactions(
                   page: _transactionBloc.paginationPage.toString(),
                   limit: _transactionBloc.limit,
-                  filterId: _transactionBloc.filterId,
                   searchTerm: _searchController.text,
                   userId: adminId ?? '',
-                  clientId: widget.clientId));
+                  clientId: widget.clientId,
+                  statusId: _transactionBloc.filterId));
               updateData();
             },
             onPreviousPressed: () {
@@ -481,10 +481,10 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                 _transactionBloc.add(TransactionManagementEvent.getTransactions(
                     page: _transactionBloc.paginationPage.toString(),
                     limit: _transactionBloc.limit,
-                    filterId: _transactionBloc.filterId,
                     searchTerm: _transactionBloc.searchQuery,
                     userId: adminId ?? '',
-                    clientId: widget.clientId));
+                    clientId: widget.clientId,
+                    statusId: _transactionBloc.filterId));
                 updateData();
               }
             });
@@ -630,9 +630,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
 
   _statusBox(Transactions item) {
     return CustomStatusWidget(
-      statusName: item.status!.name ?? "",
-      isCompleted: item.status!.id == 1 || item.status!.id == 2 ? true : false,
-    );
+        statusName: item.status!.name ?? "",
+        isCompleted: item.status!.id == 2 ? true : false,
+        isInitiated: item.status!.id == 1 ? true : false);
   }
 
   _transactionDetails(Transactions item) {
@@ -681,9 +681,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
             page: _transactionBloc.paginationPage.toString(),
             limit: _transactionBloc.limit,
             searchTerm: _searchController.text,
-            filterId: _transactionBloc.filterId,
             userId: adminId ?? '',
-            clientId: widget.clientId));
+            clientId: widget.clientId,
+            statusId: _transactionBloc.filterId));
       },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -701,16 +701,16 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
         color: AppColor.white.val,
         padding: EdgeInsets.all(DBL.five.val),
       ),
-      items: _transactionBloc.filterList
+      items: ["Initiated", "Successful", "unsuccessful"]
           .asMap()
           .entries
           .map(
             (item) => DropdownItem<int>(
-              value: int.parse(item.value.filterId!),
+              value: item.key + 1,
               child: Padding(
                 padding: EdgeInsets.all(DBL.eight.val),
                 child: Text(
-                  item.value.title ?? "",
+                  item.value ?? "",
                   style: TS().gRoboto(
                       fontWeight: FW.w500.val,
                       fontSize: FS.font15.val,
