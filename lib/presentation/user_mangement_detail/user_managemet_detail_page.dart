@@ -1,5 +1,4 @@
-import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_view.dart';
-import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/transactions_view.dart';
+import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/pending_service_page.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
@@ -59,8 +58,6 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        HeaderView(title: AppString.userManagement.val),
-        CustomSizedBox(height: DBL.twenty.val),
         _rebuildView(),
       ],
     );
@@ -83,10 +80,6 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
       BuildContext context, UserManagementDetailState state) {
     CustomLog.log('width :${MediaQuery.of(context).size.width}');
     UserDetailResponse? response = state.response;
-    Caregiver? caregiver;
-    print('testing${state.response?.data?.name?.firstName}');
-    print('testing${userId}');
-    print(state.response?.data?.profilePic);
 
     return CustomSizedBox(
       height: MediaQuery.of(context).size.height,
@@ -395,8 +388,8 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
             unselectedLabelColor: AppColor.lightGrey5.val,
             tabs: [
               Tab(icon: Text(AppString.careRecipients.val)),
-              // Tab(icon: Text(AppString.paymentMethod.val)),
               Tab(icon: Text(AppString.services.val)),
+              Tab(icon: Text(AppString.pendingServices.val)),
               Tab(icon: Text(AppString.transaction.val)),
             ],
             controller: tabController,
@@ -413,6 +406,9 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                   //   state: state,
                   // ),
                   ServiceRequestManagementPage(
+                    clientId: state.response?.data?.id ?? "",
+                  ),
+                  PendingServiceView(
                     clientId: state.response?.data?.id ?? "",
                   ),
                   // ServiceView(

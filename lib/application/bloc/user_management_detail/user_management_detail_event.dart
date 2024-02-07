@@ -13,5 +13,12 @@ class UserManagementDetailEvent with _$UserManagementDetailEvent {
     required String page,
     required String limit,
     required String searchTerm,
-}) = _GetSubClients;
+  }) = _GetSubClients;
+
+  const factory UserManagementDetailEvent.getPendingServices({
+    required String userId,
+    required String profileId,
+    required String page,
+    required String limit,
+  }) = _GetPendingServices;
 }

@@ -69,6 +69,7 @@ import '../transaction_management/model/transaction_list_response.dart';
 import '../upcoming_birthdays/model/upcoming_birthday_response.dart';
 import '../user_management/model/user_list_response.dart';
 import '../user_management_detail/model/client_service_response.dart';
+import '../user_management_detail/model/pending_service_response.dart';
 import '../user_management_detail/model/sub_client_response.dart';
 import '../video_management/models/video_management_response.dart';
 
@@ -893,5 +894,13 @@ abstract class ApiClient {
     @Field("page") String page,
     @Field("limit") String limit,
     @Field("search_term") String searchTerm,
+  );
+
+  @POST('/admin/pending-service-history')
+  Future<PendingServiceResponse> pendingService(
+    @Field("user_id") String userId,
+    @Field("profile_id") String profileId,
+    @Field("page") String page,
+    @Field("offset") String limit,
   );
 }

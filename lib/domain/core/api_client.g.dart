@@ -3516,6 +3516,39 @@ class _ApiClient implements ApiClient {
     return value;
   }
 
+  @override
+  Future<PendingServiceResponse> pendingService(
+    userId,
+    profileId,
+    page,
+    limit,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'profile_id': profileId,
+      'page': page,
+      'offset': limit,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PendingServiceResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/pending-service-history',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PendingServiceResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

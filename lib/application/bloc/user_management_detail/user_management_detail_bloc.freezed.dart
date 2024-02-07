@@ -24,6 +24,9 @@ mixin _$UserManagementDetailEvent {
     required TResult Function(
             String userId, String page, String limit, String searchTerm)
         getSubClients,
+    required TResult Function(
+            String userId, String profileId, String page, String limit)
+        getPendingServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,6 +36,9 @@ mixin _$UserManagementDetailEvent {
     TResult? Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
+    TResult? Function(
+            String userId, String profileId, String page, String limit)?
+        getPendingServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,6 +48,9 @@ mixin _$UserManagementDetailEvent {
     TResult Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
+    TResult Function(
+            String userId, String profileId, String page, String limit)?
+        getPendingServices,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -50,6 +59,7 @@ mixin _$UserManagementDetailEvent {
     required TResult Function(_GetUserDetail value) getUserDetail,
     required TResult Function(_GetClientService value) getClientService,
     required TResult Function(_GetSubClients value) getSubClients,
+    required TResult Function(_GetPendingServices value) getPendingServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +67,7 @@ mixin _$UserManagementDetailEvent {
     TResult? Function(_GetUserDetail value)? getUserDetail,
     TResult? Function(_GetClientService value)? getClientService,
     TResult? Function(_GetSubClients value)? getSubClients,
+    TResult? Function(_GetPendingServices value)? getPendingServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,6 +75,7 @@ mixin _$UserManagementDetailEvent {
     TResult Function(_GetUserDetail value)? getUserDetail,
     TResult Function(_GetClientService value)? getClientService,
     TResult Function(_GetSubClients value)? getSubClients,
+    TResult Function(_GetPendingServices value)? getPendingServices,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -186,6 +198,9 @@ class _$_GetUserDetail implements _GetUserDetail {
     required TResult Function(
             String userId, String page, String limit, String searchTerm)
         getSubClients,
+    required TResult Function(
+            String userId, String profileId, String page, String limit)
+        getPendingServices,
   }) {
     return getUserDetail(userId, adminId);
   }
@@ -198,6 +213,9 @@ class _$_GetUserDetail implements _GetUserDetail {
     TResult? Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
+    TResult? Function(
+            String userId, String profileId, String page, String limit)?
+        getPendingServices,
   }) {
     return getUserDetail?.call(userId, adminId);
   }
@@ -210,6 +228,9 @@ class _$_GetUserDetail implements _GetUserDetail {
     TResult Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
+    TResult Function(
+            String userId, String profileId, String page, String limit)?
+        getPendingServices,
     required TResult orElse(),
   }) {
     if (getUserDetail != null) {
@@ -224,6 +245,7 @@ class _$_GetUserDetail implements _GetUserDetail {
     required TResult Function(_GetUserDetail value) getUserDetail,
     required TResult Function(_GetClientService value) getClientService,
     required TResult Function(_GetSubClients value) getSubClients,
+    required TResult Function(_GetPendingServices value) getPendingServices,
   }) {
     return getUserDetail(this);
   }
@@ -234,6 +256,7 @@ class _$_GetUserDetail implements _GetUserDetail {
     TResult? Function(_GetUserDetail value)? getUserDetail,
     TResult? Function(_GetClientService value)? getClientService,
     TResult? Function(_GetSubClients value)? getSubClients,
+    TResult? Function(_GetPendingServices value)? getPendingServices,
   }) {
     return getUserDetail?.call(this);
   }
@@ -244,6 +267,7 @@ class _$_GetUserDetail implements _GetUserDetail {
     TResult Function(_GetUserDetail value)? getUserDetail,
     TResult Function(_GetClientService value)? getClientService,
     TResult Function(_GetSubClients value)? getSubClients,
+    TResult Function(_GetPendingServices value)? getPendingServices,
     required TResult orElse(),
   }) {
     if (getUserDetail != null) {
@@ -346,6 +370,9 @@ class _$_GetClientService implements _GetClientService {
     required TResult Function(
             String userId, String page, String limit, String searchTerm)
         getSubClients,
+    required TResult Function(
+            String userId, String profileId, String page, String limit)
+        getPendingServices,
   }) {
     return getClientService(userId, adminId);
   }
@@ -358,6 +385,9 @@ class _$_GetClientService implements _GetClientService {
     TResult? Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
+    TResult? Function(
+            String userId, String profileId, String page, String limit)?
+        getPendingServices,
   }) {
     return getClientService?.call(userId, adminId);
   }
@@ -370,6 +400,9 @@ class _$_GetClientService implements _GetClientService {
     TResult Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
+    TResult Function(
+            String userId, String profileId, String page, String limit)?
+        getPendingServices,
     required TResult orElse(),
   }) {
     if (getClientService != null) {
@@ -384,6 +417,7 @@ class _$_GetClientService implements _GetClientService {
     required TResult Function(_GetUserDetail value) getUserDetail,
     required TResult Function(_GetClientService value) getClientService,
     required TResult Function(_GetSubClients value) getSubClients,
+    required TResult Function(_GetPendingServices value) getPendingServices,
   }) {
     return getClientService(this);
   }
@@ -394,6 +428,7 @@ class _$_GetClientService implements _GetClientService {
     TResult? Function(_GetUserDetail value)? getUserDetail,
     TResult? Function(_GetClientService value)? getClientService,
     TResult? Function(_GetSubClients value)? getSubClients,
+    TResult? Function(_GetPendingServices value)? getPendingServices,
   }) {
     return getClientService?.call(this);
   }
@@ -404,6 +439,7 @@ class _$_GetClientService implements _GetClientService {
     TResult Function(_GetUserDetail value)? getUserDetail,
     TResult Function(_GetClientService value)? getClientService,
     TResult Function(_GetSubClients value)? getSubClients,
+    TResult Function(_GetPendingServices value)? getPendingServices,
     required TResult orElse(),
   }) {
     if (getClientService != null) {
@@ -527,6 +563,9 @@ class _$_GetSubClients implements _GetSubClients {
     required TResult Function(
             String userId, String page, String limit, String searchTerm)
         getSubClients,
+    required TResult Function(
+            String userId, String profileId, String page, String limit)
+        getPendingServices,
   }) {
     return getSubClients(userId, page, limit, searchTerm);
   }
@@ -539,6 +578,9 @@ class _$_GetSubClients implements _GetSubClients {
     TResult? Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
+    TResult? Function(
+            String userId, String profileId, String page, String limit)?
+        getPendingServices,
   }) {
     return getSubClients?.call(userId, page, limit, searchTerm);
   }
@@ -551,6 +593,9 @@ class _$_GetSubClients implements _GetSubClients {
     TResult Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
+    TResult Function(
+            String userId, String profileId, String page, String limit)?
+        getPendingServices,
     required TResult orElse(),
   }) {
     if (getSubClients != null) {
@@ -565,6 +610,7 @@ class _$_GetSubClients implements _GetSubClients {
     required TResult Function(_GetUserDetail value) getUserDetail,
     required TResult Function(_GetClientService value) getClientService,
     required TResult Function(_GetSubClients value) getSubClients,
+    required TResult Function(_GetPendingServices value) getPendingServices,
   }) {
     return getSubClients(this);
   }
@@ -575,6 +621,7 @@ class _$_GetSubClients implements _GetSubClients {
     TResult? Function(_GetUserDetail value)? getUserDetail,
     TResult? Function(_GetClientService value)? getClientService,
     TResult? Function(_GetSubClients value)? getSubClients,
+    TResult? Function(_GetPendingServices value)? getPendingServices,
   }) {
     return getSubClients?.call(this);
   }
@@ -585,6 +632,7 @@ class _$_GetSubClients implements _GetSubClients {
     TResult Function(_GetUserDetail value)? getUserDetail,
     TResult Function(_GetClientService value)? getClientService,
     TResult Function(_GetSubClients value)? getSubClients,
+    TResult Function(_GetPendingServices value)? getPendingServices,
     required TResult orElse(),
   }) {
     if (getSubClients != null) {
@@ -613,14 +661,216 @@ abstract class _GetSubClients implements UserManagementDetailEvent {
 }
 
 /// @nodoc
+abstract class _$$_GetPendingServicesCopyWith<$Res>
+    implements $UserManagementDetailEventCopyWith<$Res> {
+  factory _$$_GetPendingServicesCopyWith(_$_GetPendingServices value,
+          $Res Function(_$_GetPendingServices) then) =
+      __$$_GetPendingServicesCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String userId, String profileId, String page, String limit});
+}
+
+/// @nodoc
+class __$$_GetPendingServicesCopyWithImpl<$Res>
+    extends _$UserManagementDetailEventCopyWithImpl<$Res, _$_GetPendingServices>
+    implements _$$_GetPendingServicesCopyWith<$Res> {
+  __$$_GetPendingServicesCopyWithImpl(
+      _$_GetPendingServices _value, $Res Function(_$_GetPendingServices) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? profileId = null,
+    Object? page = null,
+    Object? limit = null,
+  }) {
+    return _then(_$_GetPendingServices(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      profileId: null == profileId
+          ? _value.profileId
+          : profileId // ignore: cast_nullable_to_non_nullable
+              as String,
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as String,
+      limit: null == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetPendingServices implements _GetPendingServices {
+  const _$_GetPendingServices(
+      {required this.userId,
+      required this.profileId,
+      required this.page,
+      required this.limit});
+
+  @override
+  final String userId;
+  @override
+  final String profileId;
+  @override
+  final String page;
+  @override
+  final String limit;
+
+  @override
+  String toString() {
+    return 'UserManagementDetailEvent.getPendingServices(userId: $userId, profileId: $profileId, page: $page, limit: $limit)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetPendingServices &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.profileId, profileId) ||
+                other.profileId == profileId) &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.limit, limit) || other.limit == limit));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userId, profileId, page, limit);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetPendingServicesCopyWith<_$_GetPendingServices> get copyWith =>
+      __$$_GetPendingServicesCopyWithImpl<_$_GetPendingServices>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId) getUserDetail,
+    required TResult Function(String userId, String adminId) getClientService,
+    required TResult Function(
+            String userId, String page, String limit, String searchTerm)
+        getSubClients,
+    required TResult Function(
+            String userId, String profileId, String page, String limit)
+        getPendingServices,
+  }) {
+    return getPendingServices(userId, profileId, page, limit);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getUserDetail,
+    TResult? Function(String userId, String adminId)? getClientService,
+    TResult? Function(
+            String userId, String page, String limit, String searchTerm)?
+        getSubClients,
+    TResult? Function(
+            String userId, String profileId, String page, String limit)?
+        getPendingServices,
+  }) {
+    return getPendingServices?.call(userId, profileId, page, limit);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getUserDetail,
+    TResult Function(String userId, String adminId)? getClientService,
+    TResult Function(
+            String userId, String page, String limit, String searchTerm)?
+        getSubClients,
+    TResult Function(
+            String userId, String profileId, String page, String limit)?
+        getPendingServices,
+    required TResult orElse(),
+  }) {
+    if (getPendingServices != null) {
+      return getPendingServices(userId, profileId, page, limit);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetUserDetail value) getUserDetail,
+    required TResult Function(_GetClientService value) getClientService,
+    required TResult Function(_GetSubClients value) getSubClients,
+    required TResult Function(_GetPendingServices value) getPendingServices,
+  }) {
+    return getPendingServices(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetUserDetail value)? getUserDetail,
+    TResult? Function(_GetClientService value)? getClientService,
+    TResult? Function(_GetSubClients value)? getSubClients,
+    TResult? Function(_GetPendingServices value)? getPendingServices,
+  }) {
+    return getPendingServices?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetUserDetail value)? getUserDetail,
+    TResult Function(_GetClientService value)? getClientService,
+    TResult Function(_GetSubClients value)? getSubClients,
+    TResult Function(_GetPendingServices value)? getPendingServices,
+    required TResult orElse(),
+  }) {
+    if (getPendingServices != null) {
+      return getPendingServices(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetPendingServices implements UserManagementDetailEvent {
+  const factory _GetPendingServices(
+      {required final String userId,
+      required final String profileId,
+      required final String page,
+      required final String limit}) = _$_GetPendingServices;
+
+  @override
+  String get userId;
+  String get profileId;
+  String get page;
+  String get limit;
+  @override
+  @JsonKey(ignore: true)
+  _$$_GetPendingServicesCopyWith<_$_GetPendingServices> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$UserManagementDetailState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   UserDetailResponse? get response => throw _privateConstructorUsedError;
   List<dynamic> get subUserList => throw _privateConstructorUsedError;
+  List<ServicesList> get pendingServiceList =>
+      throw _privateConstructorUsedError;
   ClientServiceResponse? get clientServiceResponse =>
       throw _privateConstructorUsedError;
   SubClientResponse? get subClientResponse =>
+      throw _privateConstructorUsedError;
+  PendingServiceResponse? get pendingServiceResponse =>
       throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
@@ -640,8 +890,10 @@ abstract class $UserManagementDetailStateCopyWith<$Res> {
       bool isError,
       UserDetailResponse? response,
       List<dynamic> subUserList,
+      List<ServicesList> pendingServiceList,
       ClientServiceResponse? clientServiceResponse,
       SubClientResponse? subClientResponse,
+      PendingServiceResponse? pendingServiceResponse,
       String? error});
 }
 
@@ -663,8 +915,10 @@ class _$UserManagementDetailStateCopyWithImpl<$Res,
     Object? isError = null,
     Object? response = freezed,
     Object? subUserList = null,
+    Object? pendingServiceList = null,
     Object? clientServiceResponse = freezed,
     Object? subClientResponse = freezed,
+    Object? pendingServiceResponse = freezed,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -684,6 +938,10 @@ class _$UserManagementDetailStateCopyWithImpl<$Res,
           ? _value.subUserList
           : subUserList // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
+      pendingServiceList: null == pendingServiceList
+          ? _value.pendingServiceList
+          : pendingServiceList // ignore: cast_nullable_to_non_nullable
+              as List<ServicesList>,
       clientServiceResponse: freezed == clientServiceResponse
           ? _value.clientServiceResponse
           : clientServiceResponse // ignore: cast_nullable_to_non_nullable
@@ -692,6 +950,10 @@ class _$UserManagementDetailStateCopyWithImpl<$Res,
           ? _value.subClientResponse
           : subClientResponse // ignore: cast_nullable_to_non_nullable
               as SubClientResponse?,
+      pendingServiceResponse: freezed == pendingServiceResponse
+          ? _value.pendingServiceResponse
+          : pendingServiceResponse // ignore: cast_nullable_to_non_nullable
+              as PendingServiceResponse?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -714,8 +976,10 @@ abstract class _$$_UserManagementDetailStateCopyWith<$Res>
       bool isError,
       UserDetailResponse? response,
       List<dynamic> subUserList,
+      List<ServicesList> pendingServiceList,
       ClientServiceResponse? clientServiceResponse,
       SubClientResponse? subClientResponse,
+      PendingServiceResponse? pendingServiceResponse,
       String? error});
 }
 
@@ -736,8 +1000,10 @@ class __$$_UserManagementDetailStateCopyWithImpl<$Res>
     Object? isError = null,
     Object? response = freezed,
     Object? subUserList = null,
+    Object? pendingServiceList = null,
     Object? clientServiceResponse = freezed,
     Object? subClientResponse = freezed,
+    Object? pendingServiceResponse = freezed,
     Object? error = freezed,
   }) {
     return _then(_$_UserManagementDetailState(
@@ -757,6 +1023,10 @@ class __$$_UserManagementDetailStateCopyWithImpl<$Res>
           ? _value._subUserList
           : subUserList // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
+      pendingServiceList: null == pendingServiceList
+          ? _value._pendingServiceList
+          : pendingServiceList // ignore: cast_nullable_to_non_nullable
+              as List<ServicesList>,
       clientServiceResponse: freezed == clientServiceResponse
           ? _value.clientServiceResponse
           : clientServiceResponse // ignore: cast_nullable_to_non_nullable
@@ -765,6 +1035,10 @@ class __$$_UserManagementDetailStateCopyWithImpl<$Res>
           ? _value.subClientResponse
           : subClientResponse // ignore: cast_nullable_to_non_nullable
               as SubClientResponse?,
+      pendingServiceResponse: freezed == pendingServiceResponse
+          ? _value.pendingServiceResponse
+          : pendingServiceResponse // ignore: cast_nullable_to_non_nullable
+              as PendingServiceResponse?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -781,10 +1055,13 @@ class _$_UserManagementDetailState implements _UserManagementDetailState {
       required this.isError,
       required this.response,
       required final List<dynamic> subUserList,
+      required final List<ServicesList> pendingServiceList,
       required this.clientServiceResponse,
       required this.subClientResponse,
+      required this.pendingServiceResponse,
       required this.error})
-      : _subUserList = subUserList;
+      : _subUserList = subUserList,
+        _pendingServiceList = pendingServiceList;
 
   @override
   final bool isLoading;
@@ -800,16 +1077,27 @@ class _$_UserManagementDetailState implements _UserManagementDetailState {
     return EqualUnmodifiableListView(_subUserList);
   }
 
+  final List<ServicesList> _pendingServiceList;
+  @override
+  List<ServicesList> get pendingServiceList {
+    if (_pendingServiceList is EqualUnmodifiableListView)
+      return _pendingServiceList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_pendingServiceList);
+  }
+
   @override
   final ClientServiceResponse? clientServiceResponse;
   @override
   final SubClientResponse? subClientResponse;
   @override
+  final PendingServiceResponse? pendingServiceResponse;
+  @override
   final String? error;
 
   @override
   String toString() {
-    return 'UserManagementDetailState(isLoading: $isLoading, isError: $isError, response: $response, subUserList: $subUserList, clientServiceResponse: $clientServiceResponse, subClientResponse: $subClientResponse, error: $error)';
+    return 'UserManagementDetailState(isLoading: $isLoading, isError: $isError, response: $response, subUserList: $subUserList, pendingServiceList: $pendingServiceList, clientServiceResponse: $clientServiceResponse, subClientResponse: $subClientResponse, pendingServiceResponse: $pendingServiceResponse, error: $error)';
   }
 
   @override
@@ -824,10 +1112,14 @@ class _$_UserManagementDetailState implements _UserManagementDetailState {
                 other.response == response) &&
             const DeepCollectionEquality()
                 .equals(other._subUserList, _subUserList) &&
+            const DeepCollectionEquality()
+                .equals(other._pendingServiceList, _pendingServiceList) &&
             (identical(other.clientServiceResponse, clientServiceResponse) ||
                 other.clientServiceResponse == clientServiceResponse) &&
             (identical(other.subClientResponse, subClientResponse) ||
                 other.subClientResponse == subClientResponse) &&
+            (identical(other.pendingServiceResponse, pendingServiceResponse) ||
+                other.pendingServiceResponse == pendingServiceResponse) &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -838,8 +1130,10 @@ class _$_UserManagementDetailState implements _UserManagementDetailState {
       isError,
       response,
       const DeepCollectionEquality().hash(_subUserList),
+      const DeepCollectionEquality().hash(_pendingServiceList),
       clientServiceResponse,
       subClientResponse,
+      pendingServiceResponse,
       error);
 
   @JsonKey(ignore: true)
@@ -856,8 +1150,10 @@ abstract class _UserManagementDetailState implements UserManagementDetailState {
       required final bool isError,
       required final UserDetailResponse? response,
       required final List<dynamic> subUserList,
+      required final List<ServicesList> pendingServiceList,
       required final ClientServiceResponse? clientServiceResponse,
       required final SubClientResponse? subClientResponse,
+      required final PendingServiceResponse? pendingServiceResponse,
       required final String? error}) = _$_UserManagementDetailState;
 
   @override
@@ -869,9 +1165,13 @@ abstract class _UserManagementDetailState implements UserManagementDetailState {
   @override
   List<dynamic> get subUserList;
   @override
+  List<ServicesList> get pendingServiceList;
+  @override
   ClientServiceResponse? get clientServiceResponse;
   @override
   SubClientResponse? get subClientResponse;
+  @override
+  PendingServiceResponse? get pendingServiceResponse;
   @override
   String? get error;
   @override

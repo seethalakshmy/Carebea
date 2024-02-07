@@ -592,7 +592,7 @@ class _MenuBarState extends State<SideMenuPage> {
   Text buildText(Map<String?, String> items, int index, TabsRouter tabsRouter,
       Color color) {
     return Text(
-      items.keys.elementAt(index)!.capitalize(),
+      items.keys.elementAt(index)!,
       style: TS().gRoboto(
           color: isSelected(items, index, tabsRouter)
               ? AppColor.primaryColor.val

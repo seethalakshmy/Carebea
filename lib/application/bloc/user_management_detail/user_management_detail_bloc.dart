@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
+import '../../../domain/user_management_detail/model/pending_service_response.dart';
 import '../../../domain/user_management_detail/model/sub_client_response.dart';
 import '../../../domain/user_management_detail/model/user_detail_response.dart';
 import '../../../infrastructure/user_management_detail/user_management_detail_repository.dart';
@@ -22,13 +23,16 @@ class UserManagementDetailBloc
   int page = 1;
   int limit = 10;
   List<Profiles> subUserList = [];
+  List<ServicesList> pendingServiceList = [];
   final TextEditingController searchController = TextEditingController();
+  int totalItems = 1;
 
   UserManagementDetailBloc(this.userDetailRepository)
       : super(UserManagementDetailState.initial()) {
     on<_GetUserDetail>(_getUserDetail);
     on<_GetClientService>(_getClientService);
     on<_GetSubClients>(_getSubClients);
+    on<_GetPendingServices>(_getPendingServices);
   }
 
   _getUserDetail(
@@ -64,36 +68,6 @@ class UserManagementDetailBloc
     emit(homeState);
   }
 
-  // _getSubClients(
-  //     _GetSubClients event, Emitter<UserManagementDetailState> emit) async {
-  //   emit(state.copyWith(isLoading: true));
-  //   final Either<ApiErrorHandler, SubClientResponse> result =
-  //       await userDetailRepository.getSubClients(
-  //           userId: event.userId,
-  //           page: event.page,
-  //           limit: event.limit,
-  //           searchTerm: event.searchTerm);
-  //   var subClientState = result.fold((l) {
-  //     return state.copyWith(error: l.error, isLoading: false);
-  //   }, (r) {
-  //         if (r.status == true) {
-  //           subUserList.clear();
-  //
-  //           subUserList.addAll(r.data!.profiles!);
-  //           debugPrint("usetlist $subUserList}");
-  //           emit(state.copyWith(isLoading: false));
-  //         }
-  //
-  //
-  //
-  //     return state.copyWith(
-  //       subClientResponse: r,
-  //       isLoading: false,
-  //     );
-  //   });
-  //   emit(subClientState);
-  // }
-
   _getSubClients(
       _GetSubClients event, Emitter<UserManagementDetailState> emit) async {
     emit(state.copyWith(isLoading: true));
@@ -122,5 +96,40 @@ class UserManagementDetailBloc
       );
     });
     emit(userState);
+  }
+
+  _getPendingServices(_GetPendingServices event,
+      Emitter<UserManagementDetailState> emit) async {
+    emit(state.copyWith(isLoading: true));
+    final Either<ApiErrorHandler, PendingServiceResponse> result =
+        await userDetailRepository.getPendingServices(
+            userId: event.userId,
+            profileId: event.profileId,
+            page: event.page,
+            limit: event.limit);
+    var pendingServiceState = result.fold((l) {
+      return state.copyWith(
+          error: l.error,
+          isLoading: false,
+          pendingServiceList: pendingServiceList);
+    }, (r) {
+      if (r.status == true) {
+        pendingServiceList.clear();
+
+        pendingServiceList.addAll(r.data!.servicesList ?? []);
+        debugPrint("pending list $pendingServiceList");
+        totalItems = r.data!.totals!.toInt();
+
+        emit(state.copyWith(
+            isLoading: false, pendingServiceList: pendingServiceList));
+      }
+      emit(state.copyWith(isLoading: false));
+
+      return state.copyWith(
+        pendingServiceResponse: r,
+        isLoading: false,
+      );
+    });
+    emit(pendingServiceState);
   }
 }
