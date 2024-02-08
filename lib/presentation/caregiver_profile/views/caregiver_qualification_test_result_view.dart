@@ -34,8 +34,8 @@ class CaregiverQualificationAndTestResultView extends StatelessWidget {
             CustomSizedBox(height: DBL.eight.val),
             _subTitleVIew(
                 label: AppString.expiryDate.val,
-                value: qualificationAndTest?.hhaExpiry
-                        ?.parseWithFormat(dateFormat: AppString.mmDDYYY.val) ??
+                value: qualificationAndTest?.hhaExpiry?.parseWithFormat(
+                        dateFormat: AppString.MMMMddYYYY.val) ??
                     ""),
             CustomSizedBox(
               height: DBL.eighteen.val,

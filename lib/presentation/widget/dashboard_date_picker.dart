@@ -81,8 +81,8 @@ class _DashBoardDatePickerWidgetState extends State<DashBoardDatePickerWidget> {
       },
       child: IgnorePointer(
         child: CustomSizedBox(
-          width: 150,
-          height: 48,
+          width: 200,
+          height: 80,
           child: CTextField(
             hintText: Utility.detailDate(DateTime.now()),
             hintStyle: TS().gRoboto(

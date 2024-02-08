@@ -7,6 +7,7 @@ import '../../application/bloc/complaint_details/complaint_detail_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
+import '../../core/utility.dart';
 import '../../infrastructure/complaint_details/complaint_details_repository.dart';
 import '../caregiver_detail/widgets/svg_text.dart';
 import '../routes/app_router.gr.dart';
@@ -426,7 +427,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
     return RowColonCombo.twoHundred(
         customWidthLg1: 180,
         label: AppString.createdDateTime.val,
-        value: _complaintDetailBloc.complaintDetailsList[0].createdDate ?? '',
+        value: Utility.detailDate(DateTime.parse(_complaintDetailBloc.complaintDetailsList[0].createdDate ?? '')),
         // _complaintDetailBloc.generateFormattedDate(
         //     DateTime.parse(_complaintDetailBloc.complaintDetailsList[0].createdDate ?? "").toLocal().toString()),
         fontSize: FS.font13PointFive.val);

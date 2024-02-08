@@ -1056,6 +1056,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   }
 
   checkInputData() {
+    debugPrint("inside test");
     // addressLineController.text = addressLineController.text.trim();
     // documentNumberController.text = documentNumberController.text.trim();
     // streetController.text = streetController.text.trim();
@@ -1066,6 +1067,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
     final userId = SharedPreffUtil().getCareGiverUserId;
     if (_formKey.currentState!.validate() &&
         widget.onboardingBloc.profileUrl.isNotEmpty) {
+      debugPrint("inside true");
+
       final expiryDate = expiryDateController.text;
       final dob = dobController.text;
 

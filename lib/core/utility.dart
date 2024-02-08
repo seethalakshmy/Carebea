@@ -25,13 +25,13 @@ class Utility {
 
   static String generateFormattedDate(String date) {
     DateTime inputDate = DateTime.parse(date);
-    DateFormat dateFormat = DateFormat('MM-dd-yyyy , hh:mm a');
+    DateFormat dateFormat = DateFormat('MMMM dd, yyyy , hh:mm a');
     String formattedDate = dateFormat.format(inputDate);
     return formattedDate;
   }
 
   static String detailDate(DateTime date) {
-    final String formattedDate = DateFormat('MMM dd yyyy').format(date);
+    final String formattedDate = DateFormat('MMMM dd, yyyy').format(date);
     return formattedDate;
   }
 
@@ -54,13 +54,14 @@ class Utility {
   }
 
   static String serviceDate(DateTime date) {
-    final String formattedDate = DateFormat('MMM dd yyyy hh:mm a').format(date);
+    final String formattedDate =
+        DateFormat('MMMM dd, yyyy hh:mm a').format(date);
     return formattedDate;
   }
 
   static Future<String> selectDate(BuildContext context, DateTime initialDate,
       DateTime firstDate, DateTime lastDate) async {
-    final DateFormat formatter = DateFormat('MM/dd/yyyy');
+    final DateFormat formatter = DateFormat('MMMM dd, yyyy');
     DateTime? picked = await showDatePicker(
         context: context,
         initialDate: initialDate,

@@ -376,14 +376,14 @@ class _PendingServiceViewState extends State<PendingServiceView> {
         ? EmptyView(title: AppString.noServiceRequestsFound.val)
         : CSelectionArea(
             child: CDataTable2(
-              minWidth: DBL.nineFifty.val,
+              minWidth: 2000,
               dividerThickness: .3,
               headingRowHeight: DBL.fortyEight.val,
               dataRowHeight: DBL.sixty.val,
               columns: [
                 DataColumn2(
-                  size: ColumnSize.L,
-                  fixedWidth: DBL.twoHundred.val,
+                  size: ColumnSize.S,
+                  fixedWidth: DBL.oneHundredEight.val,
                   label: _columnsView(
                       text: AppString.slNo.val, fontWeight: FontWeight.bold),
                 ),
@@ -484,7 +484,7 @@ class _PendingServiceViewState extends State<PendingServiceView> {
                       text: pageIndex.toString(),
                     )),
                     DataCell(_rowsView(
-                      text: item.serviceId.toString(),
+                      text: item.bookingId.toString(),
                     )),
                     DataCell(_rowsView(
                       text: item.clientName ?? "",

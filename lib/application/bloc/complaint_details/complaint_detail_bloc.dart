@@ -77,7 +77,8 @@ class ComplaintDetailBloc
           isLoading: false);
     }, (r) {
       add(ComplaintDetailEvent.getComplaintDetails(complaintId: compId));
-      CSnackBar.showSuccess(event.context, msg: AppString.complaintStatusChangedSuccessfully.val);
+      CSnackBar.showSuccess(event.context,
+          msg: AppString.complaintStatusChangedSuccessfully.val);
       return state.copyWith(
           updateComplaintOption: Some(Right(r)), isLoading: false);
     });
@@ -148,7 +149,7 @@ class ComplaintDetailBloc
   String formatDate(String givenDate) {
     DateTime dateTime = DateTime.parse(givenDate);
 
-    String dateString = DateFormat('MM/dd/yyyy').format(dateTime);
+    String dateString = DateFormat('MMMM dd, yyyy').format(dateTime);
     String timeString = DateFormat('HH:mm a').format(dateTime);
 
     return '$dateString, $timeString';
@@ -157,7 +158,7 @@ class ComplaintDetailBloc
   String formatDateToMonthName(String givenDate) {
     DateTime dateTime = DateTime.parse(givenDate);
 
-    String dateString = DateFormat('MMM d yyyy').format(dateTime);
+    String dateString = DateFormat('MMMM dd, yyyy').format(dateTime);
     String timeString = DateFormat('HH:mm a').format(dateTime);
 
     return '$dateString, $timeString';
@@ -169,7 +170,7 @@ class ComplaintDetailBloc
       return convertDateFormat(date);
     } else {
       inputDate = DateTime.parse(date);
-      DateFormat dateFormat = DateFormat('MM-dd-yyyy , hh:mm a');
+      DateFormat dateFormat = DateFormat('MMMM dd, yyyy , hh:mm a');
       String formattedDate = dateFormat.format(inputDate);
       return formattedDate;
     }

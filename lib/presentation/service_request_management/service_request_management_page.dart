@@ -268,7 +268,7 @@ class _ServiceRequestManagementPageState
                   clientId: widget.clientId));
         }
         fromDateController.text =
-            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+            Utility.detailDate(DateTime.parse(value.toString()));
         FocusScope.of(context).unfocus();
       }
     });
@@ -306,7 +306,7 @@ class _ServiceRequestManagementPageState
                   clientId: widget.clientId));
         }
         toDateController.text =
-            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+            Utility.detailDate(DateTime.parse(value.toString()));
         FocusScope.of(context).unfocus();
         debugPrint("toDatesss ${toDateController.text}");
         debugPrint("date check ${_serviceRequestBloc.selectedToDateTime}");

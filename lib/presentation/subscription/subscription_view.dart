@@ -687,7 +687,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                   : _subscriptionBloc.filterId));
         }
         fromDateController.text =
-            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+            Utility.detailDate(DateTime.parse(value.toString()));
         FocusScope.of(context).unfocus();
       }
     });
@@ -726,7 +726,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                   : _subscriptionBloc.filterId));
         }
         toDateController.text =
-            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+            Utility.detailDate(DateTime.parse(value.toString()));
         FocusScope.of(context).unfocus();
         debugPrint("toDatesss ${toDateController.text}");
       }

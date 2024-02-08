@@ -182,7 +182,7 @@ class MedicationWidget extends StatelessWidget {
         value: Utility.dateConverter(
             date: data?.expirationDate ?? '',
             currentFormat: 'dd/mm/yyyy',
-            convertToFormat: 'mm/dd/yyyy'),
+            convertToFormat: 'MMMM dd, yyyy'),
         fontSize: FS.font13PointFive.val);
   }
 

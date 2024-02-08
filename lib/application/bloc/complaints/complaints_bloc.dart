@@ -61,7 +61,7 @@ class ComplaintsBloc extends Bloc<ComplaintsEvent, ComplaintsState> {
 
   String generateFormattedDate(String date) {
     DateTime inputDate = DateTime.parse(date);
-    DateFormat dateFormat = DateFormat('MM-dd-yyyy , hh:mm a');
+    DateFormat dateFormat = DateFormat('MMMM dd, yyyy , hh:mm a');
     String formattedDate = dateFormat.format(inputDate);
     return formattedDate;
   }

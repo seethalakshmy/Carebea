@@ -10,6 +10,7 @@ import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/string_extension.dart';
 import '../../core/text_styles.dart';
+import '../../core/utility.dart';
 import '../../infrastructure/complaints/complaints_repository.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../routes/app_router.gr.dart';
@@ -666,7 +667,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
               endDate: _supportTicketsBloc.selectedToDate));
         }
         fromDateController.text =
-            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+            Utility.detailDate(DateTime.parse(value.toString()));
         FocusScope.of(context).unfocus();
       }
     });
@@ -701,7 +702,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
               endDate: _supportTicketsBloc.selectedToDate));
         }
         toDateController.text =
-            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+            Utility.detailDate(DateTime.parse(value.toString()));
         FocusScope.of(context).unfocus();
         // debugPrint("toDatesss ${toDateController.text}");
         // debugPrint("date check ${_serviceRequestBloc.selectedToDateTime}");

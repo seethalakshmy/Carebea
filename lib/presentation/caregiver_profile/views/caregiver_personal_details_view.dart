@@ -39,7 +39,7 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
               child: RowColonCombo.twoHundred(
                   label: AppString.dob.val,
                   value: personalDetails?.dob?.parseWithFormat(
-                          dateFormat: AppString.mmDDYYY.val) ??
+                          dateFormat: AppString.MMMMddYYYY.val) ??
                       "",
                   fontSize: FS.font13PointFive.val),
             ),
@@ -90,6 +90,13 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
           height: DBL.six.val,
         ),
         RowColonCombo.twoHundred(
+            label: AppString.addressLine2.val,
+            value: personalDetails?.street ?? "",
+            fontSize: FS.font13PointFive.val),
+        CustomSizedBox(
+          height: DBL.six.val,
+        ),
+        RowColonCombo.twoHundred(
             label: AppString.city.val,
             value: personalDetails?.city ?? "",
             fontSize: FS.font13PointFive.val),
@@ -97,8 +104,8 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
           height: DBL.six.val,
         ),
         RowColonCombo.twoHundred(
-            label: AppString.street.val,
-            value: personalDetails?.street ?? "",
+            label: AppString.state.val,
+            value: personalDetails?.state ?? "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.six.val,
@@ -106,13 +113,6 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
         RowColonCombo.twoHundred(
             label: AppString.zip.val,
             value: personalDetails?.zip ?? "",
-            fontSize: FS.font13PointFive.val),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        RowColonCombo.twoHundred(
-            label: AppString.state.val,
-            value: personalDetails?.state ?? "",
             fontSize: FS.font13PointFive.val),
         isLg(context)
             ? CustomSizedBox(
@@ -162,7 +162,7 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
         RowColonCombo.twoHundred(
             label: AppString.expiryDate.val,
             value: documentDetails?.expiryDate
-                    ?.parseWithFormat(dateFormat: AppString.mmDDYYY.val) ??
+                    ?.parseWithFormat(dateFormat: AppString.MMMMddYYYY.val) ??
                 "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(

@@ -3,7 +3,6 @@ import 'package:admin_580_tech/domain/service_request_management/model/service_d
 import 'package:admin_580_tech/presentation/service_request_management/widgets/profile_widget.dart';
 import 'package:admin_580_tech/presentation/service_request_management/widgets/rating_widget.dart';
 import 'package:admin_580_tech/presentation/service_request_management/widgets/status_widget.dart';
-import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -207,25 +206,25 @@ class ServiceDetailsAlert extends StatelessWidget {
     );
   }
 
-  Container _rateNowButton(
-      {required String title, required Function() onPressed}) {
-    return Container(
-      // width: DBL.fiveFifty.val,
-      padding: EdgeInsets.symmetric(
-          vertical: DBL.ten.val, horizontal: DBL.oneThirty.val),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(DBL.eight.val),
-          border:
-              Border.all(color: AppColor.lightGrey.val, width: DBL.one.val)),
-      child: CustomButton(
-        onPressed: onPressed,
-        text: title,
-        color: AppColor.white.val,
-        textColor: AppColor.primaryColor.val,
-        padding: EdgeInsets.all(DBL.twenty.val),
-      ),
-    );
-  }
+  // Container _rateNowButton(
+  //     {required String title, required Function() onPressed}) {
+  //   return Container(
+  //     // width: DBL.fiveFifty.val,
+  //     padding: EdgeInsets.symmetric(
+  //         vertical: DBL.ten.val, horizontal: DBL.oneThirty.val),
+  //     decoration: BoxDecoration(
+  //         borderRadius: BorderRadius.circular(DBL.eight.val),
+  //         border:
+  //             Border.all(color: AppColor.lightGrey.val, width: DBL.one.val)),
+  //     child: CustomButton(
+  //       onPressed: onPressed,
+  //       text: title,
+  //       color: AppColor.white.val,
+  //       textColor: AppColor.primaryColor.val,
+  //       padding: EdgeInsets.all(DBL.twenty.val),
+  //     ),
+  //   );
+  // }
 
   _subClientNameWidget(BuildContext context, ServiceDetailsData service) {
     return InkWell(

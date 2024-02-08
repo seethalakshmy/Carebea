@@ -39,7 +39,17 @@ class CareGiverPreferenceView extends StatelessWidget {
               height: DBL.twenty.val,
             ),
             preference?.serveWithPets == 'Yes'
-                ? petsList(context, MediaQuery.of(context).size, preference)
+                ? Row(
+                    children: [
+                      SizedBox(
+                        width: 370,
+                      ),
+                      Expanded(
+                        child: petsList(
+                            context, MediaQuery.of(context).size, preference),
+                      ),
+                    ],
+                  )
                 : const SizedBox.shrink(),
             CustomSizedBox(
               height: DBL.ten.val,
@@ -75,28 +85,39 @@ class CareGiverPreferenceView extends StatelessWidget {
 
   Wrap petsList(BuildContext context, Size size, Preference? preference) {
     return Wrap(
-      children: [
-        CustomSizedBox(
-          width: getWidth(context, size),
-        ),
-        CustomSizedBox(
-          height: DBL.fiftyFive.val,
-          child: CustomListViewBuilder(
-            padding: EdgeInsets.all(10),
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemCount: preference?.pets?.length ?? 0,
-            itemBuilder: (context, index) {
-              Pets pets = preference!.pets![index];
-              debugPrint('petssssss ${pets.name}');
-
-              return PetItem(
-                  name: pets.name ?? "", inOutStatus: pets.inOutStatus ?? 0);
-            },
-          ),
-        ),
-      ],
+      runSpacing: 10,
+      children: List.generate(
+          preference?.pets?.length ?? 0,
+          (index) => SizedBox(
+                width: 150,
+                child: PetItem(
+                    name: preference?.pets?[index].name ?? "",
+                    inOutStatus: preference?.pets?[index].inOutStatus ?? 0),
+              )),
     );
+    // return Wrap(
+    //   children: [
+    //     CustomSizedBox(
+    //       width: getWidth(context, size),
+    //     ),
+    //     CustomSizedBox(
+    //       height: DBL.fiftyFive.val,
+    //       child: CustomListViewBuilder(
+    //         padding: EdgeInsets.all(10),
+    //         shrinkWrap: true,
+    //         scrollDirection: Axis.horizontal,
+    //         itemCount: preference?.pets?.length ?? 0,
+    //         itemBuilder: (context, index) {
+    //           Pets pets = preference!.pets![index];
+    //           debugPrint('petssssss ${pets.name}');
+    //
+    //           return PetItem(
+    //               name: pets.name ?? "", inOutStatus: pets.inOutStatus ?? 0);
+    //         },
+    //       ),
+    //     ),
+    //   ],
+    // );
   }
 
   double getWidth(BuildContext context, Size size) {

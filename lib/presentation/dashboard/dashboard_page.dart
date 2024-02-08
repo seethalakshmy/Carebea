@@ -252,10 +252,11 @@ class _DashboardPageState extends State<DashboardPage> {
                                               .text.isNotEmpty) &&
                                           (endDateController.text.isNotEmpty)) {
                                         var startDate =
-                                            DateFormat('MMM dd yyyy').parse(
+                                            DateFormat('MMMM dd, yyyy').parse(
                                                 startDateController.text);
-                                        var endDate = DateFormat('MMM dd yyyy')
-                                            .parse(endDateController.text);
+                                        var endDate =
+                                            DateFormat('MMMM dd, yyyy')
+                                                .parse(endDateController.text);
                                         if (endDate
                                                 .difference(startDate)
                                                 .inDays <=

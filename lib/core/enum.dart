@@ -449,6 +449,7 @@ enum AppString {
   ddmmyyyy("dd/mm/yyyy"),
   mmddyyyy("mm/dd/yyyy"),
   mmDDYYY("MM/dd/yyyy"),
+  MMMMddYYYY("MMMM dd, yyyy"),
   ddMMYYY("dd/MM/yyyy"),
   yyyyMMdd("yyyy-MM-dd"),
   mmDDYYYTimeZone("MM/dd/yyyy  'at' hh:mm a"),
