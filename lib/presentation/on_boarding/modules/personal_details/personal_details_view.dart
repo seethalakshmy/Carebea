@@ -1057,10 +1057,14 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
 
   checkInputData() {
     debugPrint("inside test");
+    debugPrint("inside test ${widget.onboardingBloc.profileUrl}");
+    debugPrint("inside test ${_formKey.currentState!.validate()}");
+
     // addressLineController.text = addressLineController.text.trim();
     // documentNumberController.text = documentNumberController.text.trim();
     // streetController.text = streetController.text.trim();
     if (_validateMode != AutovalidateMode.always) {
+      debugPrint("bvsgdvsd");
       formValidationBloc.add(const FormValidationEvent.submit());
       formValidationBloc.add(const FormValidationEvent.dropDown("true"));
     }

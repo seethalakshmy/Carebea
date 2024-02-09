@@ -180,7 +180,7 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
     RenderBox? renderBox = context.findRenderObject() as RenderBox?;
     var size = renderBox!.size;
     var offset = renderBox.localToGlobal(Offset.zero);
-    var topOffset = offset.dy + size.height + 5;
+    var topOffset = offset.dy + (size.height) + 5;
     return OverlayEntry(
       builder: (context) => GestureDetector(
         onTap: () => _toggleDropdown(close: true),
@@ -223,6 +223,7 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
                           //color: Colors.white,
                           constraints: BoxConstraints(maxHeight: 400),
                           child: Column(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               widget.showSearchBox
                                   ? CTextField(

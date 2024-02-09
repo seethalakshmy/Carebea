@@ -33,7 +33,7 @@ class RejectionParams {
     if (blsRejectReason != null && blsRejectReason!.isNotEmpty) {
       data['bls_reject_reason'] = blsRejectReason;
     }
-    if (tbRejectReason != null && blsRejectReason!.isNotEmpty) {
+    if (tbRejectReason != null && tbRejectReason!.isNotEmpty) {
       data['tb_reject_reason'] = tbRejectReason;
     }
     if (covidRejectReason != null && covidRejectReason!.isNotEmpty) {

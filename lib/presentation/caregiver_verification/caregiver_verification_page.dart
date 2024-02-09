@@ -1295,53 +1295,63 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                           ),
                           Align(
                             alignment: Alignment.bottomCenter,
-                            child: CustomButton(
-                              onPressed: () {
-                                if (_validateMode != AutovalidateMode.always) {
-                                  context
-                                      .read<FormValidationBloc>()
-                                      .add(const FormValidationEvent.submit());
-                                }
-                                if (_formKey.currentState!.validate()) {
-                                  if (_hhaReasonController.text.isEmpty &&
-                                      _tbReasonController.text.isEmpty &&
-                                      _blsReasonController.text.isEmpty &&
-                                      _covid19ReasonController.text.isEmpty) {
-                                    CSnackBar.showError(
-                                      context,
-                                      msg: AppString.emptyRejectedDocument.val,
-                                    );
-                                  } else {
-                                    rejectionParams = RejectionParams(
-                                        userId: adminId,
-                                        caregiverId: userId,
-                                        hhaRejectReason:
-                                            _hhaReasonController.text.trim(),
-                                        blsRejectReason:
-                                            _blsReasonController.text.trim(),
-                                        tbRejectReason:
-                                            _tbReasonController.text.trim(),
-                                        covidRejectReason:
-                                            _covid19ReasonController.text);
-                                    context
-                                        .read<CareGiverVerificationBloc>()
-                                        .add(CareGiverVerificationEvent
-                                            .careGiverCertificateReject(
-                                                userID: userId,
-                                                params: rejectionParams!,
-                                                context: context));
-                                  }
-                                }
+                            child: BlocBuilder<CareGiverVerificationBloc,
+                                CareGiverVerificationState>(
+                              builder: (context, state) {
+                                return CustomButton(
+                                  onPressed: () {
+                                    if (_validateMode !=
+                                        AutovalidateMode.always) {
+                                      context.read<FormValidationBloc>().add(
+                                          const FormValidationEvent.submit());
+                                    }
+                                    if (_formKey.currentState!.validate()) {
+                                      if (_hhaReasonController.text.isEmpty &&
+                                          _tbReasonController.text.isEmpty &&
+                                          _blsReasonController.text.isEmpty &&
+                                          _covid19ReasonController
+                                              .text.isEmpty) {
+                                        CSnackBar.showError(
+                                          context,
+                                          msg: AppString
+                                              .emptyRejectedDocument.val,
+                                        );
+                                      } else {
+                                        rejectionParams = RejectionParams(
+                                            userId: adminId,
+                                            caregiverId: userId,
+                                            hhaRejectReason:
+                                                _hhaReasonController.text
+                                                    .trim(),
+                                            blsRejectReason:
+                                                _blsReasonController.text
+                                                    .trim(),
+                                            tbRejectReason:
+                                                _tbReasonController.text.trim(),
+                                            covidRejectReason:
+                                                _covid19ReasonController.text);
+                                        context
+                                            .read<CareGiverVerificationBloc>()
+                                            .add(CareGiverVerificationEvent
+                                                .careGiverCertificateReject(
+                                                    userID: userId,
+                                                    params: rejectionParams!,
+                                                    context: context));
+                                      }
+                                    }
+                                  },
+                                  isLoading: state.isLoading,
+                                  text: AppString.submit.val,
+                                  borderRadius: DBL.four.val,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: DBL.fortyFive.val,
+                                      vertical: DBL.sixteen.val),
+                                  textStyle: TS().gRoboto(
+                                      fontWeight: FW.w600.val,
+                                      fontSize: FS.font20.val,
+                                      color: AppColor.white.val),
+                                );
                               },
-                              text: AppString.submit.val,
-                              borderRadius: DBL.four.val,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: DBL.fortyFive.val,
-                                  vertical: DBL.sixteen.val),
-                              textStyle: TS().gRoboto(
-                                  fontWeight: FW.w600.val,
-                                  fontSize: FS.font20.val,
-                                  color: AppColor.white.val),
                             ),
                           )
                         ],

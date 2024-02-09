@@ -6,7 +6,7 @@ class TimeUtils {
   }
 
   static String dateInMMDDYYYYToDDMMYYY(String dateTimeInMMDDYYYY) {
-    final dateTime = DateFormat("mm/dd/yyyy").parse(dateTimeInMMDDYYYY);
-    return DateFormat("dd/mm/yyyy").format(dateTime);
+    final dateTime = DateFormat("MMMM dd, yyyy").parse(dateTimeInMMDDYYYY);
+    return DateFormat("dd/MM/yyyy").format(dateTime);
   }
 }

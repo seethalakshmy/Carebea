@@ -39,7 +39,7 @@ part 'onboarding_state.dart';
 
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   OnBoardingRepository onboardingRepository;
-  List<Gender> genderList = [];
+  final List<Gender> genderList = [];
   List<City> cityList = [];
   List<StateItem> stateList = [];
   List<RelationList> relationList = [];
@@ -62,6 +62,8 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   List<PlatformFile> blsBytesList = [];
   List<PlatformFile> tbBytesList = [];
   List<PlatformFile> covidBytesList = [];
+
+  PersonalDetailsResponse? personalDetails;
 
   bool nextButtonClicked = false;
   String stateId = "";
@@ -289,19 +291,20 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   _getPetsList(_GetPetList event, Emitter<OnboardingState> emit) async {
     final Either<ApiErrorHandler, PetListResponse> result =
         await onboardingRepository.getPetList(searchKey: event.petSearchKey);
-    OnboardingState petState = result.fold((l) {
-      return state.copyWith(isLoading: false, petListOption: Some(Left(l)));
+
+    result.fold((l) {
+      return emit(
+          state.copyWith(isLoading: false, petListOption: Some(Left(l))));
     }, (r) {
       petsList.clear();
       petsList.addAll(r.data!
           .map((e) => PetsModel(e.name ?? "", e.id))
           .toList(growable: true));
-      return state.copyWith(
+      return emit(state.copyWith(
           isLoading: false,
           // petsList: r.data!.map((e) => PetsModel(e.name ?? "", e.id)).toList(),
-          petListOption: Some(Right(r)));
+          petListOption: Some(Right(r))));
     });
-    emit(petState);
   }
 
   _getLanguageList(
@@ -455,6 +458,8 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
       return state.copyWith(
           isLoading: false, personalDetailsOption: Some(Left(l)));
     }, (r) {
+      personalDetails = r;
+
       return state.copyWith(
           isLoading: false, personalDetailsOption: Some(Right(r)));
     });
