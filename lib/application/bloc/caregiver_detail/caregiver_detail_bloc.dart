@@ -69,7 +69,7 @@ class CaregiverDetailBloc
         await careGiverDetailRepository.getCareGiverEarningsList(
             userID: event.userId,
             page: event.page,
-            limit: event.page,
+            limit: event.limit,
             adminId: event.adminId);
     var homeState = result.fold((l) {
       return state.copyWith(

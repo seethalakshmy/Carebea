@@ -44,7 +44,7 @@ extension StringExtension on String {
       if (isNotEmpty) {
         DateTime dateTime = DateTime.parse(this);
         DateFormat outputFormat =
-            DateFormat(dateFormat ?? AppString.mmDDYYYTimeZone.val);
+            DateFormat(dateFormat ?? AppString.MMMMddYYYY.val);
         String formattedDateTime = outputFormat.format(dateTime);
         if (formattedDateTime.contains("AM")) {
           formattedDateTime = formattedDateTime.replaceFirst('AM', 'am');

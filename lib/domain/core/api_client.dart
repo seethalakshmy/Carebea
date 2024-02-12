@@ -624,13 +624,16 @@ abstract class ApiClient {
 
   @POST("/admin/get-transactions")
   Future<TransactionListResponse> getTransactions(
-      @Header("Authorization") String token,
-      @Field('user_id') String userId,
-      @Field('page') String page,
-      @Field('limit') int limit,
-      @Field('search_term') String searchTerm,
-      @Field('client_id') String clientId,
-      @Field('status_id') int statusId);
+    @Header("Authorization") String token,
+    @Field('user_id') String userId,
+    @Field('page') String page,
+    @Field('limit') int limit,
+    @Field('search_term') String searchTerm,
+    @Field('client_id') String clientId,
+    @Field('status_id') int statusId,
+    @Field('from_date') String fromDate,
+    @Field('to_date') String toDate,
+  );
 
   @POST("/admin/transaction-details")
   Future<TransactionDetailsResponse> getTransactionDetails(

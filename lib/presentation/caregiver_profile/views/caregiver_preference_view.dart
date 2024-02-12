@@ -92,7 +92,8 @@ class CareGiverPreferenceView extends StatelessWidget {
                 width: 150,
                 child: PetItem(
                     name: preference?.pets?[index].name ?? "",
-                    inOutStatus: preference?.pets?[index].inOutStatus ?? 0),
+                    inOutStatus:
+                        preference?.pets?[index].inOutStatus?.toInt() ?? 0),
               )),
     );
     // return Wrap(

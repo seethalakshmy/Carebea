@@ -102,7 +102,7 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
 
   _bodyView(CareGiverProfileState state) {
     CustomLog.log('width :${MediaQuery.of(context).size.width}');
-    int status = state.response?.data?.verificationStatus ?? 0;
+    int status = state.response?.data?.verificationStatus?.toInt() ?? 0;
 
     return InkWell(
       onTap: () {

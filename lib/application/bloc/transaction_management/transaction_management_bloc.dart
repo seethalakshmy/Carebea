@@ -30,6 +30,11 @@ class TransactionManagementBloc
   bool isClicked = false;
   String searchQuery = "";
   int filterId = 0;
+  String selectedFromDate = "";
+  String selectedToDate = "";
+  DateTime selectedFromDateTime = DateTime(2020);
+  DateTime? selectedToDateTime;
+  bool isClearFilterClicked = false;
 
   TransactionManagementBloc(this.transactionsRepository)
       : super(TransactionManagementState.initial()) {
@@ -51,7 +56,9 @@ class TransactionManagementBloc
             searchTerm: event.searchTerm,
             token: '',
             clientId: event.clientId,
-            statusId: event.statusId);
+            statusId: event.statusId,
+            fromDate: event.fromDate,
+            toDate: event.toDate);
     var transactionState = result.fold((l) {
       emit(state.copyWith(isInitialLoading: false));
       return state.copyWith(error: l.error, isLoading: false);

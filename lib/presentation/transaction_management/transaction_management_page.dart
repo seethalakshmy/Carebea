@@ -6,9 +6,11 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../application/bloc/transaction_management/transaction_management_bloc.dart';
 import '../../core/custom_debugger.dart';
+import '../../core/custom_snackbar.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
+import '../../core/string_extension.dart';
 import '../../core/text_styles.dart';
 import '../../core/utility.dart';
 import '../../domain/transaction_management/model/transaction_list_response.dart';
@@ -53,9 +55,12 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
   List<int> shimmerList = List.generate(10, (index) => (index));
 
   final TextEditingController _searchController = TextEditingController();
+  TextEditingController fromDateController = TextEditingController();
+  TextEditingController toDateController = TextEditingController();
 
   SharedPreffUtil sharedPrefUtil = SharedPreffUtil();
   String? adminId;
+  int _page = 1;
 
   @override
   void initState() {
@@ -103,7 +108,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
             searchTerm: _searchController.text,
             userId: adminId ?? '',
             clientId: widget.clientId,
-            statusId: 0)),
+            statusId: 0,
+            fromDate: _transactionBloc.selectedFromDate,
+            toDate: _transactionBloc.selectedToDate)),
       child: CustomCard(
         shape: PR().roundedRectangleBorder(DBL.eighteen.val),
         elevation: DBL.seven.val,
@@ -114,16 +121,33 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
             builder: (context, state) {
               return Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                  Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.start,
                     children: [
                       _transactionBloc.state.isInitialLoading &&
                               _transactionBloc.filterId == 0
                           ? _filterLoader()
                           : _statusDropDown(context),
                       CustomSizedBox(width: DBL.fifteen.val),
-                      _clearAllFiltersButtonWidget(),
-                      Spacer(),
+                      state.isLoading
+                          ? _shimmerForFilterWidgets()
+                          : _buildDatePicker(state, fromDateController,
+                              AppString.startDate.val, () {
+                              _selectFromDate(context, state);
+                            }),
+                      CustomSizedBox(width: DBL.fifteen.val),
+                      state.isLoading
+                          ? _shimmerForFilterWidgets()
+                          : _buildDatePicker(
+                              state, toDateController, AppString.endDate.val,
+                              () {
+                              _transactionBloc.selectedFromDate != "" ||
+                                      fromDateController.text.isNotEmpty
+                                  ? _selectToDate(context, state)
+                                  : CSnackBar.showError(context,
+                                      msg: 'Please select a startDate');
+                            }),
+                      CustomSizedBox(width: DBL.fifteen.val),
                       CTextField(
                         onSubmitted: (val) {
                           _transactionBloc.searchQuery = val;
@@ -136,7 +160,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                                   searchTerm: _searchController.text,
                                   userId: adminId ?? '',
                                   clientId: widget.clientId,
-                                  statusId: _transactionBloc.filterId));
+                                  statusId: _transactionBloc.filterId,
+                                  fromDate: _transactionBloc.selectedFromDate,
+                                  toDate: _transactionBloc.selectedToDate));
                         },
                         onChanged: (val) {
                           _transactionBloc.add(
@@ -147,7 +173,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                                   searchTerm: _searchController.text,
                                   userId: adminId ?? '',
                                   clientId: widget.clientId,
-                                  statusId: _transactionBloc.filterId));
+                                  statusId: _transactionBloc.filterId,
+                                  fromDate: _transactionBloc.selectedFromDate,
+                                  toDate: _transactionBloc.selectedToDate));
                         },
                         width: Responsive.isWeb(context)
                             ? DBL.threeFifteen.val
@@ -167,7 +195,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                                     searchTerm: _transactionBloc.searchQuery,
                                     userId: adminId ?? '',
                                     clientId: widget.clientId,
-                                    statusId: _transactionBloc.filterId));
+                                    statusId: _transactionBloc.filterId,
+                                    fromDate: _transactionBloc.selectedFromDate,
+                                    toDate: _transactionBloc.selectedToDate));
                           },
                           child: CustomSvg(
                             path: IMG.search.val,
@@ -176,6 +206,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                           ),
                         ),
                       ),
+                      _clearAllFiltersButtonWidget(),
                     ],
                   ),
                   BlocBuilder<TransactionManagementBloc,
@@ -333,9 +364,15 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
         height: DBL.forty.val,
         child: CustomButton(
           onPressed: () {
+            _page = 1;
             _searchController.clear();
+            fromDateController.clear();
+            toDateController.clear();
             setState(() {
               _transactionBloc.filterId = 0;
+
+              _transactionBloc.selectedFromDate = '';
+              _transactionBloc.selectedToDate = '';
             });
 
             _transactionBloc.add(TransactionManagementEvent.getTransactions(
@@ -344,7 +381,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                 searchTerm: _searchController.text,
                 userId: adminId ?? '',
                 clientId: widget.clientId,
-                statusId: 0));
+                statusId: 0,
+                fromDate: _transactionBloc.selectedFromDate,
+                toDate: _transactionBloc.selectedToDate));
           },
           text: AppString.clearFilters.val,
         ),
@@ -459,7 +498,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                     searchTerm: _searchController.text,
                     userId: adminId ?? '',
                     clientId: widget.clientId,
-                    statusId: _transactionBloc.filterId));
+                    statusId: _transactionBloc.filterId,
+                    fromDate: _transactionBloc.selectedFromDate,
+                    toDate: _transactionBloc.selectedToDate));
                 updateData();
               }
             },
@@ -471,7 +512,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                   searchTerm: _searchController.text,
                   userId: adminId ?? '',
                   clientId: widget.clientId,
-                  statusId: _transactionBloc.filterId));
+                  statusId: _transactionBloc.filterId,
+                  fromDate: _transactionBloc.selectedFromDate,
+                  toDate: _transactionBloc.selectedToDate));
               updateData();
             },
             onPreviousPressed: () {
@@ -484,7 +527,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                     searchTerm: _transactionBloc.searchQuery,
                     userId: adminId ?? '',
                     clientId: widget.clientId,
-                    statusId: _transactionBloc.filterId));
+                    statusId: _transactionBloc.filterId,
+                    fromDate: _transactionBloc.selectedFromDate,
+                    toDate: _transactionBloc.selectedToDate));
                 updateData();
               }
             });
@@ -683,13 +728,16 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
             searchTerm: _searchController.text,
             userId: adminId ?? '',
             clientId: widget.clientId,
-            statusId: _transactionBloc.filterId));
+            statusId: _transactionBloc.filterId,
+            fromDate: _transactionBloc.selectedFromDate,
+            toDate: _transactionBloc.selectedToDate));
       },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
         width: DBL.twoTen.val,
-        height:
-            Responsive.isMobile(context) ? DBL.fortyFive.val : DBL.forty.val,
+        height: Responsive.isMobile(context)
+            ? DBL.fortyFive.val
+            : DBL.fortyEight.val,
         elevation: DBL.zero.val,
         padding: EdgeInsets.only(left: DBL.fifteen.val),
         backgroundColor: Colors.white,
@@ -726,6 +774,116 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
             fontWeight: FW.w500.val,
             fontSize: FS.font15.val,
             color: AppColor.columColor2.val),
+      ),
+    );
+  }
+
+  CustomShimmerWidget _shimmerForFilterWidgets({double? width}) {
+    return CustomShimmerWidget.rectangular(
+      height: DBL.fortySeven.val,
+      width: width ?? DBL.twoTen.val,
+      baseColor: AppColor.rowBackgroundColor.val,
+      highlightColor: AppColor.lightGrey.val,
+    );
+  }
+
+  Future<void> _selectFromDate(
+      BuildContext context, TransactionManagementState state) async {
+    final DateTime now = DateTime.now();
+    showDatePicker(
+            context: context,
+            initialDate: _transactionBloc.selectedToDateTime ?? now,
+            firstDate: _transactionBloc.selectedToDateTime
+                    ?.subtract(const Duration(days: 1825)) ??
+                DateTime(DateTime.now().year - 5),
+            lastDate: _transactionBloc.selectedToDateTime ??
+                DateTime(DateTime.now().year + 5))
+        .then((value) {
+      if (value != null) {
+        _transactionBloc.selectedFromDate =
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        _transactionBloc.selectedFromDateTime = value;
+        if (_transactionBloc.selectedFromDate.isNotEmpty &&
+            _transactionBloc.selectedToDate.isNotEmpty) {
+          _page = 1;
+          _transactionBloc.add(TransactionManagementEvent.getTransactions(
+              page: _transactionBloc.paginationPage.toString(),
+              limit: _transactionBloc.limit,
+              searchTerm: _searchController.text,
+              userId: adminId ?? '',
+              clientId: widget.clientId,
+              statusId: _transactionBloc.filterId,
+              fromDate: _transactionBloc.selectedFromDate,
+              toDate: _transactionBloc.selectedToDate));
+        }
+        fromDateController.text =
+            Utility.detailDate(DateTime.parse(value.toString()));
+        FocusScope.of(context).unfocus();
+      }
+    });
+  }
+
+  Future<void> _selectToDate(
+      BuildContext context, TransactionManagementState state) async {
+    final DateTime now = DateTime.now();
+    showDatePicker(
+            context: context,
+            initialDate: _transactionBloc.selectedToDateTime ?? now,
+            firstDate: _transactionBloc.selectedFromDateTime,
+            lastDate: DateTime(DateTime.now().year + 5))
+        .then((value) {
+      if (value != null) {
+        _transactionBloc.selectedToDateTime = value;
+        _transactionBloc.selectedToDate =
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        if (_transactionBloc.selectedFromDate.isNotEmpty &&
+            _transactionBloc.selectedToDate.isNotEmpty) {
+          _page = 1;
+          _transactionBloc.add(TransactionManagementEvent.getTransactions(
+              page: _transactionBloc.paginationPage.toString(),
+              limit: _transactionBloc.limit,
+              searchTerm: _searchController.text,
+              userId: adminId ?? '',
+              clientId: widget.clientId,
+              statusId: _transactionBloc.filterId,
+              fromDate: _transactionBloc.selectedFromDate,
+              toDate: _transactionBloc.selectedToDate));
+        }
+        toDateController.text =
+            Utility.detailDate(DateTime.parse(value.toString()));
+        FocusScope.of(context).unfocus();
+        debugPrint("toDatesss ${toDateController.text}");
+      }
+    });
+  }
+
+  CTextField _buildDatePicker(TransactionManagementState state,
+      TextEditingController controller, String hintText, Function() onTap) {
+    return CTextField(
+      width: DBL.twoTen.val,
+      height: DBL.fortySeven.val,
+      hintStyle: TS().gRoboto(
+          fontWeight: FW.w400.val,
+          fontSize: FS.font14.val,
+          color: AppColor.columColor2.val),
+      textColor: AppColor.columColor2.val,
+      hintText: hintText,
+      isReadOnly: true,
+      controller: controller,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return AppString.emptyDate.val;
+        }
+        return null;
+      },
+      onTap: onTap,
+      onChanged: (val) {},
+      textInputAction: TextInputAction.next,
+      keyBoardType: TextInputType.text,
+      suffixIcon: CustomSvg(
+        width: DBL.twentyFive.val,
+        height: DBL.twentyFive.val,
+        path: IMG.calenderOutLine.val,
       ),
     );
   }

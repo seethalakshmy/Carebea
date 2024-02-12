@@ -10,7 +10,9 @@ abstract class TransactionManagementEvent with _$TransactionManagementEvent {
       required int limit,
       required String searchTerm,
       String? clientId,
-      required int statusId}) = _GetTransactions;
+      required int statusId,
+      required String fromDate,
+      required String toDate}) = _GetTransactions;
 
   const factory TransactionManagementEvent.hideOrShowDetails(
       {required bool clicked}) = _HideOrShowDetails;

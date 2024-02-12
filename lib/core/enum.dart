@@ -408,6 +408,7 @@ enum AppString {
   documentDetails("Document Details"),
   certificateVerification("Certificate Verification"),
   documentUploaded("Document Uploaded"),
+  document("Document"),
   documentNumber("Document Number"),
   hhaDocument("HHA Document"),
   docNumber("Document Number"),

@@ -52,44 +52,52 @@ class Data {
 
 class Earnings {
   String? serviceId;
+  String? uniqueServiceId;
   String? transactionType;
   String? dateTime;
   String? amount;
   String? recievedFrom;
   String? paidFor;
   String? transactionId;
+  String? uniqueTransactionId;
   int? status;
 
   Earnings(
       {this.serviceId,
+      this.uniqueServiceId,
       this.transactionType,
       this.dateTime,
       this.amount,
       this.recievedFrom,
       this.paidFor,
       this.transactionId,
+      this.uniqueTransactionId,
       this.status});
 
   Earnings.fromJson(Map<String, dynamic> json) {
     serviceId = json['service_id'];
+    uniqueServiceId = json['serviceId'];
     transactionType = json['transaction_type'];
     dateTime = json['date_time'];
     amount = json['amount'];
     recievedFrom = json['recieved_from'];
     paidFor = json['paid_for'];
-    transactionId = json['transaction_id'];
+    transactionId = json['unique_transactionId'];
+    uniqueTransactionId = json['transactionId'];
     status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['service_id'] = serviceId;
+    data['serviceId'] = uniqueServiceId;
     data['transaction_type'] = transactionType;
     data['date_time'] = dateTime;
     data['amount'] = amount;
     data['recieved_from'] = recievedFrom;
     data['paid_for'] = paidFor;
-    data['transaction_id'] = transactionId;
+    data['unique_transactionId'] = transactionId;
+    data['transactionId'] = uniqueTransactionId;
     data['status'] = status;
     return data;
   }

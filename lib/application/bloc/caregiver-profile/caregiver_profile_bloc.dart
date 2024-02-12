@@ -88,7 +88,7 @@ class CareGiverProfileBloc
       return state.copyWith(
         statusList: list,
         response: r,
-        status: r.data?.verificationStatus,
+        status: r.data?.verificationStatus?.toInt(),
         isLoading: false,
       );
     });
@@ -108,7 +108,7 @@ class CareGiverProfileBloc
     CareGiverProfileState caregiverVerificationState = result.fold((l) {
       CSnackBar.showError(event.context, msg: l.error);
       emit(state.copyWith(
-          status: state.response?.data?.verificationStatus ?? 0,
+          status: state.response?.data?.verificationStatus?.toInt() ?? 0,
           isLoadingStatusChangeApi: false));
       return state.copyWith(
           error: l.error,
@@ -124,7 +124,7 @@ class CareGiverProfileBloc
             !state.isShowStatusDropDown));
       } else {
         emit(state.copyWith(
-            status: state.response?.data?.verificationStatus ?? 0));
+            status: state.response?.data?.verificationStatus?.toInt() ?? 0));
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
       return state.copyWith(
@@ -150,7 +150,7 @@ class CareGiverProfileBloc
     CareGiverProfileState stateResult = homeResult.fold((l) {
       CSnackBar.showError(event.context, msg: l.error);
       emit(state.copyWith(
-          status: state.response?.data?.verificationStatus ?? 0,
+          status: state.response?.data?.verificationStatus?.toInt() ?? 0,
           isLoadingStatusChangeApi: false));
       return state.copyWith(
           error: l.error,
@@ -209,7 +209,7 @@ class CareGiverProfileBloc
             !state.isShowStatusDropDown));
       } else {
         emit(state.copyWith(
-            status: state.response?.data?.verificationStatus ?? 0));
+            status: state.response?.data?.verificationStatus?.toInt() ?? 0));
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
 
@@ -239,7 +239,7 @@ class CareGiverProfileBloc
     CareGiverProfileState stateResult = homeResult.fold((l) {
       CSnackBar.showError(event.context, msg: l.error);
       emit(state.copyWith(
-          status: state.response?.data?.verificationStatus ?? 0,
+          status: state.response?.data?.verificationStatus?.toInt() ?? 0,
           isLoadingStatusChangeApi: false));
       return state.copyWith(
           error: l.error,
@@ -310,7 +310,7 @@ class CareGiverProfileBloc
         }
       } else {
         emit(state.copyWith(
-            status: state.response?.data?.verificationStatus ?? 0));
+            status: state.response?.data?.verificationStatus?.toInt() ?? 0));
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
 
