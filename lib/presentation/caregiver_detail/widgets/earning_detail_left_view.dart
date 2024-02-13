@@ -11,19 +11,18 @@ import '../../widget/rectangle_border.dart';
 import '../../widget/status_text.dart';
 
 class EarnDetailLeftView extends StatelessWidget {
-  const EarnDetailLeftView(
-      {Key? key,
-      required this.clientName,
-      required this.transactionId,
-      required this.status,
-      required this.amount,
-      required this.dateTime,
-      required this.receivedFrom,
-      required this.creditTo,
-      required this.serviceId,
-      required this.paidFor,
-      required this.location})
-      : super(key: key);
+  const EarnDetailLeftView({
+    Key? key,
+    required this.clientName,
+    required this.transactionId,
+    required this.status,
+    required this.amount,
+    required this.dateTime,
+    required this.receivedFrom,
+    required this.creditTo,
+    required this.serviceId,
+    required this.paidFor,
+  }) : super(key: key);
   final String clientName;
   final String transactionId;
   final int status;
@@ -33,7 +32,6 @@ class EarnDetailLeftView extends StatelessWidget {
   final String creditTo;
   final String serviceId;
   final String paidFor;
-  final String location;
 
   @override
   Widget build(BuildContext context) {
@@ -116,8 +114,6 @@ class EarnDetailLeftView extends StatelessWidget {
         CustomSizedBox(
           height: DBL.ten.val,
         ),
-        RowColonCombo.twoHundred(
-            label: AppString.location.val, value: location),
       ],
     ));
   }

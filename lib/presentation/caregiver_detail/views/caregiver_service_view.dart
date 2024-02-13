@@ -145,7 +145,7 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
                     child: _servicesTable(context),
                   ),
                   CustomSizedBox(height: DBL.twenty.val),
-                  if (_totalItems > 10) _paginationView()
+                  _paginationView()
                 ],
               ),
             ),
@@ -282,14 +282,14 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
                         debugPrint('item status ${item.status}');
                         return CustomAlertDialogWidget(
                           heading: item.status == 2
-                              ? 'Upcoming'
+                              ? 'Upcoming Service Request'
                               : item.status == 3
-                                  ? 'Ongoing'
+                                  ? 'Ongoing Service Request'
                                   : item.status == 5
-                                      ? 'Completed'
+                                      ? 'Completed Service Request'
                                       : item.status == 6
-                                          ? 'Canceled'
-                                          : 'Missed',
+                                          ? 'Canceled Service Request'
+                                          : 'Missed Service Request',
                           child: ServiceDetailsAlert(
                             title: item.status == 2
                                 ? 'Upcoming'

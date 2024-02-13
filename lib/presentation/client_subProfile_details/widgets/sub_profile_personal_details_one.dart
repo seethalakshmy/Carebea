@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:pdf_render/pdf_render_widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../application/bloc/sub_profile_details/sub_profile_details_bloc.dart';
+import '../../../core/custom_debugger.dart';
 import '../../../core/enum.dart';
 import '../../../core/string_extension.dart';
 import '../../../domain/subProfile_details/model/sub_profile_detail_response.dart';
+import '../../caregiver_verification/widgets/file_preview.dart';
+import '../../widget/cached_image.dart';
+import '../../widget/commonImageview.dart';
+import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_sizedbox.dart';
 import '../../widget/header_view.dart';
 import '../../widget/row_combo.dart';
 
 class SubProfilePersonalDetailsOneView extends StatelessWidget {
-  const SubProfilePersonalDetailsOneView({Key? key, required this.state})
+  SubProfilePersonalDetailsOneView({Key? key, required this.state})
       : super(key: key);
   final SubProfileDetailState state;
+
+  final pdfController = PdfViewerController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +48,7 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
               child: RowColonCombo.twoHundred(
                   label: AppString.dob.val,
                   value: personalDetails?.dob?.parseWithFormat(
-                          dateFormat: AppString.mmDDYYY.val) ??
+                          dateFormat: AppString.MMMMddYYYY.val) ??
                       "",
                   fontSize: FS.font13PointFive.val),
             ),
@@ -190,16 +199,10 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
         CustomSizedBox(
           height: DBL.six.val,
         ),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
         RowColonCombo.twoHundred(
             label: AppString.docNumber.val,
             value: documentDetails?.doumentNumber ?? "",
             fontSize: FS.font13PointFive.val),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
         CustomSizedBox(
           height: DBL.six.val,
         ),
@@ -212,8 +215,91 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
         CustomSizedBox(
           height: DBL.six.val,
         ),
+        FilePreview(
+            fileName: documentDetails?.documentUploaded ?? '',
+            onTap: () {
+              _docImagePreviewPopUp(
+                  url: documentDetails?.url ?? "",
+                  fileName: documentDetails?.documentUploaded ?? "",
+                  context: context);
+            }),
+        // CommonImageView(
+        //   url: documentDetails?.url,
+        //   height: 100,
+        //   width: 100,
+        // )
       ],
     );
+  }
+
+  Future<void> _launchUrl(String url) async {
+    if (!await launchUrl(Uri.parse(url))) {
+      throw Exception('Could not launch $url}');
+    }
+  }
+
+  _docImagePreviewPopUp(
+      {required String url,
+      required String fileName,
+      required BuildContext context}) {
+    if (true.isPdf(url)) {
+      _launchUrl(url);
+    } else {
+      showGeneralDialog(
+        barrierLabel: "",
+        barrierDismissible: true,
+        context: context,
+        pageBuilder: (BuildContext buildContext, Animation animation,
+            Animation secondaryAnimation) {
+          CustomLog.log("url is ${url}");
+          return CustomAlertDialogWidget(
+              width: 800,
+              height: 550,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              heading: "",
+              child: url.contains('.pdf')
+                  ? CustomSizedBox(
+                      width: 780,
+                      height: 540,
+                      child: PdfViewer.openFile(
+                        url,
+                        viewerController: pdfController,
+                        onError: (err) => print(err),
+                        params: const PdfViewerParams(
+                            minScale: 0.2,
+                            scrollDirection: Axis.vertical,
+                            padding: 10),
+                      ),
+                    )
+                  : CachedImage(
+                      onTap: () {
+                        /*showGeneralDialog(barrierLabel: "",
+                          barrierDismissible: true,
+                          context: context,
+                          pageBuilder: (BuildContext buildContext,
+                              Animation animation,
+                              Animation secondaryAnimation) {
+                            return CustomAlertDialogWidget(
+                                showHeading: false,
+                                width: 700,
+                                heading: "",
+                                child: CachedImage(
+                                  fit: BoxFit.contain,
+                                  imgUrl: url,
+                                ));
+                          },
+                        );*/
+                      },
+                      imgUrl: url,
+                      width: 780,
+                      height: 800,
+                      isDocImage: true,
+                      fit: BoxFit.contain,
+                    ));
+        },
+      );
+    }
   }
 
   RowColonCombo _emailView(PersonalDetails1? personalDetails) {
@@ -239,16 +325,31 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
   }
 
   RowColonCombo _heightView(PersonalDetails1? personalDetails) {
+    var height = personalDetails?.height?.split(',');
+    var feet = "";
+    String inchIndex = "";
+    String inch = "";
+    if (height!.isNotEmpty) {
+      feet = "${height[0].trim()} feet";
+      if (height.length > 1) {
+        inchIndex = height[1].trim();
+      }
+      if (inchIndex == "") {
+        inch = " 0 inch";
+      } else {
+        inch = inchIndex;
+      }
+    }
     return RowColonCombo.twoHundred(
         label: AppString.height.val,
-        value: personalDetails?.height ?? "",
+        value: feet + inch,
         fontSize: FS.font13PointFive.val);
   }
 
   RowColonCombo _weightView(PersonalDetails1? personalDetails) {
     return RowColonCombo.twoHundred(
         label: AppString.weight.val,
-        value: personalDetails?.weight ?? "",
+        value: '${personalDetails?.weight} lbs ' ?? "",
         fontSize: FS.font13PointFive.val);
   }
 

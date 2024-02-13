@@ -476,6 +476,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   }
 
   _genderWidget(OnboardingState state) {
+    debugPrint("gender lis t ${widget.onboardingBloc.genderList}");
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1055,16 +1056,23 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   }
 
   checkInputData() {
+    debugPrint("inside test");
+    debugPrint("inside test ${widget.onboardingBloc.profileUrl}");
+    debugPrint("inside test ${_formKey.currentState!.validate()}");
+
     // addressLineController.text = addressLineController.text.trim();
     // documentNumberController.text = documentNumberController.text.trim();
     // streetController.text = streetController.text.trim();
     if (_validateMode != AutovalidateMode.always) {
+      debugPrint("bvsgdvsd");
       formValidationBloc.add(const FormValidationEvent.submit());
       formValidationBloc.add(const FormValidationEvent.dropDown("true"));
     }
     final userId = SharedPreffUtil().getCareGiverUserId;
     if (_formKey.currentState!.validate() &&
         widget.onboardingBloc.profileUrl.isNotEmpty) {
+      debugPrint("inside true");
+
       final expiryDate = expiryDateController.text;
       final dob = dobController.text;
 

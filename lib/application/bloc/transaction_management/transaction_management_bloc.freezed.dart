@@ -19,8 +19,15 @@ mixin _$TransactionManagementEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getFilters,
-    required TResult Function(String userId, String page, int limit,
-            String searchTerm, int filterId, String? clientId)
+    required TResult Function(
+            String userId,
+            String page,
+            int limit,
+            String searchTerm,
+            String? clientId,
+            int statusId,
+            String fromDate,
+            String toDate)
         getTransactions,
     required TResult Function(bool clicked) hideOrShowDetails,
     required TResult Function(String transactionId, String serviceId)
@@ -31,7 +38,7 @@ mixin _$TransactionManagementEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getFilters,
     TResult? Function(String userId, String page, int limit, String searchTerm,
-            int filterId, String? clientId)?
+            String? clientId, int statusId, String fromDate, String toDate)?
         getTransactions,
     TResult? Function(bool clicked)? hideOrShowDetails,
     TResult? Function(String transactionId, String serviceId)?
@@ -42,7 +49,7 @@ mixin _$TransactionManagementEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getFilters,
     TResult Function(String userId, String page, int limit, String searchTerm,
-            int filterId, String? clientId)?
+            String? clientId, int statusId, String fromDate, String toDate)?
         getTransactions,
     TResult Function(bool clicked)? hideOrShowDetails,
     TResult Function(String transactionId, String serviceId)?
@@ -137,8 +144,15 @@ class _$_GetFilters implements _GetFilters {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getFilters,
-    required TResult Function(String userId, String page, int limit,
-            String searchTerm, int filterId, String? clientId)
+    required TResult Function(
+            String userId,
+            String page,
+            int limit,
+            String searchTerm,
+            String? clientId,
+            int statusId,
+            String fromDate,
+            String toDate)
         getTransactions,
     required TResult Function(bool clicked) hideOrShowDetails,
     required TResult Function(String transactionId, String serviceId)
@@ -152,7 +166,7 @@ class _$_GetFilters implements _GetFilters {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getFilters,
     TResult? Function(String userId, String page, int limit, String searchTerm,
-            int filterId, String? clientId)?
+            String? clientId, int statusId, String fromDate, String toDate)?
         getTransactions,
     TResult? Function(bool clicked)? hideOrShowDetails,
     TResult? Function(String transactionId, String serviceId)?
@@ -166,7 +180,7 @@ class _$_GetFilters implements _GetFilters {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getFilters,
     TResult Function(String userId, String page, int limit, String searchTerm,
-            int filterId, String? clientId)?
+            String? clientId, int statusId, String fromDate, String toDate)?
         getTransactions,
     TResult Function(bool clicked)? hideOrShowDetails,
     TResult Function(String transactionId, String serviceId)?
@@ -233,8 +247,10 @@ abstract class _$$_GetTransactionsCopyWith<$Res> {
       String page,
       int limit,
       String searchTerm,
-      int filterId,
-      String? clientId});
+      String? clientId,
+      int statusId,
+      String fromDate,
+      String toDate});
 }
 
 /// @nodoc
@@ -252,8 +268,10 @@ class __$$_GetTransactionsCopyWithImpl<$Res>
     Object? page = null,
     Object? limit = null,
     Object? searchTerm = null,
-    Object? filterId = null,
     Object? clientId = freezed,
+    Object? statusId = null,
+    Object? fromDate = null,
+    Object? toDate = null,
   }) {
     return _then(_$_GetTransactions(
       userId: null == userId
@@ -272,14 +290,22 @@ class __$$_GetTransactionsCopyWithImpl<$Res>
           ? _value.searchTerm
           : searchTerm // ignore: cast_nullable_to_non_nullable
               as String,
-      filterId: null == filterId
-          ? _value.filterId
-          : filterId // ignore: cast_nullable_to_non_nullable
-              as int,
       clientId: freezed == clientId
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as String?,
+      statusId: null == statusId
+          ? _value.statusId
+          : statusId // ignore: cast_nullable_to_non_nullable
+              as int,
+      fromDate: null == fromDate
+          ? _value.fromDate
+          : fromDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      toDate: null == toDate
+          ? _value.toDate
+          : toDate // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -292,8 +318,10 @@ class _$_GetTransactions implements _GetTransactions {
       required this.page,
       required this.limit,
       required this.searchTerm,
-      required this.filterId,
-      this.clientId});
+      this.clientId,
+      required this.statusId,
+      required this.fromDate,
+      required this.toDate});
 
   @override
   final String userId;
@@ -304,13 +332,17 @@ class _$_GetTransactions implements _GetTransactions {
   @override
   final String searchTerm;
   @override
-  final int filterId;
-  @override
   final String? clientId;
+  @override
+  final int statusId;
+  @override
+  final String fromDate;
+  @override
+  final String toDate;
 
   @override
   String toString() {
-    return 'TransactionManagementEvent.getTransactions(userId: $userId, page: $page, limit: $limit, searchTerm: $searchTerm, filterId: $filterId, clientId: $clientId)';
+    return 'TransactionManagementEvent.getTransactions(userId: $userId, page: $page, limit: $limit, searchTerm: $searchTerm, clientId: $clientId, statusId: $statusId, fromDate: $fromDate, toDate: $toDate)';
   }
 
   @override
@@ -323,15 +355,18 @@ class _$_GetTransactions implements _GetTransactions {
             (identical(other.limit, limit) || other.limit == limit) &&
             (identical(other.searchTerm, searchTerm) ||
                 other.searchTerm == searchTerm) &&
-            (identical(other.filterId, filterId) ||
-                other.filterId == filterId) &&
             (identical(other.clientId, clientId) ||
-                other.clientId == clientId));
+                other.clientId == clientId) &&
+            (identical(other.statusId, statusId) ||
+                other.statusId == statusId) &&
+            (identical(other.fromDate, fromDate) ||
+                other.fromDate == fromDate) &&
+            (identical(other.toDate, toDate) || other.toDate == toDate));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, userId, page, limit, searchTerm, filterId, clientId);
+  int get hashCode => Object.hash(runtimeType, userId, page, limit, searchTerm,
+      clientId, statusId, fromDate, toDate);
 
   @JsonKey(ignore: true)
   @override
@@ -343,14 +378,22 @@ class _$_GetTransactions implements _GetTransactions {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getFilters,
-    required TResult Function(String userId, String page, int limit,
-            String searchTerm, int filterId, String? clientId)
+    required TResult Function(
+            String userId,
+            String page,
+            int limit,
+            String searchTerm,
+            String? clientId,
+            int statusId,
+            String fromDate,
+            String toDate)
         getTransactions,
     required TResult Function(bool clicked) hideOrShowDetails,
     required TResult Function(String transactionId, String serviceId)
         getTransactionDetails,
   }) {
-    return getTransactions(userId, page, limit, searchTerm, filterId, clientId);
+    return getTransactions(
+        userId, page, limit, searchTerm, clientId, statusId, fromDate, toDate);
   }
 
   @override
@@ -358,14 +401,14 @@ class _$_GetTransactions implements _GetTransactions {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getFilters,
     TResult? Function(String userId, String page, int limit, String searchTerm,
-            int filterId, String? clientId)?
+            String? clientId, int statusId, String fromDate, String toDate)?
         getTransactions,
     TResult? Function(bool clicked)? hideOrShowDetails,
     TResult? Function(String transactionId, String serviceId)?
         getTransactionDetails,
   }) {
     return getTransactions?.call(
-        userId, page, limit, searchTerm, filterId, clientId);
+        userId, page, limit, searchTerm, clientId, statusId, fromDate, toDate);
   }
 
   @override
@@ -373,7 +416,7 @@ class _$_GetTransactions implements _GetTransactions {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getFilters,
     TResult Function(String userId, String page, int limit, String searchTerm,
-            int filterId, String? clientId)?
+            String? clientId, int statusId, String fromDate, String toDate)?
         getTransactions,
     TResult Function(bool clicked)? hideOrShowDetails,
     TResult Function(String transactionId, String serviceId)?
@@ -381,8 +424,8 @@ class _$_GetTransactions implements _GetTransactions {
     required TResult orElse(),
   }) {
     if (getTransactions != null) {
-      return getTransactions(
-          userId, page, limit, searchTerm, filterId, clientId);
+      return getTransactions(userId, page, limit, searchTerm, clientId,
+          statusId, fromDate, toDate);
     }
     return orElse();
   }
@@ -432,15 +475,19 @@ abstract class _GetTransactions implements TransactionManagementEvent {
       required final String page,
       required final int limit,
       required final String searchTerm,
-      required final int filterId,
-      final String? clientId}) = _$_GetTransactions;
+      final String? clientId,
+      required final int statusId,
+      required final String fromDate,
+      required final String toDate}) = _$_GetTransactions;
 
   String get userId;
   String get page;
   int get limit;
   String get searchTerm;
-  int get filterId;
   String? get clientId;
+  int get statusId;
+  String get fromDate;
+  String get toDate;
   @JsonKey(ignore: true)
   _$$_GetTransactionsCopyWith<_$_GetTransactions> get copyWith =>
       throw _privateConstructorUsedError;
@@ -512,8 +559,15 @@ class _$_HideOrShowDetails implements _HideOrShowDetails {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getFilters,
-    required TResult Function(String userId, String page, int limit,
-            String searchTerm, int filterId, String? clientId)
+    required TResult Function(
+            String userId,
+            String page,
+            int limit,
+            String searchTerm,
+            String? clientId,
+            int statusId,
+            String fromDate,
+            String toDate)
         getTransactions,
     required TResult Function(bool clicked) hideOrShowDetails,
     required TResult Function(String transactionId, String serviceId)
@@ -527,7 +581,7 @@ class _$_HideOrShowDetails implements _HideOrShowDetails {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getFilters,
     TResult? Function(String userId, String page, int limit, String searchTerm,
-            int filterId, String? clientId)?
+            String? clientId, int statusId, String fromDate, String toDate)?
         getTransactions,
     TResult? Function(bool clicked)? hideOrShowDetails,
     TResult? Function(String transactionId, String serviceId)?
@@ -541,7 +595,7 @@ class _$_HideOrShowDetails implements _HideOrShowDetails {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getFilters,
     TResult Function(String userId, String page, int limit, String searchTerm,
-            int filterId, String? clientId)?
+            String? clientId, int statusId, String fromDate, String toDate)?
         getTransactions,
     TResult Function(bool clicked)? hideOrShowDetails,
     TResult Function(String transactionId, String serviceId)?
@@ -681,8 +735,15 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getFilters,
-    required TResult Function(String userId, String page, int limit,
-            String searchTerm, int filterId, String? clientId)
+    required TResult Function(
+            String userId,
+            String page,
+            int limit,
+            String searchTerm,
+            String? clientId,
+            int statusId,
+            String fromDate,
+            String toDate)
         getTransactions,
     required TResult Function(bool clicked) hideOrShowDetails,
     required TResult Function(String transactionId, String serviceId)
@@ -696,7 +757,7 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getFilters,
     TResult? Function(String userId, String page, int limit, String searchTerm,
-            int filterId, String? clientId)?
+            String? clientId, int statusId, String fromDate, String toDate)?
         getTransactions,
     TResult? Function(bool clicked)? hideOrShowDetails,
     TResult? Function(String transactionId, String serviceId)?
@@ -710,7 +771,7 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getFilters,
     TResult Function(String userId, String page, int limit, String searchTerm,
-            int filterId, String? clientId)?
+            String? clientId, int statusId, String fromDate, String toDate)?
         getTransactions,
     TResult Function(bool clicked)? hideOrShowDetails,
     TResult Function(String transactionId, String serviceId)?

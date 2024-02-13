@@ -26,6 +26,7 @@ import 'application/bloc/resend_otp_bloc/resend_otp_bloc.dart';
 import 'application/bloc/reset_password/reset_password_bloc.dart';
 import 'application/bloc/service_request_management/service_request_management_bloc.dart';
 import 'application/bloc/signup/signup_bloc.dart';
+import 'application/bloc/transaction_management/transaction_management_bloc.dart';
 import 'application/bloc/verify_email/verify_email_bloc.dart';
 import 'core/config/environment.dart';
 import 'core/hive/hive_utils.dart';
@@ -46,6 +47,7 @@ import 'infrastructure/reset_password_repository/reset_password_repository.dart'
 import 'infrastructure/service_request_management/service_request_management_repository.dart';
 import 'infrastructure/shared_preference/shared_preff_util.dart';
 import 'infrastructure/signup/signup_repository.dart';
+import 'infrastructure/transaction_management/transactions_repository.dart';
 import 'infrastructure/verify_email/verify_email_repository.dart';
 import 'presentation/routes/app_router.dart';
 import 'presentation/widget/loader_view.dart';
@@ -135,6 +137,9 @@ class _MyAppState extends State<MyApp> {
         routeInformationProvider: _appRouter.routeInfoProvider(),
         debugShowCheckedModeBanner: false,
         theme: ThemeClass.themeData(context),
+        supportedLocales: const <Locale>[
+          Locale('en', ''),
+        ],
         builder: (_, child) {
           return FutureBuilder(
               future: SharedPreffUtil().init(),

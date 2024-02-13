@@ -8,4 +8,5 @@ class FormValidationState with _$FormValidationState {
   const factory FormValidationState.checkBoxSuccess(bool value) =
       _CheckBoxSuccess;
   const factory FormValidationState.formSubmitSuccess() = _FormSubmitSuccess;
+  const factory FormValidationState.countStart() = _CountStart;
 }

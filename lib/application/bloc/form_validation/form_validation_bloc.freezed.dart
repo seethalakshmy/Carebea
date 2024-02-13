@@ -21,6 +21,7 @@ mixin _$FormValidationEvent {
     required TResult Function(String value) dropDown,
     required TResult Function(bool value) checkBox,
     required TResult Function() submit,
+    required TResult Function() count,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$FormValidationEvent {
     TResult? Function(String value)? dropDown,
     TResult? Function(bool value)? checkBox,
     TResult? Function()? submit,
+    TResult? Function()? count,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$FormValidationEvent {
     TResult Function(String value)? dropDown,
     TResult Function(bool value)? checkBox,
     TResult Function()? submit,
+    TResult Function()? count,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$FormValidationEvent {
     required TResult Function(_DropDown value) dropDown,
     required TResult Function(_CheckBox value) checkBox,
     required TResult Function(_Submit value) submit,
+    required TResult Function(_Count value) count,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$FormValidationEvent {
     TResult? Function(_DropDown value)? dropDown,
     TResult? Function(_CheckBox value)? checkBox,
     TResult? Function(_Submit value)? submit,
+    TResult? Function(_Count value)? count,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$FormValidationEvent {
     TResult Function(_DropDown value)? dropDown,
     TResult Function(_CheckBox value)? checkBox,
     TResult Function(_Submit value)? submit,
+    TResult Function(_Count value)? count,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -147,6 +153,7 @@ class _$_DropDown implements _DropDown {
     required TResult Function(String value) dropDown,
     required TResult Function(bool value) checkBox,
     required TResult Function() submit,
+    required TResult Function() count,
   }) {
     return dropDown(value);
   }
@@ -157,6 +164,7 @@ class _$_DropDown implements _DropDown {
     TResult? Function(String value)? dropDown,
     TResult? Function(bool value)? checkBox,
     TResult? Function()? submit,
+    TResult? Function()? count,
   }) {
     return dropDown?.call(value);
   }
@@ -167,6 +175,7 @@ class _$_DropDown implements _DropDown {
     TResult Function(String value)? dropDown,
     TResult Function(bool value)? checkBox,
     TResult Function()? submit,
+    TResult Function()? count,
     required TResult orElse(),
   }) {
     if (dropDown != null) {
@@ -181,6 +190,7 @@ class _$_DropDown implements _DropDown {
     required TResult Function(_DropDown value) dropDown,
     required TResult Function(_CheckBox value) checkBox,
     required TResult Function(_Submit value) submit,
+    required TResult Function(_Count value) count,
   }) {
     return dropDown(this);
   }
@@ -191,6 +201,7 @@ class _$_DropDown implements _DropDown {
     TResult? Function(_DropDown value)? dropDown,
     TResult? Function(_CheckBox value)? checkBox,
     TResult? Function(_Submit value)? submit,
+    TResult? Function(_Count value)? count,
   }) {
     return dropDown?.call(this);
   }
@@ -201,6 +212,7 @@ class _$_DropDown implements _DropDown {
     TResult Function(_DropDown value)? dropDown,
     TResult Function(_CheckBox value)? checkBox,
     TResult Function(_Submit value)? submit,
+    TResult Function(_Count value)? count,
     required TResult orElse(),
   }) {
     if (dropDown != null) {
@@ -286,6 +298,7 @@ class _$_CheckBox implements _CheckBox {
     required TResult Function(String value) dropDown,
     required TResult Function(bool value) checkBox,
     required TResult Function() submit,
+    required TResult Function() count,
   }) {
     return checkBox(value);
   }
@@ -296,6 +309,7 @@ class _$_CheckBox implements _CheckBox {
     TResult? Function(String value)? dropDown,
     TResult? Function(bool value)? checkBox,
     TResult? Function()? submit,
+    TResult? Function()? count,
   }) {
     return checkBox?.call(value);
   }
@@ -306,6 +320,7 @@ class _$_CheckBox implements _CheckBox {
     TResult Function(String value)? dropDown,
     TResult Function(bool value)? checkBox,
     TResult Function()? submit,
+    TResult Function()? count,
     required TResult orElse(),
   }) {
     if (checkBox != null) {
@@ -320,6 +335,7 @@ class _$_CheckBox implements _CheckBox {
     required TResult Function(_DropDown value) dropDown,
     required TResult Function(_CheckBox value) checkBox,
     required TResult Function(_Submit value) submit,
+    required TResult Function(_Count value) count,
   }) {
     return checkBox(this);
   }
@@ -330,6 +346,7 @@ class _$_CheckBox implements _CheckBox {
     TResult? Function(_DropDown value)? dropDown,
     TResult? Function(_CheckBox value)? checkBox,
     TResult? Function(_Submit value)? submit,
+    TResult? Function(_Count value)? count,
   }) {
     return checkBox?.call(this);
   }
@@ -340,6 +357,7 @@ class _$_CheckBox implements _CheckBox {
     TResult Function(_DropDown value)? dropDown,
     TResult Function(_CheckBox value)? checkBox,
     TResult Function(_Submit value)? submit,
+    TResult Function(_Count value)? count,
     required TResult orElse(),
   }) {
     if (checkBox != null) {
@@ -397,6 +415,7 @@ class _$_Submit implements _Submit {
     required TResult Function(String value) dropDown,
     required TResult Function(bool value) checkBox,
     required TResult Function() submit,
+    required TResult Function() count,
   }) {
     return submit();
   }
@@ -407,6 +426,7 @@ class _$_Submit implements _Submit {
     TResult? Function(String value)? dropDown,
     TResult? Function(bool value)? checkBox,
     TResult? Function()? submit,
+    TResult? Function()? count,
   }) {
     return submit?.call();
   }
@@ -417,6 +437,7 @@ class _$_Submit implements _Submit {
     TResult Function(String value)? dropDown,
     TResult Function(bool value)? checkBox,
     TResult Function()? submit,
+    TResult Function()? count,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -431,6 +452,7 @@ class _$_Submit implements _Submit {
     required TResult Function(_DropDown value) dropDown,
     required TResult Function(_CheckBox value) checkBox,
     required TResult Function(_Submit value) submit,
+    required TResult Function(_Count value) count,
   }) {
     return submit(this);
   }
@@ -441,6 +463,7 @@ class _$_Submit implements _Submit {
     TResult? Function(_DropDown value)? dropDown,
     TResult? Function(_CheckBox value)? checkBox,
     TResult? Function(_Submit value)? submit,
+    TResult? Function(_Count value)? count,
   }) {
     return submit?.call(this);
   }
@@ -451,6 +474,7 @@ class _$_Submit implements _Submit {
     TResult Function(_DropDown value)? dropDown,
     TResult Function(_CheckBox value)? checkBox,
     TResult Function(_Submit value)? submit,
+    TResult Function(_Count value)? count,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -465,6 +489,118 @@ abstract class _Submit implements FormValidationEvent {
 }
 
 /// @nodoc
+abstract class _$$_CountCopyWith<$Res> {
+  factory _$$_CountCopyWith(_$_Count value, $Res Function(_$_Count) then) =
+      __$$_CountCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_CountCopyWithImpl<$Res>
+    extends _$FormValidationEventCopyWithImpl<$Res, _$_Count>
+    implements _$$_CountCopyWith<$Res> {
+  __$$_CountCopyWithImpl(_$_Count _value, $Res Function(_$_Count) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Count implements _Count {
+  const _$_Count();
+
+  @override
+  String toString() {
+    return 'FormValidationEvent.count()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Count);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String value) dropDown,
+    required TResult Function(bool value) checkBox,
+    required TResult Function() submit,
+    required TResult Function() count,
+  }) {
+    return count();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String value)? dropDown,
+    TResult? Function(bool value)? checkBox,
+    TResult? Function()? submit,
+    TResult? Function()? count,
+  }) {
+    return count?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String value)? dropDown,
+    TResult Function(bool value)? checkBox,
+    TResult Function()? submit,
+    TResult Function()? count,
+    required TResult orElse(),
+  }) {
+    if (count != null) {
+      return count();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_DropDown value) dropDown,
+    required TResult Function(_CheckBox value) checkBox,
+    required TResult Function(_Submit value) submit,
+    required TResult Function(_Count value) count,
+  }) {
+    return count(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_DropDown value)? dropDown,
+    TResult? Function(_CheckBox value)? checkBox,
+    TResult? Function(_Submit value)? submit,
+    TResult? Function(_Count value)? count,
+  }) {
+    return count?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_DropDown value)? dropDown,
+    TResult Function(_CheckBox value)? checkBox,
+    TResult Function(_Submit value)? submit,
+    TResult Function(_Count value)? count,
+    required TResult orElse(),
+  }) {
+    if (count != null) {
+      return count(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Count implements FormValidationEvent {
+  const factory _Count() = _$_Count;
+}
+
+/// @nodoc
 mixin _$FormValidationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -472,6 +608,7 @@ mixin _$FormValidationState {
     required TResult Function(String value) dropDownSuccess,
     required TResult Function(bool value) checkBoxSuccess,
     required TResult Function() formSubmitSuccess,
+    required TResult Function() countStart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -480,6 +617,7 @@ mixin _$FormValidationState {
     TResult? Function(String value)? dropDownSuccess,
     TResult? Function(bool value)? checkBoxSuccess,
     TResult? Function()? formSubmitSuccess,
+    TResult? Function()? countStart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -488,6 +626,7 @@ mixin _$FormValidationState {
     TResult Function(String value)? dropDownSuccess,
     TResult Function(bool value)? checkBoxSuccess,
     TResult Function()? formSubmitSuccess,
+    TResult Function()? countStart,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -497,6 +636,7 @@ mixin _$FormValidationState {
     required TResult Function(_DropDownSuccess value) dropDownSuccess,
     required TResult Function(_CheckBoxSuccess value) checkBoxSuccess,
     required TResult Function(_FormSubmitSuccess value) formSubmitSuccess,
+    required TResult Function(_CountStart value) countStart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -505,6 +645,7 @@ mixin _$FormValidationState {
     TResult? Function(_DropDownSuccess value)? dropDownSuccess,
     TResult? Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult? Function(_FormSubmitSuccess value)? formSubmitSuccess,
+    TResult? Function(_CountStart value)? countStart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -513,6 +654,7 @@ mixin _$FormValidationState {
     TResult Function(_DropDownSuccess value)? dropDownSuccess,
     TResult Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult Function(_FormSubmitSuccess value)? formSubmitSuccess,
+    TResult Function(_CountStart value)? countStart,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -577,6 +719,7 @@ class _$_Initial implements _Initial {
     required TResult Function(String value) dropDownSuccess,
     required TResult Function(bool value) checkBoxSuccess,
     required TResult Function() formSubmitSuccess,
+    required TResult Function() countStart,
   }) {
     return initial();
   }
@@ -588,6 +731,7 @@ class _$_Initial implements _Initial {
     TResult? Function(String value)? dropDownSuccess,
     TResult? Function(bool value)? checkBoxSuccess,
     TResult? Function()? formSubmitSuccess,
+    TResult? Function()? countStart,
   }) {
     return initial?.call();
   }
@@ -599,6 +743,7 @@ class _$_Initial implements _Initial {
     TResult Function(String value)? dropDownSuccess,
     TResult Function(bool value)? checkBoxSuccess,
     TResult Function()? formSubmitSuccess,
+    TResult Function()? countStart,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -614,6 +759,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_DropDownSuccess value) dropDownSuccess,
     required TResult Function(_CheckBoxSuccess value) checkBoxSuccess,
     required TResult Function(_FormSubmitSuccess value) formSubmitSuccess,
+    required TResult Function(_CountStart value) countStart,
   }) {
     return initial(this);
   }
@@ -625,6 +771,7 @@ class _$_Initial implements _Initial {
     TResult? Function(_DropDownSuccess value)? dropDownSuccess,
     TResult? Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult? Function(_FormSubmitSuccess value)? formSubmitSuccess,
+    TResult? Function(_CountStart value)? countStart,
   }) {
     return initial?.call(this);
   }
@@ -636,6 +783,7 @@ class _$_Initial implements _Initial {
     TResult Function(_DropDownSuccess value)? dropDownSuccess,
     TResult Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult Function(_FormSubmitSuccess value)? formSubmitSuccess,
+    TResult Function(_CountStart value)? countStart,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -717,6 +865,7 @@ class _$_DropDownSuccess implements _DropDownSuccess {
     required TResult Function(String value) dropDownSuccess,
     required TResult Function(bool value) checkBoxSuccess,
     required TResult Function() formSubmitSuccess,
+    required TResult Function() countStart,
   }) {
     return dropDownSuccess(value);
   }
@@ -728,6 +877,7 @@ class _$_DropDownSuccess implements _DropDownSuccess {
     TResult? Function(String value)? dropDownSuccess,
     TResult? Function(bool value)? checkBoxSuccess,
     TResult? Function()? formSubmitSuccess,
+    TResult? Function()? countStart,
   }) {
     return dropDownSuccess?.call(value);
   }
@@ -739,6 +889,7 @@ class _$_DropDownSuccess implements _DropDownSuccess {
     TResult Function(String value)? dropDownSuccess,
     TResult Function(bool value)? checkBoxSuccess,
     TResult Function()? formSubmitSuccess,
+    TResult Function()? countStart,
     required TResult orElse(),
   }) {
     if (dropDownSuccess != null) {
@@ -754,6 +905,7 @@ class _$_DropDownSuccess implements _DropDownSuccess {
     required TResult Function(_DropDownSuccess value) dropDownSuccess,
     required TResult Function(_CheckBoxSuccess value) checkBoxSuccess,
     required TResult Function(_FormSubmitSuccess value) formSubmitSuccess,
+    required TResult Function(_CountStart value) countStart,
   }) {
     return dropDownSuccess(this);
   }
@@ -765,6 +917,7 @@ class _$_DropDownSuccess implements _DropDownSuccess {
     TResult? Function(_DropDownSuccess value)? dropDownSuccess,
     TResult? Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult? Function(_FormSubmitSuccess value)? formSubmitSuccess,
+    TResult? Function(_CountStart value)? countStart,
   }) {
     return dropDownSuccess?.call(this);
   }
@@ -776,6 +929,7 @@ class _$_DropDownSuccess implements _DropDownSuccess {
     TResult Function(_DropDownSuccess value)? dropDownSuccess,
     TResult Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult Function(_FormSubmitSuccess value)? formSubmitSuccess,
+    TResult Function(_CountStart value)? countStart,
     required TResult orElse(),
   }) {
     if (dropDownSuccess != null) {
@@ -862,6 +1016,7 @@ class _$_CheckBoxSuccess implements _CheckBoxSuccess {
     required TResult Function(String value) dropDownSuccess,
     required TResult Function(bool value) checkBoxSuccess,
     required TResult Function() formSubmitSuccess,
+    required TResult Function() countStart,
   }) {
     return checkBoxSuccess(value);
   }
@@ -873,6 +1028,7 @@ class _$_CheckBoxSuccess implements _CheckBoxSuccess {
     TResult? Function(String value)? dropDownSuccess,
     TResult? Function(bool value)? checkBoxSuccess,
     TResult? Function()? formSubmitSuccess,
+    TResult? Function()? countStart,
   }) {
     return checkBoxSuccess?.call(value);
   }
@@ -884,6 +1040,7 @@ class _$_CheckBoxSuccess implements _CheckBoxSuccess {
     TResult Function(String value)? dropDownSuccess,
     TResult Function(bool value)? checkBoxSuccess,
     TResult Function()? formSubmitSuccess,
+    TResult Function()? countStart,
     required TResult orElse(),
   }) {
     if (checkBoxSuccess != null) {
@@ -899,6 +1056,7 @@ class _$_CheckBoxSuccess implements _CheckBoxSuccess {
     required TResult Function(_DropDownSuccess value) dropDownSuccess,
     required TResult Function(_CheckBoxSuccess value) checkBoxSuccess,
     required TResult Function(_FormSubmitSuccess value) formSubmitSuccess,
+    required TResult Function(_CountStart value) countStart,
   }) {
     return checkBoxSuccess(this);
   }
@@ -910,6 +1068,7 @@ class _$_CheckBoxSuccess implements _CheckBoxSuccess {
     TResult? Function(_DropDownSuccess value)? dropDownSuccess,
     TResult? Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult? Function(_FormSubmitSuccess value)? formSubmitSuccess,
+    TResult? Function(_CountStart value)? countStart,
   }) {
     return checkBoxSuccess?.call(this);
   }
@@ -921,6 +1080,7 @@ class _$_CheckBoxSuccess implements _CheckBoxSuccess {
     TResult Function(_DropDownSuccess value)? dropDownSuccess,
     TResult Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult Function(_FormSubmitSuccess value)? formSubmitSuccess,
+    TResult Function(_CountStart value)? countStart,
     required TResult orElse(),
   }) {
     if (checkBoxSuccess != null) {
@@ -981,6 +1141,7 @@ class _$_FormSubmitSuccess implements _FormSubmitSuccess {
     required TResult Function(String value) dropDownSuccess,
     required TResult Function(bool value) checkBoxSuccess,
     required TResult Function() formSubmitSuccess,
+    required TResult Function() countStart,
   }) {
     return formSubmitSuccess();
   }
@@ -992,6 +1153,7 @@ class _$_FormSubmitSuccess implements _FormSubmitSuccess {
     TResult? Function(String value)? dropDownSuccess,
     TResult? Function(bool value)? checkBoxSuccess,
     TResult? Function()? formSubmitSuccess,
+    TResult? Function()? countStart,
   }) {
     return formSubmitSuccess?.call();
   }
@@ -1003,6 +1165,7 @@ class _$_FormSubmitSuccess implements _FormSubmitSuccess {
     TResult Function(String value)? dropDownSuccess,
     TResult Function(bool value)? checkBoxSuccess,
     TResult Function()? formSubmitSuccess,
+    TResult Function()? countStart,
     required TResult orElse(),
   }) {
     if (formSubmitSuccess != null) {
@@ -1018,6 +1181,7 @@ class _$_FormSubmitSuccess implements _FormSubmitSuccess {
     required TResult Function(_DropDownSuccess value) dropDownSuccess,
     required TResult Function(_CheckBoxSuccess value) checkBoxSuccess,
     required TResult Function(_FormSubmitSuccess value) formSubmitSuccess,
+    required TResult Function(_CountStart value) countStart,
   }) {
     return formSubmitSuccess(this);
   }
@@ -1029,6 +1193,7 @@ class _$_FormSubmitSuccess implements _FormSubmitSuccess {
     TResult? Function(_DropDownSuccess value)? dropDownSuccess,
     TResult? Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult? Function(_FormSubmitSuccess value)? formSubmitSuccess,
+    TResult? Function(_CountStart value)? countStart,
   }) {
     return formSubmitSuccess?.call(this);
   }
@@ -1040,6 +1205,7 @@ class _$_FormSubmitSuccess implements _FormSubmitSuccess {
     TResult Function(_DropDownSuccess value)? dropDownSuccess,
     TResult Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult Function(_FormSubmitSuccess value)? formSubmitSuccess,
+    TResult Function(_CountStart value)? countStart,
     required TResult orElse(),
   }) {
     if (formSubmitSuccess != null) {
@@ -1051,4 +1217,124 @@ class _$_FormSubmitSuccess implements _FormSubmitSuccess {
 
 abstract class _FormSubmitSuccess implements FormValidationState {
   const factory _FormSubmitSuccess() = _$_FormSubmitSuccess;
+}
+
+/// @nodoc
+abstract class _$$_CountStartCopyWith<$Res> {
+  factory _$$_CountStartCopyWith(
+          _$_CountStart value, $Res Function(_$_CountStart) then) =
+      __$$_CountStartCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_CountStartCopyWithImpl<$Res>
+    extends _$FormValidationStateCopyWithImpl<$Res, _$_CountStart>
+    implements _$$_CountStartCopyWith<$Res> {
+  __$$_CountStartCopyWithImpl(
+      _$_CountStart _value, $Res Function(_$_CountStart) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_CountStart implements _CountStart {
+  const _$_CountStart();
+
+  @override
+  String toString() {
+    return 'FormValidationState.countStart()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_CountStart);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(String value) dropDownSuccess,
+    required TResult Function(bool value) checkBoxSuccess,
+    required TResult Function() formSubmitSuccess,
+    required TResult Function() countStart,
+  }) {
+    return countStart();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(String value)? dropDownSuccess,
+    TResult? Function(bool value)? checkBoxSuccess,
+    TResult? Function()? formSubmitSuccess,
+    TResult? Function()? countStart,
+  }) {
+    return countStart?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(String value)? dropDownSuccess,
+    TResult Function(bool value)? checkBoxSuccess,
+    TResult Function()? formSubmitSuccess,
+    TResult Function()? countStart,
+    required TResult orElse(),
+  }) {
+    if (countStart != null) {
+      return countStart();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_DropDownSuccess value) dropDownSuccess,
+    required TResult Function(_CheckBoxSuccess value) checkBoxSuccess,
+    required TResult Function(_FormSubmitSuccess value) formSubmitSuccess,
+    required TResult Function(_CountStart value) countStart,
+  }) {
+    return countStart(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_DropDownSuccess value)? dropDownSuccess,
+    TResult? Function(_CheckBoxSuccess value)? checkBoxSuccess,
+    TResult? Function(_FormSubmitSuccess value)? formSubmitSuccess,
+    TResult? Function(_CountStart value)? countStart,
+  }) {
+    return countStart?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_DropDownSuccess value)? dropDownSuccess,
+    TResult Function(_CheckBoxSuccess value)? checkBoxSuccess,
+    TResult Function(_FormSubmitSuccess value)? formSubmitSuccess,
+    TResult Function(_CountStart value)? countStart,
+    required TResult orElse(),
+  }) {
+    if (countStart != null) {
+      return countStart(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CountStart implements FormValidationState {
+  const factory _CountStart() = _$_CountStart;
 }

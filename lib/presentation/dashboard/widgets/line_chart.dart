@@ -89,12 +89,12 @@ class BarChartWidgetState extends State<BarChartWidget> {
                         color: AppColor.primaryColor.val,
                       ),
                     ),
-                    const CustomSizedBox(
-                      width: 50,
-                    ),
                     BlocBuilder<DashboardBloc, DashboardState>(
                       builder: (context, state) {
-                        return _filterDropDown(context, widget.bloc);
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: _filterDropDown(context, widget.bloc),
+                        );
                       },
                     ),
                     Responsive.isWeb(context)
@@ -110,9 +110,9 @@ class BarChartWidgetState extends State<BarChartWidget> {
                           BlocBuilder<DashboardBloc, DashboardState>(
                             builder: (context, state) {
                               return DashBoardDatePickerWidget(
-                                initialDate: DateFormat('MMM dd yyyy')
+                                initialDate: DateFormat('MMMM dd, yyyy')
                                     .parse(_startdate ?? widget.startDate.text),
-                                firstDate: DateFormat('MMM dd yyyy')
+                                firstDate: DateFormat('MMMM dd, yyyy')
                                     .parse(_startdate ?? widget.startDate.text),
                                 lastDate: state.filterId == 0
                                     ? DateTime(DateTime.now().year + 10)
@@ -159,9 +159,9 @@ class BarChartWidgetState extends State<BarChartWidget> {
                           BlocBuilder<DashboardBloc, DashboardState>(
                             builder: (context, state) {
                               return DashBoardDatePickerWidget(
-                                initialDate: DateFormat('MMM dd yyyy')
+                                initialDate: DateFormat('MMMM dd, yyyy')
                                     .parse(widget.startDate.text),
-                                firstDate: DateFormat('MMM dd yyyy')
+                                firstDate: DateFormat('MMMM dd, yyyy')
                                     .parse(widget.startDate.text),
                                 lastDate: state.filterId == 0
                                     ? DateTime(DateTime.now().year + 10)

@@ -203,6 +203,7 @@ class TransactionView extends StatelessWidget {
               ? 'Success'
               : 'Failed',
       isCompleted: item == 2 ? true : false,
+      isInitiated: item == 1 ? true : false,
     );
   }
 

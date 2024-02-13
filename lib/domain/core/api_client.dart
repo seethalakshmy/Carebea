@@ -69,6 +69,7 @@ import '../transaction_management/model/transaction_list_response.dart';
 import '../upcoming_birthdays/model/upcoming_birthday_response.dart';
 import '../user_management/model/user_list_response.dart';
 import '../user_management_detail/model/client_service_response.dart';
+import '../user_management_detail/model/pending_service_response.dart';
 import '../user_management_detail/model/sub_client_response.dart';
 import '../video_management/models/video_management_response.dart';
 
@@ -623,13 +624,16 @@ abstract class ApiClient {
 
   @POST("/admin/get-transactions")
   Future<TransactionListResponse> getTransactions(
-      @Header("Authorization") String token,
-      @Field('user_id') String userId,
-      @Field('page') String page,
-      @Field('limit') int limit,
-      @Field('search_term') String searchTerm,
-      @Field('filter_id') int filterId,
-      @Field('client_id') String clientId);
+    @Header("Authorization") String token,
+    @Field('user_id') String userId,
+    @Field('page') String page,
+    @Field('limit') int limit,
+    @Field('search_term') String searchTerm,
+    @Field('client_id') String clientId,
+    @Field('status_id') int statusId,
+    @Field('from_date') String fromDate,
+    @Field('to_date') String toDate,
+  );
 
   @POST("/admin/transaction-details")
   Future<TransactionDetailsResponse> getTransactionDetails(
@@ -725,12 +729,13 @@ abstract class ApiClient {
 
   @POST('/admin/get-complaints')
   Future<ComplaintsListResponseModel> getComplaints(
-    @Field('user_id') String userId,
-    @Field('page') String page,
-    @Field('limit') String limit,
-    @Field('search_term') String searchTerm,
-    @Field('status') int status,
-  );
+      @Field('user_id') String userId,
+      @Field('page') String page,
+      @Field('limit') String limit,
+      @Field('search_term') String searchTerm,
+      @Field('status') int status,
+      @Field('createdDateStart') String createdDateStart,
+      @Field('createdDateEnd') String createdDateEnd);
 
   @POST('/admin/client-service-view')
   Future<ClientServiceResponse> getClientService(
@@ -892,5 +897,13 @@ abstract class ApiClient {
     @Field("page") String page,
     @Field("limit") String limit,
     @Field("search_term") String searchTerm,
+  );
+
+  @POST('/admin/pending-service-history')
+  Future<PendingServiceResponse> pendingService(
+    @Field("user_id") String userId,
+    @Field("profile_id") String profileId,
+    @Field("page") String page,
+    @Field("offset") String limit,
   );
 }

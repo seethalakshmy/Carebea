@@ -207,7 +207,7 @@ class CareGiverScheduleView extends StatelessWidget {
           width: DBL.ten.val,
         ),
         CustomText(
-          DateFormat("MM - dd - yyyy").format(state.selectedDate),
+          DateFormat("MMMM dd, yyyy").format(state.selectedDate),
           style: TS().gRoboto(
               fontSize: isXS2(context) ? FS.font14.val : FS.font18.val,
               fontWeight: FW.w500.val,

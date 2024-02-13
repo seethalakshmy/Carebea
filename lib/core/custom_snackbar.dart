@@ -10,7 +10,7 @@ class CSnackBar {
     fToast.init(context);
     fToast.showToast(
         child: SizedBox(
-          width: 350,
+          width: 380,
           height: 50,
           child: Container(
             alignment: Alignment.center,

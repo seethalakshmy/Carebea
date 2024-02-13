@@ -1,5 +1,4 @@
-import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_view.dart';
-import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/transactions_view.dart';
+import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/pending_service_page.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
@@ -59,8 +58,6 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        HeaderView(title: AppString.userManagement.val),
-        CustomSizedBox(height: DBL.twenty.val),
         _rebuildView(),
       ],
     );
@@ -83,10 +80,6 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
       BuildContext context, UserManagementDetailState state) {
     CustomLog.log('width :${MediaQuery.of(context).size.width}');
     UserDetailResponse? response = state.response;
-    Caregiver? caregiver;
-    print('testing${state.response?.data?.name?.firstName}');
-    print('testing${userId}');
-    print(state.response?.data?.profilePic);
 
     return CustomSizedBox(
       height: MediaQuery.of(context).size.height,
@@ -217,12 +210,34 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                             CustomSizedBox(
                                               height: DBL.fourteen.val,
                                             ),
-                                            SVGText(
-                                              path: IMG.location.val,
-                                              name:
-                                                  response?.data?.locationTag ??
-                                                      "",
-                                              widthGap: DBL.twelve.val,
+                                            Expanded(
+                                              child: SVGText(
+                                                path: IMG.location.val,
+                                                name: (response?.data?.address?.first
+                                                            .address ??
+                                                        '') +
+                                                    (response?.data?.address
+                                                            ?.first.streetName ??
+                                                        '') +
+                                                    (',') +
+                                                    (response?.data
+                                                            ?.address?.first.cityName ??
+                                                        '') +
+                                                    (',') +
+                                                    (response?.data?.address
+                                                            ?.first.stateName ??
+                                                        '') +
+                                                    (',') +
+                                                    (response?.data?.address
+                                                            ?.first.zipCode ??
+                                                        '') +
+                                                    (',') +
+                                                    ('USA'),
+                                                widthGap: DBL.twelve.val,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 100,
                                             ),
                                             // CustomSizedBox(
                                             //   height: isXs2(context)
@@ -279,28 +294,40 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                 ),
                                 !isXs2(context)
                                     ? Positioned(
+                                        left: 700,
                                         right: 0,
-                                        top: isLg2(context) ? 5 : 38,
+                                        // top: isLg2(context) ? 5 : 38,
                                         child: Column(
                                           children: [
                                             !isLg2(context)
-                                                ? Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                                ? Wrap(
+                                                    runSpacing: DBL.fifteen.val,
+                                                    spacing: DBL.fifteen.val,
+                                                    // mainAxisAlignment:
+                                                    //     MainAxisAlignment
+                                                    //         .spaceBetween,
                                                     children: [
                                                       serviceCount(
+                                                          height: 70,
                                                           response: response),
-                                                      CustomSizedBox(
-                                                        width: DBL.fifteen.val,
-                                                      ),
+                                                      // CustomSizedBox(
+                                                      //   width: DBL.fifteen.val,
+                                                      // ),
                                                       cancelledCount(
+                                                          height: 70,
                                                           response: response),
-                                                      CustomSizedBox(
-                                                        width: DBL.fifteen.val,
-                                                      ),
-                                                      averageReviewsView(
+                                                      // CustomSizedBox(
+                                                      //   width: DBL.fifteen.val,
+                                                      // ),
+                                                      // averageReviewsView(
+                                                      //     height: 70,
+                                                      //     response: response),
+                                                      pendingReviewsView(
+                                                          height: 70,
                                                           response: response),
+                                                      totalOngoingServicesView(
+                                                          height: 70,
+                                                          response: response)
                                                     ],
                                                   )
                                                 : CustomSizedBox.shrink(),
@@ -319,9 +346,15 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                                       CustomSizedBox(
                                                         height: DBL.fifteen.val,
                                                       ),
-                                                      averageReviewsView(
+                                                      // averageReviewsView(
+                                                      //     height: DBL.sixty.val,
+                                                      //     response: response),
+                                                      pendingReviewsView(
                                                           height: DBL.sixty.val,
                                                           response: response),
+                                                      totalOngoingServicesView(
+                                                          height: DBL.sixty.val,
+                                                          response: response)
                                                     ],
                                                   )
                                                 : CustomSizedBox.shrink(),
@@ -337,9 +370,9 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                             isXs2(context)
                                 ? SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                    child: Wrap(
+                                      // mainAxisAlignment:
+                                      //     MainAxisAlignment.spaceBetween,
                                       children: [
                                         serviceCount(
                                             height: DBL.fifty.val,
@@ -353,9 +386,15 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                         CustomSizedBox(
                                           width: DBL.fifteen.val,
                                         ),
-                                        averageReviewsView(
+                                        // averageReviewsView(
+                                        //     height: DBL.fifty.val,
+                                        //     response: response),
+                                        pendingReviewsView(
                                             height: DBL.fifty.val,
                                             response: response),
+                                        totalOngoingServicesView(
+                                            height: DBL.fifty.val,
+                                            response: response)
                                       ],
                                     ),
                                   )
@@ -376,8 +415,8 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
             unselectedLabelColor: AppColor.lightGrey5.val,
             tabs: [
               Tab(icon: Text(AppString.careRecipients.val)),
-              // Tab(icon: Text(AppString.paymentMethod.val)),
               Tab(icon: Text(AppString.services.val)),
+              Tab(icon: Text(AppString.pendingServices.val)),
               Tab(icon: Text(AppString.transaction.val)),
             ],
             controller: tabController,
@@ -394,6 +433,9 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                   //   state: state,
                   // ),
                   ServiceRequestManagementPage(
+                    clientId: state.response?.data?.id ?? "",
+                  ),
+                  PendingServiceView(
                     clientId: state.response?.data?.id ?? "",
                   ),
                   // ServiceView(
@@ -414,39 +456,30 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
     );
   }
 
-  ServiceRewardAndCompletion averageReviewsView(
-      {double? height, required UserDetailResponse? response}) {
-    return ServiceRewardAndCompletion(
-      height: height,
-      title: response?.data?.averageReviewsGiven.toString() ?? "",
-      subTitle: AppString.averageReviewByCareAmbassador.val,
-    );
-  }
+  // ServiceRewardAndCompletion averageReviewsView(
+  //     {double? height, required UserDetailResponse? response}) {
+  //   return ServiceRewardAndCompletion(
+  //     height: height,
+  //     title: response?.data?.averageReviewsGiven.toString() ?? "",
+  //     subTitle: AppString.averageReviewByCareAmbassador.val,
+  //   );
+  // }
 
   ServiceRewardAndCompletion pendingReviewsView(
       {double? height, required UserDetailResponse? response}) {
     return ServiceRewardAndCompletion(
       height: height,
-      title: "",
-      subTitle: AppString.totalPendingReviews.val,
+      title: response?.data?.notRatedServices.toString() ?? "",
+      subTitle: AppString.reviewPendingByClient.val,
     );
   }
 
-  ServiceRewardAndCompletion upcomingView(
+  ServiceRewardAndCompletion totalOngoingServicesView(
       {double? height, required UserDetailResponse? response}) {
     return ServiceRewardAndCompletion(
       height: height,
-      title: "",
-      subTitle: AppString.totalUpcomingServices.val,
-    );
-  }
-
-  ServiceRewardAndCompletion awaitingView(
-      {double? height, required UserDetailResponse? response}) {
-    return ServiceRewardAndCompletion(
-      height: height,
-      title: "",
-      subTitle: AppString.totalAwaitingServices.val,
+      title: response?.data?.totalOngoingServices.toString() ?? "",
+      subTitle: AppString.totalOngoingServices.val,
     );
   }
 
@@ -464,7 +497,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
     return ServiceRewardAndCompletion(
       height: height,
       title: response?.data?.serviceCompleted.toString() ?? "",
-      subTitle: AppString.serviceCompleted.val,
+      subTitle: AppString.totalServices.val,
     );
   }
 

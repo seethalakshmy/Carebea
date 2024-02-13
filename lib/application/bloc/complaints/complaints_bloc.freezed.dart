@@ -21,24 +21,26 @@ mixin _$ComplaintsEvent {
   String get limit => throw _privateConstructorUsedError;
   String get searchTerm => throw _privateConstructorUsedError;
   int get status => throw _privateConstructorUsedError;
+  String get startDate => throw _privateConstructorUsedError;
+  String get endDate => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, String page, String limit,
-            String searchTerm, int status)
+            String searchTerm, int status, String startDate, String endDate)
         getComplaints,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId, String page, String limit,
-            String searchTerm, int status)?
+            String searchTerm, int status, String startDate, String endDate)?
         getComplaints,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, String page, String limit,
-            String searchTerm, int status)?
+            String searchTerm, int status, String startDate, String endDate)?
         getComplaints,
     required TResult orElse(),
   }) =>
@@ -76,7 +78,9 @@ abstract class $ComplaintsEventCopyWith<$Res> {
       String page,
       String limit,
       String searchTerm,
-      int status});
+      int status,
+      String startDate,
+      String endDate});
 }
 
 /// @nodoc
@@ -97,6 +101,8 @@ class _$ComplaintsEventCopyWithImpl<$Res, $Val extends ComplaintsEvent>
     Object? limit = null,
     Object? searchTerm = null,
     Object? status = null,
+    Object? startDate = null,
+    Object? endDate = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -119,6 +125,14 @@ class _$ComplaintsEventCopyWithImpl<$Res, $Val extends ComplaintsEvent>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as int,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      endDate: null == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -136,7 +150,9 @@ abstract class _$$_GetComplaintsCopyWith<$Res>
       String page,
       String limit,
       String searchTerm,
-      int status});
+      int status,
+      String startDate,
+      String endDate});
 }
 
 /// @nodoc
@@ -155,6 +171,8 @@ class __$$_GetComplaintsCopyWithImpl<$Res>
     Object? limit = null,
     Object? searchTerm = null,
     Object? status = null,
+    Object? startDate = null,
+    Object? endDate = null,
   }) {
     return _then(_$_GetComplaints(
       userId: null == userId
@@ -177,6 +195,14 @@ class __$$_GetComplaintsCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as int,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      endDate: null == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -189,7 +215,9 @@ class _$_GetComplaints implements _GetComplaints {
       required this.page,
       required this.limit,
       required this.searchTerm,
-      required this.status});
+      required this.status,
+      required this.startDate,
+      required this.endDate});
 
   @override
   final String userId;
@@ -201,10 +229,14 @@ class _$_GetComplaints implements _GetComplaints {
   final String searchTerm;
   @override
   final int status;
+  @override
+  final String startDate;
+  @override
+  final String endDate;
 
   @override
   String toString() {
-    return 'ComplaintsEvent.getComplaints(userId: $userId, page: $page, limit: $limit, searchTerm: $searchTerm, status: $status)';
+    return 'ComplaintsEvent.getComplaints(userId: $userId, page: $page, limit: $limit, searchTerm: $searchTerm, status: $status, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -217,12 +249,15 @@ class _$_GetComplaints implements _GetComplaints {
             (identical(other.limit, limit) || other.limit == limit) &&
             (identical(other.searchTerm, searchTerm) ||
                 other.searchTerm == searchTerm) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, userId, page, limit, searchTerm, status);
+  int get hashCode => Object.hash(
+      runtimeType, userId, page, limit, searchTerm, status, startDate, endDate);
 
   @JsonKey(ignore: true)
   @override
@@ -234,32 +269,35 @@ class _$_GetComplaints implements _GetComplaints {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, String page, String limit,
-            String searchTerm, int status)
+            String searchTerm, int status, String startDate, String endDate)
         getComplaints,
   }) {
-    return getComplaints(userId, page, limit, searchTerm, status);
+    return getComplaints(
+        userId, page, limit, searchTerm, status, startDate, endDate);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId, String page, String limit,
-            String searchTerm, int status)?
+            String searchTerm, int status, String startDate, String endDate)?
         getComplaints,
   }) {
-    return getComplaints?.call(userId, page, limit, searchTerm, status);
+    return getComplaints?.call(
+        userId, page, limit, searchTerm, status, startDate, endDate);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, String page, String limit,
-            String searchTerm, int status)?
+            String searchTerm, int status, String startDate, String endDate)?
         getComplaints,
     required TResult orElse(),
   }) {
     if (getComplaints != null) {
-      return getComplaints(userId, page, limit, searchTerm, status);
+      return getComplaints(
+          userId, page, limit, searchTerm, status, startDate, endDate);
     }
     return orElse();
   }
@@ -299,7 +337,9 @@ abstract class _GetComplaints implements ComplaintsEvent {
       required final String page,
       required final String limit,
       required final String searchTerm,
-      required final int status}) = _$_GetComplaints;
+      required final int status,
+      required final String startDate,
+      required final String endDate}) = _$_GetComplaints;
 
   @override
   String get userId;
@@ -312,6 +352,10 @@ abstract class _GetComplaints implements ComplaintsEvent {
   @override
   int get status;
   @override
+  String get startDate;
+  @override
+  String get endDate;
+  @override
   @JsonKey(ignore: true)
   _$$_GetComplaintsCopyWith<_$_GetComplaints> get copyWith =>
       throw _privateConstructorUsedError;
@@ -321,6 +365,7 @@ abstract class _GetComplaints implements ComplaintsEvent {
 mixin _$ComplaintsState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
+  DateTime get selectedDate => throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, ComplaintsListResponseModel>>
       get complaintListOption => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
@@ -339,6 +384,7 @@ abstract class $ComplaintsStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       bool isError,
+      DateTime selectedDate,
       Option<Either<ApiErrorHandler, ComplaintsListResponseModel>>
           complaintListOption,
       String? error});
@@ -359,6 +405,7 @@ class _$ComplaintsStateCopyWithImpl<$Res, $Val extends ComplaintsState>
   $Res call({
     Object? isLoading = null,
     Object? isError = null,
+    Object? selectedDate = null,
     Object? complaintListOption = null,
     Object? error = freezed,
   }) {
@@ -371,6 +418,10 @@ class _$ComplaintsStateCopyWithImpl<$Res, $Val extends ComplaintsState>
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
               as bool,
+      selectedDate: null == selectedDate
+          ? _value.selectedDate
+          : selectedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       complaintListOption: null == complaintListOption
           ? _value.complaintListOption
           : complaintListOption // ignore: cast_nullable_to_non_nullable
@@ -394,6 +445,7 @@ abstract class _$$_ComplaintsStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       bool isError,
+      DateTime selectedDate,
       Option<Either<ApiErrorHandler, ComplaintsListResponseModel>>
           complaintListOption,
       String? error});
@@ -412,6 +464,7 @@ class __$$_ComplaintsStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? isError = null,
+    Object? selectedDate = null,
     Object? complaintListOption = null,
     Object? error = freezed,
   }) {
@@ -424,6 +477,10 @@ class __$$_ComplaintsStateCopyWithImpl<$Res>
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
               as bool,
+      selectedDate: null == selectedDate
+          ? _value.selectedDate
+          : selectedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       complaintListOption: null == complaintListOption
           ? _value.complaintListOption
           : complaintListOption // ignore: cast_nullable_to_non_nullable
@@ -442,6 +499,7 @@ class _$_ComplaintsState implements _ComplaintsState {
   const _$_ComplaintsState(
       {required this.isLoading,
       required this.isError,
+      required this.selectedDate,
       required this.complaintListOption,
       required this.error});
 
@@ -450,6 +508,8 @@ class _$_ComplaintsState implements _ComplaintsState {
   @override
   final bool isError;
   @override
+  final DateTime selectedDate;
+  @override
   final Option<Either<ApiErrorHandler, ComplaintsListResponseModel>>
       complaintListOption;
   @override
@@ -457,7 +517,7 @@ class _$_ComplaintsState implements _ComplaintsState {
 
   @override
   String toString() {
-    return 'ComplaintsState(isLoading: $isLoading, isError: $isError, complaintListOption: $complaintListOption, error: $error)';
+    return 'ComplaintsState(isLoading: $isLoading, isError: $isError, selectedDate: $selectedDate, complaintListOption: $complaintListOption, error: $error)';
   }
 
   @override
@@ -468,14 +528,16 @@ class _$_ComplaintsState implements _ComplaintsState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isError, isError) || other.isError == isError) &&
+            (identical(other.selectedDate, selectedDate) ||
+                other.selectedDate == selectedDate) &&
             (identical(other.complaintListOption, complaintListOption) ||
                 other.complaintListOption == complaintListOption) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, isError, complaintListOption, error);
+  int get hashCode => Object.hash(runtimeType, isLoading, isError, selectedDate,
+      complaintListOption, error);
 
   @JsonKey(ignore: true)
   @override
@@ -488,6 +550,7 @@ abstract class _ComplaintsState implements ComplaintsState {
   const factory _ComplaintsState(
       {required final bool isLoading,
       required final bool isError,
+      required final DateTime selectedDate,
       required final Option<
               Either<ApiErrorHandler, ComplaintsListResponseModel>>
           complaintListOption,
@@ -497,6 +560,8 @@ abstract class _ComplaintsState implements ComplaintsState {
   bool get isLoading;
   @override
   bool get isError;
+  @override
+  DateTime get selectedDate;
   @override
   Option<Either<ApiErrorHandler, ComplaintsListResponseModel>>
       get complaintListOption;

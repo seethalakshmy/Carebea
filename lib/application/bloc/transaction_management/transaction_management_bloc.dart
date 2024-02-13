@@ -30,6 +30,11 @@ class TransactionManagementBloc
   bool isClicked = false;
   String searchQuery = "";
   int filterId = 0;
+  String selectedFromDate = "";
+  String selectedToDate = "";
+  DateTime selectedFromDateTime = DateTime(2020);
+  DateTime? selectedToDateTime;
+  bool isClearFilterClicked = false;
 
   TransactionManagementBloc(this.transactionsRepository)
       : super(TransactionManagementState.initial()) {
@@ -49,9 +54,11 @@ class TransactionManagementBloc
             page: event.page,
             limit: event.limit,
             searchTerm: event.searchTerm,
-            filterId: event.filterId,
             token: '',
-            clientId: event.clientId);
+            clientId: event.clientId,
+            statusId: event.statusId,
+            fromDate: event.fromDate,
+            toDate: event.toDate);
     var transactionState = result.fold((l) {
       emit(state.copyWith(isInitialLoading: false));
       return state.copyWith(error: l.error, isLoading: false);
@@ -84,7 +91,7 @@ class TransactionManagementBloc
   String formatDate(String givenDate) {
     DateTime dateTime = DateTime.parse(givenDate).toLocal();
 
-    String dateString = DateFormat('MM/dd/yyyy').format(dateTime);
+    String dateString = DateFormat('MMMM dd, yyyy').format(dateTime);
     String timeString = DateFormat('HH:mm a').format(dateTime);
 
     return '$dateString, $timeString';
@@ -93,7 +100,7 @@ class TransactionManagementBloc
   String formatDateToMonthName(String givenDate) {
     DateTime dateTime = DateTime.parse(givenDate).toLocal();
 
-    String dateString = DateFormat('MMM d yyyy').format(dateTime);
+    String dateString = DateFormat('MMMM dd, yyyy').format(dateTime);
     String timeString = DateFormat('HH:mm a').format(dateTime);
 
     return '$dateString, $timeString';

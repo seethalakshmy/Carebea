@@ -2306,8 +2306,10 @@ class _ApiClient implements ApiClient {
     page,
     limit,
     searchTerm,
-    filterId,
     clientId,
+    statusId,
+    fromDate,
+    toDate,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2318,8 +2320,10 @@ class _ApiClient implements ApiClient {
       'page': page,
       'limit': limit,
       'search_term': searchTerm,
-      'filter_id': filterId,
       'client_id': clientId,
+      'status_id': statusId,
+      'from_date': fromDate,
+      'to_date': toDate,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<TransactionListResponse>(Options(
@@ -2794,6 +2798,8 @@ class _ApiClient implements ApiClient {
     limit,
     searchTerm,
     status,
+    createdDateStart,
+    createdDateEnd,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2804,6 +2810,8 @@ class _ApiClient implements ApiClient {
       'limit': limit,
       'search_term': searchTerm,
       'status': status,
+      'createdDateStart': createdDateStart,
+      'createdDateEnd': createdDateEnd,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ComplaintsListResponseModel>(Options(
@@ -3509,6 +3517,39 @@ class _ApiClient implements ApiClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = SubClientResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<PendingServiceResponse> pendingService(
+    userId,
+    profileId,
+    page,
+    limit,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'profile_id': profileId,
+      'page': page,
+      'offset': limit,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PendingServiceResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/pending-service-history',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PendingServiceResponse.fromJson(_result.data!);
     return value;
   }
 

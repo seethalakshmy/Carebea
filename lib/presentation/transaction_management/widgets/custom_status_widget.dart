@@ -9,12 +9,14 @@ import '../../widget/custom_text.dart';
 
 class CustomStatusWidget extends StatelessWidget {
   final bool isCompleted;
+  final bool isInitiated;
   final bool? isFromDetails;
   final String statusName;
 
   const CustomStatusWidget(
       {Key? key,
       required this.isCompleted,
+      required this.isInitiated,
       this.isFromDetails,
       required this.statusName})
       : super(key: key);
@@ -32,7 +34,11 @@ class CustomStatusWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(
               vertical: DBL.five.val, horizontal: DBL.five.val),
           decoration: BoxDecoration(
-              color: isCompleted ? AppColor.darkGreen.val : AppColor.red.val,
+              color: isCompleted
+                  ? AppColor.darkGreen.val
+                  : isInitiated
+                      ? AppColor.amber.val
+                      : AppColor.red.val,
               borderRadius: PR().circularRadius(DBL.eight.val)),
           child: CustomText(
             textAlign: TextAlign.center,
@@ -45,7 +51,7 @@ class CustomStatusWidget extends StatelessWidget {
             ),
           ),
         ),
-        !isCompleted
+        !isCompleted && !isInitiated
             ? CustomText(
                 "Refund under process",
                 style: TextStyle(

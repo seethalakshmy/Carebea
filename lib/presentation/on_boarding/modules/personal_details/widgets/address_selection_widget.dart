@@ -45,7 +45,7 @@ class AddressSelectionWidget extends StatelessWidget {
                 confirmButtonTextColor: Colors.black,
                 searchHint: "Search location",
                 initialLocation: const LatLng(36.778259, -119.417931),
-                language: 'en',
+                language: 'en-GB',
                 country: 'US');
             String zipCodeSuffix = "";
             String zipCodePrefix = "";

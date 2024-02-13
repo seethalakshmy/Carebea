@@ -91,9 +91,9 @@ class TransactionDetailsAlert extends StatelessWidget {
                     ),
                     CustomStatusWidget(
                       statusName: item?.status?.name ?? "",
-                      isCompleted:
-                          item?.status?.id == 1 || item?.status?.id == 2,
+                      isCompleted: item?.status?.id == 2,
                       isFromDetails: true,
+                      isInitiated: item?.status?.id == 1,
                     )
                   ],
                 ),

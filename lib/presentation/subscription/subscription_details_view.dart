@@ -6,20 +6,23 @@ import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 
+import '../../application/bloc/subscription/subscription_bloc.dart';
 import '../../domain/subscription/model/subscription_model.dart';
+import '../../infrastructure/subscription/subscription_repository.dart';
 import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
 import '../widget/custom_alert_dialog_widget.dart';
+import '../widget/custom_container.dart';
 import '../widget/row_combo.dart';
 
 class SubscriptionDetailScreen extends StatelessWidget {
-  const SubscriptionDetailScreen({
+  SubscriptionDetailScreen({
     super.key,
     required this.item,
   });
 
-  final SubscriptionResult item;
+  final FinalResult item;
 
   @override
   Widget build(BuildContext context) {
@@ -85,11 +88,11 @@ class SubscriptionDetailScreen extends StatelessWidget {
                                             ? MediaQuery.of(context)
                                                     .size
                                                     .width -
-                                                695
+                                                100
                                             : MediaQuery.of(context)
                                                     .size
                                                     .width -
-                                                1055,
+                                                1000,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -158,6 +161,7 @@ class SubscriptionDetailScreen extends StatelessWidget {
                         ],
                       ),
                     ),
+                    _refundDetailsWidget(item, context),
                   ],
                 )
               : Column(
@@ -199,38 +203,42 @@ class SubscriptionDetailScreen extends StatelessWidget {
                                                     .size
                                                     .width -
                                                 1055,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
+                            child: Row(
                               children: [
-                                SizedBox(
-                                  height: 40,
-                                ),
-                                CustomText(
-                                  (item.name?.firstName ?? '') +
-                                      (item.name?.lastName ?? ''),
-                                  style: TS().gRoboto(
-                                    color: AppColor.rowColor.val,
-                                    fontWeight: FW.w600.val,
-                                    fontSize: getFontSize(
-                                      context,
-                                      fontSize: FS.font19.val,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 40,
                                     ),
-                                  ),
-                                ),
-                                CustomText(
-                                  item.email ?? '',
-                                  style: TS().gRoboto(
-                                    color: AppColor.rowColor.val,
-                                    fontWeight: FW.w600.val,
-                                    fontSize: getFontSize(
-                                      context,
-                                      fontSize: FS.font19.val,
+                                    CustomText(
+                                      (item.name?.firstName ?? '') +
+                                          (item.name?.lastName ?? ''),
+                                      style: TS().gRoboto(
+                                        color: AppColor.rowColor.val,
+                                        fontWeight: FW.w600.val,
+                                        fontSize: getFontSize(
+                                          context,
+                                          fontSize: FS.font19.val,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                CustomSizedBox(
-                                  height: DBL.seventeen.val,
+                                    CustomText(
+                                      item.email ?? '',
+                                      style: TS().gRoboto(
+                                        color: AppColor.rowColor.val,
+                                        fontWeight: FW.w600.val,
+                                        fontSize: getFontSize(
+                                          context,
+                                          fontSize: FS.font19.val,
+                                        ),
+                                      ),
+                                    ),
+                                    CustomSizedBox(
+                                      height: DBL.seventeen.val,
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
@@ -240,10 +248,10 @@ class SubscriptionDetailScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-          RowColonCombo.twoHundred(
-              label: AppString.subscriptionId.val,
-              value: item.subscriptionDetails?.subscriptionId ?? '',
-              fontSize: FS.font13PointFive.val),
+          // RowColonCombo.twoHundred(
+          //     label: AppString.subscriptionId.val,
+          //     value: item.subscriptionDetails?.subscriptionId ?? '',
+          //     fontSize: FS.font13PointFive.val),
           CustomSizedBox(
             height: DBL.seventeen.val,
           ),
@@ -251,7 +259,7 @@ class SubscriptionDetailScreen extends StatelessWidget {
           RowColonCombo.twoHundred(
               label: AppString.startDateAndTime.val,
               value: Utility.serviceDate(
-                DateTime.parse(item.subscriptionDetails?.startedAt ?? "")
+                DateTime.parse(item.subscriptionDetails?.first.startedAt ?? "")
                     .toLocal(),
               ),
               fontSize: FS.font13PointFive.val),
@@ -260,14 +268,14 @@ class SubscriptionDetailScreen extends StatelessWidget {
           ),
           RowColonCombo.twoHundred(
               label: AppString.subscriptionType.val,
-              value: item.subscriptionDetails?.type == '1'
+              value: item.subscriptionDetails?.first.type == '1'
                   ? 'Monthly'
-                  : item.subscriptionDetails?.type == '2'
+                  : item.subscriptionDetails?.first.type == '2'
                       ? 'Semi Annual'
                       : 'Annual',
-              valueColor: item.subscriptionDetails?.type == '1'
+              valueColor: item.subscriptionDetails?.first.type == '1'
                   ? AppColor.blue.val
-                  : item.subscriptionDetails?.type == '2'
+                  : item.subscriptionDetails?.first.type == '2'
                       ? AppColor.red.val
                       : AppColor.green.val,
               fontSize: FS.font13PointFive.val),
@@ -277,7 +285,7 @@ class SubscriptionDetailScreen extends StatelessWidget {
 
           RowColonCombo.twoHundred(
               label: AppString.subscriptionFee.val,
-              value: item.subscriptionDetails?.subscriptionPlanFee ?? "",
+              value: item.subscriptionDetails?.first.subscriptionPlanFee ?? "",
               fontSize: FS.font13PointFive.val),
           CustomSizedBox(
             height: DBL.seventeen.val,
@@ -286,7 +294,7 @@ class SubscriptionDetailScreen extends StatelessWidget {
           RowColonCombo.twoHundred(
               label: AppString.endDateAndTime.val,
               value: Utility.serviceDate(
-                  DateTime.parse(item.subscriptionDetails?.expiry ?? "")
+                  DateTime.parse(item.subscriptionDetails?.first.expiry ?? "")
                       .toLocal()),
               fontSize: FS.font13PointFive.val),
           CustomSizedBox(
@@ -295,22 +303,128 @@ class SubscriptionDetailScreen extends StatelessWidget {
 
           RowColonCombo.twoHundred(
               label: AppString.renewalDate.val,
-              value: item.subscriptionDetails?.monthlyExpire ?? '',
+              value: item.subscriptionDetails?.first.monthlyExpiry ?? '',
               fontSize: FS.font13PointFive.val),
           CustomSizedBox(
             height: DBL.seventeen.val,
           ),
           RowColonCombo.twoHundred(
               label: AppString.subscriptionStatus.val,
-              value: item.subscriptionDetails?.isActive == true
+              value: item.subscriptionDetails?.first.isActive == true
                   ? AppString.active.val
                   : AppString.inActive.val,
-              valueColor: item.subscriptionDetails?.isActive == true
+              valueColor: item.subscriptionDetails?.first.isActive == true
                   ? AppColor.green.val
                   : AppColor.red.val,
               fontSize: FS.font13PointFive.val),
 
           // isLg(context) ? _rightView() : CustomSizedBox.shrink(),
+        ],
+      ),
+    );
+  }
+
+  Widget _refundDetailsWidget(FinalResult item, BuildContext context) {
+    debugPrint('lenghty ${item.subscriptionDetails?.length}');
+    return CustomContainer(
+      width: 400,
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          item.subscriptionDetails?.first.id != null
+              ? CustomText(
+                  AppString.subscriptionTimeline.val,
+                  style: TS().gRoboto(
+                      fontSize: FS.font16.val,
+                      fontWeight: FW.w500.val,
+                      color: AppColor.black.val),
+                )
+              : CustomSizedBox.shrink(),
+          CustomSizedBox(height: DBL.ten.val),
+          SizedBox(
+            height: 200,
+            child: ListView.builder(
+                itemCount: item.subscriptionDetails?.first.id != null
+                    ? item.subscriptionDetails?.length
+                    : 0,
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return item.subscriptionDetails!.isNotEmpty
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              children: [
+                                const CircleAvatar(
+                                  backgroundColor: Colors.green,
+                                  radius: 6,
+                                ),
+                                index + 1 < item.subscriptionDetails!.length
+                                    ? Container(
+                                        width: 5,
+                                        color: AppColor.lightGrey.val,
+                                        height: 60,
+                                      )
+                                    : Container()
+                              ],
+                            ),
+                            CustomSizedBox(width: DBL.ten.val),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomText(
+                                  Utility.generateFormattedDate(item
+                                              .subscriptionDetails?[index]
+                                              .startedAt ??
+                                          "") ??
+                                      "",
+                                  style: TS().gRoboto(
+                                      fontSize: FS.font12.val,
+                                      fontWeight: FW.w400.val,
+                                      color: AppColor.black4.val),
+                                ),
+                                CustomSizedBox(height: DBL.ten.val),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10.0, bottom: 10.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomText(
+                                        item.subscriptionDetails?[index]
+                                                .title ??
+                                            "",
+                                        style: TS().gRoboto(
+                                            fontSize: FS.font12.val,
+                                            fontWeight: FW.w400.val,
+                                            color: AppColor.lightGrey2.val),
+                                      ),
+                                      // CustomSizedBox(height: DBL.five.val),
+                                      // CustomText(
+                                      //   "Txn Id : ${item.subscriptionDetails?[index]. ?? "" ?? ""}",
+                                      //   style: TS().gRoboto(
+                                      //       fontSize: FS.font12.val,
+                                      //       fontWeight: FW.w400.val,
+                                      //       color: AppColor.lightGrey2.val),
+                                      // ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        )
+                      : Container(
+                          width: 100,
+                          height: 50,
+                          color: Colors.red,
+                        );
+                }),
+          ),
         ],
       ),
     );

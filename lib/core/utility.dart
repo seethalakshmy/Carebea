@@ -25,13 +25,20 @@ class Utility {
 
   static String generateFormattedDate(String date) {
     DateTime inputDate = DateTime.parse(date);
-    DateFormat dateFormat = DateFormat('MM-dd-yyyy , hh:mm a');
+    DateFormat dateFormat = DateFormat('MMMM dd, yyyy , hh:mm a');
+    String formattedDate = dateFormat.format(inputDate);
+    return formattedDate;
+  }
+
+  static String generateFormattedDateForPendingService(String date) {
+    DateTime inputDate = DateTime.parse(date);
+    DateFormat dateFormat = DateFormat('MMMM dd, yyyy');
     String formattedDate = dateFormat.format(inputDate);
     return formattedDate;
   }
 
   static String detailDate(DateTime date) {
-    final String formattedDate = DateFormat('MMM dd yyyy').format(date);
+    final String formattedDate = DateFormat('MMMM dd, yyyy').format(date);
     return formattedDate;
   }
 
@@ -54,13 +61,14 @@ class Utility {
   }
 
   static String serviceDate(DateTime date) {
-    final String formattedDate = DateFormat('MMM dd yyyy hh:mm a').format(date);
+    final String formattedDate =
+        DateFormat('MMMM dd, yyyy hh:mm a').format(date);
     return formattedDate;
   }
 
   static Future<String> selectDate(BuildContext context, DateTime initialDate,
       DateTime firstDate, DateTime lastDate) async {
-    final DateFormat formatter = DateFormat('MM/dd/yyyy');
+    final DateFormat formatter = DateFormat('MMMM dd, yyyy');
     DateTime? picked = await showDatePicker(
         context: context,
         initialDate: initialDate,
@@ -93,5 +101,26 @@ class Utility {
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,32}$';
     RegExp regExp = RegExp(pattern);
     return regExp.hasMatch(value);
+  }
+
+  static TimeOfDay convertToLocalTime(String dynamicGmtTime) {
+    // Parse the dynamic GMT time to a DateTime object
+    DateTime gmtDateTime =
+        DateTime.parse("1970-01-01 $dynamicGmtTime:00Z").toLocal();
+
+    // Extract local time components
+    int localHour = gmtDateTime.hour;
+    int localMinute = gmtDateTime.minute;
+
+    // Return as TimeOfDay
+    return TimeOfDay(hour: localHour, minute: localMinute);
+  }
+
+  static String formatTimeOfDay(TimeOfDay tod) {
+    final now = DateTime.now();
+    final dt =
+        DateTime(now.year, now.month, now.day, tod.hour, tod.minute).toLocal();
+    final format = DateFormat.jm(); //"6:00 AM"
+    return format.format(dt);
   }
 }

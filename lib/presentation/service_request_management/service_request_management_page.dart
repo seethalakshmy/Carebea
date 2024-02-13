@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/service_request_management/service_request_management_bloc.dart';
-import '../../core/custom_debugger.dart';
 import '../../core/custom_snackbar.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
@@ -268,7 +267,7 @@ class _ServiceRequestManagementPageState
                   clientId: widget.clientId));
         }
         fromDateController.text =
-            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+            Utility.detailDate(DateTime.parse(value.toString()));
         FocusScope.of(context).unfocus();
       }
     });
@@ -306,7 +305,7 @@ class _ServiceRequestManagementPageState
                   clientId: widget.clientId));
         }
         toDateController.text =
-            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+            Utility.detailDate(DateTime.parse(value.toString()));
         FocusScope.of(context).unfocus();
         debugPrint("toDatesss ${toDateController.text}");
         debugPrint("date check ${_serviceRequestBloc.selectedToDateTime}");

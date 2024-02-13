@@ -11,6 +11,7 @@ import '../../core/enum.dart';
 import '../../core/responsive.dart';
 import '../../core/string_extension.dart';
 import '../../core/text_styles.dart';
+import '../../core/utility.dart';
 import '../../domain/client_report/model/client_report_user_list_response.dart';
 import '../../infrastructure/client_report/client_report_repository.dart';
 import '../../infrastructure/master/master_repository.dart';
@@ -571,7 +572,7 @@ class _ClientAnalyticsPageState extends State<ClientAnalyticsPage> {
     ).then((value) {
       if (value != null) {
         fromDateController.text =
-            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+            Utility.detailDate(DateTime.parse(value.toString()));
         FocusScope.of(context).unfocus();
       }
     });

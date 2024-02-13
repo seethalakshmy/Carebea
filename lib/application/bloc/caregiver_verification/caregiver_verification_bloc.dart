@@ -227,7 +227,8 @@ class CareGiverVerificationBloc
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context,
+            msg: "Pending Document uploading request sent successfully");
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
@@ -308,7 +309,8 @@ class CareGiverVerificationBloc
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context,
+            msg: "Background Verification Rejected");
         Navigator.pop(event.context);
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");

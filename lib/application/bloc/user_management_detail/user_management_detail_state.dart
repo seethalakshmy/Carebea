@@ -7,8 +7,10 @@ class UserManagementDetailState with _$UserManagementDetailState {
       required bool isError,
       required UserDetailResponse? response,
       required List<dynamic> subUserList,
+      required List<ServicesList> pendingServiceList,
       required ClientServiceResponse? clientServiceResponse,
       required SubClientResponse? subClientResponse,
+      required PendingServiceResponse? pendingServiceResponse,
       required String? error}) = _UserManagementDetailState;
 
   factory UserManagementDetailState.initial() {
@@ -19,6 +21,8 @@ class UserManagementDetailState with _$UserManagementDetailState {
         error: null,
         clientServiceResponse: null,
         subClientResponse: null,
-        subUserList: []);
+        subUserList: [],
+        pendingServiceResponse: null,
+        pendingServiceList: []);
   }
 }

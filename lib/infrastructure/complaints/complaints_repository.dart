@@ -17,10 +17,12 @@ class ComplaintsRepository implements IComplaintsRepo {
       required String page,
       required String limit,
       required String searchTerm,
-      required int status}) async {
+      required int status,
+      required String startDate,
+      required String endDate}) async {
     try {
       final response = await apiClient.getComplaints(
-          userId, page, limit, searchTerm, status);
+          userId, page, limit, searchTerm, status, startDate, endDate);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");

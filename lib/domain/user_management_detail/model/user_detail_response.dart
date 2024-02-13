@@ -61,10 +61,14 @@ class Data {
     String? email,
     String? profilePic,
     dynamic ssn,
+    List<Address>? address,
     num? serviceCompleted,
     num? cancelledRequest,
     num? totalReviewsGiven,
     num? averageReviewsGiven,
+    num? totalServices,
+    num? totalOngoingServices,
+    num? notRatedServices,
     List<SubProfiles>? subProfiles,
     PaymentMethod? paymentMethod,
     List<Transactions>? transactions,
@@ -80,7 +84,11 @@ class Data {
     _cancelledRequest = cancelledRequest;
     _totalReviewsGiven = totalReviewsGiven;
     _averageReviewsGiven = averageReviewsGiven;
+    _notRatedServices = notRatedServices;
+    _totalOngoingServices = totalOngoingServices;
+    _totalServices = totalServices;
     _subProfiles = subProfiles;
+    _address = address;
     _paymentMethod = paymentMethod;
     _transactions = transactions;
   }
@@ -97,6 +105,15 @@ class Data {
     _cancelledRequest = json['cancelled_request'];
     _totalReviewsGiven = json['total_reviews_given'];
     _averageReviewsGiven = json['average_review'];
+    _notRatedServices = json['notRatedServiceCount'];
+    _totalOngoingServices = json['total_ongoing_service'];
+    _totalServices = json['total_services'];
+    if (json['address'] != null) {
+      _address = [];
+      json['address'].forEach((v) {
+        _address?.add(Address.fromJson(v));
+      });
+    }
     if (json['subProfiles'] != null) {
       _subProfiles = [];
       json['subProfiles'].forEach((v) {
@@ -125,7 +142,12 @@ class Data {
   num? _cancelledRequest;
   num? _totalReviewsGiven;
   num? _averageReviewsGiven;
+  num? _notRatedServices;
+  num? _totalServices;
+  num? _totalOngoingServices;
   List<SubProfiles>? _subProfiles;
+  List<Address>? _address;
+
   PaymentMethod? _paymentMethod;
   List<Transactions>? _transactions;
   Data copyWith({
@@ -140,7 +162,11 @@ class Data {
     num? cancelledRequest,
     num? totalReviewsGiven,
     num? averageReviewsGiven,
+    num? notRatedServices,
+    num? totalServices,
+    num? totalOngoingServices,
     List<SubProfiles>? subProfiles,
+    List<Address>? address,
     PaymentMethod? paymentMethod,
     List<Transactions>? transactions,
   }) =>
@@ -156,7 +182,11 @@ class Data {
         cancelledRequest: cancelledRequest ?? _cancelledRequest,
         totalReviewsGiven: totalReviewsGiven ?? _totalReviewsGiven,
         averageReviewsGiven: averageReviewsGiven ?? _averageReviewsGiven,
+        notRatedServices: notRatedServices ?? _notRatedServices,
+        totalServices: totalServices ?? _totalServices,
+        totalOngoingServices: totalOngoingServices ?? _totalOngoingServices,
         subProfiles: subProfiles ?? _subProfiles,
+        address: address ?? _address,
         paymentMethod: paymentMethod ?? _paymentMethod,
         transactions: transactions ?? _transactions,
       );
@@ -171,7 +201,11 @@ class Data {
   num? get cancelledRequest => _cancelledRequest;
   num? get totalReviewsGiven => _totalReviewsGiven;
   num? get averageReviewsGiven => _averageReviewsGiven;
+  num? get notRatedServices => _notRatedServices;
+  num? get totalServices => _totalServices;
+  num? get totalOngoingServices => _totalOngoingServices;
   List<SubProfiles>? get subProfiles => _subProfiles;
+  List<Address>? get address => _address;
   PaymentMethod? get paymentMethod => _paymentMethod;
   List<Transactions>? get transactions => _transactions;
 
@@ -190,8 +224,14 @@ class Data {
     map['cancelled_request'] = _cancelledRequest;
     map['total_reviews_given'] = _totalReviewsGiven;
     map['average_review'] = _averageReviewsGiven;
+    map['notRatedServiceCount'] = _notRatedServices;
+    map['total_services'] = _totalServices;
+    map["total_ongoing_services"] = _totalOngoingServices;
     if (_subProfiles != null) {
       map['subProfiles'] = _subProfiles?.map((v) => v.toJson()).toList();
+    }
+    if (_address != null) {
+      map['address'] = _address?.map((v) => v.toJson()).toList();
     }
     if (_paymentMethod != null) {
       map['paymentMethod'] = _paymentMethod?.toJson();
@@ -385,7 +425,6 @@ class LastName {
     BackgroundVerification? backgroundVerification,
     String? id,
     num? v,
-    List<Address>? address,
     num? certificateVerificationStatus,
     String? createdAt,
     bool? deleteStatus,
@@ -424,7 +463,6 @@ class LastName {
     _backgroundVerification = backgroundVerification;
     _id = id;
     _v = v;
-    _address = address;
     _certificateVerificationStatus = certificateVerificationStatus;
     _createdAt = createdAt;
     _deleteStatus = deleteStatus;
@@ -469,12 +507,7 @@ class LastName {
         : null;
     _id = json['_id'];
     _v = json['__v'];
-    if (json['address'] != null) {
-      _address = [];
-      json['address'].forEach((v) {
-        _address?.add(Address.fromJson(v));
-      });
-    }
+
     _certificateVerificationStatus = json['certificateVerificationStatus'];
     _createdAt = json['createdAt'];
     _deleteStatus = json['deleteStatus'];
@@ -517,7 +550,6 @@ class LastName {
   BackgroundVerification? _backgroundVerification;
   String? _id;
   num? _v;
-  List<Address>? _address;
   num? _certificateVerificationStatus;
   String? _createdAt;
   bool? _deleteStatus;
@@ -556,7 +588,6 @@ class LastName {
     BackgroundVerification? backgroundVerification,
     String? id,
     num? v,
-    List<Address>? address,
     num? certificateVerificationStatus,
     String? createdAt,
     bool? deleteStatus,
@@ -597,7 +628,6 @@ class LastName {
             backgroundVerification ?? _backgroundVerification,
         id: id ?? _id,
         v: v ?? _v,
-        address: address ?? _address,
         certificateVerificationStatus:
             certificateVerificationStatus ?? _certificateVerificationStatus,
         createdAt: createdAt ?? _createdAt,
@@ -639,7 +669,6 @@ class LastName {
   BackgroundVerification? get backgroundVerification => _backgroundVerification;
   String? get id => _id;
   num? get v => _v;
-  List<Address>? get address => _address;
   num? get certificateVerificationStatus => _certificateVerificationStatus;
   String? get createdAt => _createdAt;
   bool? get deleteStatus => _deleteStatus;
@@ -688,9 +717,7 @@ class LastName {
     }
     map['_id'] = _id;
     map['__v'] = _v;
-    if (_address != null) {
-      map['address'] = _address?.map((v) => v.toJson()).toList();
-    }
+
     map['certificateVerificationStatus'] = _certificateVerificationStatus;
     map['createdAt'] = _createdAt;
     map['deleteStatus'] = _deleteStatus;
@@ -819,6 +846,8 @@ class Address {
     String? longitude,
     String? city,
     String? state,
+    String? stateName,
+    String? cityName,
     String? address,
     dynamic locationTag,
     String? zipCode,
@@ -832,6 +861,8 @@ class Address {
     _longitude = longitude;
     _city = city;
     _state = state;
+    _stateName = stateName;
+    _cityName = cityName;
     _address = address;
     _locationTag = locationTag;
     _zipCode = zipCode;
@@ -848,6 +879,8 @@ class Address {
     _longitude = json['longitude'];
     _city = json['city'];
     _state = json['state'];
+    _stateName = json['stateName'];
+    _cityName = json['cityName'];
     _address = json['address'];
     _locationTag = json['locationTag'];
     _zipCode = json['zipCode'];
@@ -861,6 +894,8 @@ class Address {
   String? _longitude;
   String? _city;
   String? _state;
+  String? _stateName;
+  String? _cityName;
   String? _address;
   dynamic _locationTag;
   String? _zipCode;
@@ -874,6 +909,8 @@ class Address {
     String? longitude,
     String? city,
     String? state,
+    String? stateName,
+    String? cityName,
     String? address,
     dynamic locationTag,
     String? zipCode,
@@ -888,6 +925,8 @@ class Address {
         longitude: longitude ?? _longitude,
         city: city ?? _city,
         state: state ?? _state,
+        stateName: stateName ?? _stateName,
+        cityName: cityName ?? _cityName,
         address: address ?? _address,
         locationTag: locationTag ?? _locationTag,
         zipCode: zipCode ?? _zipCode,
@@ -901,6 +940,8 @@ class Address {
   String? get longitude => _longitude;
   String? get city => _city;
   String? get state => _state;
+  String? get stateName => _stateName;
+  String? get cityName => _cityName;
   String? get address => _address;
   dynamic get locationTag => _locationTag;
   String? get zipCode => _zipCode;
@@ -918,6 +959,8 @@ class Address {
     map['longitude'] = _longitude;
     map['city'] = _city;
     map['state'] = _state;
+    map['stateName'] = _stateName;
+    map['cityName'] = _cityName;
     map['address'] = _address;
     map['locationTag'] = _locationTag;
     map['zipCode'] = _zipCode;

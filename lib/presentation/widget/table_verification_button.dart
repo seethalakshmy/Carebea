@@ -183,12 +183,20 @@ class TableVerificationButton extends StatelessWidget {
           : AppColor.white.val;
     } else if (verificationStatus == Verification.startedVerification.val) {
       return isHover ? AppColor.darkBlue.val : AppColor.primaryColor.val;
-    } else if (verificationStatus == Verification.trainingStarted.val ||
-        verificationStatus == Verification.trainingCompleted.val) {
+    } else if (verificationStatus == Verification.trainingStarted.val
+        // ||
+        // verificationStatus == Verification.trainingCompleted.val
+        ) {
       return isHover ? AppColor.amber3.val : AppColor.amber2.val;
-    } else if (verificationStatus == Verification.interViewStarted.val ||
-        verificationStatus == Verification.interViewCompleted.val) {
-      return isHover ? AppColor.darkGreen2.val : AppColor.darkGreen.val;
+    } else if (verificationStatus == Verification.trainingCompleted.val) {
+      return isHover ? AppColor.darkBlue.val : AppColor.blue.val;
+    } else if (verificationStatus == Verification.interViewStarted.val
+        // ||
+        // verificationStatus == Verification.interViewCompleted.val
+        ) {
+      return isHover ? AppColor.warning.val : AppColor.warningDark.val;
+    } else if (verificationStatus == Verification.interViewCompleted.val) {
+      return isHover ? AppColor.green.val : AppColor.darkGreen.val;
     } else if (verificationStatus == Verification.interViewFailed.val ||
         verificationStatus == Verification.backgroundVerificationRejected.val ||
         verificationStatus ==
@@ -206,12 +214,20 @@ class TableVerificationButton extends StatelessWidget {
           : AppColor.white.val;
     } else if (verificationStatus == Verification.startedVerification.val) {
       return isHover ? AppColor.darkBlue.val : AppColor.primaryColor.val;
-    } else if (verificationStatus == Verification.trainingStarted.val ||
-        verificationStatus == Verification.trainingCompleted.val) {
+    } else if (verificationStatus == Verification.trainingStarted.val
+        // ||
+        // verificationStatus == Verification.trainingCompleted.val
+        ) {
       return isHover ? AppColor.amber3.val : AppColor.amber5.val;
-    } else if (verificationStatus == Verification.interViewStarted.val ||
-        verificationStatus == Verification.interViewCompleted.val) {
-      return isHover ? AppColor.darkGreen2.val : AppColor.darkGreen3.val;
+    } else if (verificationStatus == Verification.trainingCompleted.val) {
+      return isHover ? AppColor.darkBlue.val : AppColor.blue.val;
+    } else if (verificationStatus == Verification.interViewStarted.val
+        // ||
+        // verificationStatus == Verification.interViewCompleted.val
+        ) {
+      return isHover ? AppColor.warning.val : AppColor.warningDark.val;
+    } else if (verificationStatus == Verification.interViewCompleted.val) {
+      return isHover ? AppColor.green.val : AppColor.darkGreen.val;
     } else if (verificationStatus == Verification.interViewFailed.val ||
         verificationStatus == Verification.backgroundVerificationRejected.val ||
         verificationStatus ==

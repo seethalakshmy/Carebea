@@ -15,7 +15,7 @@ part 'subscription_state.dart';
 
 class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
   SubscriptionRepository subscriptionRepository;
-  List<SubscriptionResult> subscriptionList = [];
+  List<FinalResult> subscriptionList = [];
   List<Pagination> paginationList = [];
   int filterId = 0;
   int statusId = -1;

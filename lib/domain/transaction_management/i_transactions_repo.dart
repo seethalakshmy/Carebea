@@ -12,7 +12,9 @@ abstract class ITransactionsRepo {
     required String page,
     required int limit,
     required String searchTerm,
-    required int filterId,
+    required int statusId,
+    required String fromDate,
+    required String toDate,
   });
 
   Future<Either<ApiErrorHandler, GetFiltersResponse>> getFilters();

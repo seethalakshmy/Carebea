@@ -62,10 +62,14 @@ class Data {
     bool? isSubscriptionActive,
     dynamic agreement,
     String? serviceAgreement,
-    int? serviceCompleted,
-    int? cancelledRequests,
-    double? averageReview,
-    int? reviewCount,
+    num? serviceCompleted,
+    num? upcomingService,
+    num? cancelledRequests,
+    num? totalCancelledReqByClient,
+    num? totalMissedService,
+    num? averageReview,
+    num? notRatedServiceCount,
+    num? reviewCount,
     Name? name,
     Location? location,
     String? profilePicReferrence,
@@ -91,8 +95,12 @@ class Data {
     _isSubscriptionActive = isSubscriptionActive;
     _subscriptionDetails = subscriptionDetails;
     _serviceCompleted = serviceCompleted;
+    _upcomingService = upcomingService;
     _cancelledRequests = cancelledRequests;
+    _totalCancelledReqByClient = totalCancelledReqByClient;
+    _totalMissedService = totalMissedService;
     _averageReview = averageReview;
+    _notRatedServiceCount = notRatedServiceCount;
     _reviewCount = reviewCount;
     _name = name;
     _address = address;
@@ -129,8 +137,12 @@ class Data {
     _agreement = json['agreement'];
     _serviceAgreement = json['service_agreement'];
     _serviceCompleted = json['service_completed'];
+    _upcomingService = json['upcoming_service'];
     _cancelledRequests = json['cancelled_requests'];
+    _totalCancelledReqByClient = json['total_cancelled_req_by_client'];
+    _totalMissedService = json['total_missed_service'];
     _averageReview = json['average_review'];
+    _notRatedServiceCount = json['notRatedServiceCount'];
     _reviewCount = json['review_count'];
     _name = json['name'] != null ? Name.fromJson(json['name']) : null;
     _location =
@@ -178,10 +190,14 @@ class Data {
   String? _serviceAgreement;
   bool? _isSubscriptionActive;
   List<SubscriptionDetails>? _subscriptionDetails;
-  int? _serviceCompleted;
-  int? _cancelledRequests;
-  double? _averageReview;
-  int? _reviewCount;
+  num? _serviceCompleted;
+  num? _upcomingService;
+  num? _cancelledRequests;
+  num? _totalCancelledReqByClient;
+  num? _totalMissedService;
+  num? _averageReview;
+  num? _notRatedServiceCount;
+  num? _reviewCount;
   Name? _name;
   List<Address>? _address;
 
@@ -210,10 +226,13 @@ class Data {
     dynamic agreement,
     String? serviceAgreement,
     List<Address>? address,
-    int? serviceCompleted,
-    int? cancelledRequests,
-    double? averageReview,
-    int? reviewCount,
+    num? upcomingService,
+    num? cancelledRequests,
+    num? totalCancelledReqByClient,
+    num? totalMissedService,
+    num? averageReview,
+    num? notRatedServiceCount,
+    num? reviewCount,
     Name? name,
     Location? location,
     String? profilePicReferrence,
@@ -241,8 +260,13 @@ class Data {
         agreement: agreement ?? _agreement,
         serviceAgreement: serviceAgreement ?? _serviceAgreement,
         serviceCompleted: serviceCompleted ?? _serviceCompleted,
+        upcomingService: upcomingService ?? _upcomingService,
         cancelledRequests: cancelledRequests ?? _cancelledRequests,
+        totalCancelledReqByClient:
+            totalCancelledReqByClient ?? _totalCancelledReqByClient,
+        totalMissedService: totalMissedService ?? _totalMissedService,
         averageReview: averageReview ?? _averageReview,
+        notRatedServiceCount: notRatedServiceCount ?? _notRatedServiceCount,
         reviewCount: reviewCount ?? _reviewCount,
         name: name ?? _name,
         location: location ?? _location,
@@ -270,12 +294,15 @@ class Data {
   List<SubscriptionDetails>? get subscriptionDetails => _subscriptionDetails;
   dynamic get agreement => _agreement;
   String? get serviceAgreement => _serviceAgreement;
-  int? get serviceCompleted => _serviceCompleted;
-  int? get cancelledRequests => _cancelledRequests;
+  num? get serviceCompleted => _serviceCompleted;
+  num? get upcomingService => _upcomingService;
+  num? get cancelledRequests => _cancelledRequests;
+  num? get totalCancelledReqByClient => _totalCancelledReqByClient;
+  num? get totalMissedService => _totalMissedService;
+  num? get averageReview => _averageReview;
+  num? get notRatedServiceCount => _notRatedServiceCount;
+  num? get reviewCount => _reviewCount;
   List<Address>? get address => _address;
-
-  double? get averageReview => _averageReview;
-  int? get reviewCount => _reviewCount;
   Name? get name => _name;
   Location? get location => _location;
   String? get profilePicReferrence => _profilePicReferrence;
@@ -312,8 +339,12 @@ class Data {
     map['agreement'] = _agreement;
     map['service_agreement'] = _serviceAgreement;
     map['service_completed'] = _serviceCompleted;
+    map['upcoming_service'] = _upcomingService;
     map['cancelled_requests'] = _cancelledRequests;
+    map['total_cancelled_req_by_client'] = _totalCancelledReqByClient;
+    map['total_missed_service'] = _totalMissedService;
     map['average_review'] = _averageReview;
+    map['notRatedServiceCount'] = _notRatedServiceCount;
     map['review_count'] = _reviewCount;
     if (_name != null) {
       map['name'] = _name?.toJson();
