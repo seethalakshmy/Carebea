@@ -66,6 +66,9 @@ class Data {
     num? cancelledRequest,
     num? totalReviewsGiven,
     num? averageReviewsGiven,
+    num? totalServices,
+    num? totalOngoingServices,
+    num? notRatedServices,
     List<SubProfiles>? subProfiles,
     PaymentMethod? paymentMethod,
     List<Transactions>? transactions,
@@ -81,6 +84,9 @@ class Data {
     _cancelledRequest = cancelledRequest;
     _totalReviewsGiven = totalReviewsGiven;
     _averageReviewsGiven = averageReviewsGiven;
+    _notRatedServices = notRatedServices;
+    _totalOngoingServices = totalOngoingServices;
+    _totalServices = totalServices;
     _subProfiles = subProfiles;
     _address = address;
     _paymentMethod = paymentMethod;
@@ -99,6 +105,9 @@ class Data {
     _cancelledRequest = json['cancelled_request'];
     _totalReviewsGiven = json['total_reviews_given'];
     _averageReviewsGiven = json['average_review'];
+    _notRatedServices = json['notRatedServiceCount'];
+    _totalOngoingServices = json['total_ongoing_service'];
+    _totalServices = json['total_services'];
     if (json['address'] != null) {
       _address = [];
       json['address'].forEach((v) {
@@ -133,6 +142,9 @@ class Data {
   num? _cancelledRequest;
   num? _totalReviewsGiven;
   num? _averageReviewsGiven;
+  num? _notRatedServices;
+  num? _totalServices;
+  num? _totalOngoingServices;
   List<SubProfiles>? _subProfiles;
   List<Address>? _address;
 
@@ -150,6 +162,9 @@ class Data {
     num? cancelledRequest,
     num? totalReviewsGiven,
     num? averageReviewsGiven,
+    num? notRatedServices,
+    num? totalServices,
+    num? totalOngoingServices,
     List<SubProfiles>? subProfiles,
     List<Address>? address,
     PaymentMethod? paymentMethod,
@@ -167,6 +182,9 @@ class Data {
         cancelledRequest: cancelledRequest ?? _cancelledRequest,
         totalReviewsGiven: totalReviewsGiven ?? _totalReviewsGiven,
         averageReviewsGiven: averageReviewsGiven ?? _averageReviewsGiven,
+        notRatedServices: notRatedServices ?? _notRatedServices,
+        totalServices: totalServices ?? _totalServices,
+        totalOngoingServices: totalOngoingServices ?? _totalOngoingServices,
         subProfiles: subProfiles ?? _subProfiles,
         address: address ?? _address,
         paymentMethod: paymentMethod ?? _paymentMethod,
@@ -183,6 +201,9 @@ class Data {
   num? get cancelledRequest => _cancelledRequest;
   num? get totalReviewsGiven => _totalReviewsGiven;
   num? get averageReviewsGiven => _averageReviewsGiven;
+  num? get notRatedServices => _notRatedServices;
+  num? get totalServices => _totalServices;
+  num? get totalOngoingServices => _totalOngoingServices;
   List<SubProfiles>? get subProfiles => _subProfiles;
   List<Address>? get address => _address;
   PaymentMethod? get paymentMethod => _paymentMethod;
@@ -203,6 +224,9 @@ class Data {
     map['cancelled_request'] = _cancelledRequest;
     map['total_reviews_given'] = _totalReviewsGiven;
     map['average_review'] = _averageReviewsGiven;
+    map['notRatedServiceCount'] = _notRatedServices;
+    map['total_services'] = _totalServices;
+    map["total_ongoing_services"] = _totalOngoingServices;
     if (_subProfiles != null) {
       map['subProfiles'] = _subProfiles?.map((v) => v.toJson()).toList();
     }

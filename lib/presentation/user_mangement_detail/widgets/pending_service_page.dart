@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../../application/bloc/user_management_detail/user_management_detail_bloc.dart';
 import '../../../core/enum.dart';
@@ -475,6 +476,12 @@ class _PendingServiceViewState extends State<PendingServiceView> {
                 setIndex(e.key);
 
                 var item = e.value;
+                String dynamicGmtStartTime = item?.startTime ?? "";
+                String dynamicGmtEndTime = item?.endTime ?? "";
+                TimeOfDay dynamicLocalStartTime =
+                    Utility.convertToLocalTime(dynamicGmtStartTime);
+                TimeOfDay dynamicLocalEndTime =
+                    Utility.convertToLocalTime(dynamicGmtEndTime);
                 return DataRow2(
                   // onTap: () {
                   //   _getServiceDetails(item, state);
@@ -496,17 +503,18 @@ class _PendingServiceViewState extends State<PendingServiceView> {
                       text: item.careGiverName ?? "",
                     )),
                     DataCell(_rowsView(
-                      text: Utility.generateFormattedDate(
-                          DateTime.parse(item.startDate ?? "")
-                              .toLocal()
-                              .toString()),
+                      text: Utility.generateFormattedDateForPendingService(
+                              DateTime.parse(item.startDate ?? "")
+                                  .toLocal()
+                                  .toString()) +
+                          (",") +
+                          Utility.formatTimeOfDay(dynamicLocalStartTime),
                     )),
                     DataCell(_rowsView(
-                      text: Utility.generateFormattedDate(
-                          DateTime.parse(item.endDate ?? "")
-                              .toLocal()
-                              .toString()),
-                    )),
+                        text: Utility.generateFormattedDateForPendingService(
+                                DateTime.parse(item.endDate ?? "").toString()) +
+                            (",") +
+                            Utility.formatTimeOfDay(dynamicLocalEndTime))),
                     /*DataCell(_rowsView(
                     text:
                         '\$ ${Utility.formatAmount(double.tryParse(item.serviceFee.toString() ?? "0.0") ?? 0.0)}',

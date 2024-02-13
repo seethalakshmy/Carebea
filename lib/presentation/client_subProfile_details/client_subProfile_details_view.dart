@@ -255,48 +255,74 @@ class _ClientSubProfileDetailsPageState
                                 ),
                                 !isXs2(context)
                                     ? Positioned(
+                                        left: 500,
                                         right: 0,
-                                        top: isLg2(context) ? 5 : 38,
+                                        // top: isLg2(context) ? 5 : 38,
                                         child: Column(
                                           children: [
                                             !isLg2(context)
-                                                ? Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                                ? Wrap(
+                                                    runSpacing: DBL.fifteen.val,
+                                                    spacing: DBL.fifteen.val,
+                                                    // mainAxisAlignment:
+                                                    //     MainAxisAlignment
+                                                    //         .spaceBetween,
                                                     children: [
+                                                      upcomingServices(
+                                                          height: 70,
+                                                          response: response),
                                                       serviceCount(
+                                                          height: 70,
                                                           response: response),
-                                                      CustomSizedBox(
-                                                        width: DBL.fifteen.val,
-                                                      ),
                                                       cancelledCount(
+                                                          height: 70,
                                                           response: response),
-                                                      CustomSizedBox(
-                                                        width: DBL.fifteen.val,
-                                                      ),
-                                                      reviewsView(
+                                                      missedServices(
+                                                          height: 70,
                                                           response: response),
+                                                      reviewByClient(
+                                                          height: 70,
+                                                          response: response),
+                                                      pendingReviewByClient(
+                                                          height: 70,
+                                                          response: response)
                                                     ],
                                                   )
                                                 : CustomSizedBox.shrink(),
                                             isLg2(context)
                                                 ? Column(
                                                     children: [
+                                                      upcomingServices(
+                                                          response: response),
+                                                      CustomSizedBox(
+                                                        height: DBL.fifteen.val,
+                                                      ),
                                                       serviceCount(
-                                                          height: DBL.sixty.val,
+                                                          height: 50,
                                                           response: response),
                                                       CustomSizedBox(
                                                         height: DBL.fifteen.val,
                                                       ),
                                                       cancelledCount(
-                                                          height: DBL.sixty.val,
+                                                          height: 50,
                                                           response: response),
                                                       CustomSizedBox(
                                                         height: DBL.fifteen.val,
                                                       ),
-                                                      reviewsView(
-                                                          height: DBL.sixty.val,
+                                                      CustomSizedBox(
+                                                        height: DBL.fifteen.val,
+                                                      ),
+                                                      missedServices(
+                                                          response: response),
+                                                      CustomSizedBox(
+                                                        height: DBL.fifteen.val,
+                                                      ),
+                                                      reviewByClient(
+                                                          response: response),
+                                                      CustomSizedBox(
+                                                        height: DBL.fifteen.val,
+                                                      ),
+                                                      pendingReviewByClient(
                                                           response: response),
                                                     ],
                                                   )
@@ -313,25 +339,33 @@ class _ClientSubProfileDetailsPageState
                             isXs2(context)
                                 ? SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                    child: Wrap(
+                                      runSpacing: 15,
                                       children: [
+                                        upcomingServices(
+                                          response: response,
+                                          height: 70,
+                                        ),
                                         serviceCount(
-                                            height: DBL.fifty.val,
-                                            response: response),
-                                        CustomSizedBox(
-                                          width: DBL.fifteen.val,
+                                          response: response,
+                                          height: 70,
                                         ),
                                         cancelledCount(
-                                            height: DBL.fifty.val,
-                                            response: response),
-                                        CustomSizedBox(
-                                          width: DBL.fifteen.val,
+                                          response: response,
+                                          height: 70,
                                         ),
-                                        reviewsView(
-                                            height: DBL.fifty.val,
-                                            response: response),
+                                        missedServices(
+                                          response: response,
+                                          height: 70,
+                                        ),
+                                        reviewByClient(
+                                          response: response,
+                                          height: 70,
+                                        ),
+                                        pendingReviewByClient(
+                                          response: response,
+                                          height: 70,
+                                        )
                                       ],
                                     ),
                                   )
@@ -388,15 +422,6 @@ class _ClientSubProfileDetailsPageState
     );
   }
 
-  ServiceRewardAndCompletion reviewsView(
-      {double? height, required SubProfileDetailResponse? response}) {
-    return ServiceRewardAndCompletion(
-      height: height,
-      title: response?.data?.reviewCount.toString() ?? "",
-      subTitle: AppString.reviewGiven.val,
-    );
-  }
-
   ServiceRewardAndCompletion cancelledCount(
       {double? height, required SubProfileDetailResponse? response}) {
     return ServiceRewardAndCompletion(
@@ -412,6 +437,42 @@ class _ClientSubProfileDetailsPageState
       height: height,
       title: response?.data?.serviceCompleted.toString() ?? "",
       subTitle: AppString.serviceCompleted.val,
+    );
+  }
+
+  ServiceRewardAndCompletion upcomingServices(
+      {double? height, required SubProfileDetailResponse? response}) {
+    return ServiceRewardAndCompletion(
+      height: height,
+      title: response?.data?.upcomingService.toString() ?? "",
+      subTitle: AppString.totalUpcomingServices.val,
+    );
+  }
+
+  ServiceRewardAndCompletion missedServices(
+      {double? height, required SubProfileDetailResponse? response}) {
+    return ServiceRewardAndCompletion(
+      height: height,
+      title: response?.data?.totalMissedService.toString() ?? "",
+      subTitle: AppString.totalMissedServices.val,
+    );
+  }
+
+  ServiceRewardAndCompletion reviewByClient(
+      {double? height, required SubProfileDetailResponse? response}) {
+    return ServiceRewardAndCompletion(
+      height: height,
+      title: response?.data?.reviewCount.toString() ?? "",
+      subTitle: AppString.averageReviewByCareAmbassador.val,
+    );
+  }
+
+  ServiceRewardAndCompletion pendingReviewByClient(
+      {double? height, required SubProfileDetailResponse? response}) {
+    return ServiceRewardAndCompletion(
+      height: height,
+      title: response?.data?.notRatedServiceCount.toString() ?? "",
+      subTitle: AppString.totalPendingReviews.val,
     );
   }
 
