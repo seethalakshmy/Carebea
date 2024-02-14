@@ -15,6 +15,7 @@ class CustomTextField extends TextFormField {
     this.inputType,
     this.label,
     this.obscure = false,
+    this.textCapitalization = TextCapitalization.none,
     this.onChanged,
     this.onsaved,
     this.hint,
@@ -25,9 +26,7 @@ class CustomTextField extends TextFormField {
     this.focusNode,
     this.validaton,
     this.autoFocus = false,
-    
   }) : super(
-    
           key: key,
           focusNode: focusNode,
           initialValue: initialvalue,
@@ -44,6 +43,7 @@ class CustomTextField extends TextFormField {
           enabled: enabled,
           autofocus: autoFocus,
           maxLines: maxLines,
+          textCapitalization: textCapitalization,
           style: customTheme(Get.context!)
               .regular
               .copyWith(fontSize: 14, color: Colors.black),
@@ -91,6 +91,7 @@ class CustomTextField extends TextFormField {
   final String? initialvalue;
   final Widget? trailing;
   final bool autoFocus;
+  final TextCapitalization textCapitalization;
   @override
   final bool enabled;
 }

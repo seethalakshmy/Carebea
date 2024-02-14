@@ -1,5 +1,5 @@
 name: carebea
-version: 1.2.26+28
+version: 1.2.26+29
 publish_to: none
 description: Carebea Mobile App.
 environment:
@@ -37,12 +37,16 @@ dependencies:
   table_calendar: 3.0.6
   url_launcher: ^6.1.5
   dio: ^4.0.6
+  geolocator: ^10.1.1
 
 dev_dependencies:
   build_runner: 2.2.0
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+
+dependency_overrides:
+  firebase_core_platform_interface: 4.5.1
 
 flutter:
   assets:

@@ -9,8 +9,10 @@ class OrderListRepo {
   OrderDataSource orderDataSource = OrderDataSource();
 
   ///OrderListShopDeatilPage
-  Future<OrderListResponse> orderList(int salesPersonId, String orderType, int shopId) async {
-    return orderDataSource.orderList(salesPersonId: salesPersonId, orderType: orderType, shopId: shopId);
+  Future<OrderListResponse> orderList(
+      int salesPersonId, String orderType, int shopId) async {
+    return orderDataSource.orderList(
+        salesPersonId: salesPersonId, orderType: orderType, shopId: shopId);
   }
 
   Future<OrderListResponse> allOrdersList(
@@ -22,26 +24,43 @@ class OrderListRepo {
     int? pageNumber,
     int? pageSize,
   }) async {
-    return orderDataSource.orderList(salesPersonId: salesPersonId, orderType: orderType, filterName: filtername, filterId: filterid, query: query, pageNumber: pageNumber, pageSize: pageSize);
+    return orderDataSource.orderList(
+        salesPersonId: salesPersonId,
+        orderType: orderType,
+        filterName: filtername,
+        filterId: filterid,
+        query: query,
+        pageNumber: pageNumber,
+        pageSize: pageSize);
   }
 
   Future<OrderListResponse> orderDetails({int? salesPersonId, int? orderId}) {
-    return orderDataSource.orderList(salesPersonId: salesPersonId!, orderId: orderId);
+    return orderDataSource.orderList(
+        salesPersonId: salesPersonId!, orderId: orderId);
   }
 
-  Future<OrderListResponse> orderListDelivery({int? driverId, String? filterName, int? filterId, int? salesPersonId}) {
-    return orderDataSource.orderList(driverId: driverId, filterName: filterName, filterId: filterId, salesPersonId: salesPersonId);
+  Future<OrderListResponse> orderListDelivery(
+      {int? driverId, String? filterName, int? filterId, int? salesPersonId}) {
+    return orderDataSource.orderList(
+        driverId: driverId,
+        filterName: filterName,
+        filterId: filterId,
+        salesPersonId: salesPersonId);
   }
 
-  Future<OrderListResponse> allOrdersDelivery({int? driverId, int? salesPersonId}) {
-    return orderDataSource.orderList(driverId: driverId, salesPersonId: salesPersonId);
+  Future<OrderListResponse> allOrdersDelivery(
+      {int? driverId, int? salesPersonId}) {
+    return orderDataSource.orderList(
+        driverId: driverId, salesPersonId: salesPersonId);
   }
 
-  Future<OrderListResponse> orderDetailsDelivery({int? driverId, int? orderId}) {
+  Future<OrderListResponse> orderDetailsDelivery(
+      {int? driverId, int? orderId}) {
     return orderDataSource.orderList(driverId: driverId, orderId: orderId);
   }
 
-  Future<OrderListResponse> upcomingOrdersDelivery({int? driverId, String? orderType}) {
+  Future<OrderListResponse> upcomingOrdersDelivery(
+      {int? driverId, String? orderType}) {
     return orderDataSource.orderList(driverId: driverId, orderType: orderType);
   }
 }

@@ -6,16 +6,19 @@ import 'package:carebea/app/modules/orders/controllers/orders_controller.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../add_shop/views/add_shop_view.dart';
 import '../../delivery_home/controllers/delivery_home_controller.dart';
 import '../../delivery_home/views/delivery_order_list_view.dart';
+import '../../near_by_shop/views/near_by_shop_view.dart';
 
 class HomeMenuCards extends GetView<HomeController> {
   HomeMenuCards({Key? key}) : super(key: key);
-  HomePageOrderListingController homePageOrderListingController = Get.put(HomePageOrderListingController());
+  HomePageOrderListingController homePageOrderListingController =
+      Get.put(HomePageOrderListingController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,10 @@ class HomeMenuCards extends GetView<HomeController> {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, crossAxisSpacing: 10, mainAxisSpacing: 10, childAspectRatio: 12 / 8),
+            crossAxisCount: 3,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            childAspectRatio: 12 / 8),
         children: [
           InkWell(
             onTap: () {
@@ -96,13 +102,16 @@ class HomeMenuCards extends GetView<HomeController> {
             asseticon: Assets.deliveryHomeIcon,
             backgroundColor: const Color(0xff00B2BE),
             title: "Collected Amount",
-            amount: controller.reportsData?.result?.collectedAmount?.toDouble() ?? 0,
+            amount:
+                controller.reportsData?.result?.collectedAmount?.toDouble() ??
+                    0,
           ),
           HomeMenuIndividual(
             asseticon: Assets.deliveryHomeIcon,
             backgroundColor: const Color(0xff985194),
             title: "Outstanding",
-            amount: controller.reportsData?.result?.outstanding?.toDouble() ?? 0.0,
+            amount:
+                controller.reportsData?.result?.outstanding?.toDouble() ?? 0.0,
           ),
           HomeMenuIndividual(
             asseticon: Assets.deliveryHomeIcon,
@@ -115,6 +124,21 @@ class HomeMenuCards extends GetView<HomeController> {
             backgroundColor: const Color(0xff66DE9D),
             title: "Sale Amount",
             amount: controller.reportsData?.result?.sales ?? 0.0,
+          ),
+          InkWell(
+            onTap: () {
+              controller.getCurrentPosition();
+              if (controller.currentPosition?.latitude != null) {
+                Get.to(() => NearByShops());
+              }
+              debugPrint("hellpo ${controller.currentPosition?.latitude}");
+              // homePageOrderListingController.fetchSrAllOrders();
+            },
+            child: const HomeMenuIndividual(
+              asseticon: Assets.orderHomeIcon,
+              backgroundColor: Color(0xffF3674F),
+              title: "Visit Shop",
+            ),
           ),
         ],
       ),

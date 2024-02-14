@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:carebea/app/modules/login/data/models/forget_password_response.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart' as http;
@@ -19,8 +20,15 @@ class AuthenticationRemoteDataSource {
   /// Email login
 
   Future<EmailLoginResponse> emailLogin(String email, String password) async {
-    var response = await http.post(Uri.parse('${apiService.baseUrl}user-login-username'), body: json.encode({'email': email, 'password': password}), headers: apiService.getHeaders());
-    developer.log(" url----${(Uri.parse('${apiService.baseUrl}user-login-username'))}");
+    var test = apiService.getHeaders();
+    var response = await http.post(
+        Uri.parse('${apiService.baseUrl}user-login-username'),
+        body: json.encode({'email': email, 'password': password}),
+        headers: apiService.getHeaders());
+    developer.log(
+        " url----${(Uri.parse('${apiService.baseUrl}user-login-username'))}");
+    debugPrint('login credentials ${response.body}');
+    debugPrint('login credentials ${test}');
 
     if (response.statusCode == 200) {
       return EmailLoginResponse.fromJson(json.decode(response.body));
@@ -35,7 +43,8 @@ class AuthenticationRemoteDataSource {
       return ForgetPasswordResponse.fromJson(json.decode(response.body));
     }
 
-    return ForgetPasswordResponse(result: Result.fromJson(json.decode(response.body)));
+    return ForgetPasswordResponse(
+        result: Result.fromJson(json.decode(response.body)));
   }
 
   /// verify email otp

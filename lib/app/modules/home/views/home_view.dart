@@ -40,13 +40,15 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
         appBar: appBar(context, showScanner: true, onScanned: (val) {
           try {
-            var qr = QrResponse.fromJson(json.decode(val.replaceAll("\'", "\"")));
+            var qr =
+                QrResponse.fromJson(json.decode(val.replaceAll("\'", "\"")));
             if (qr.type == 1) {
               Get.to(() => ShopDetails(
                     shopId: qr.id,
                   ));
             } else if (qr.type == 2) {
-              Get.toNamed(Routes.ORDER_HISTORY_DETAILS, arguments: {'order_id': qr.id});
+              Get.toNamed(Routes.ORDER_HISTORY_DETAILS,
+                  arguments: {'order_id': qr.id});
             }
           } catch (e, s) {
             developer.log('error', error: e, stackTrace: s);
@@ -90,11 +92,14 @@ class HomeView extends GetView<HomeController> {
               //   ),
               // ),
               SliverPadding(
-                padding: const EdgeInsets.only(left: 15.0, top: 15, right: 15.0),
+                padding:
+                    const EdgeInsets.only(left: 15.0, top: 15, right: 15.0),
                 sliver: SliverToBoxAdapter(
                   child: Text(
                     "Dashboard",
-                    style: customTheme(context).medium.copyWith(fontSize: 16, color: Colors.black),
+                    style: customTheme(context)
+                        .medium
+                        .copyWith(fontSize: 16, color: Colors.black),
                   ),
                 ),
               ),
@@ -103,11 +108,12 @@ class HomeView extends GetView<HomeController> {
                 sliver: SliverToBoxAdapter(
                     child: Container(
                   decoration: BoxDecoration(
-                      color: customTheme(context).textFormFieldColor, borderRadius: BorderRadius.circular(5)),
+                      color: customTheme(context).textFormFieldColor,
+                      borderRadius: BorderRadius.circular(5)),
                   child: Row(
                     children: [
                       Expanded(
-                        child: controller.selectedSearchtype == 'Shop'
+                        child: controller.selectedSearchtype.value == 'Shop'
                             ? TypeAheadField<ShopList>(
                                 loadingBuilder: (context) => Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -118,10 +124,13 @@ class HomeView extends GetView<HomeController> {
                                 textFieldConfiguration: TextFieldConfiguration(
                                     autofocus: false,
                                     cursorColor: Colors.grey,
-                                    style: customTheme(context).regular.copyWith(fontSize: 12),
+                                    style: customTheme(context)
+                                        .regular
+                                        .copyWith(fontSize: 12),
                                     decoration: InputDecoration(
                                         isDense: true,
-                                        fillColor: customTheme(context).textFormFieldColor,
+                                        fillColor: customTheme(context)
+                                            .textFormFieldColor,
                                         prefixIcon: Icon(
                                           CupertinoIcons.search,
                                           color: Color(0xff9F9F9F),
@@ -129,9 +138,13 @@ class HomeView extends GetView<HomeController> {
                                         hintText: 'Search for shops,orders .. ',
                                         hintStyle: customTheme(context)
                                             .regular
-                                            .copyWith(fontSize: 12, color: Colors.grey[500]),
-                                        border: OutlineInputBorder(borderSide: BorderSide.none))),
-                                suggestionsCallback: (pattern) => controller.homeSearchShop(pattern),
+                                            .copyWith(
+                                                fontSize: 12,
+                                                color: Colors.grey[500]),
+                                        border: OutlineInputBorder(
+                                            borderSide: BorderSide.none))),
+                                suggestionsCallback: (pattern) =>
+                                    controller.homeSearchShop(pattern),
                                 itemBuilder: (context, shop) => ShopTile(
                                   shop: shop,
                                   onTap: () {
@@ -152,10 +165,13 @@ class HomeView extends GetView<HomeController> {
                                 textFieldConfiguration: TextFieldConfiguration(
                                     cursorColor: Colors.grey,
                                     autofocus: false,
-                                    style: customTheme(context).regular.copyWith(fontSize: 12),
+                                    style: customTheme(context)
+                                        .regular
+                                        .copyWith(fontSize: 12),
                                     decoration: InputDecoration(
                                         isDense: true,
-                                        fillColor: customTheme(context).textFormFieldColor,
+                                        fillColor: customTheme(context)
+                                            .textFormFieldColor,
                                         prefixIcon: Icon(
                                           CupertinoIcons.search,
                                           color: Color(0xff9F9F9F),
@@ -163,17 +179,24 @@ class HomeView extends GetView<HomeController> {
                                         hintText: 'Search for shops,orders .. ',
                                         hintStyle: customTheme(context)
                                             .regular
-                                            .copyWith(fontSize: 12, color: Colors.grey[500]),
-                                        border: OutlineInputBorder(borderSide: BorderSide.none))),
-                                suggestionsCallback: (pattern) => controller.homeSearchOrder(pattern),
-                                itemBuilder: (context, order) => OrderTileHomePageSearch(
+                                            .copyWith(
+                                                fontSize: 12,
+                                                color: Colors.grey[500]),
+                                        border: OutlineInputBorder(
+                                            borderSide: BorderSide.none))),
+                                suggestionsCallback: (pattern) =>
+                                    controller.homeSearchOrder(pattern),
+                                itemBuilder: (context, order) =>
+                                    OrderTileHomePageSearch(
                                   order: order,
                                   onTap: () {
-                                    Get.toNamed(Routes.ORDER_HISTORY_DETAILS, arguments: {'order_id': order.id});
+                                    Get.toNamed(Routes.ORDER_HISTORY_DETAILS,
+                                        arguments: {'order_id': order.id});
                                   },
                                 ),
                                 onSuggestionSelected: (order) {
-                                  Get.toNamed(Routes.ORDER_HISTORY_DETAILS, arguments: {'order_id': order.id});
+                                  Get.toNamed(Routes.ORDER_HISTORY_DETAILS,
+                                      arguments: {'order_id': order.id});
                                 },
                               ),
                       ),
@@ -182,9 +205,8 @@ class HomeView extends GetView<HomeController> {
                         child: DropdownButton<String>(
                           hint: Text(
                             "Choose",
-                            style: customTheme(Get.context!)
-                                .regular
-                                .copyWith(fontSize: 11, color: const Color(0xff929292)),
+                            style: customTheme(Get.context!).regular.copyWith(
+                                fontSize: 11, color: const Color(0xff929292)),
                           ),
                           value: controller.selectedSearchtype.value,
                           underline: const SizedBox.shrink(),
@@ -200,7 +222,9 @@ class HomeView extends GetView<HomeController> {
                                   child: Text(e,
                                       style: customTheme(Get.context!)
                                           .regular
-                                          .copyWith(fontSize: 11, color: Colors.black)),
+                                          .copyWith(
+                                              fontSize: 11,
+                                              color: Colors.black)),
                                 ),
                               )
                               .toList(),
@@ -258,7 +282,8 @@ class HomeView extends GetView<HomeController> {
               ),
               const SliverPadding(
                   padding: EdgeInsets.only(bottom: 10),
-                  sliver: SliverToBoxAdapter(child: HomepageUpcomingDeliveryView())),
+                  sliver: SliverToBoxAdapter(
+                      child: HomepageUpcomingDeliveryView())),
               const SliverToBoxAdapter(child: HomepageLatestShopsAddedView()),
             ]),
           );

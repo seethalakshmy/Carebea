@@ -37,7 +37,8 @@ class LoginController extends GetxController {
   loginWithEmail({required String username, required String password}) async {
     isLoading(true);
     if (loginFormKey.currentState!.validate()) {
-      EmailLoginResponse response = await authenticationRepo.loginWithEmail(username, password);
+      EmailLoginResponse response =
+          await authenticationRepo.loginWithEmail(username, password);
 
       if (response.emailLogin?.status ?? false) {
         SharedPrefs.setUserId(response.emailLogin!.userId!);
@@ -72,9 +73,13 @@ class LoginController extends GetxController {
     }
     var response = await authenticationRepo.resetUserPassword(email: username!);
     if (response.result!.status ?? false) {
-      Get.toNamed(Routes.FORGOT_PASSWORD, arguments: {"userId": response.result!.userId, "email": response.result!.email});
+      Get.toNamed(Routes.FORGOT_PASSWORD, arguments: {
+        "userId": response.result!.userId,
+        "email": response.result!.email
+      });
     } else {
-      showSnackBar(response.result?.message ?? "Something happpend, Please try again!!!");
+      showSnackBar(response.result?.message ??
+          "Something happpend, Please try again!!!");
     }
   }
 }

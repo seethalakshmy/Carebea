@@ -6,21 +6,23 @@ import 'package:carebea/app/modules/shops/repo/order_list_repo.dart';
 import 'package:carebea/app/modules/shops/repo/payment_repo.dart';
 import 'package:carebea/app/modules/near_by_shop/repo/remark_list_repo.dart';
 import 'package:carebea/app/modules/shops/repo/shop_list_repo.dart';
-import 'package:carebea/app/modules/shops/views/shop_details.dart';
-import 'package:carebea/app/routes/app_pages.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/shared_prefs.dart';
 import '../../create_order/model/create_order.dart';
+import '../models/remark_submit_response.dart';
 
-class ShopsController extends GetxController {
+class NearByShopsController extends GetxController {
   ShopListRepo shopListRepo = ShopListRepo();
   OrderListRepo orderListRepo = OrderListRepo();
+  RemarkListRepo remarkListRepo = RemarkListRepo();
   RxBool isOrdersLoading = true.obs;
   RxBool isLoading = true.obs;
+  RxBool isRemarksLoading = true.obs;
+  RxBool isRemarksSubmitLoading = false.obs;
   ShopListResponse? shopDetailResponse;
+  RemarkModel? remarkModel;
   RxList<ShopList> shopList = RxList<ShopList>();
   FilterVal? filterVals;
   RxBool isFilterClick = false.obs;
@@ -31,6 +33,9 @@ class ShopsController extends GetxController {
   List<PaymentCommentsList>? remarkList;
   PaymentRepo paymentRepo = PaymentRepo();
   PaymentResponse? paymentResponse;
+  RemarkSubmitResponse? remarkSubmitResponse;
+  RxString selectedReason = 'Choose'.obs;
+  RxInt selectedReasonId = 0.obs;
 
   int pageNumber = 0;
   int pageSize = 10;
@@ -64,6 +69,7 @@ class ShopsController extends GetxController {
       }
     });
     fetchAllShops();
+    fetchRemarks();
     super.onInit();
   }
 
@@ -89,27 +95,47 @@ class ShopsController extends GetxController {
     isLoading(false);
   }
 
-  fetchOrders(String orderType, int shopId) async {
-    isOrdersLoading(true);
+  fetchRemarks() async {
+    isRemarksLoading(true);
 
-    orderListResponse = await orderListRepo.orderList(
-        SharedPrefs.getUserId()!, orderType, shopId);
-    if (orderListResponse!.orderListResult!.status == true) {
-      orderHistory = orderListResponse!.orderListResult!.history;
+    remarkModel = await remarkListRepo.remarkList();
+
+    if (remarkModel?.result?.status == true) {
+      remarkList = remarkModel?.result?.paymentCommentsList;
     } else {
-      orderHistory = [];
+      remarkList = [];
     }
 
-    if (orderType == "Previous") {
-      previousOrderCount(orderHistory?.length ?? 0);
-    } else {
-      upcomingOrderCount(orderHistory?.length ?? 0);
-    }
+    isRemarksLoading(false);
+  }
 
-    isOrdersLoading(false);
+  submitRemarks({required int commentId, required int shopId}) async {
+    isRemarksSubmitLoading(true);
+
+    remarkSubmitResponse = await remarkListRepo.remarkSubmit(
+        userId: SharedPrefs.getUserId() ?? 0,
+        commentId: commentId,
+        shopId: shopId);
+
+    if (remarkSubmitResponse?.result?.status == true) {
+      isRemarksSubmitLoading(false);
+      selectedReasonId.value = 0;
+      selectedReason.value = "choose";
+
+      ScaffoldMessenger.of(Get.context!).showSnackBar(SnackBar(
+          content: Text(remarkSubmitResponse?.result?.message ?? "Success")));
+    } else {
+      isRemarksSubmitLoading(false);
+      selectedReasonId.value = 0;
+      selectedReason.value = "choose";
+
+      ScaffoldMessenger.of(Get.context!).showSnackBar(SnackBar(
+          content: Text(remarkSubmitResponse?.result?.message ?? "Error")));
+    }
   }
 
   RxString filterSelected = "".obs;
+
   filterShops(String filterName, int filterId) async {
     shopList.clear();
     searchEditingController.text = "";
@@ -132,22 +158,6 @@ class ShopsController extends GetxController {
     isShopDetailsLoading(false);
   }
 
-  Future<bool> onWillpopClose() async {
-    // DateTime currentTime = DateTime.now();
-    // bool backButton =
-    //     backbuttonpressedTime == null || currentTime.difference(backbuttonpressedTime!) > const Duration(seconds: 3);
-
-    // if (backButton) {
-    //   backbuttonpressedTime = currentTime;
-    //   Get.snackbar('', 'Tap again to close the app', duration: const Duration(seconds: 1));
-    //   // SnackBar(content: Text(buildTranslate(context, "tap_back")));
-    //   return false;
-    // } else {
-    //   Get.back();
-    // }
-    return true;
-  }
-
   void clearFilters() async {
     await fetchAllShops();
   }
@@ -155,39 +165,9 @@ class ShopsController extends GetxController {
   RxInt previousOrderCount = 0.obs;
   RxInt upcomingOrderCount = 0.obs;
   ShopList? shop;
-  void fetchShop(int? shopId) async {
-    isShopDetailsLoading(true);
-    previousOrderCount(0);
-    upcomingOrderCount(0);
-    var response = await shopListRepo.shopDetails(shopId!);
-    if (response.shopListResult?.status ?? false) {
-      shop = response.shopListResult?.shopList?.first;
-      collectedAmountEditingController.text =
-          (shop?.outStandingAmount ?? 0).toString();
-      await fetchOrders('Previous', shopId);
-      await fetchOrders('Upcoming', shopId);
-    }
-    isShopDetailsLoading(false);
-  }
-
-  ///
-  void outstandingAmountPay({required int shopId}) async {
-    paymentResponse = await paymentRepo.payAmount(
-        salesPersonId: SharedPrefs.getUserId()!,
-        shopId: shopId,
-        collectedAmount: double.parse(collectedAmountEditingController.text),
-        paymentType: selectedPaymentMethod.value!.name!,
-        chequeNo: cheqNoController.text);
-
-    if (paymentResponse?.paymentResult?.status ?? false) {
-      Get.back();
-      ScaffoldMessenger.of(Get.context!)
-          .showSnackBar(const SnackBar(content: Text("Payment Successful")));
-      fetchShop(shopId);
-    }
-  }
 
   String? query;
+
   Future<void> searchShop(String? query) async {
     isFilterClick(true);
     filterSelected("");
@@ -219,6 +199,7 @@ class ShopsController extends GetxController {
   }
 
   RxBool isPaginating = false.obs;
+
   Future<void> _paginateShopList() async {
     var shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!,
         pageNumber: pageNumber, pageSize: pageSize);

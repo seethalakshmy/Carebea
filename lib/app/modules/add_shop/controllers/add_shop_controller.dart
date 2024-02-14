@@ -3,7 +3,8 @@ import 'dart:ffi';
 
 import 'package:carebea/app/modules/add_shop/models/add_shop_model.dart';
 import 'package:carebea/app/modules/add_shop/models/list_state_model.dart';
-import 'package:carebea/app/modules/add_shop/models/list_zone_model.dart' as zone_list;
+import 'package:carebea/app/modules/add_shop/models/list_zone_model.dart'
+    as zone_list;
 import 'package:carebea/app/modules/add_shop/repo/add_shop_repo.dart';
 import 'package:carebea/app/modules/home/controllers/home_controller.dart';
 import 'package:carebea/app/utils/show_snackbar.dart';
@@ -125,9 +126,10 @@ class AddShopController extends GetxController {
           zoneId,
           routeId,
           currentLocation!.latitude!,
-          currentLocation!.longitude!,0
+          currentLocation!.longitude!,
+          0
           // openingBalanceController.text.isEmpty ? 0 : double.parse(openingBalanceController.text)
-      );
+          );
 
       if (addShopResponse.addShopResult?.status ?? false) {
         showDialog<bool>(
@@ -153,7 +155,8 @@ class AddShopController extends GetxController {
               );
             });
       } else {
-        showSnackBar(addShopResponse.addShopResult?.message ?? "Something happend!");
+        showSnackBar(
+            addShopResponse.addShopResult?.message ?? "Something happend!");
       }
     }
     isAddShopButtonPressed(false);
@@ -196,7 +199,9 @@ class AddShopController extends GetxController {
           routeId,
           currentLocation!.latitude!,
           currentLocation!.longitude!,
-          phone: (Get.arguments["shop"] as ShopList).phone != phone ? phone : null);
+          phone: (Get.arguments["shop"] as ShopList).phone != phone
+              ? phone
+              : null);
 
       if (addShopResponse.addShopResult?.status ?? false) {
         showDialog<bool>(
@@ -222,7 +227,8 @@ class AddShopController extends GetxController {
               );
             });
       } else {
-        showSnackBar(addShopResponse.addShopResult?.message ?? "Something happend!");
+        showSnackBar(
+            addShopResponse.addShopResult?.message ?? "Something happend!");
       }
     }
     isAddShopButtonPressed(false);
@@ -236,13 +242,15 @@ class AddShopController extends GetxController {
     zip.text = argument.address!.zip!;
     localArea.text = argument.address!.localArea!;
     lastName.text = argument.lastName!;
-    openingBalanceController.text = argument.outStandingAmount?.toStringAsFixed(2) ?? "";
+    openingBalanceController.text =
+        argument.outStandingAmount?.toStringAsFixed(2) ?? "";
     if ((argument.type ?? "").toLowerCase() == "b2b") {
       selectedRadio(1);
     } else if ((argument.type ?? "").toLowerCase() == "b2c") {
       selectedRadio(2);
     }
-    currentLocation = LocationData.fromMap({"latitude": argument.latitude, "longitude": argument.longitude});
+    currentLocation = LocationData.fromMap(
+        {"latitude": argument.latitude, "longitude": argument.longitude});
   }
 
   Future<bool> onWillpopClose() async {
@@ -264,11 +272,13 @@ class AddShopController extends GetxController {
 
   fetchRouteList() async {
     isRoutesListLoading(true);
-    routeListResponse = await addShopRepo.routeList(salesPersonId: SharedPrefs.getUserId());
+    routeListResponse =
+        await addShopRepo.routeList(salesPersonId: SharedPrefs.getUserId());
     routeList = routeListResponse!.routeListResult!.routeList ?? [];
     if ((Get.arguments["isEdit"] ?? false) && (Get.arguments["shop"] != null)) {
       try {
-        selectedRoute = routeList.singleWhere((element) => element.id == (Get.arguments["shop"] as ShopList).routeId);
+        selectedRoute = routeList.singleWhere((element) =>
+            element.id == (Get.arguments["shop"] as ShopList).routeId);
       } catch (e) {}
     }
     isRoutesListLoading(false);
@@ -281,8 +291,9 @@ class AddShopController extends GetxController {
     stateList = stateListResponse!.stateListResult!.stateList ?? [];
     if ((Get.arguments["isEdit"] ?? false) && (Get.arguments["shop"] != null)) {
       try {
-        selectedStateList =
-            stateList.firstWhere((element) => element.stateId == (Get.arguments["shop"] as ShopList).address!.stateId);
+        selectedStateList = stateList.firstWhere((element) =>
+            element.stateId ==
+            (Get.arguments["shop"] as ShopList).address!.stateId);
       } catch (e) {}
     }
     isStateListLoading(false);
@@ -295,7 +306,8 @@ class AddShopController extends GetxController {
     zoneList = zoneListResponse!.zoneListResult!.poolList ?? [];
     if ((Get.arguments["isEdit"] ?? false) && (Get.arguments["shop"] != null)) {
       try {
-        selectedZone = zoneList.firstWhere((element) => element.id == (Get.arguments["shop"] as ShopList).zoneId);
+        selectedZone = zoneList.firstWhere((element) =>
+            element.id == (Get.arguments["shop"] as ShopList).zoneId);
       } catch (e) {}
     }
     isZoneListLoading(false);
@@ -303,8 +315,9 @@ class AddShopController extends GetxController {
 
   fetchCategory() {
     if ((Get.arguments["isEdit"] ?? false) && (Get.arguments["shop"] != null)) {
-      selectedCategory = category.singleWhere(
-          (element) => element.name?.toLowerCase() == (Get.arguments["shop"] as ShopList).category?.toLowerCase());
+      selectedCategory = category.singleWhere((element) =>
+          element.name?.toLowerCase() ==
+          (Get.arguments["shop"] as ShopList).category?.toLowerCase());
     }
   }
 
@@ -321,7 +334,6 @@ class AddShopController extends GetxController {
     searchingLocation(true);
     try {
       currentLocation = await _location.getLocation();
-
     } catch (e, s) {
       log("location error", error: e, stackTrace: s);
       currentLocation = null;
@@ -336,7 +348,8 @@ class AddShopController extends GetxController {
   Future<bool> _checkForLocationPermission() async {
     var isLocationServiceEnabled = await _location.serviceEnabled();
     var permissionStatus = await _location.hasPermission();
-    return (permissionStatus == PermissionStatus.granted) && isLocationServiceEnabled;
+    return (permissionStatus == PermissionStatus.granted) &&
+        isLocationServiceEnabled;
   }
 
   Future<bool> getLocationPermissions(BuildContext context) async {
@@ -346,10 +359,12 @@ class AddShopController extends GetxController {
       permissionStatus = await _location.requestPermission();
       if ((permissionStatus != PermissionStatus.granted)) {
         if (permissionStatus == PermissionStatus.deniedForever) {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Location Permission is permanently denied, Please enable it in settings")));
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text(
+                  "Location Permission is permanently denied, Please enable it in settings")));
         } else if (permissionStatus == PermissionStatus.denied) {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Location Permission is required")));
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Location Permission is required")));
         }
         return false;
       }
@@ -358,7 +373,8 @@ class AddShopController extends GetxController {
     if (!(isServiceEnabled)) {
       isServiceEnabled = await _location.requestService();
       if (!isServiceEnabled) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Location Service is required")));
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Location Service is required")));
       }
       return false;
     }

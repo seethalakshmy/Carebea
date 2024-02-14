@@ -7,6 +7,7 @@ import 'package:carebea/app/modules/shops/models/order_list_model.dart';
 import 'package:carebea/app/utils/shared_prefs.dart';
 import 'package:carebea/app/utils/show_snackbar.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 import '../../shops/models/shop_model.dart';
@@ -23,11 +24,12 @@ class HomeController extends GetxController {
   ReportsData? reportsData;
 
   ScrollController scrollController = ScrollController();
+  Position? currentPosition;
 
   @override
   void onInit() {
-
     fetchHomePageData();
+
     super.onInit();
   }
 
@@ -35,9 +37,57 @@ class HomeController extends GetxController {
     reportsData = await _repository.getReports();
   }
 
+  Future<bool> _handleLocationPermission() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      ScaffoldMessenger.of(Get.context!).showSnackBar(const SnackBar(
+          content: Text(
+              'Location services are disabled. Please enable the services')));
+      return false;
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        ScaffoldMessenger.of(Get.context!).showSnackBar(
+            const SnackBar(content: Text('Location permissions are denied')));
+        return false;
+      }
+    }
+    // else {
+    //   _getCurrentPosition();
+    //   debugPrint("lat ${_currentPosition?.latitude}");
+    //   debugPrint("lon ${_currentPosition?.longitude}");
+    //   Get.to(() => NearByShops());
+    // }
+    if (permission == LocationPermission.deniedForever) {
+      ScaffoldMessenger.of(Get.context!).showSnackBar(const SnackBar(
+          content: Text(
+              'Location Permission is permanently denied, Please enable it in settings')));
+      return false;
+    }
+    return true;
+  }
+
+  Future<void> getCurrentPosition() async {
+    final hasPermission = await _handleLocationPermission();
+    if (!hasPermission) return;
+    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
+        .then((Position position) {
+      currentPosition = position;
+      // setState(() => _currentPosition = position);
+    }).catchError((e) {
+      debugPrint(e);
+    });
+  }
+
   Future fetchHomePageData() async {
     isLoading(true);
-    var response = await _repository.getHomePageData(userId: SharedPrefs.getUserId()!);
+    var response =
+        await _repository.getHomePageData(userId: SharedPrefs.getUserId()!);
     if (!(response.result?.status ?? false)) {
       showSnackBar(response.result?.message ?? "Something happend!!");
     } else {
@@ -61,7 +111,11 @@ class HomeController extends GetxController {
       return [];
       // shopListResponse = await _repository.shopList(SharedPrefs.getUserId()!);
     }
-    var shopListResponse = await _repository.homeShopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query}, pageNumber: pageNumber, pageSize: pageSize);
+    var shopListResponse = await _repository.homeShopSearch(
+        salesPersonId: SharedPrefs.getUserId()!,
+        query: {"name": query},
+        pageNumber: pageNumber,
+        pageSize: pageSize);
     if (shopListResponse.shopListResult?.status ?? false) {
       return shopListResponse.shopListResult?.shopList ?? [];
     }
@@ -73,7 +127,11 @@ class HomeController extends GetxController {
     if ((query ?? "").isEmpty) {
       return [];
     }
-    var orderListResponse = await _repository.homeOrderSearch(salesPersonId: SharedPrefs.getUserId()!, query: query,pageNumber:pageNumber,pageSize:pageSize);
+    var orderListResponse = await _repository.homeOrderSearch(
+        salesPersonId: SharedPrefs.getUserId()!,
+        query: query,
+        pageNumber: pageNumber,
+        pageSize: pageSize);
     if (orderListResponse.orderListResult?.status ?? false) {
       return orderListResponse.orderListResult?.history ?? [];
     }

@@ -1,19 +1,14 @@
-import 'dart:ffi';
-
 import 'package:carebea/app/modules/add_shop/models/list_category.dart';
-import 'package:carebea/app/modules/add_shop/models/list_routes_model.dart' as route;
-import 'package:carebea/app/modules/add_shop/models/list_state_model.dart';
-import 'package:carebea/app/modules/add_shop/models/list_zone_model.dart' as zone;
-import 'package:carebea/app/routes/app_pages.dart';
-import 'package:carebea/app/utils/widgets/appbar.dart';
+import 'package:carebea/app/modules/add_shop/models/list_routes_model.dart'
+    as route;
 import 'package:carebea/app/utils/shared_prefs.dart';
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:carebea/app/utils/widgets/custom_radio_button.dart';
 import 'package:carebea/app/utils/widgets/map_location_view.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:get/get.dart';
 
 import '../../../core/helper.dart';
@@ -22,7 +17,6 @@ import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_textfield.dart';
 import '../../shops/models/shop_model.dart';
 import '../controllers/add_shop_controller.dart';
-import 'dart:developer' as developer;
 
 class AddShopView extends GetView<AddShopController> {
   AddShopView({Key? key}) : super(key: key);
@@ -59,7 +53,8 @@ class AddShopView extends GetView<AddShopController> {
                       ),
                       Text(
                         'Add new shop',
-                        style: customTheme(context).medium.copyWith(fontSize: 16),
+                        style:
+                            customTheme(context).medium.copyWith(fontSize: 16),
                       )
                     ],
                   ),
@@ -69,16 +64,19 @@ class AddShopView extends GetView<AddShopController> {
 
                   RichText(
                       text: TextSpan(
-                        text: 'Shop name',
-                        style: customTheme(context).regular.copyWith(fontSize: 12),
-                        children: const <TextSpan>[
-                          TextSpan(text: '\*', style: TextStyle(color: Colors.blue)),
-                        ],
-                      )),
+                    text: 'Shop name',
+                    style: customTheme(context).regular.copyWith(fontSize: 12),
+                    children: const <TextSpan>[
+                      TextSpan(
+                          text: '\*', style: TextStyle(color: Colors.blue)),
+                    ],
+                  )),
                   const SizedBox(
                     height: 5,
                   ),
                   CustomTextField(
+                    inputFormatters: [UpperCaseTextFormatter()],
+
                     textcontroller: controller.name,
                     validaton: (value) {
                       if (value == null || value.trim().isEmpty) {
@@ -93,17 +91,23 @@ class AddShopView extends GetView<AddShopController> {
                   ),
                   RichText(
                       text: TextSpan(
-                    text: 'Last name',
+                    text: 'Shop location',
                     style: customTheme(context).regular.copyWith(fontSize: 12),
                     children: const <TextSpan>[
-                      TextSpan(text: '\*', style: TextStyle(color: Colors.blue)),
-                      TextSpan(text: '  (location should be the last name)', style: TextStyle(color: Colors.black54, fontStyle: FontStyle.italic)),
+                      TextSpan(
+                          text: '\*', style: TextStyle(color: Colors.blue)),
+                      // TextSpan(
+                      //     text: '  (location should be the last name)',
+                      //     style: TextStyle(
+                      //         color: Colors.black54,
+                      //         fontStyle: FontStyle.italic)),
                     ],
                   )),
                   const SizedBox(
                     height: 5,
                   ),
                   CustomTextField(
+                    textCapitalization: TextCapitalization.sentences,
                     textcontroller: controller.lastName,
                     validaton: (value) {
                       if (value == null || value.trim().isEmpty) {
@@ -117,19 +121,22 @@ class AddShopView extends GetView<AddShopController> {
                   ),
                   RichText(
                       text: TextSpan(
-                        text: "Shop category",
-                        style: customTheme(context).regular.copyWith(fontSize: 12),
-                        children: const <TextSpan>[
-                          TextSpan(text: '\*', style: TextStyle(color: Colors.blue)),
-                        ],
-                      )),
+                    text: "Shop category",
+                    style: customTheme(context).regular.copyWith(fontSize: 12),
+                    children: const <TextSpan>[
+                      TextSpan(
+                          text: '\*', style: TextStyle(color: Colors.blue)),
+                    ],
+                  )),
 
                   Padding(
                     padding: const EdgeInsets.only(top: 8, bottom: 12),
                     child: DropdownSearch<CategoryList>(
                       dropdownBuilder: (context, selectedItem) => Text(
                         selectedItem?.name ?? "",
-                        style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black),
+                        style: customTheme(Get.context!)
+                            .regular
+                            .copyWith(fontSize: 11, color: Colors.black),
                       ),
                       validator: (value) {
                         if (value == null) {
@@ -157,7 +164,9 @@ class AddShopView extends GetView<AddShopController> {
                                 borderSide: BorderSide.none,
                               ),
                               filled: true,
-                              fillColor: Theme.of(context).extension<CustomTheme>()!.textFormFieldColor)),
+                              fillColor: Theme.of(context)
+                                  .extension<CustomTheme>()!
+                                  .textFormFieldColor)),
                       items: controller.category,
                       itemAsString: (categoryList) => categoryList.name!,
                       onChanged: (data) {
@@ -178,7 +187,9 @@ class AddShopView extends GetView<AddShopController> {
                       children: [
                         CustomRadioButton<int>(
                           groupValue: controller.selectedRadio.value,
-                          color: Theme.of(context).extension<CustomTheme>()!.primary,
+                          color: Theme.of(context)
+                              .extension<CustomTheme>()!
+                              .primary,
                           label: 'B2B',
                           value: 1,
                           onChanged: (val) {
@@ -190,7 +201,9 @@ class AddShopView extends GetView<AddShopController> {
                         ),
                         CustomRadioButton<int>(
                             groupValue: controller.selectedRadio.value,
-                            color: Theme.of(context).extension<CustomTheme>()!.primary,
+                            color: Theme.of(context)
+                                .extension<CustomTheme>()!
+                                .primary,
                             label: 'B2C',
                             value: 2,
                             onChanged: (val) {
@@ -214,9 +227,13 @@ class AddShopView extends GetView<AddShopController> {
                         RichText(
                             text: TextSpan(
                           text: 'GST',
-                          style: customTheme(context).regular.copyWith(fontSize: 12),
+                          style: customTheme(context)
+                              .regular
+                              .copyWith(fontSize: 12),
                           children: const <TextSpan>[
-                            TextSpan(text: '\*', style: TextStyle(color: Colors.blue)),
+                            TextSpan(
+                                text: '\*',
+                                style: TextStyle(color: Colors.blue)),
                           ],
                         )),
                         const SizedBox(
@@ -228,7 +245,8 @@ class AddShopView extends GetView<AddShopController> {
                           // ],
                           textcontroller: controller.gst,
                           validaton: (value) {
-                            if (controller.selectedRadio.value == 1 || (value != null && value.trim().isNotEmpty)) {
+                            if (controller.selectedRadio.value == 1 ||
+                                (value != null && value.trim().isNotEmpty)) {
                               if (value == null || value.trim().isEmpty) {
                                 return 'GST Number can\'t be empty';
                               }
@@ -259,7 +277,10 @@ class AddShopView extends GetView<AddShopController> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            MapLocationView(latitude: controller.currentLocation!.latitude!, longitude: controller.currentLocation!.longitude!),
+                            MapLocationView(
+                                latitude: controller.currentLocation!.latitude!,
+                                longitude:
+                                    controller.currentLocation!.longitude!),
                             Padding(
                               padding: const EdgeInsets.only(top: 20),
                               child: InkWell(
@@ -270,9 +291,16 @@ class AddShopView extends GetView<AddShopController> {
                                   children: [
                                     Icon(
                                       Icons.add,
-                                      color: Theme.of(context).extension<CustomTheme>()!.primary,
+                                      color: Theme.of(context)
+                                          .extension<CustomTheme>()!
+                                          .primary,
                                     ),
-                                    Text('Update shop location', style: TextStyle(fontSize: 12, color: Theme.of(context).extension<CustomTheme>()!.primary))
+                                    Text('Update shop location',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: Theme.of(context)
+                                                .extension<CustomTheme>()!
+                                                .primary))
                                   ],
                                 ),
                               ),
@@ -291,9 +319,16 @@ class AddShopView extends GetView<AddShopController> {
                           children: [
                             Icon(
                               Icons.add,
-                              color: Theme.of(context).extension<CustomTheme>()!.primary,
+                              color: Theme.of(context)
+                                  .extension<CustomTheme>()!
+                                  .primary,
                             ),
-                            Text('Add shop location', style: TextStyle(fontSize: 12, color: Theme.of(context).extension<CustomTheme>()!.primary))
+                            Text('Add shop location',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: Theme.of(context)
+                                        .extension<CustomTheme>()!
+                                        .primary))
                           ],
                         ),
                       ),
@@ -304,12 +339,13 @@ class AddShopView extends GetView<AddShopController> {
                   ),
                   RichText(
                       text: TextSpan(
-                        text: 'Local area/city',
-                        style: customTheme(context).regular.copyWith(fontSize: 12),
-                        children: const <TextSpan>[
-                          TextSpan(text: '\*', style: TextStyle(color: Colors.blue)),
-                        ],
-                      )),
+                    text: 'Local area/city',
+                    style: customTheme(context).regular.copyWith(fontSize: 12),
+                    children: const <TextSpan>[
+                      TextSpan(
+                          text: '\*', style: TextStyle(color: Colors.blue)),
+                    ],
+                  )),
 
                   const SizedBox(
                     height: 5,
@@ -317,7 +353,8 @@ class AddShopView extends GetView<AddShopController> {
                   CustomTextField(
                     textcontroller: controller.localArea,
                     inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]+|\b\s')),
+                      FilteringTextInputFormatter.allow(
+                          RegExp(r'[a-zA-Z0-9]+|\b\s')),
                     ],
                     validaton: (value) {
                       if (value == null || value.trim().isEmpty) {
@@ -338,7 +375,9 @@ class AddShopView extends GetView<AddShopController> {
                           children: [
                             Text(
                               'Pincode',
-                              style: customTheme(context).regular.copyWith(fontSize: 12),
+                              style: customTheme(context)
+                                  .regular
+                                  .copyWith(fontSize: 12),
                             ),
                             const SizedBox(
                               height: 5,
@@ -348,16 +387,16 @@ class AddShopView extends GetView<AddShopController> {
                               maxlength: 6,
                               inputType: TextInputType.number,
                               // validaton: (value) {
-                                // if (value == null || value.trim().isEmpty) {
-                                //   return 'pincode can\'t be empty';
-                                // }
-                                // if (value.length < 6) {
-                                //   return "Pincode must be 6 digits";
-                                // }
-                                // if (!RegExp(pinRegexp).hasMatch(value)) {
-                                //   return 'Invalid Pincode';
-                                // }
-                                // return null;
+                              // if (value == null || value.trim().isEmpty) {
+                              //   return 'pincode can\'t be empty';
+                              // }
+                              // if (value.length < 6) {
+                              //   return "Pincode must be 6 digits";
+                              // }
+                              // if (!RegExp(pinRegexp).hasMatch(value)) {
+                              //   return 'Invalid Pincode';
+                              // }
+                              // return null;
                               // },
                               // onChanged: (value)=>controller.zip.toString()!= value!,
                             ),
@@ -375,7 +414,9 @@ class AddShopView extends GetView<AddShopController> {
                             children: [
                               Text(
                                 'District',
-                                style: customTheme(context).regular.copyWith(fontSize: 12),
+                                style: customTheme(context)
+                                    .regular
+                                    .copyWith(fontSize: 12),
                               ),
                               const SizedBox(
                                 height: 5,
@@ -383,13 +424,14 @@ class AddShopView extends GetView<AddShopController> {
                               CustomTextField(
                                 textcontroller: controller.district,
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]+|\b\s')),
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[a-zA-Z0-9]+|\b\s')),
                                 ],
                                 // validaton: (value) {
-                                  // if (value == null || value.trim().isEmpty) {
-                                  //   return 'District can\'t be empty';
-                                  // }
-                                  // return null;
+                                // if (value == null || value.trim().isEmpty) {
+                                //   return 'District can\'t be empty';
+                                // }
+                                // return null;
                                 // },
                                 // onChanged: (value)=>controller.district.toString() =value!.trim(),
                               ),
@@ -480,7 +522,8 @@ class AddShopView extends GetView<AddShopController> {
                     text: 'Phone number',
                     style: customTheme(context).regular.copyWith(fontSize: 12),
                     children: const <TextSpan>[
-                      TextSpan(text: '\*', style: TextStyle(color: Colors.blue)),
+                      TextSpan(
+                          text: '\*', style: TextStyle(color: Colors.blue)),
                     ],
                   )),
                   const SizedBox(
@@ -488,7 +531,9 @@ class AddShopView extends GetView<AddShopController> {
                   ),
                   CustomTextField(
                     textcontroller: controller.phone,
-                    inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
                     maxlength: 10,
                     inputType: TextInputType.phone,
                     validaton: (value) {
@@ -501,7 +546,8 @@ class AddShopView extends GetView<AddShopController> {
                       if (phoneSet.length == 1) {
                         return 'Invalid number';
                       }
-                      if (value.length < 10) return "Mobile number must be 10 digits";
+                      if (value.length < 10)
+                        return "Mobile number must be 10 digits";
                       return null;
                     },
                     // onChanged: (value)=>controller.phone.text = value!,
@@ -637,12 +683,13 @@ class AddShopView extends GetView<AddShopController> {
                   // ),
                   RichText(
                       text: TextSpan(
-                        text: "Route",
-                        style: customTheme(context).regular.copyWith(fontSize: 12),
-                        children: const <TextSpan>[
-                          TextSpan(text: '\*', style: TextStyle(color: Colors.blue)),
-                        ],
-                      )),
+                    text: "Route",
+                    style: customTheme(context).regular.copyWith(fontSize: 12),
+                    children: const <TextSpan>[
+                      TextSpan(
+                          text: '\*', style: TextStyle(color: Colors.blue)),
+                    ],
+                  )),
                   Padding(
                     padding: const EdgeInsets.only(top: 8, bottom: 12),
                     child: Obx(() {
@@ -652,7 +699,9 @@ class AddShopView extends GetView<AddShopController> {
                       return DropdownSearch<route.RouteList>(
                         dropdownBuilder: (context, selectedItem) => Text(
                           selectedItem?.name ?? "",
-                          style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black),
+                          style: customTheme(Get.context!)
+                              .regular
+                              .copyWith(fontSize: 11, color: Colors.black),
                         ),
                         validator: (value) {
                           if (value?.name == null) {
@@ -684,9 +733,12 @@ class AddShopView extends GetView<AddShopController> {
                                   borderSide: BorderSide.none,
                                 ),
                                 filled: true,
-                                fillColor: Theme.of(context).extension<CustomTheme>()!.textFormFieldColor)),
+                                fillColor: Theme.of(context)
+                                    .extension<CustomTheme>()!
+                                    .textFormFieldColor)),
                         items: controller.routeList,
-                        itemAsString: (route.RouteList? routeList) => routeList!.name!,
+                        itemAsString: (route.RouteList? routeList) =>
+                            routeList!.name!,
                         onChanged: (data) {
                           controller.selectedRoute = data;
                         },
@@ -716,58 +768,78 @@ class AddShopView extends GetView<AddShopController> {
                       ? Obx(() {
                           return CustomButton(
                               onTap: () {
-                                for(int i=0;i<=controller.stateList.length-1;i++){
-                                  if(controller.stateList[i].stateName == "Kerala"){
-                                    controller.selectedStateList = controller.stateList[i];
+                                for (int i = 0;
+                                    i <= controller.stateList.length - 1;
+                                    i++) {
+                                  if (controller.stateList[i].stateName ==
+                                      "Kerala") {
+                                    controller.selectedStateList =
+                                        controller.stateList[i];
                                   }
                                 }
-                                if (controller.addShopFormKey.currentState!.validate()) {
+                                if (controller.addShopFormKey.currentState!
+                                    .validate()) {
                                   controller.updateShop(
                                     name: controller.name.text,
                                     district: controller.district.text,
                                     localArea: controller.localArea.text,
                                     phone: controller.phone.text,
                                     zip: controller.zip.text,
-                                    customerType: controller.selectedRadio.value,
-                                    shopCategoryId: controller.selectedCategory!.id!,
-                                    latitude: controller.currentLocation!.latitude!,
+                                    customerType:
+                                        controller.selectedRadio.value,
+                                    shopCategoryId:
+                                        controller.selectedCategory!.id!,
+                                    latitude:
+                                        controller.currentLocation!.latitude!,
                                     routeId: controller.selectedRoute!.id!,
-                                    longitude: controller.currentLocation!.longitude!,
+                                    longitude:
+                                        controller.currentLocation!.longitude!,
                                     gst: controller.gst.text,
-                                    stateId: controller.selectedStateList!.stateId!,
+                                    stateId:
+                                        controller.selectedStateList!.stateId!,
                                     zoneId: controller.zoneId!,
                                     salesPersonId: SharedPrefs.getUserId()!,
-                                    shopId: (Get.arguments['shop'] as ShopList).id!,
+                                    shopId:
+                                        (Get.arguments['shop'] as ShopList).id!,
                                     lastName: controller.lastName.text,
                                   );
                                 }
                               },
                               title: 'Update Shop',
-                              isLoading: controller.isAddShopButtonPressed.value);
+                              isLoading:
+                                  controller.isAddShopButtonPressed.value);
                         })
                       : Obx(() {
-                         if (controller.isStateListLoading.value) {
+                          if (controller.isStateListLoading.value) {
                             circularProgressIndicator(context);
-                        }
+                          }
                           return CustomButton(
                               onTap: () {
-                                for(int i=0;i<=controller.stateList.length-1;i++){
-                                  if(controller.stateList[i].stateName == "Kerala"){
-                                    controller.selectedStateList = controller.stateList[i];
+                                for (int i = 0;
+                                    i <= controller.stateList.length - 1;
+                                    i++) {
+                                  if (controller.stateList[i].stateName ==
+                                      "Kerala") {
+                                    controller.selectedStateList =
+                                        controller.stateList[i];
                                   }
                                 }
-                                if (controller.addShopFormKey.currentState!.validate()) {
+                                if (controller.addShopFormKey.currentState!
+                                    .validate()) {
                                   controller.addShop(
                                     name: controller.name.text,
                                     district: controller.district.text,
                                     localArea: controller.localArea.text,
                                     phone: controller.phone.text,
                                     zip: controller.zip.text,
-                                    customerType: controller.selectedRadio.value,
-                                    shopCategoryId: controller.selectedCategory!.id!,
+                                    customerType:
+                                        controller.selectedRadio.value,
+                                    shopCategoryId:
+                                        controller.selectedCategory!.id!,
                                     routeId: controller.selectedRoute!.id!,
                                     gst: controller.gst.text,
-                                    stateId: controller.selectedStateList!.stateId!,
+                                    stateId:
+                                        controller.selectedStateList!.stateId!,
                                     zoneId: controller.zoneId!,
                                     salesPersonId: SharedPrefs.getUserId()!,
                                     lastName: controller.lastName.text,
@@ -775,7 +847,8 @@ class AddShopView extends GetView<AddShopController> {
                                 }
                               },
                               title: 'Add Shop',
-                              isLoading: controller.isAddShopButtonPressed.value);
+                              isLoading:
+                                  controller.isAddShopButtonPressed.value);
                         })
                 ],
               ),
@@ -783,6 +856,17 @@ class AddShopView extends GetView<AddShopController> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class UpperCaseTextFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    return TextEditingValue(
+      text: newValue.text.toUpperCase(),
+      selection: newValue.selection,
     );
   }
 }
