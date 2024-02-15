@@ -1,3 +1,4 @@
+import 'package:carebea/app/modules/near_by_shop/repo/near_by_shop_repo.dart';
 import 'package:carebea/app/modules/shops/models/order_list_model.dart';
 import 'package:carebea/app/modules/shops/models/payment_model.dart';
 import 'package:carebea/app/modules/near_by_shop/models/remark_model.dart';
@@ -15,15 +16,18 @@ import '../models/remark_submit_response.dart';
 
 class NearByShopsController extends GetxController {
   ShopListRepo shopListRepo = ShopListRepo();
+  NearByShopRepo nearByShopRepo = NearByShopRepo();
   OrderListRepo orderListRepo = OrderListRepo();
   RemarkListRepo remarkListRepo = RemarkListRepo();
   RxBool isOrdersLoading = true.obs;
-  RxBool isLoading = true.obs;
+  RxBool isLoading = false.obs;
   RxBool isRemarksLoading = true.obs;
   RxBool isRemarksSubmitLoading = false.obs;
+  RxBool isNearByShopLoading = false.obs;
   ShopListResponse? shopDetailResponse;
   RemarkModel? remarkModel;
   RxList<ShopList> shopList = RxList<ShopList>();
+  RxList<ShopList> nearByShopList = RxList<ShopList>();
   FilterVal? filterVals;
   RxBool isFilterClick = false.obs;
   RxBool isShopDetailsLoading = false.obs;
@@ -46,6 +50,8 @@ class NearByShopsController extends GetxController {
       TextEditingController();
   TextEditingController cheqNoController = TextEditingController();
   TextEditingController searchEditingController = TextEditingController();
+  double? latitude;
+  double? longitude;
 
   Rx<SearchType> selectedSearchtype = Rx(
     SearchType("Name", "name"),
@@ -57,23 +63,27 @@ class NearByShopsController extends GetxController {
     SearchType("Local Area", "local_area"),
   ];
 
-  final count = 0.obs;
-
   @override
   void onInit() {
+    latitude = Get.arguments['latitude'];
+    longitude = Get.arguments['longitude'];
     scrollController.addListener(() {
       if (((scrollController.position.maxScrollExtent * .7) <=
               scrollController.position.pixels) &&
-          !isPaginating.value) {
-        paginate();
+          !isNearByShopPaginating.value) {
+        debugPrint("pixel change ${scrollController.position}");
+        paginateNearByShop(latitude: latitude!, longitude: longitude!);
       }
     });
-    fetchAllShops();
+    fetchNearByShops(latitude: latitude!, longitude: longitude!);
+    // fetchAllShops();
     fetchRemarks();
     super.onInit();
   }
 
   fetchAllShops() async {
+    debugPrint("isloading before api call $isLoading");
+
     searchEditingController.text = "";
     shopList.clear();
     filterSelected("");
@@ -87,12 +97,39 @@ class NearByShopsController extends GetxController {
       shopList(shopListResponse.shopListResult?.shopList ?? []);
 
       filterVals = shopListResponse.shopListResult!.filterVals;
+      isLoading(false);
+      debugPrint("isloading after api call $isLoading");
     } else {
       shopList.clear();
       filterVals = null;
+      isLoading(false);
+      debugPrint("isloading after api call $isLoading");
     }
+    debugPrint("isloading after api call $isLoading");
 
     isLoading(false);
+  }
+
+  fetchNearByShops(
+      {required double latitude, required double longitude}) async {
+    nearByShopList.clear();
+    pageNumber = 0;
+
+    isNearByShopLoading(true);
+    var nearByShopResponse = await nearByShopRepo.nearByShopList(
+        salesPersonId: SharedPrefs.getUserId()!,
+        latitude: latitude,
+        longitude: longitude,
+        limit: pageSize,
+        pageNumber: pageNumber);
+
+    if (nearByShopResponse.shopListResult?.status ?? false) {
+      pageNumber += 1;
+      nearByShopList(nearByShopResponse.shopListResult?.shopList ?? []);
+    } else {
+      nearByShopList.clear();
+    }
+    isNearByShopLoading(false);
   }
 
   fetchRemarks() async {
@@ -158,9 +195,9 @@ class NearByShopsController extends GetxController {
     isShopDetailsLoading(false);
   }
 
-  void clearFilters() async {
-    await fetchAllShops();
-  }
+  // void clearFilters() async {
+  //   await fetchAllShops();
+  // }
 
   RxInt previousOrderCount = 0.obs;
   RxInt upcomingOrderCount = 0.obs;
@@ -169,15 +206,17 @@ class NearByShopsController extends GetxController {
   String? query;
 
   Future<void> searchShop(String? query) async {
+    nearByShopList.clear();
     isFilterClick(true);
     filterSelected("");
     pageNumber = 0;
     var shopListResponse;
     if ((query ?? "").isEmpty) {
-      await fetchAllShops();
+      await fetchNearByShops(latitude: latitude!, longitude: longitude!);
     } else {
       if (this.query == query) {
-        isFilterClick(false);
+        await fetchAllShops();
+        // isFilterClick(false);
         return;
       }
       this.query = query;
@@ -207,6 +246,23 @@ class NearByShopsController extends GetxController {
         ((shopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
       pageNumber += 1;
       shopList.addAll(shopListResponse.shopListResult!.shopList!);
+    }
+  }
+
+  RxBool isNearByShopPaginating = false.obs;
+
+  Future<void> _paginateNearByShopList(
+      {required double latitude, required double longitude}) async {
+    var nearByShopListResponse = await nearByShopRepo.nearByShopList(
+        salesPersonId: SharedPrefs.getUserId()!,
+        latitude: latitude,
+        longitude: longitude,
+        limit: pageSize,
+        pageNumber: pageNumber);
+    if ((nearByShopListResponse.shopListResult?.status ?? false) &&
+        ((nearByShopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
+      pageNumber += 1;
+      nearByShopList.addAll(nearByShopListResponse.shopListResult!.shopList!);
     }
   }
 
@@ -249,6 +305,13 @@ class NearByShopsController extends GetxController {
     }
 
     isPaginating(false);
+  }
+
+  paginateNearByShop(
+      {required double latitude, required double longitude}) async {
+    isNearByShopPaginating(true);
+    await _paginateNearByShopList(latitude: latitude, longitude: longitude);
+    isNearByShopPaginating(false);
   }
 }
 

@@ -37,7 +37,7 @@ class HomeMenuCards extends GetView<HomeController> {
             onTap: () {
               Get.toNamed(Routes.CREATE_ORDER);
             },
-            child: const HomeMenuIndividual(
+            child: HomeMenuIndividual(
               asseticon: Assets.orderHomeIcon,
               gradients: [Color(0xff0098BA), Color(0xff4163A2)],
               title: "Create new order",
@@ -47,7 +47,7 @@ class HomeMenuCards extends GetView<HomeController> {
             onTap: () {
               Get.toNamed(Routes.ADD_SHOP, arguments: {"isEdit": false});
             },
-            child: const HomeMenuIndividual(
+            child: HomeMenuIndividual(
               asseticon: Assets.newShopHomeIcon,
               gradients: [Color(0xffA73B6E), Color(0xff985194)],
               title: "Add new shop",
@@ -67,7 +67,7 @@ class HomeMenuCards extends GetView<HomeController> {
             onTap: () {
               Get.toNamed(Routes.ROUTE_PAGE);
             },
-            child: const HomeMenuIndividual(
+            child: HomeMenuIndividual(
               asseticon: Assets.routeHomeIcon,
               backgroundColor: Color(0xffF74254),
               title: "Route",
@@ -125,21 +125,30 @@ class HomeMenuCards extends GetView<HomeController> {
             title: "Sale Amount",
             amount: controller.reportsData?.result?.sales ?? 0.0,
           ),
-          InkWell(
-            onTap: () {
-              controller.getCurrentPosition();
-              if (controller.currentPosition?.latitude != null) {
-                Get.to(() => NearByShops());
-              }
-              debugPrint("hellpo ${controller.currentPosition?.latitude}");
-              // homePageOrderListingController.fetchSrAllOrders();
-            },
-            child: const HomeMenuIndividual(
-              asseticon: Assets.orderHomeIcon,
-              backgroundColor: Color(0xffF3674F),
-              title: "Visit Shop",
-            ),
-          ),
+          Obx(() {
+            return InkWell(
+              onTap: () async {
+                debugPrint("loading before ${controller.isLocationLoading}");
+                await controller.getCurrentPosition();
+                debugPrint("loading after ${controller.isLocationLoading}");
+
+                if (controller.currentPosition?.latitude != null) {
+                  Get.to(() => NearByShops(), arguments: {
+                    "latitude": controller.currentPosition?.latitude,
+                    "longitude": controller.currentPosition?.longitude
+                  });
+                }
+                debugPrint("hellpo ${controller.currentPosition?.latitude}");
+                // homePageOrderListingController.fetchSrAllOrders();
+              },
+              child: HomeMenuIndividual(
+                isLoading: controller.isLocationLoading.value,
+                asseticon: Assets.orderHomeIcon,
+                backgroundColor: Color(0xffF3674F),
+                title: "Visit Shop",
+              ),
+            );
+          }),
         ],
       ),
     );

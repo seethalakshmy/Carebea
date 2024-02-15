@@ -2,16 +2,17 @@ import 'package:carebea/app/utils/theme.dart';
 import 'package:flutter/material.dart';
 
 class HomeMenuIndividual extends StatelessWidget {
-  const HomeMenuIndividual({
-    Key? key,
-    this.asseticon,
-    this.backgroundColor,
-    this.gradients,
-    required this.title,
-    this.onTap,
-    this.count,
-    this.amount,
-  }) : super(key: key);
+  const HomeMenuIndividual(
+      {Key? key,
+      this.asseticon,
+      this.backgroundColor,
+      this.gradients,
+      required this.title,
+      this.onTap,
+      this.count,
+      this.amount,
+      this.isLoading = false})
+      : super(key: key);
 
   final List<Color>? gradients;
   final Color? backgroundColor;
@@ -20,6 +21,7 @@ class HomeMenuIndividual extends StatelessWidget {
   final int? count;
   final double? amount;
   final VoidCallback? onTap;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -34,36 +36,40 @@ class HomeMenuIndividual extends StatelessWidget {
         ),
         child: Builder(builder: (context) {
           if (count != null || amount != null) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _title(context),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8),
-                      child: amount != null
-                          ? Text(
-                              amount!.toStringAsFixed(2),
-                              style: customTheme(context).regular.copyWith(
-                                    fontSize: 13,
-                                    color: Colors.white,
+            return isLoading == false
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _title(context),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8),
+                            child: amount != null
+                                ? Text(
+                                    amount!.toStringAsFixed(2),
+                                    style:
+                                        customTheme(context).regular.copyWith(
+                                              fontSize: 13,
+                                              color: Colors.white,
+                                            ),
+                                  )
+                                : Text(
+                                    count.toString(),
+                                    style:
+                                        customTheme(context).regular.copyWith(
+                                              fontSize: 13,
+                                              color: Colors.white,
+                                            ),
                                   ),
-                            )
-                          : Text(
-                              count.toString(),
-                              style: customTheme(context).regular.copyWith(
-                                    fontSize: 13,
-                                    color: Colors.white,
-                                  ),
-                            ),
-                    ),
-                    _icon(),
-                  ],
-                )
-              ],
-            );
+                          ),
+                          _icon(),
+                        ],
+                      )
+                    ],
+                  )
+                : const CircularProgressIndicator();
           }
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

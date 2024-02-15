@@ -209,7 +209,7 @@ class ShopsController extends GetxController {
           pageSize: pageSize);
       if (shopListResponse.shopListResult?.status ?? false) {
         pageNumber = 1;
-        shopList(shopListResponse.shopListResult?.shopList ?? []);
+        shopList(shopListResponse.shopListResult?.NearByShopList ?? []);
       } else {
         shopList.clear();
       }

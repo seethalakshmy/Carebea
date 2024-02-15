@@ -11,33 +11,21 @@ import 'dart:developer' as developer;
 class NearByShopDataSource {
   ApiService apiService = Get.find();
 
-  Future<ShopListResponse> shopList(
-      {int? salesPersonId,
-      int? shopId,
-      String? filterName,
-      int? filterId,
-      Map<String, dynamic>? query,
-      required int pageNumber,
-      required int pageSize}) async {
+  Future<ShopListResponse> nearByShopList(
+      {required int salesPersonId,
+      required double latitude,
+      required double longitude,
+      required int limit,
+      required int pageNumber}) async {
     Map<String, dynamic> body = {
-      "limit": pageSize,
-      "page_number": pageNumber,
+      "sales_person_id": salesPersonId,
+      "latitude": latitude,
+      "longitude": longitude,
+      "limit": limit,
+      "page_number": pageNumber
     };
-    if (shopId != null) {
-      body.addAll({'shop_id': shopId});
-    }
-    if (salesPersonId != null) {
-      body.addAll({
-        'sales_person_id': salesPersonId,
-      });
-    }
-    if (filterName != null) {
-      body.addAll({'filter_name': filterName, 'filter_id': filterId});
-    }
-    if ((query ?? {}).isNotEmpty) {
-      body.addAll(query!);
-    }
-    var response = await apiService.post('list-shops', body);
+
+    var response = await apiService.post('list-shops-location-wise', body);
 
     if (response.statusCode == 200) {
       return ShopListResponse.fromJson(json.decode(response.body));

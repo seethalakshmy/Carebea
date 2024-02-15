@@ -3,7 +3,6 @@ import 'package:carebea/app/modules/shops/controllers/shops_controller.dart';
 import 'package:carebea/app/modules/shops/widgets/shop_card.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
-import 'package:carebea/app/utils/global_state_controller.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
@@ -12,11 +11,10 @@ import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../models/shop_model.dart';
-
 class ListShops extends StatelessWidget {
   ListShops({Key? key}) : super(key: key);
-  ShopsController controller = Get.put(ShopsController());
+  final ShopsController controller = Get.put(ShopsController());
+
   // TextEditingController searchTextEditingController = TextEditingController();
   // FocusNode _focusNode = FocusNode();
   // static List<String> category = ['Retail', 'Supermarket', 'Wholesale', 'Zone'];
@@ -29,7 +27,8 @@ class ListShops extends StatelessWidget {
         onWillPop: () => controller.onWillpopClose(),
         child: Scaffold(
             appBar: appBar(context),
-            floatingActionButton: openKeyboardGuard(context, child: _addNewShopButton(context)),
+            floatingActionButton:
+                openKeyboardGuard(context, child: _addNewShopButton(context)),
             body: Obx(() {
               if (controller.isLoading.value) {
                 return Center(child: circularProgressIndicator(context));
@@ -42,7 +41,9 @@ class ListShops extends StatelessWidget {
                   children: [
                     Text(
                       'Shops',
-                      style: customTheme(context).medium.copyWith(fontSize: 16, color: Colors.black),
+                      style: customTheme(context)
+                          .medium
+                          .copyWith(fontSize: 16, color: Colors.black),
                     ),
                     const SizedBox(
                       height: 20,
@@ -68,20 +69,33 @@ class ListShops extends StatelessWidget {
                               return DropdownButton<String>(
                                 hint: Text(
                                   "Choose",
-                                  style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: const Color(0xff929292)),
+                                  style: customTheme(Get.context!)
+                                      .regular
+                                      .copyWith(
+                                          fontSize: 11,
+                                          color: const Color(0xff929292)),
                                 ),
-                                value: controller.selectedSearchtype.value.type ?? "",
+                                value:
+                                    controller.selectedSearchtype.value.type ??
+                                        "",
                                 underline: const SizedBox.shrink(),
                                 isDense: true,
                                 onChanged: (value) {
                                   // _focusNode.requestFocus();
-                                  controller.selectedSearchtype(controller.searchitems.singleWhere((element) => element.type == value));
+                                  controller.selectedSearchtype(
+                                      controller.searchitems.singleWhere(
+                                          (element) => element.type == value));
                                 },
                                 items: controller.searchitems
                                     .map(
                                       (e) => DropdownMenuItem(
                                         value: e.type,
-                                        child: Text(e.title!, style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black)),
+                                        child: Text(e.title!,
+                                            style: customTheme(Get.context!)
+                                                .regular
+                                                .copyWith(
+                                                    fontSize: 11,
+                                                    color: Colors.black)),
                                       ),
                                     )
                                     .toList(),
@@ -94,7 +108,8 @@ class ListShops extends StatelessWidget {
                         ),
                         if (controller.filterVals != null)
                           PopupMenuButton<String>(
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(7)),
                             offset: const Offset(0.0, 50),
                             padding: EdgeInsets.zero,
                             child: Image.asset(
@@ -113,22 +128,28 @@ class ListShops extends StatelessWidget {
                                   isSelected: true,
                                   showBorder: false,
                                 ),
-                                ...buildCategoryFilterItems(context, controller.filterSelected.value),
+                                ...buildCategoryFilterItems(
+                                    context, controller.filterSelected.value),
                                 customPopupMenuItem<String>(
                                   context,
                                   name: "Zone",
                                   isSelected: true,
                                   showBorder: false,
                                 ),
-                                ...buildZoneFilterItems(context, controller.filterSelected.value),
-                                if (controller.filterVals?.route?.isNotEmpty ?? false)
+                                ...buildZoneFilterItems(
+                                    context, controller.filterSelected.value),
+                                if (controller.filterVals?.route?.isNotEmpty ??
+                                    false)
                                   customPopupMenuItem<String>(
                                     context,
                                     name: "Route",
                                     isSelected: true,
                                     showBorder: false,
                                   ),
-                                if (controller.filterVals?.route?.isNotEmpty ?? false) ...buildRouteFilterItems(context, controller.filterSelected.value),
+                                if (controller.filterVals?.route?.isNotEmpty ??
+                                    false)
+                                  ...buildRouteFilterItems(
+                                      context, controller.filterSelected.value),
                                 customPopupMenuItem<String>(
                                   context,
                                   name: "Clear",
@@ -171,18 +192,25 @@ class ListShops extends StatelessWidget {
                     Flexible(
                       child: Obx(() {
                         if (controller.isFilterClick.value) {
-                          return Center(child: circularProgressIndicator(context));
+                          return Center(
+                              child: circularProgressIndicator(context));
                         }
                         if (controller.shopList.isEmpty) {
-                          return Container(alignment: Alignment.topCenter, width: double.infinity, padding: EdgeInsets.only(top: 50), child: Text("No shops found!"));
+                          return Container(
+                              alignment: Alignment.topCenter,
+                              width: double.infinity,
+                              padding: const EdgeInsets.only(top: 50),
+                              child: const Text("No shops found!"));
                         }
                         return ListView.separated(
                             controller: controller.scrollController,
-                            separatorBuilder: (_, __) => const SizedBox(height: 20),
+                            separatorBuilder: (_, __) =>
+                                const SizedBox(height: 20),
                             shrinkWrap: true,
                             itemCount: controller.shopList.length,
                             itemBuilder: (context, index) {
-                              return ShopListTile(shop: controller.shopList[index]);
+                              return ShopListTile(
+                                  shop: controller.shopList[index]);
                             });
                       }),
                     ),
@@ -192,7 +220,9 @@ class ListShops extends StatelessWidget {
             })));
   }
 
-  List<PopupMenuItem<String>> buildCategoryFilterItems(BuildContext context, String value) => controller.filterVals!.category!.map((e) {
+  List<PopupMenuItem<String>> buildCategoryFilterItems(
+          BuildContext context, String value) =>
+      controller.filterVals!.category!.map((e) {
         return customPopupMenuItem<String>(
           context,
           name: e.name!,
@@ -204,7 +234,9 @@ class ListShops extends StatelessWidget {
         );
       }).toList();
 
-  List<PopupMenuItem<String>> buildZoneFilterItems(BuildContext context, String value) => controller.filterVals!.zone!.map((e) {
+  List<PopupMenuItem<String>> buildZoneFilterItems(
+          BuildContext context, String value) =>
+      controller.filterVals!.zone!.map((e) {
         return customPopupMenuItem<String>(
           context,
           name: e.name!,
@@ -215,7 +247,9 @@ class ListShops extends StatelessWidget {
         );
       }).toList();
 
-  List<PopupMenuItem<String>> buildRouteFilterItems(BuildContext context, String value) => controller.filterVals!.route!.map((e) {
+  List<PopupMenuItem<String>> buildRouteFilterItems(
+          BuildContext context, String value) =>
+      controller.filterVals!.route!.map((e) {
         return customPopupMenuItem<String>(
           context,
           name: e.name!,
@@ -230,11 +264,14 @@ class ListShops extends StatelessWidget {
     return FloatingActionButton.extended(
       backgroundColor: customTheme(context).primary,
       onPressed: () {
-        Get.toNamed(Routes.ADD_SHOP, arguments: {'isEdit': false, 'isFromListShop': true});
+        Get.toNamed(Routes.ADD_SHOP,
+            arguments: {'isEdit': false, 'isFromListShop': true});
       },
       label: Text(
         "Add new shop",
-        style: customTheme(context).medium.copyWith(fontSize: 13, color: Colors.white),
+        style: customTheme(context)
+            .medium
+            .copyWith(fontSize: 13, color: Colors.white),
       ),
       icon: Icon(Icons.add),
     );

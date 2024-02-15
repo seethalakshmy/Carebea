@@ -22,6 +22,7 @@ class HomeController extends GetxController {
   List<UpcomingOrdersList> upcomingOrderList = [];
   RxString selectedSearchtype = 'Shop'.obs;
   ReportsData? reportsData;
+  RxBool isLocationLoading = false.obs;
 
   ScrollController scrollController = ScrollController();
   Position? currentPosition;
@@ -73,15 +74,19 @@ class HomeController extends GetxController {
   }
 
   Future<void> getCurrentPosition() async {
+    isLocationLoading(true);
     final hasPermission = await _handleLocationPermission();
     if (!hasPermission) return;
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
         .then((Position position) {
       currentPosition = position;
+      isLocationLoading(false);
+
       // setState(() => _currentPosition = position);
     }).catchError((e) {
       debugPrint(e);
     });
+    isLocationLoading(false);
   }
 
   Future fetchHomePageData() async {
