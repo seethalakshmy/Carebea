@@ -24,7 +24,8 @@ class CreateOrderController extends GetxController {
   DateTime? backbuttonpressedTime;
   final ShopListRepo _shopRepo = ShopListRepo();
   final CreateOrderRepository _repository = CreateOrderRepository();
-  RxMap<int, TextEditingController> cartproducts = RxMap<int, TextEditingController>();
+  RxMap<int, TextEditingController> cartproducts =
+      RxMap<int, TextEditingController>();
   RxMap<int, FocusNode> cartproductsFocusNode = RxMap<int, FocusNode>();
   RxBool isLoading = true.obs;
   RxBool isProductsLoading = true.obs;
@@ -56,12 +57,16 @@ class CreateOrderController extends GetxController {
   void onInit() {
     clearProducts();
     shopScrollController.addListener(() {
-      if (((shopScrollController.position.maxScrollExtent * .3) <= shopScrollController.position.pixels) && !isPaginating.value) {
+      if (((shopScrollController.position.maxScrollExtent * .3) <=
+              shopScrollController.position.pixels) &&
+          !isPaginating.value) {
         paginateShops();
       }
     });
     productScrollController.addListener(() {
-      if (((productScrollController.position.maxScrollExtent * .7) <= productScrollController.position.pixels) && !isPaginating.value) {
+      if (((productScrollController.position.maxScrollExtent * .7) <=
+              productScrollController.position.pixels) &&
+          !isPaginating.value) {
         paginateProducts();
       }
     });
@@ -103,7 +108,10 @@ class CreateOrderController extends GetxController {
     isLoading(true);
     try {
       pageNumber = 0;
-      var res = await _shopRepo.shopList(SharedPrefs.getUserId()!, pageNumber: pageNumber, pageSize: pageSize);
+      var res = await _shopRepo.shopList(
+          salesPersonId: SharedPrefs.getUserId()!,
+          pageNumber: pageNumber,
+          pageSize: pageSize);
       shopList(res.shopListResult?.shopList ?? []);
       pageNumber = 1;
     } catch (error, stacktrace) {
@@ -144,7 +152,8 @@ class CreateOrderController extends GetxController {
   RxBool creatingOrder = false.obs;
   late Rx<PaymentMethod> selectedPaymentMethod;
   goToOrderSummary() {
-    cartproducts.removeWhere((key, textEditingController) => textEditingController.text.isEmpty);
+    cartproducts.removeWhere(
+        (key, textEditingController) => textEditingController.text.isEmpty);
     // Get.to(() => const OrderSummmaryView(), arguments: Get.arguments);
     createOrder();
   }
@@ -154,11 +163,16 @@ class CreateOrderController extends GetxController {
     creatingOrder(true);
     Map<int, int>? _products = {};
     offerProducts.clear();
-    cartproducts.removeWhere((key, textEditingController) => textEditingController.text.isEmpty);
+    cartproducts.removeWhere(
+        (key, textEditingController) => textEditingController.text.isEmpty);
     cartproducts.forEach((key, textEditingControlller) {
       _products.addAll({key: int.parse(textEditingControlller.text)});
     });
-    var res = await _repository.createOrder(shopId: (Get.arguments["shop"] as ShopList).id, salesPersonId: SharedPrefs.getUserId(), products: _products, orderId: createOrderResponse?.result?.orderId);
+    var res = await _repository.createOrder(
+        shopId: (Get.arguments["shop"] as ShopList).id,
+        salesPersonId: SharedPrefs.getUserId(),
+        products: _products,
+        orderId: createOrderResponse?.result?.orderId);
     sortList();
 
     if (res.result?.status ?? false) {
@@ -186,7 +200,8 @@ class CreateOrderController extends GetxController {
     productQuery = null;
     try {
       productPageNumber = 0;
-      var res = await _productListRepo.productList(pageNumber: productPageNumber, pageSize: productPageSize);
+      var res = await _productListRepo.productList(
+          pageNumber: productPageNumber, pageSize: productPageSize);
       productList(res.productListResult?.productList ?? []);
       if (productList.isEmpty) {
         throw "";
@@ -194,7 +209,8 @@ class CreateOrderController extends GetxController {
       productPageNumber = 1;
       _products = productList;
       for (var product in _products) {
-        if (!cartproductsFocusNode.keys.contains(product.id)) cartproductsFocusNode[product.id!] = FocusNode();
+        if (!cartproductsFocusNode.keys.contains(product.id))
+          cartproductsFocusNode[product.id!] = FocusNode();
       }
     } catch (error, stacktrace) {
       log("error", error: error, stackTrace: stacktrace);
@@ -216,7 +232,8 @@ class CreateOrderController extends GetxController {
       }
       productQuery = query;
       productPageNumber = 0;
-      var res = await _productListRepo.searchProductList(query ?? "", pageNumber: productPageNumber, pageSize: productPageSize);
+      var res = await _productListRepo.searchProductList(query ?? "",
+          pageNumber: productPageNumber, pageSize: productPageSize);
       productList(res.productListResult?.productList ?? []);
       if (productList.isEmpty) {
         throw "";
@@ -224,7 +241,8 @@ class CreateOrderController extends GetxController {
       productPageNumber = 1;
       _products = productList;
       for (var product in _products) {
-        if (!cartproductsFocusNode.keys.contains(product.id)) cartproductsFocusNode[product.id!] = FocusNode();
+        if (!cartproductsFocusNode.keys.contains(product.id))
+          cartproductsFocusNode[product.id!] = FocusNode();
       }
     } catch (error, stacktrace) {
       log("error", error: error, stackTrace: stacktrace);
@@ -262,7 +280,11 @@ class CreateOrderController extends GetxController {
       }
       this.query = query;
       pageNumber = 0;
-      var shopListResponse = await _shopRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query}, pageNumber: pageNumber, pageSize: pageSize);
+      var shopListResponse = await _shopRepo.shopSearch(
+          salesPersonId: SharedPrefs.getUserId()!,
+          query: {"name": query},
+          pageNumber: pageNumber,
+          pageSize: pageSize);
       if (shopListResponse.shopListResult?.status ?? false) {
         pageNumber = 1;
         shopList(shopListResponse.shopListResult?.shopList ?? []);
@@ -281,7 +303,8 @@ class CreateOrderController extends GetxController {
       for (var i in _products) {
         if (cartproducts.keys.contains(i.id)) {
           tempSelectedProducts.add(i);
-          var c = productPrice((Get.arguments["shop"] as ShopList).category!, i);
+          var c =
+              productPrice((Get.arguments["shop"] as ShopList).category!, i);
           var t = int.parse(cartproducts[i.id]!.text) * c;
           cost += t;
         }
@@ -343,7 +366,8 @@ class CreateOrderController extends GetxController {
       navigator!.popUntil((route) => route.isFirst);
 
       if (value ?? false) {
-        Get.toNamed(Routes.ORDER_HISTORY_DETAILS, arguments: {'order_id': orderId});
+        Get.toNamed(Routes.ORDER_HISTORY_DETAILS,
+            arguments: {'order_id': orderId});
 
         // _dashboardController.currentScreenIndex(2);
         // ordersController.tabController1.animateTo(1);
@@ -365,16 +389,25 @@ class CreateOrderController extends GetxController {
   }
 
   Future<void> _paginateShopList() async {
-    var shopListResponse = await _shopRepo.shopList(SharedPrefs.getUserId()!, pageNumber: pageNumber, pageSize: pageSize);
-    if ((shopListResponse.shopListResult?.status ?? false) && ((shopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
+    var shopListResponse = await _shopRepo.shopList(
+        salesPersonId: SharedPrefs.getUserId()!,
+        pageNumber: pageNumber,
+        pageSize: pageSize);
+    if ((shopListResponse.shopListResult?.status ?? false) &&
+        ((shopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
       pageNumber += 1;
       shopList.addAll(shopListResponse.shopListResult!.shopList!);
     }
   }
 
   Future<void> _paginateSearchShop() async {
-    var shopListResponse = await _shopRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query}, pageNumber: pageNumber, pageSize: pageSize);
-    if ((shopListResponse.shopListResult?.status ?? false) && ((shopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
+    var shopListResponse = await _shopRepo.shopSearch(
+        salesPersonId: SharedPrefs.getUserId()!,
+        query: {"name": query},
+        pageNumber: pageNumber,
+        pageSize: pageSize);
+    if ((shopListResponse.shopListResult?.status ?? false) &&
+        ((shopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
       pageNumber += 1;
       shopList.addAll(shopListResponse.shopListResult!.shopList!);
     }
@@ -396,9 +429,14 @@ class CreateOrderController extends GetxController {
 
   Future<void> _paginateSearchProducts() async {
     try {
-      var res = await _productListRepo.searchProductList(productQuery ?? "", pageNumber: productPageNumber, pageSize: productPageSize);
+      var res = await _productListRepo.searchProductList(productQuery ?? "",
+          pageNumber: productPageNumber, pageSize: productPageSize);
       var tempProductList = res.productListResult?.productList ?? [];
-      tempProductList = tempProductList.where((outer) => productList.firstWhereOrNull((inner) => inner.id == outer.id) == null).toList();
+      tempProductList = tempProductList
+          .where((outer) =>
+              productList.firstWhereOrNull((inner) => inner.id == outer.id) ==
+              null)
+          .toList();
       if (tempProductList.isEmpty) {
         throw "";
       }
@@ -409,7 +447,8 @@ class CreateOrderController extends GetxController {
       _products.addAll(tempProductList);
       _products = _products.toSet().toList();
       for (var product in _products) {
-        if (!cartproductsFocusNode.keys.contains(product.id)) cartproductsFocusNode[product.id!] = FocusNode();
+        if (!cartproductsFocusNode.keys.contains(product.id))
+          cartproductsFocusNode[product.id!] = FocusNode();
       }
     } catch (error, stacktrace) {
       log("error", error: error, stackTrace: stacktrace);
@@ -418,7 +457,8 @@ class CreateOrderController extends GetxController {
 
   Future<void> _paginateProducts() async {
     try {
-      var res = await _productListRepo.productList(pageNumber: productPageNumber, pageSize: productPageSize);
+      var res = await _productListRepo.productList(
+          pageNumber: productPageNumber, pageSize: productPageSize);
       var tempProductList = res.productListResult?.productList ?? [];
       // tempProductList = tempProductList.where((outer) => productList.firstWhereOrNull((inner) => inner.id == outer.id) == null).toList();
       if (tempProductList.isEmpty) {
@@ -431,7 +471,8 @@ class CreateOrderController extends GetxController {
       _products.addAll(tempProductList);
       _products = _products.toSet().toList();
       for (var product in _products) {
-        if (!cartproductsFocusNode.keys.contains(product.id)) cartproductsFocusNode[product.id!] = FocusNode();
+        if (!cartproductsFocusNode.keys.contains(product.id))
+          cartproductsFocusNode[product.id!] = FocusNode();
       }
     } catch (error, stacktrace) {
       log("error", error: error, stackTrace: stacktrace);

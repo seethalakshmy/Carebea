@@ -27,7 +27,7 @@ class RemarkHistoryController extends GetxController {
         paginate();
       }
     });
-    fetchRemarkHistory(shopId: shopId!);
+    // fetchRemarkHistory(shopId: shopId!);
     super.onInit();
   }
 

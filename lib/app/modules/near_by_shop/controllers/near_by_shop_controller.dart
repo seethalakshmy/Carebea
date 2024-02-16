@@ -14,7 +14,8 @@ import '../../../utils/shared_prefs.dart';
 import '../../create_order/model/create_order.dart';
 import '../models/remark_submit_response.dart';
 
-class NearByShopsController extends GetxController {
+class NearByShopsController extends GetxController
+    with GetTickerProviderStateMixin {
   ShopListRepo shopListRepo = ShopListRepo();
   NearByShopRepo nearByShopRepo = NearByShopRepo();
   OrderListRepo orderListRepo = OrderListRepo();
@@ -52,6 +53,8 @@ class NearByShopsController extends GetxController {
   TextEditingController searchEditingController = TextEditingController();
   double? latitude;
   double? longitude;
+  bool? isFromDelivery;
+  TabController? tabController;
 
   Rx<SearchType> selectedSearchtype = Rx(
     SearchType("Name", "name"),
@@ -65,8 +68,11 @@ class NearByShopsController extends GetxController {
 
   @override
   void onInit() {
+    tabController = TabController(length: 2, vsync: this);
     latitude = Get.arguments['latitude'];
     longitude = Get.arguments['longitude'];
+    isFromDelivery = Get.arguments['is_from_delivery'];
+    debugPrint("is from delivery $isFromDelivery");
     scrollController.addListener(() {
       if (((scrollController.position.maxScrollExtent * .7) <=
               scrollController.position.pixels) &&
@@ -90,8 +96,12 @@ class NearByShopsController extends GetxController {
     pageNumber = 0;
 
     isLoading(true);
-    var shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!,
-        pageNumber: pageNumber, pageSize: pageSize);
+    var shopListResponse = await shopListRepo.shopList(
+        salesPersonId: isFromDelivery == true ? null : SharedPrefs.getUserId()!,
+        pageNumber: pageNumber,
+        pageSize: pageSize,
+        deliveryPersonId:
+            isFromDelivery == true ? SharedPrefs.getUserId()! : null);
     if (shopListResponse.shopListResult?.status ?? false) {
       pageNumber += 1;
       shopList(shopListResponse.shopListResult?.shopList ?? []);
@@ -117,7 +127,9 @@ class NearByShopsController extends GetxController {
 
     isNearByShopLoading(true);
     var nearByShopResponse = await nearByShopRepo.nearByShopList(
-        salesPersonId: SharedPrefs.getUserId()!,
+        salesPersonId: isFromDelivery == true ? null : SharedPrefs.getUserId()!,
+        deliveryPersonId:
+            isFromDelivery == false ? null : SharedPrefs.getUserId()!,
         latitude: latitude,
         longitude: longitude,
         limit: pageSize,
@@ -152,7 +164,9 @@ class NearByShopsController extends GetxController {
     remarkSubmitResponse = await remarkListRepo.remarkSubmit(
         userId: SharedPrefs.getUserId() ?? 0,
         commentId: commentId,
-        shopId: shopId);
+        shopId: shopId,
+        latitude: latitude!,
+        longitude: longitude!);
 
     if (remarkSubmitResponse?.result?.status == true) {
       isRemarksSubmitLoading(false);
@@ -222,7 +236,10 @@ class NearByShopsController extends GetxController {
       this.query = query;
 
       shopListResponse = await shopListRepo.shopSearch(
-          salesPersonId: SharedPrefs.getUserId()!,
+          deliveryPersonId:
+              isFromDelivery == true ? SharedPrefs.getUserId() : null,
+          salesPersonId:
+              isFromDelivery == true ? null : SharedPrefs.getUserId()!,
           query: {selectedSearchtype.value.type!: query},
           pageNumber: pageNumber,
           pageSize: pageSize);
@@ -240,8 +257,12 @@ class NearByShopsController extends GetxController {
   RxBool isPaginating = false.obs;
 
   Future<void> _paginateShopList() async {
-    var shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!,
-        pageNumber: pageNumber, pageSize: pageSize);
+    var shopListResponse = await shopListRepo.shopList(
+        salesPersonId: isFromDelivery == true ? null : SharedPrefs.getUserId()!,
+        deliveryPersonId:
+            isFromDelivery == true ? SharedPrefs.getUserId()! : null,
+        pageNumber: pageNumber,
+        pageSize: pageSize);
     if ((shopListResponse.shopListResult?.status ?? false) &&
         ((shopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
       pageNumber += 1;
@@ -254,7 +275,9 @@ class NearByShopsController extends GetxController {
   Future<void> _paginateNearByShopList(
       {required double latitude, required double longitude}) async {
     var nearByShopListResponse = await nearByShopRepo.nearByShopList(
-        salesPersonId: SharedPrefs.getUserId()!,
+        salesPersonId: isFromDelivery == true ? null : SharedPrefs.getUserId()!,
+        deliveryPersonId:
+            isFromDelivery == false ? null : SharedPrefs.getUserId()!,
         latitude: latitude,
         longitude: longitude,
         limit: pageSize,
@@ -271,7 +294,9 @@ class NearByShopsController extends GetxController {
       pageNumber = 1;
     }
     var shopListResponse = await shopListRepo.shopSearch(
-        salesPersonId: SharedPrefs.getUserId()!,
+        salesPersonId: isFromDelivery == true ? null : SharedPrefs.getUserId()!,
+        deliveryPersonId:
+            isFromDelivery == true ? SharedPrefs.getUserId()! : null,
         query: {selectedSearchtype.value.type!: searchEditingController.text},
         pageNumber: pageNumber,
         pageSize: pageSize);

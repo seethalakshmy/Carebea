@@ -74,8 +74,10 @@ class ShopsController extends GetxController {
     pageNumber = 0;
 
     isLoading(true);
-    var shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!,
-        pageNumber: pageNumber, pageSize: pageSize);
+    var shopListResponse = await shopListRepo.shopList(
+        salesPersonId: SharedPrefs.getUserId()!,
+        pageNumber: pageNumber,
+        pageSize: pageSize);
     if (shopListResponse.shopListResult?.status ?? false) {
       pageNumber += 1;
       shopList(shopListResponse.shopListResult?.shopList ?? []);
@@ -220,8 +222,10 @@ class ShopsController extends GetxController {
 
   RxBool isPaginating = false.obs;
   Future<void> _paginateShopList() async {
-    var shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!,
-        pageNumber: pageNumber, pageSize: pageSize);
+    var shopListResponse = await shopListRepo.shopList(
+        salesPersonId: SharedPrefs.getUserId()!,
+        pageNumber: pageNumber,
+        pageSize: pageSize);
     if ((shopListResponse.shopListResult?.status ?? false) &&
         ((shopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
       pageNumber += 1;

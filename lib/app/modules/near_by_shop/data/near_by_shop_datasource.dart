@@ -12,18 +12,24 @@ class NearByShopDataSource {
   ApiService apiService = Get.find();
 
   Future<ShopListResponse> nearByShopList(
-      {required int salesPersonId,
+      {int? salesPersonId,
+      int? deliveryPersonId,
       required double latitude,
       required double longitude,
       required int limit,
       required int pageNumber}) async {
     Map<String, dynamic> body = {
-      "sales_person_id": salesPersonId,
       "latitude": latitude,
       "longitude": longitude,
       "limit": limit,
       "page_number": pageNumber
     };
+    if (salesPersonId != null) {
+      body.addAll({"sales_person_id": salesPersonId});
+    }
+    if (deliveryPersonId != null) {
+      body.addAll({"delivery_person_id": deliveryPersonId});
+    }
 
     var response = await apiService.post('list-shops-location-wise', body);
 

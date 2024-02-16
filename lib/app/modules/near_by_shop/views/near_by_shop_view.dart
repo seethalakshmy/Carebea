@@ -7,15 +7,18 @@ import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_card.dart';
-import '../../remark_history/views/remark_history_view.dart';
+import '../../remark_history/controllers/remark_history_controller.dart';
 import '../controllers/near_by_shop_controller.dart';
 
 class NearByShops extends StatelessWidget {
   NearByShops({Key? key}) : super(key: key);
   final NearByShopsController controller = Get.put(NearByShopsController());
+  final RemarkHistoryController remarkHistoryController =
+      Get.put(RemarkHistoryController());
 
   @override
   Widget build(BuildContext context) {
@@ -115,6 +118,8 @@ class NearByShops extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
+                              remarkHistoryController.fetchRemarkHistory(
+                                  shopId: controller.nearByShopList[index].id!);
                               showDialog(
                                 context: context,
                                 builder: (ctx) => Material(
@@ -125,123 +130,228 @@ class NearByShops extends StatelessWidget {
                                       padding: const EdgeInsets.all(20),
                                       width: Get.size.width * .8,
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "Remarks",
-                                                style: customTheme(context)
-                                                    .medium
-                                                    .copyWith(fontSize: 14),
-                                              ),
-                                              Spacer(),
-                                              TextButton(
-                                                onPressed: () {
-                                                  Get.back();
-                                                  Get.to(() => RemarkHistory(),
-                                                      arguments: {
-                                                        "shop_id": controller
-                                                            .nearByShopList[
-                                                                index]
-                                                            .id
-                                                      });
-                                                },
+                                          TabBar(
+                                            controller:
+                                                controller.tabController,
+                                            tabs: <Tab>[
+                                              Tab(
                                                 child: Text(
-                                                  "Remark History",
+                                                  "Remarks",
                                                   style: customTheme(context)
                                                       .medium
-                                                      .copyWith(
-                                                          fontSize: 14,
-                                                          color: Colors.blue),
+                                                      .copyWith(fontSize: 14),
+                                                ),
+                                              ),
+                                              Tab(
+                                                child: Text(
+                                                  "History",
+                                                  style: customTheme(context)
+                                                      .medium
+                                                      .copyWith(fontSize: 14),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          const SizedBox(height: 10),
-
-                                          Obx(() {
-                                            return DropdownButton<
-                                                PaymentCommentsList>(
-                                              hint: Text(
-                                                controller.selectedReason.value,
-                                                style: customTheme(Get.context!)
-                                                    .regular
-                                                    .copyWith(
-                                                        fontSize: 11,
-                                                        color: const Color(
-                                                            0xff929292)),
-                                              ),
-                                              // value: controller.selectedSearchtype.value,
-                                              underline:
-                                                  const SizedBox.shrink(),
-                                              isDense: true,
-                                              onChanged: (value) {
-                                                // _focusNode.requestFocus();
-                                                controller.selectedReason(
-                                                    value?.name ?? "");
-                                                controller.selectedReasonId(
-                                                    (value?.id ?? 0).toInt());
-                                              },
-                                              items: controller.remarkList
-                                                  ?.map(
-                                                    (e) => DropdownMenuItem(
-                                                      value: e,
-                                                      child: controller
-                                                              .isRemarksLoading
-                                                              .value
-                                                          ? CircularProgressIndicator()
-                                                          : Text(e.name ?? "",
+                                          SizedBox(
+                                            // color: Colors.red,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                .2,
+                                            child: TabBarView(
+                                                controller:
+                                                    controller.tabController,
+                                                children: [
+                                                  Obx(() {
+                                                    return Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 20),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          DropdownButton<
+                                                              PaymentCommentsList>(
+                                                            hint: Text(
+                                                              controller
+                                                                  .selectedReason
+                                                                  .value,
                                                               style: customTheme(Get
                                                                       .context!)
                                                                   .regular
                                                                   .copyWith(
                                                                       fontSize:
                                                                           11,
-                                                                      color: Colors
-                                                                          .black)),
-                                                    ),
-                                                  )
-                                                  .toList(),
-                                            );
-                                          }),
+                                                                      color: const Color(
+                                                                          0xff929292)),
+                                                            ),
+                                                            // value: controller.selectedSearchtype.value,
+                                                            underline:
+                                                                const SizedBox
+                                                                    .shrink(),
+                                                            isDense: true,
+                                                            onChanged: (value) {
+                                                              // _focusNode.requestFocus();
+                                                              controller
+                                                                  .selectedReason(
+                                                                      value?.name ??
+                                                                          "");
+                                                              controller.selectedReasonId(
+                                                                  (value?.id ??
+                                                                          0)
+                                                                      .toInt());
+                                                            },
+                                                            items:
+                                                                controller
+                                                                    .remarkList
+                                                                    ?.map(
+                                                                      (e) =>
+                                                                          DropdownMenuItem(
+                                                                        value:
+                                                                            e,
+                                                                        child: controller.isRemarksLoading.value
+                                                                            ? CircularProgressIndicator()
+                                                                            : Text(e.name ?? "",
+                                                                                style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black)),
+                                                                      ),
+                                                                    )
+                                                                    .toList(),
+                                                          ),
+                                                          Spacer(),
+                                                          Obx(() {
+                                                            return CustomButton(
+                                                                isLoading:
+                                                                    controller
+                                                                        .isRemarksSubmitLoading
+                                                                        .value,
+                                                                title:
+                                                                    "Confirm",
+                                                                onTap: () {
+                                                                  if (controller
+                                                                          .selectedReason
+                                                                          .value !=
+                                                                      "choose") {
+                                                                    controller.submitRemarks(
+                                                                        commentId: controller
+                                                                            .selectedReasonId
+                                                                            .value,
+                                                                        shopId:
+                                                                            controller.nearByShopList[index].id ??
+                                                                                0);
 
-                                          const SizedBox(height: 20),
+                                                                    Get.back();
+                                                                  } else {
+                                                                    ScaffoldMessenger.of(Get
+                                                                            .context!)
+                                                                        .showSnackBar(const SnackBar(
+                                                                            content:
+                                                                                Text("Please select a remark")));
+                                                                  }
+                                                                });
+                                                          })
+                                                        ],
+                                                      ),
+                                                    );
+                                                  }),
+                                                  Obx(() {
+                                                    if (remarkHistoryController
+                                                        .isLoading.value) {
+                                                      return Center(
+                                                          child:
+                                                              circularProgressIndicator(
+                                                                  context));
+                                                    }
 
-                                          Obx(() {
-                                            return CustomButton(
-                                                isLoading: controller
-                                                    .isRemarksSubmitLoading
-                                                    .value,
-                                                title: "Confirm",
-                                                onTap: () {
-                                                  if (controller.selectedReason
-                                                          .value !=
-                                                      "choose") {
-                                                    controller.submitRemarks(
-                                                        commentId: controller
-                                                            .selectedReasonId
-                                                            .value,
-                                                        shopId: controller
-                                                                .nearByShopList[
-                                                                    index]
-                                                                .id ??
-                                                            0);
-
-                                                    Get.back();
-                                                  } else {
-                                                    ScaffoldMessenger.of(
-                                                            Get.context!)
-                                                        .showSnackBar(
-                                                            const SnackBar(
-                                                                content: Text(
-                                                                    "Please select a remark")));
-                                                  }
-                                                });
-                                          })
-                                          // })
+                                                    return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(15.0),
+                                                        child:
+                                                            SingleChildScrollView(
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              remarkHistoryController
+                                                                      .remarkHistory
+                                                                      .isNotEmpty
+                                                                  ? ListView
+                                                                      .separated(
+                                                                          physics:
+                                                                              NeverScrollableScrollPhysics(),
+                                                                          shrinkWrap:
+                                                                              true,
+                                                                          separatorBuilder: (_, __) => const SizedBox(
+                                                                              height:
+                                                                                  16),
+                                                                          // physics: const NeverScrollableScrollPhysics(),
+                                                                          itemCount: remarkHistoryController
+                                                                              .remarkHistory
+                                                                              .length,
+                                                                          itemBuilder: (context,
+                                                                              index) {
+                                                                            return Row(
+                                                                              children: [
+                                                                                Expanded(
+                                                                                  child: Text(
+                                                                                    remarkHistoryController.remarkHistory[index].commentName ?? "",
+                                                                                    style: customTheme(context).medium.copyWith(fontSize: 14),
+                                                                                  ),
+                                                                                ),
+                                                                                Expanded(
+                                                                                  child: Text(
+                                                                                    DateFormat('dd/MM/yyyy h:mm a').format(DateTime.parse(
+                                                                                      remarkHistoryController.remarkHistory[index].createDate ?? "",
+                                                                                    )),
+                                                                                    style: customTheme(context).medium.copyWith(fontSize: 12),
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            );
+                                                                            // ListTile(
+                                                                            //     tileColor: Colors.grey[200],
+                                                                            //     title: Text(
+                                                                            //       remarkHistoryController.remarkHistory[index].commentName ?? "",
+                                                                            //       style: customTheme(context).medium.copyWith(fontSize: 14),
+                                                                            //     ),
+                                                                            //     trailing: Padding(
+                                                                            //       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                                                                            //       child: Column(
+                                                                            //         mainAxisAlignment: MainAxisAlignment.end,
+                                                                            //         children: [
+                                                                            //           Text(
+                                                                            //             DateFormat('dd/MM/yyyy h:mm a').format(DateTime.parse(
+                                                                            //               remarkHistoryController.remarkHistory[index].createDate ?? "",
+                                                                            //             )),
+                                                                            //             style: customTheme(context).medium.copyWith(fontSize: 12),
+                                                                            //           ),
+                                                                            //         ],
+                                                                            //       ),
+                                                                            //     ),
+                                                                            //   ),
+                                                                          })
+                                                                  : Align(
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      child:
+                                                                          Text(
+                                                                        "No Remarks Found",
+                                                                        style: customTheme(context)
+                                                                            .medium
+                                                                            .copyWith(fontSize: 12),
+                                                                      ))
+                                                            ],
+                                                          ),
+                                                        ));
+                                                  })
+                                                ]),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -320,6 +430,8 @@ class NearByShops extends StatelessWidget {
                     debugPrint("outside empty");
 
                     if (controller.isLoading.value) {
+                      debugPrint("outside empty");
+
                       return Center(child: circularProgressIndicator(context));
                     }
                     if (controller.shopList.isEmpty) {
@@ -337,6 +449,8 @@ class NearByShops extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
+                              remarkHistoryController.fetchRemarkHistory(
+                                  shopId: controller.shopList[index].id!);
                               showDialog(
                                 context: context,
                                 builder: (ctx) => Material(
@@ -347,89 +461,175 @@ class NearByShops extends StatelessWidget {
                                       padding: const EdgeInsets.all(20),
                                       width: Get.size.width * .8,
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "Remarks",
-                                                style: customTheme(context)
-                                                    .medium
-                                                    .copyWith(fontSize: 14),
-                                              ),
-                                              Spacer(),
-                                              TextButton(
-                                                onPressed: () {
-                                                  Get.back();
-                                                  Get.to(() => RemarkHistory(),
-                                                      arguments: {
-                                                        "shop_id": controller
-                                                            .shopList[index].id
-                                                      });
-                                                },
+                                          TabBar(
+                                            controller:
+                                                controller.tabController,
+                                            tabs: <Tab>[
+                                              Tab(
                                                 child: Text(
-                                                  "Remark History",
+                                                  "Remarks",
                                                   style: customTheme(context)
                                                       .medium
-                                                      .copyWith(
-                                                          fontSize: 14,
-                                                          color: Colors.blue),
+                                                      .copyWith(fontSize: 14),
+                                                ),
+                                              ),
+                                              Tab(
+                                                child: Text(
+                                                  "History",
+                                                  style: customTheme(context)
+                                                      .medium
+                                                      .copyWith(fontSize: 14),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          const SizedBox(height: 10),
-
-                                          Obx(() {
-                                            return DropdownButton<
-                                                PaymentCommentsList>(
-                                              hint: Text(
-                                                controller.selectedReason.value,
-                                                style: customTheme(Get.context!)
-                                                    .regular
-                                                    .copyWith(
-                                                        fontSize: 11,
-                                                        color: const Color(
-                                                            0xff929292)),
-                                              ),
-                                              // value: controller.selectedSearchtype.value,
-                                              underline:
-                                                  const SizedBox.shrink(),
-                                              isDense: true,
-                                              onChanged: (value) {
-                                                // _focusNode.requestFocus();
-                                                controller.selectedReason(
-                                                    value?.name ?? "");
-                                                controller.selectedReasonId(
-                                                    (value?.id ?? 0).toInt());
-                                              },
-                                              items: controller.remarkList
-                                                  ?.map(
-                                                    (e) => DropdownMenuItem(
-                                                      value: e,
-                                                      child: controller
-                                                              .isRemarksLoading
-                                                              .value
-                                                          ? CircularProgressIndicator()
-                                                          : Text(e.name ?? "",
+                                          SizedBox(
+                                            // color: Colors.red,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                .2,
+                                            child: TabBarView(
+                                                controller:
+                                                    controller.tabController,
+                                                children: [
+                                                  Obx(() {
+                                                    return Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 20),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          DropdownButton<
+                                                              PaymentCommentsList>(
+                                                            hint: Text(
+                                                              controller
+                                                                  .selectedReason
+                                                                  .value,
                                                               style: customTheme(Get
                                                                       .context!)
                                                                   .regular
                                                                   .copyWith(
                                                                       fontSize:
                                                                           11,
-                                                                      color: Colors
-                                                                          .black)),
-                                                    ),
-                                                  )
-                                                  .toList(),
-                                            );
-                                          }),
+                                                                      color: const Color(
+                                                                          0xff929292)),
+                                                            ),
+                                                            // value: controller.selectedSearchtype.value,
+                                                            underline:
+                                                                const SizedBox
+                                                                    .shrink(),
+                                                            isDense: true,
+                                                            onChanged: (value) {
+                                                              // _focusNode.requestFocus();
+                                                              controller
+                                                                  .selectedReason(
+                                                                      value?.name ??
+                                                                          "");
+                                                              controller.selectedReasonId(
+                                                                  (value?.id ??
+                                                                          0)
+                                                                      .toInt());
+                                                            },
+                                                            items:
+                                                                controller
+                                                                    .remarkList
+                                                                    ?.map(
+                                                                      (e) =>
+                                                                          DropdownMenuItem(
+                                                                        value:
+                                                                            e,
+                                                                        child: controller.isRemarksLoading.value
+                                                                            ? CircularProgressIndicator()
+                                                                            : Text(e.name ?? "",
+                                                                                style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black)),
+                                                                      ),
+                                                                    )
+                                                                    .toList(),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  }),
+                                                  Obx(() {
+                                                    if (remarkHistoryController
+                                                        .isLoading.value) {
+                                                      return Center(
+                                                          child:
+                                                              circularProgressIndicator(
+                                                                  context));
+                                                    }
 
-                                          const SizedBox(height: 20),
-
+                                                    return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(15.0),
+                                                        child:
+                                                            SingleChildScrollView(
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              remarkHistoryController
+                                                                      .remarkHistory
+                                                                      .isNotEmpty
+                                                                  ? ListView
+                                                                      .separated(
+                                                                          physics:
+                                                                              NeverScrollableScrollPhysics(),
+                                                                          shrinkWrap:
+                                                                              true,
+                                                                          separatorBuilder: (_, __) => const SizedBox(
+                                                                              height:
+                                                                                  16),
+                                                                          // physics: const NeverScrollableScrollPhysics(),
+                                                                          itemCount: remarkHistoryController
+                                                                              .remarkHistory
+                                                                              .length,
+                                                                          itemBuilder: (context,
+                                                                              index) {
+                                                                            return Row(
+                                                                              children: [
+                                                                                Expanded(
+                                                                                  child: Text(
+                                                                                    remarkHistoryController.remarkHistory[index].commentName ?? "",
+                                                                                    style: customTheme(context).medium.copyWith(fontSize: 14),
+                                                                                  ),
+                                                                                ),
+                                                                                Expanded(
+                                                                                  child: Text(
+                                                                                    DateFormat('dd/MM/yyyy h:mm a').format(DateTime.parse(
+                                                                                      remarkHistoryController.remarkHistory[index].createDate ?? "",
+                                                                                    )),
+                                                                                    style: customTheme(context).medium.copyWith(fontSize: 12),
+                                                                                  ),
+                                                                                )
+                                                                              ],
+                                                                            );
+                                                                          })
+                                                                  : Align(
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      child:
+                                                                          Text(
+                                                                        "No Remarks Found",
+                                                                        style: customTheme(context)
+                                                                            .medium
+                                                                            .copyWith(fontSize: 12),
+                                                                      ))
+                                                            ],
+                                                          ),
+                                                        ));
+                                                  })
+                                                ]),
+                                          ),
                                           Obx(() {
                                             return CustomButton(
                                                 isLoading: controller
@@ -445,8 +645,7 @@ class NearByShops extends StatelessWidget {
                                                             .selectedReasonId
                                                             .value,
                                                         shopId: controller
-                                                                .nearByShopList[
-                                                                    index]
+                                                                .shopList[index]
                                                                 .id ??
                                                             0);
 
@@ -461,7 +660,6 @@ class NearByShops extends StatelessWidget {
                                                   }
                                                 });
                                           })
-                                          // })
                                         ],
                                       ),
                                     ),

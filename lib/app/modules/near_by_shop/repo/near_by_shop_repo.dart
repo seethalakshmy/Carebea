@@ -5,13 +5,15 @@ class NearByShopRepo {
   NearByShopDataSource nearByShopDataSource = NearByShopDataSource();
 
   Future<ShopListResponse> nearByShopList(
-      {required int salesPersonId,
+      {int? salesPersonId,
+      int? deliveryPersonId,
       required double latitude,
       required double longitude,
       required int limit,
       required int pageNumber}) async {
     return nearByShopDataSource.nearByShopList(
         salesPersonId: salesPersonId,
+        deliveryPersonId: deliveryPersonId,
         latitude: latitude,
         longitude: longitude,
         limit: limit,

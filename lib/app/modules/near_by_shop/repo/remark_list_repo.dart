@@ -16,8 +16,14 @@ class RemarkListRepo {
   Future<RemarkSubmitResponse> remarkSubmit(
       {required int userId,
       required int commentId,
-      required int shopId}) async {
+      required int shopId,
+      required double latitude,
+      required double longitude}) async {
     return remarkListDataSource.remarkSubmission(
-        userId: userId, commentId: commentId, shopId: shopId);
+        userId: userId,
+        commentId: commentId,
+        shopId: shopId,
+        latitude: latitude,
+        longitude: longitude);
   }
 }

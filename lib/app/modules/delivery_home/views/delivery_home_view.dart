@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'dart:developer' as developer;
 
 import 'package:carebea/app/core/helper.dart';
@@ -7,6 +6,7 @@ import 'package:carebea/app/modules/dashboard/models/qr_model.dart';
 import 'package:carebea/app/modules/delivery_home/controllers/homePage_orderListing_controller.dart';
 import 'package:carebea/app/modules/delivery_home/models/delivery_home_model.dart';
 import 'package:carebea/app/modules/delivery_home/views/delivery_order_list_view.dart';
+import 'package:carebea/app/modules/home/controllers/home_controller.dart';
 import 'package:carebea/app/modules/shops/models/order_list_model.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
@@ -15,23 +15,21 @@ import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
-import 'package:carebea/app/utils/widgets/custom_textfield.dart';
-import 'package:carebea/app/utils/widgets/scanner.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-
 import 'package:get/get.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_core/src/get_main.dart';
 
+import '../../home/widgets/home_menu_cards.dart';
 import '../../home/widgets/order_list_for_homepage_search.dart';
+import '../../near_by_shop/views/near_by_shop_view.dart';
 import '../controllers/delivery_home_controller.dart';
 
 class DeliveryHomeView extends GetView<DeliveryHomeController> {
   DeliveryHomeView({Key? key}) : super(key: key);
-  HomePageOrderListingController homePageOrderListingController = Get.put(HomePageOrderListingController());
+  HomePageOrderListingController homePageOrderListingController =
+      Get.put(HomePageOrderListingController());
+  HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +39,11 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
           appBar: appBar(context,
               showProfile: true,
               showScanner: true,
-              imageUrl: controller.profileController.profileResponse?.profileResponseResult?.imgUrl, onScanned: (val) {
+              imageUrl: controller.profileController.profileResponse
+                  ?.profileResponseResult?.imgUrl, onScanned: (val) {
             try {
-              var qr = QrResponse.fromJson(json.decode(val.replaceAll("\'", "\"")));
+              var qr =
+                  QrResponse.fromJson(json.decode(val.replaceAll("\'", "\"")));
               if (qr.type == 2) {
                 Get.toNamed(Routes.ORDER_DETAILS_DELIVERY, arguments: {
                   "order_id": qr.id,
@@ -81,7 +81,8 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
               child: ListView(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 15.0, top: 15, bottom: 25, right: 15.0),
+                    padding: const EdgeInsets.only(
+                        left: 15.0, top: 15, bottom: 25, right: 15.0),
                     child: Text(
                       "Dashboard",
                       style: customTheme(context).medium,
@@ -99,23 +100,30 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                       textFieldConfiguration: TextFieldConfiguration(
                           cursorColor: Colors.grey,
                           autofocus: false,
-                          style: customTheme(context).regular.copyWith(fontSize: 12),
+                          style: customTheme(context)
+                              .regular
+                              .copyWith(fontSize: 12),
                           decoration: InputDecoration(
                               isDense: true,
                               filled: true,
-                              fillColor: customTheme(context).textFormFieldColor,
+                              fillColor:
+                                  customTheme(context).textFormFieldColor,
                               prefixIcon: Icon(
                                 CupertinoIcons.search,
                                 color: Color(0xff9F9F9F),
                               ),
                               hintText: 'Search for orders',
-                              hintStyle: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.grey[500]),
-                              border: OutlineInputBorder(borderSide: BorderSide.none))),
-                      suggestionsCallback: (pattern) => controller.homeSearchOrder(pattern),
+                              hintStyle: customTheme(context).regular.copyWith(
+                                  fontSize: 12, color: Colors.grey[500]),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide.none))),
+                      suggestionsCallback: (pattern) =>
+                          controller.homeSearchOrder(pattern),
                       itemBuilder: (context, order) => OrderTileHomePageSearch(
                         order: order,
                         onTap: () {
-                          Get.toNamed(Routes.ORDER_DETAILS_DELIVERY, arguments: {'order_id': order.id});
+                          Get.toNamed(Routes.ORDER_DETAILS_DELIVERY,
+                              arguments: {'order_id': order.id});
                         },
                       ),
                       onSuggestionSelected: (order) {},
@@ -129,26 +137,36 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                       children: [
                         InkWell(
                           onTap: () {
-                            homePageOrderListingController.fetchDeliveryOrders(1);
-                            Get.to(() => DeliveryOrderListView("Today's Delivery", "delivery"));
+                            homePageOrderListingController
+                                .fetchDeliveryOrders(1);
+                            Get.to(() => DeliveryOrderListView(
+                                "Today's Delivery", "delivery"));
                           },
                           child: HomeTile(
                             asset: Assets.deliveryHomeIcon2,
                             title: "Today's Delivery",
-                            count: controller.deliveryHomePageResponse!.deliveryHomePageResult!.todaysDelivery!,
+                            count: controller.deliveryHomePageResponse!
+                                    .deliveryHomePageResult!.todaysDelivery ??
+                                0,
                             color: Color(0xffD8375C),
                           ),
                         ),
                         SizedBox(width: 10),
                         InkWell(
                           onTap: () {
-                            homePageOrderListingController.fetchDeliveryOrders(2);
-                            Get.to(() => DeliveryOrderListView("Total Orders Delivered", "delivery"));
+                            homePageOrderListingController
+                                .fetchDeliveryOrders(2);
+                            Get.to(() => DeliveryOrderListView(
+                                "Total Orders Delivered", "delivery"));
                           },
                           child: HomeTile(
                             asset: Assets.ordersHomeIcon,
                             title: "Total Orders Delivered",
-                            count: controller.deliveryHomePageResponse!.deliveryHomePageResult!.totalOrdersDelivered!,
+                            count: controller
+                                    .deliveryHomePageResponse!
+                                    .deliveryHomePageResult!
+                                    .totalOrdersDelivered ??
+                                0,
                             color: Color(0xffF3674F),
                           ),
                         ),
@@ -156,27 +174,67 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Center(
-                    child: InkWell(
-                      onTap: () {
-                        homePageOrderListingController.fetchDeliveryAllOrders();
-                        Get.to(() => DeliveryOrderListView('Order History', "delivery"));
-                      },
-                      child: HomeTile(
-                        asset: Assets.ordersHomeIcon,
-                        title: "Order History",
-                        count: controller.deliveryHomePageResponse!.deliveryHomePageResult!.orderHistory!,
-                        color: Color(0xff00B2BE),
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0, right: 15.0),
+                    child: Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            homePageOrderListingController
+                                .fetchDeliveryAllOrders();
+                            Get.to(() => DeliveryOrderListView(
+                                'Order History', "delivery"));
+                          },
+                          child: HomeTile(
+                            asset: Assets.ordersHomeIcon,
+                            title: "Order History",
+                            count: controller.deliveryHomePageResponse!
+                                    .deliveryHomePageResult!.orderHistory ??
+                                0,
+                            color: Color(0xff00B2BE),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        InkWell(
+                          onTap: () async {
+                            debugPrint(
+                                "loading before ${homeController.isLocationLoading}");
+                            await homeController.getCurrentPosition();
+                            debugPrint(
+                                "loading after ${homeController.isLocationLoading}");
+
+                            if (homeController.currentPosition?.latitude !=
+                                null) {
+                              Get.to(() => NearByShops(), arguments: {
+                                "latitude":
+                                    homeController.currentPosition?.latitude,
+                                "longitude":
+                                    homeController.currentPosition?.longitude,
+                                "is_from_delivery": true
+                              });
+                            }
+                            debugPrint(
+                                "hellpo ${homeController.currentPosition?.latitude}");
+                          },
+                          child: HomeTile(
+                            asset: Assets.deliveryHomeIcon,
+                            title: "Visit Shop",
+                            color: const Color(0xffF3674F),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 30),
-                  if ((controller.deliveryHomePageResponse?.deliveryHomePageResult?.upcomingDeliveryList ?? [])
+                  if ((controller.deliveryHomePageResponse
+                              ?.deliveryHomePageResult?.upcomingDeliveryList ??
+                          [])
                       .isNotEmpty)
                     Container(
                       padding: const EdgeInsets.all(25),
                       decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(12)),
                         color: Color(0xffF8F4F2),
                       ),
                       child: Column(
@@ -184,24 +242,35 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                         children: [
                           Text(
                             "Orders to be delivered(${controller.deliveryHomePageResponse!.deliveryHomePageResult!.upcomingDeliveryList!.length})",
-                            style: customTheme(context).medium.copyWith(fontSize: 14),
+                            style: customTheme(context)
+                                .medium
+                                .copyWith(fontSize: 14),
                           ),
                           SizedBox(height: 10),
                           ListView.separated(
                             shrinkWrap: true,
                             itemCount: controller
-                                .deliveryHomePageResponse!.deliveryHomePageResult!.upcomingDeliveryList!.length,
+                                .deliveryHomePageResponse!
+                                .deliveryHomePageResult!
+                                .upcomingDeliveryList!
+                                .length,
                             separatorBuilder: (_, __) => SizedBox(height: 10),
                             physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) => InkWell(
                                 onTap: () {
-                                  Get.toNamed(Routes.ORDER_DETAILS_DELIVERY, arguments: {
-                                    "order_id": controller.deliveryHomePageResponse!.deliveryHomePageResult!
-                                        .upcomingDeliveryList![index].orderId
-                                  });
+                                  Get.toNamed(Routes.ORDER_DETAILS_DELIVERY,
+                                      arguments: {
+                                        "order_id": controller
+                                            .deliveryHomePageResponse!
+                                            .deliveryHomePageResult!
+                                            .upcomingDeliveryList![index]
+                                            .orderId
+                                      });
                                 },
                                 child: OrderDeliveryCard(
-                                    order: controller.deliveryHomePageResponse!.deliveryHomePageResult!
+                                    order: controller
+                                        .deliveryHomePageResponse!
+                                        .deliveryHomePageResult!
                                         .upcomingDeliveryList![index])),
                           ),
                           // InkWell(
@@ -244,17 +313,20 @@ class OrderDeliveryCard extends StatelessWidget {
               children: [
                 Text(
                   'Order ID: #${order.orderName}',
-                  style: customTheme(context).medium.copyWith(fontSize: 12, color: customTheme(context).secondary),
+                  style: customTheme(context).medium.copyWith(
+                      fontSize: 12, color: customTheme(context).secondary),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: customTheme(context).action.withOpacity(.25),
                   ),
                   child: Text(
                     order.status!,
-                    style: customTheme(context).medium.copyWith(fontSize: 10, color: customTheme(context).action),
+                    style: customTheme(context).medium.copyWith(
+                        fontSize: 10, color: customTheme(context).action),
                   ),
                 ),
               ],
@@ -294,7 +366,8 @@ class OrderDeliveryCard extends StatelessWidget {
                     },
                     child: CircleAvatar(
                       radius: 17,
-                      backgroundColor: customTheme(context).primary.withOpacity(.2),
+                      backgroundColor:
+                          customTheme(context).primary.withOpacity(.2),
                       child: Image.asset(
                         Assets.assetsPhone,
                         scale: 2.5,
@@ -306,16 +379,21 @@ class OrderDeliveryCard extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-            child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(
-                "Amount to be collected",
-                style: customTheme(context).regular.copyWith(fontSize: 11, color: Colors.grey),
-              ),
-              Text(
-                '₹${order.amountTotal}',
-                style: customTheme(context).medium.copyWith(fontSize: 14),
-              ),
-            ]),
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Amount to be collected",
+                    style: customTheme(context)
+                        .regular
+                        .copyWith(fontSize: 11, color: Colors.grey),
+                  ),
+                  Text(
+                    '₹${order.amountTotal}',
+                    style: customTheme(context).medium.copyWith(fontSize: 14),
+                  ),
+                ]),
           )
         ],
       ),
@@ -324,16 +402,16 @@ class OrderDeliveryCard extends StatelessWidget {
 }
 
 class HomeTile extends StatelessWidget {
-  const HomeTile({
+  HomeTile({
     Key? key,
     required this.asset,
-    required this.count,
+    this.count,
     required this.title,
     required this.color,
   }) : super(key: key);
 
   final String title;
-  final int count;
+  int? count;
   final String asset;
   final Color color;
 
@@ -358,12 +436,20 @@ class HomeTile extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: customTheme(context).regular.copyWith(fontSize: 9, color: Colors.white),
+                  style: customTheme(context)
+                      .regular
+                      .copyWith(fontSize: 9, color: Colors.white),
                 ),
-                Text(
-                  "$count",
-                  style: customTheme(context).medium.copyWith(fontSize: 24, color: Colors.white),
-                )
+                count != null
+                    ? Text(
+                        "$count",
+                        style: customTheme(context)
+                            .medium
+                            .copyWith(fontSize: 24, color: Colors.white),
+                      )
+                    : const SizedBox(
+                        height: 35,
+                      )
               ],
             )
           ],

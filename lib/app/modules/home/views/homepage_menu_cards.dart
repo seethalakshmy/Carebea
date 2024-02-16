@@ -37,7 +37,7 @@ class HomeMenuCards extends GetView<HomeController> {
             onTap: () {
               Get.toNamed(Routes.CREATE_ORDER);
             },
-            child: HomeMenuIndividual(
+            child: const HomeMenuIndividual(
               asseticon: Assets.orderHomeIcon,
               gradients: [Color(0xff0098BA), Color(0xff4163A2)],
               title: "Create new order",
@@ -47,7 +47,7 @@ class HomeMenuCards extends GetView<HomeController> {
             onTap: () {
               Get.toNamed(Routes.ADD_SHOP, arguments: {"isEdit": false});
             },
-            child: HomeMenuIndividual(
+            child: const HomeMenuIndividual(
               asseticon: Assets.newShopHomeIcon,
               gradients: [Color(0xffA73B6E), Color(0xff985194)],
               title: "Add new shop",
@@ -67,7 +67,7 @@ class HomeMenuCards extends GetView<HomeController> {
             onTap: () {
               Get.toNamed(Routes.ROUTE_PAGE);
             },
-            child: HomeMenuIndividual(
+            child: const HomeMenuIndividual(
               asseticon: Assets.routeHomeIcon,
               backgroundColor: Color(0xffF74254),
               title: "Route",

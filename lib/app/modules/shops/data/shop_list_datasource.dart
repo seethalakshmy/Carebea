@@ -11,7 +11,15 @@ import 'dart:developer' as developer;
 class ShopDataSource {
   ApiService apiService = Get.find();
 
-  Future<ShopListResponse> shopList({int? salesPersonId, int? shopId, String? filterName, int? filterId, Map<String, dynamic>? query, required int pageNumber, required int pageSize}) async {
+  Future<ShopListResponse> shopList(
+      {int? salesPersonId,
+      int? deliveryPersonId,
+      int? shopId,
+      String? filterName,
+      int? filterId,
+      Map<String, dynamic>? query,
+      required int pageNumber,
+      required int pageSize}) async {
     Map<String, dynamic> body = {
       "limit": pageSize,
       "page_number": pageNumber,
@@ -23,6 +31,9 @@ class ShopDataSource {
       body.addAll({
         'sales_person_id': salesPersonId,
       });
+    }
+    if (deliveryPersonId != null) {
+      body.addAll({"delivery_person_id": deliveryPersonId});
     }
     if (filterName != null) {
       body.addAll({'filter_name': filterName, 'filter_id': filterId});

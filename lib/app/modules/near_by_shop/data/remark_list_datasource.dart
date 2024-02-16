@@ -27,15 +27,18 @@ class RemarkListDataSource {
     }
   }
 
-  Future<RemarkSubmitResponse> remarkSubmission({
-    required int userId,
-    required int commentId,
-    required int shopId,
-  }) async {
+  Future<RemarkSubmitResponse> remarkSubmission(
+      {required int userId,
+      required int commentId,
+      required int shopId,
+      required double latitude,
+      required double longitude}) async {
     Map<String, dynamic> body = {
       "user_id": userId,
       "comment_id": commentId,
       "shop_id": shopId,
+      "latitude": latitude,
+      "longitude": longitude
     };
 
     var response = await apiService.post('create-payment_followups', body);
