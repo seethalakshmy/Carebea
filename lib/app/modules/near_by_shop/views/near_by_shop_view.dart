@@ -20,6 +20,8 @@ class NearByShops extends StatelessWidget {
   final RemarkHistoryController remarkHistoryController =
       Get.put(RemarkHistoryController());
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -272,6 +274,9 @@ class NearByShops extends StatelessWidget {
                                                                 .all(15.0),
                                                         child:
                                                             SingleChildScrollView(
+                                                          controller:
+                                                              remarkHistoryController
+                                                                  .scrollController,
                                                           child: Column(
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
@@ -442,7 +447,6 @@ class NearByShops extends StatelessWidget {
                           child: const Text("No shops found!"));
                     }
                     return ListView.separated(
-                        controller: controller.scrollController,
                         separatorBuilder: (_, __) => const SizedBox(height: 20),
                         shrinkWrap: true,
                         itemCount: controller.shopList.length,
@@ -571,6 +575,9 @@ class NearByShops extends StatelessWidget {
                                                                 .all(15.0),
                                                         child:
                                                             SingleChildScrollView(
+                                                          controller:
+                                                              remarkHistoryController
+                                                                  .scrollController,
                                                           child: Column(
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment

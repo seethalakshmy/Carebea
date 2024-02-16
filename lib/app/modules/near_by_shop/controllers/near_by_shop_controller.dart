@@ -1,4 +1,5 @@
 import 'package:carebea/app/modules/near_by_shop/repo/near_by_shop_repo.dart';
+import 'package:carebea/app/modules/remark_history/controllers/remark_history_controller.dart';
 import 'package:carebea/app/modules/shops/models/order_list_model.dart';
 import 'package:carebea/app/modules/shops/models/payment_model.dart';
 import 'package:carebea/app/modules/near_by_shop/models/remark_model.dart';
@@ -55,6 +56,7 @@ class NearByShopsController extends GetxController
   double? longitude;
   bool? isFromDelivery;
   TabController? tabController;
+  RemarkHistoryController remarkHistoryController = Get.find();
 
   Rx<SearchType> selectedSearchtype = Rx(
     SearchType("Name", "name"),
@@ -73,6 +75,16 @@ class NearByShopsController extends GetxController
     longitude = Get.arguments['longitude'];
     isFromDelivery = Get.arguments['is_from_delivery'];
     debugPrint("is from delivery $isFromDelivery");
+    remarkHistoryController.scrollController.addListener(() {
+      if (((remarkHistoryController.scrollController.position.maxScrollExtent *
+                  .7) <=
+              remarkHistoryController.scrollController.position.pixels) &&
+          !remarkHistoryController.isPaginating.value) {
+        debugPrint(
+            "pixel change ${remarkHistoryController.scrollController.position}");
+        remarkHistoryController.paginate();
+      }
+    });
     scrollController.addListener(() {
       if (((scrollController.position.maxScrollExtent * .7) <=
               scrollController.position.pixels) &&
