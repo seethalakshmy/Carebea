@@ -133,6 +133,7 @@ class HomeMenuCards extends GetView<HomeController> {
                 debugPrint("loading after ${controller.isLocationLoading}");
 
                 if (controller.currentPosition?.latitude != null) {
+                  debugPrint("ok");
                   Get.to(() => NearByShops(), arguments: {
                     "latitude": controller.currentPosition?.latitude,
                     "longitude": controller.currentPosition?.longitude

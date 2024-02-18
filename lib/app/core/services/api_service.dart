@@ -12,7 +12,7 @@ import '../../../model/access_token.dart';
 import '../../utils/shared_prefs.dart';
 
 class ApiService extends GetxService {
-  final _baseUrl = "http://192.168.1.252:8069"; //test
+  final _baseUrl = "https://4715-103-70-199-239.ngrok-free.app"; //test
   // final _baseUrl = "http://15.206.14.111"; //live
 
   var xAuthClient = "12345";
@@ -29,7 +29,9 @@ class ApiService extends GetxService {
       'X-Auth-Token': xAuthToken,
       'grant_type': 'access_token',
       'content-type': 'application/json',
-      'Authorization': "Bearer ${SharedPrefs.getAccessToken() ?? ''}",
+      // 'Authorization': "Bearer ${SharedPrefs.getAccessToken() ?? ''}",
+      'Authorization':
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTA4MjEzNDMsImlhdCI6MTcwODIyOTM0M30.NyG2p-1aLXC4BThT4O6ls25hxNPS8aRRZX0eFKsJw2k ?? ''}",
     };
   }
 

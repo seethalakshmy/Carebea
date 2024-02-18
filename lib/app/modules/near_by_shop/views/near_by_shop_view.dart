@@ -16,11 +16,9 @@ import '../controllers/near_by_shop_controller.dart';
 
 class NearByShops extends StatelessWidget {
   NearByShops({Key? key}) : super(key: key);
-  final NearByShopsController controller = Get.put(NearByShopsController());
   final RemarkHistoryController remarkHistoryController =
       Get.put(RemarkHistoryController());
-
-
+  final NearByShopsController controller = Get.put(NearByShopsController());
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +118,8 @@ class NearByShops extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
+                              remarkHistoryController.shopId =
+                                  controller.nearByShopList[index].id!;
                               remarkHistoryController.fetchRemarkHistory(
                                   shopId: controller.nearByShopList[index].id!);
                               showDialog(
@@ -453,6 +453,8 @@ class NearByShops extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
+                              remarkHistoryController.shopId =
+                                  controller.shopList[index].id!;
                               remarkHistoryController.fetchRemarkHistory(
                                   shopId: controller.shopList[index].id!);
                               showDialog(

@@ -17,7 +17,7 @@ class RemarkHistoryController extends GetxController {
 
   @override
   void onInit() {
-    shopId = Get.arguments['shop_id'];
+    // shopId = Get.arguments['shop_id'];
     debugPrint("shopId $shopId");
     scrollController.addListener(() {
       if (((scrollController.position.maxScrollExtent * .7) <=

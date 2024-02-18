@@ -6,7 +6,6 @@ class SharedPrefs {
     init();
   }
   Future init() async {
-
     shared = await SharedPreferences.getInstance();
   }
 
