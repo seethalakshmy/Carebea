@@ -136,7 +136,8 @@ class HomeMenuCards extends GetView<HomeController> {
                   debugPrint("ok");
                   Get.to(() => NearByShops(), arguments: {
                     "latitude": controller.currentPosition?.latitude,
-                    "longitude": controller.currentPosition?.longitude
+                    "longitude": controller.currentPosition?.longitude,
+                    "is_from_delivery": false
                   });
                 }
                 debugPrint("hellpo ${controller.currentPosition?.latitude}");

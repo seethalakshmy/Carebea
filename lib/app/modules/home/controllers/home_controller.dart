@@ -77,6 +77,8 @@ class HomeController extends GetxController {
     isLocationLoading(true);
     final hasPermission = await _handleLocationPermission();
     if (!hasPermission) return;
+    ScaffoldMessenger.of(Get.context!).showSnackBar(const SnackBar(
+        content: Text("Please wait we are fetching your current location")));
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
         .then((Position position) {
       currentPosition = position;
