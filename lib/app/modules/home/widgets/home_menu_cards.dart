@@ -45,7 +45,7 @@ class HomeMenuIndividual extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 8),
+                            padding: const EdgeInsets.only(left: 8, bottom: 5),
                             child: amount != null
                                 ? Text(
                                     amount!.toStringAsFixed(2),

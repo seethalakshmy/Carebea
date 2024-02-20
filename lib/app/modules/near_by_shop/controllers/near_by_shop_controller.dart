@@ -185,8 +185,8 @@ class NearByShopsController extends GetxController
       selectedReasonId.value = 0;
       selectedReason.value = "choose";
 
-      ScaffoldMessenger.of(Get.context!).showSnackBar(SnackBar(
-          content: Text(remarkSubmitResponse?.result?.message ?? "Success")));
+      ScaffoldMessenger.of(Get.context!).showSnackBar(
+          const SnackBar(content: Text("Remark submitted successfully")));
     } else {
       isRemarksSubmitLoading(false);
       selectedReasonId.value = 0;
