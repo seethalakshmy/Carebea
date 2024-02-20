@@ -435,7 +435,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                   ServiceRequestManagementPage(
                     clientId: state.response?.data?.id ?? "",
                   ),
-                  PendingServiceView(
+                  PendingServicePage(
                     clientId: state.response?.data?.id ?? "",
                   ),
                   // ServiceView(

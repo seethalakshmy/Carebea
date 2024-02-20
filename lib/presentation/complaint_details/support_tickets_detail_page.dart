@@ -241,9 +241,13 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
           _complaintDetailBloc.complaintDetailsList[0].isGeneral ?? false
               ? const CustomSizedBox()
               : CustomSizedBox(height: DBL.six.val),
-          _complaintDetailBloc.complaintDetailsList[0].isGeneral ?? false ? const SizedBox.shrink() :  _complaintClientNameWidget(),
+          _complaintDetailBloc.complaintDetailsList[0].isGeneral ?? false
+              ? const SizedBox.shrink()
+              : _complaintClientNameWidget(),
           CustomSizedBox(height: DBL.six.val),
-          _complaintDetailBloc.complaintDetailsList[0].isGeneral ?? false ? const SizedBox.shrink() : _complaintCANameWidget(),
+          _complaintDetailBloc.complaintDetailsList[0].isGeneral ?? false
+              ? const SizedBox.shrink()
+              : _complaintCANameWidget(),
           CustomSizedBox(height: DBL.thirty.val),
           _complaintDetailBloc.complaintDetailsList[0].attachments!.isNotEmpty
               ? CustomText(
@@ -427,9 +431,9 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
     return RowColonCombo.twoHundred(
         customWidthLg1: 180,
         label: AppString.createdDateTime.val,
-        value: Utility.detailDate(DateTime.parse(_complaintDetailBloc.complaintDetailsList[0].createdDate ?? '')),
-        // _complaintDetailBloc.generateFormattedDate(
-        //     DateTime.parse(_complaintDetailBloc.complaintDetailsList[0].createdDate ?? "").toLocal().toString()),
+        value: _complaintDetailBloc.complaintDetailsList[0].createdDate ?? "",
+        // Utility.detailDate(DateTime.parse(_complaintDetailBloc.complaintDetailsList[0].createdDate ?? '')),
+
         fontSize: FS.font13PointFive.val);
   }
 

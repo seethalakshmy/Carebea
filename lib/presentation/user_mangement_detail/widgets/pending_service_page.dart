@@ -23,12 +23,13 @@ import '../../widget/custom_sizedbox.dart';
 import '../../widget/custom_text.dart';
 import '../../widget/empty_view.dart';
 import '../../widget/error_view.dart';
+import '../../widget/header_view.dart';
 import '../../widget/pagination_view.dart';
 import '../../widget/table_loader_view.dart';
 
 @RoutePage()
-class PendingServiceView extends StatefulWidget {
-  PendingServiceView({
+class PendingServicePage extends StatefulWidget {
+  PendingServicePage({
     Key? key,
     required this.clientId,
   }) : super(key: key);
@@ -36,10 +37,10 @@ class PendingServiceView extends StatefulWidget {
   String clientId;
 
   @override
-  State<PendingServiceView> createState() => _PendingServiceViewState();
+  State<PendingServicePage> createState() => _PendingServicePageState();
 }
 
-class _PendingServiceViewState extends State<PendingServiceView> {
+class _PendingServicePageState extends State<PendingServicePage> {
   List<ServicesList> serviceList = [];
 
   final int _limit = 10;
@@ -71,6 +72,9 @@ class _PendingServiceViewState extends State<PendingServiceView> {
     return SingleChildScrollView(
       child: Column(
         children: [
+          HeaderView(
+            title: AppString.pendingServices.val,
+          ),
           BlocProvider(
             create: (context) => _userManagementDetailBloc,
             child: Builder(builder: (context) {
