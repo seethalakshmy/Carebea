@@ -32,11 +32,24 @@ class NearByShops extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Near By Shops',
-                style: customTheme(context)
-                    .medium
-                    .copyWith(fontSize: 16, color: Colors.black),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back_ios,
+                      size: 17,
+                    ),
+                  ),
+                  Text(
+                    'Near By Shops',
+                    style: customTheme(context)
+                        .medium
+                        .copyWith(fontSize: 16, color: Colors.black),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 20,
@@ -44,62 +57,56 @@ class NearByShops extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: Obx(() {
-                      return CustomTextField(
-                        textcontroller: controller.searchEditingController,
-                        key: const ValueKey("search"),
-                        inputType:
-                            controller.selectedSearchtype.value.type == "phone"
-                                ? TextInputType.phone
-                                : TextInputType.name,
-                        focusNode: focusNode,
-                        onChanged: (val) {
-                          controller.searchShop(val);
-                        },
-                        hint: 'Search for shops',
-                        fillcolor: customTheme(context).textFormFieldColor,
-                        icon: const Icon(
-                          Icons.search,
-                          size: 30,
-                          color: Colors.grey,
+                      child: CustomTextField(
+                    textcontroller: controller.searchEditingController,
+                    key: const ValueKey("search"),
+                    inputType: TextInputType.visiblePassword,
+                    // controller.selectedSearchtype.value.type == "phone"
+                    //     ? TextInputType.visiblePassword
+                    //     : TextInputType.phone,
+                    focusNode: focusNode,
+                    onChanged: (val) {
+                      controller.searchShop(val);
+                    },
+                    hint: 'Search for shops',
+                    fillcolor: customTheme(context).textFormFieldColor,
+                    icon: const Icon(
+                      Icons.search,
+                      size: 30,
+                      color: Colors.grey,
+                    ),
+                    trailing: Obx(() {
+                      return DropdownButton<String>(
+                        hint: Text(
+                          "Choose",
+                          style: customTheme(Get.context!).regular.copyWith(
+                              fontSize: 11, color: const Color(0xff929292)),
                         ),
-                        trailing: Obx(() {
-                          return DropdownButton<String>(
-                            hint: Text(
-                              "Choose",
-                              style: customTheme(Get.context!).regular.copyWith(
-                                  fontSize: 11, color: const Color(0xff929292)),
-                            ),
-                            value:
-                                controller.selectedSearchtype.value.type ?? "",
-                            underline: const SizedBox.shrink(),
-                            isDense: true,
-                            onChanged: (value) {
-                              focusNode.requestFocus();
-                              controller.selectedSearchtype(
-                                  controller.searchitems.singleWhere(
-                                      (element) => element.type == value));
-                              debugPrint(
-                                  "search type ${controller.selectedSearchtype.value.type}");
-                            },
-                            items: controller.searchitems
-                                .map(
-                                  (e) => DropdownMenuItem(
-                                    value: e.type,
-                                    child: Text(e.title!,
-                                        style: customTheme(Get.context!)
-                                            .regular
-                                            .copyWith(
-                                                fontSize: 11,
-                                                color: Colors.black)),
-                                  ),
-                                )
-                                .toList(),
-                          );
-                        }),
+                        value: controller.selectedSearchtype.value.type ?? "",
+                        underline: const SizedBox.shrink(),
+                        isDense: true,
+                        onChanged: (value) {
+                          focusNode.requestFocus();
+                          controller.selectedSearchtype(controller.searchitems
+                              .singleWhere((element) => element.type == value));
+                          debugPrint(
+                              "search type ${controller.selectedSearchtype.value.type}");
+                        },
+                        items: controller.searchitems
+                            .map(
+                              (e) => DropdownMenuItem(
+                                value: e.type,
+                                child: Text(e.title!,
+                                    style: customTheme(Get.context!)
+                                        .regular
+                                        .copyWith(
+                                            fontSize: 11, color: Colors.black)),
+                              ),
+                            )
+                            .toList(),
                       );
                     }),
-                  ),
+                  )),
                   const SizedBox(
                     width: 5,
                   ),
