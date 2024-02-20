@@ -67,6 +67,10 @@ class NearByShops extends StatelessWidget {
                     focusNode: focusNode,
                     onChanged: (val) {
                       controller.searchShop(val);
+                      controller.searchTerm.value =
+                          controller.searchEditingController.text;
+                      debugPrint(
+                          "searched value ${controller.searchEditingController.text}");
                     },
                     hint: 'Search for shops',
                     fillcolor: customTheme(context).textFormFieldColor,
@@ -76,35 +80,55 @@ class NearByShops extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     trailing: Obx(() {
-                      return DropdownButton<String>(
-                        hint: Text(
-                          "Choose",
-                          style: customTheme(Get.context!).regular.copyWith(
-                              fontSize: 11, color: const Color(0xff929292)),
-                        ),
-                        value: controller.selectedSearchtype.value.type ?? "",
-                        underline: const SizedBox.shrink(),
-                        isDense: true,
-                        onChanged: (value) {
-                          focusNode.requestFocus();
-                          controller.selectedSearchtype(controller.searchitems
-                              .singleWhere((element) => element.type == value));
-                          debugPrint(
-                              "search type ${controller.selectedSearchtype.value.type}");
-                        },
-                        items: controller.searchitems
-                            .map(
-                              (e) => DropdownMenuItem(
-                                value: e.type,
-                                child: Text(e.title!,
-                                    style: customTheme(Get.context!)
-                                        .regular
-                                        .copyWith(
-                                            fontSize: 11, color: Colors.black)),
+                      return controller.searchTerm.isEmpty
+                          ? DropdownButton<String>(
+                              hint: Text(
+                                "Choose",
+                                style: customTheme(Get.context!)
+                                    .regular
+                                    .copyWith(
+                                        fontSize: 11,
+                                        color: const Color(0xff929292)),
                               ),
+                              value: controller.selectedSearchtype.value.type ??
+                                  "",
+                              underline: const SizedBox.shrink(),
+                              isDense: true,
+                              onChanged: (value) {
+                                focusNode.requestFocus();
+                                controller.selectedSearchtype(
+                                    controller.searchitems.singleWhere(
+                                        (element) => element.type == value));
+                                debugPrint(
+                                    "search type ${controller.selectedSearchtype.value.type}");
+                              },
+                              items: controller.searchitems
+                                  .map(
+                                    (e) => DropdownMenuItem(
+                                      value: e.type,
+                                      child: Text(e.title!,
+                                          style: customTheme(Get.context!)
+                                              .regular
+                                              .copyWith(
+                                                  fontSize: 11,
+                                                  color: Colors.black)),
+                                    ),
+                                  )
+                                  .toList(),
                             )
-                            .toList(),
-                      );
+                          : InkWell(
+                              onTap: () {
+                                controller.searchTerm.value = "";
+                                controller.searchEditingController.clear();
+                                controller.fetchNearByShops(
+                                    latitude: controller.latitude!,
+                                    longitude: controller.longitude!);
+                              },
+                              child: const Icon(
+                                Icons.close,
+                                size: 20,
+                              ),
+                            );
                     }),
                   )),
                   const SizedBox(

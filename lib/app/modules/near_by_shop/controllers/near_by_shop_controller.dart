@@ -52,6 +52,7 @@ class NearByShopsController extends GetxController
       TextEditingController();
   TextEditingController cheqNoController = TextEditingController();
   TextEditingController searchEditingController = TextEditingController();
+  RxString searchTerm = "".obs;
   double? latitude;
   double? longitude;
   bool? isFromDelivery;
