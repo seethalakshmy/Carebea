@@ -1046,6 +1046,29 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<PersonalDetailsResponse> fetchPersonalDetails(userId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'user_id': userId};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PersonalDetailsResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/personal-details?',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PersonalDetailsResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<StateListResponse> getStateList(
     pageNo,
     limit,

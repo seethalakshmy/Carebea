@@ -991,7 +991,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                         addressLineController.text.trim();
                     documentNumberController.text =
                         documentNumberController.text.trim();
-                    streetController.text = streetController.text.trim();
 // Here you will get callback after coming back from NextPage()
 // Do your code here
                   });

@@ -23,6 +23,9 @@ abstract class IOnBoardingRepo {
     required String searchKey,
   });
 
+  Future<Either<ApiErrorHandler, PersonalDetailsResponse>> fetchPersonalDetails(
+      {required String userId});
+
   Future<Either<ApiErrorHandler, StateListResponse>> getStateList({
     required String page,
     required String searchKey,

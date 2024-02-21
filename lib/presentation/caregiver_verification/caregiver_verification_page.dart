@@ -173,9 +173,12 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                           showHeading: false,
                           width: 700,
                           heading: "",
-                          child: CachedImage(
-                            fit: BoxFit.contain,
-                            imgUrl: caregiver?.profile ?? "",
+                          child: Center(
+                            child: CachedImage(
+                              width: 700,
+                              fit: BoxFit.fitWidth,
+                              imgUrl: caregiver?.profile ?? "",
+                            ),
                           ));
                     },
                   );
@@ -1127,8 +1130,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
               heading: AppString.verificationProcess.val,
               child: url.contains('.pdf')
                   ? CustomSizedBox(
-                      width: 780,
-                      height: 540,
+                      width: 800,
+                      height: 550,
                       child: PdfViewer.openFile(
                         url,
                         viewerController: pdfController,

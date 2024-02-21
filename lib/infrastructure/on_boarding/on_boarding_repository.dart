@@ -43,6 +43,25 @@ class OnBoardingRepository implements IOnBoardingRepo {
   }
 
   @override
+  Future<Either<ApiErrorHandler, PersonalDetailsResponse>> fetchPersonalDetails(
+      {required String userId}) async {
+    try {
+      final response = await apiClient.fetchPersonalDetails(userId);
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
   Future<Either<ApiErrorHandler, CityListResponse>> getCityList({
     required String stateId,
     required String page,
@@ -625,5 +644,12 @@ class OnBoardingRepository implements IOnBoardingRepo {
             error: AppString.somethingWentWrong.val, isClientError: false));
       }
     }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, PersonalDetailsResponse>> getPersonalDetails(
+      {required String userId}) {
+    // TODO: implement getPersonalDetails
+    throw UnimplementedError();
   }
 }

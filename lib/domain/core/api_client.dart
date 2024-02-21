@@ -354,6 +354,11 @@ abstract class ApiClient {
     @Query("search_term") String searchQuery,
   );
 
+  @GET("/admin/personal-details?")
+  Future<PersonalDetailsResponse> fetchPersonalDetails(
+    @Query("user_id") String userId,
+  );
+
   @GET("/common-data/get-states?")
   Future<StateListResponse> getStateList(
     @Query("page") String pageNo,

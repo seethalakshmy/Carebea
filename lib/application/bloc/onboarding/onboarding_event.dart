@@ -51,6 +51,9 @@ class OnboardingEvent with _$OnboardingEvent {
       {required String stateSearchQuery,
       required bool wantLoading}) = _StateLists;
 
+  const factory OnboardingEvent.fetchPersonalDetails({required String userId}) =
+      _FetchPersonalDetails;
+
   const factory OnboardingEvent.relationList() = _RelationList;
 
   const factory OnboardingEvent.submitReference({required String userId}) =
