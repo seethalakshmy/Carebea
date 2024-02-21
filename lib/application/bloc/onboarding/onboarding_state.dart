@@ -12,6 +12,7 @@ class OnboardingState with _$OnboardingState {
     required List<GetReferences> referenceList,
     required List<PetsModel> petsList,
     required List<PreferenceLanguageModel> languageList,
+    PersonalDetailsResponse? personalDetails,
     required List<ServiceModel> serviceList,
     required int isHHASelected,
     required int isBLSSelected,
@@ -112,6 +113,7 @@ class OnboardingState with _$OnboardingState {
       submitBuildProfileOption: const None(),
       submitAccountDetailsOption: const None(),
       referenceOption: const None(),
+      personalDetails: null,
     );
   }
 }

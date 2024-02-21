@@ -87,7 +87,7 @@ class _AlertListState extends State<AlertList> {
                     return InkWell(
                       onTap: () {
                         if (index == 0 || index == 1) {
-                          autoTabRouter!.setActiveIndex(15);
+                          autoTabRouter!.setActiveIndex(16);
                         }
                       },
                       child: Container(

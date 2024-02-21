@@ -61,6 +61,7 @@ mixin _$OnboardingEvent {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -153,6 +154,7 @@ mixin _$OnboardingEvent {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -244,6 +246,7 @@ mixin _$OnboardingEvent {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -301,6 +304,7 @@ mixin _$OnboardingEvent {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -349,6 +353,7 @@ mixin _$OnboardingEvent {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -393,6 +398,7 @@ mixin _$OnboardingEvent {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -755,6 +761,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -867,6 +874,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -978,6 +986,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -1058,6 +1067,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -1109,6 +1119,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -1156,6 +1167,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -1450,6 +1462,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -1554,6 +1567,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -1657,6 +1671,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -1729,6 +1744,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -1780,6 +1796,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -1827,6 +1844,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -2095,6 +2113,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -2197,6 +2216,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -2298,6 +2318,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -2368,6 +2389,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -2419,6 +2441,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -2466,6 +2489,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -2612,6 +2636,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -2707,6 +2732,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -2801,6 +2827,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -2864,6 +2891,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -2915,6 +2943,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -2962,6 +2991,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -3126,6 +3156,7 @@ class _$_CityLists implements _CityLists {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -3221,6 +3252,7 @@ class _$_CityLists implements _CityLists {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -3315,6 +3347,7 @@ class _$_CityLists implements _CityLists {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -3378,6 +3411,7 @@ class _$_CityLists implements _CityLists {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -3429,6 +3463,7 @@ class _$_CityLists implements _CityLists {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -3476,6 +3511,7 @@ class _$_CityLists implements _CityLists {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -3649,6 +3685,7 @@ class _$_StateLists implements _StateLists {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -3744,6 +3781,7 @@ class _$_StateLists implements _StateLists {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -3838,6 +3876,7 @@ class _$_StateLists implements _StateLists {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -3901,6 +3940,7 @@ class _$_StateLists implements _StateLists {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -3952,6 +3992,7 @@ class _$_StateLists implements _StateLists {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -3999,6 +4040,7 @@ class _$_StateLists implements _StateLists {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -4051,6 +4093,523 @@ abstract class _StateLists implements OnboardingEvent {
   bool get wantLoading;
   @JsonKey(ignore: true)
   _$$_StateListsCopyWith<_$_StateLists> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_FetchPersonalDetailsCopyWith<$Res> {
+  factory _$$_FetchPersonalDetailsCopyWith(_$_FetchPersonalDetails value,
+          $Res Function(_$_FetchPersonalDetails) then) =
+      __$$_FetchPersonalDetailsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String userId});
+}
+
+/// @nodoc
+class __$$_FetchPersonalDetailsCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_FetchPersonalDetails>
+    implements _$$_FetchPersonalDetailsCopyWith<$Res> {
+  __$$_FetchPersonalDetailsCopyWithImpl(_$_FetchPersonalDetails _value,
+      $Res Function(_$_FetchPersonalDetails) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+  }) {
+    return _then(_$_FetchPersonalDetails(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_FetchPersonalDetails implements _FetchPersonalDetails {
+  const _$_FetchPersonalDetails({required this.userId});
+
+  @override
+  final String userId;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.fetchPersonalDetails(userId: $userId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchPersonalDetails &&
+            (identical(other.userId, userId) || other.userId == userId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FetchPersonalDetailsCopyWith<_$_FetchPersonalDetails> get copyWith =>
+      __$$_FetchPersonalDetailsCopyWithImpl<_$_FetchPersonalDetails>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic,
+            String locationTag)
+        personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
+    required TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<Map<String, dynamic>> petsList,
+            List<String> knownLanguages)
+        preferenceDetails,
+    required TResult Function() commonData,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
+    required TResult Function() yearsOfExpList,
+    required TResult Function(String petSearchKey, List<PetsModel> petList)
+        petsList,
+    required TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)
+        languageList,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+    required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
+    required TResult Function() getServices,
+    required TResult Function(String userId, Map<String, dynamic> services)
+        submitServices,
+    required TResult Function(int index, bool value) serviceSelected,
+    required TResult Function(String userId, String aboutYou, String hobbies,
+            String whyLoveBeingCaregiver)
+        submitBuildProfile,
+    required TResult Function(String userId, String accountHolderName,
+            String routingNumber, String accountNumber)
+        submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
+  }) {
+    return fetchPersonalDetails(userId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic,
+            String locationTag)?
+        personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult? Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<Map<String, dynamic>> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult? Function()? commonData,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
+    TResult? Function()? yearsOfExpList,
+    TResult? Function(String petSearchKey, List<PetsModel> petList)? petsList,
+    TResult? Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
+    TResult? Function()? getServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
+    TResult? Function(int index, bool value)? serviceSelected,
+    TResult? Function(String userId, String aboutYou, String hobbies,
+            String whyLoveBeingCaregiver)?
+        submitBuildProfile,
+    TResult? Function(String userId, String accountHolderName,
+            String routingNumber, String accountNumber)?
+        submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
+  }) {
+    return fetchPersonalDetails?.call(userId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic,
+            String locationTag)?
+        personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<Map<String, dynamic>> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult Function()? commonData,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
+    TResult Function()? yearsOfExpList,
+    TResult Function(String petSearchKey, List<PetsModel> petList)? petsList,
+    TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
+    TResult Function()? getServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
+    TResult Function(int index, bool value)? serviceSelected,
+    TResult Function(String userId, String aboutYou, String hobbies,
+            String whyLoveBeingCaregiver)?
+        submitBuildProfile,
+    TResult Function(String userId, String accountHolderName,
+            String routingNumber, String accountNumber)?
+        submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
+    required TResult orElse(),
+  }) {
+    if (fetchPersonalDetails != null) {
+      return fetchPersonalDetails(userId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
+    required TResult Function(_SubmitPreferenceDetails value) preferenceDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
+    required TResult Function(_YearsOfExp value) yearsOfExpList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+    required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
+    required TResult Function(_GetCaregiverService value) getServices,
+    required TResult Function(_SubmitCaregiverService value) submitServices,
+    required TResult Function(_CaregiverServiceSelected value) serviceSelected,
+    required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
+    required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
+  }) {
+    return fetchPersonalDetails(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult? Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
+    TResult? Function(_YearsOfExp value)? yearsOfExpList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
+    TResult? Function(_GetCaregiverService value)? getServices,
+    TResult? Function(_SubmitCaregiverService value)? submitServices,
+    TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
+    TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
+    TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
+  }) {
+    return fetchPersonalDetails?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
+    TResult Function(_YearsOfExp value)? yearsOfExpList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
+    TResult Function(_GetCaregiverService value)? getServices,
+    TResult Function(_SubmitCaregiverService value)? submitServices,
+    TResult Function(_CaregiverServiceSelected value)? serviceSelected,
+    TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
+    TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
+    required TResult orElse(),
+  }) {
+    if (fetchPersonalDetails != null) {
+      return fetchPersonalDetails(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchPersonalDetails implements OnboardingEvent {
+  const factory _FetchPersonalDetails({required final String userId}) =
+      _$_FetchPersonalDetails;
+
+  String get userId;
+  @JsonKey(ignore: true)
+  _$$_FetchPersonalDetailsCopyWith<_$_FetchPersonalDetails> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -4135,6 +4694,7 @@ class _$_RelationList implements _RelationList {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -4230,6 +4790,7 @@ class _$_RelationList implements _RelationList {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -4324,6 +4885,7 @@ class _$_RelationList implements _RelationList {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -4387,6 +4949,7 @@ class _$_RelationList implements _RelationList {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -4438,6 +5001,7 @@ class _$_RelationList implements _RelationList {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -4485,6 +5049,7 @@ class _$_RelationList implements _RelationList {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -4639,6 +5204,7 @@ class _$_SubmitReference implements _SubmitReference {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -4734,6 +5300,7 @@ class _$_SubmitReference implements _SubmitReference {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -4828,6 +5395,7 @@ class _$_SubmitReference implements _SubmitReference {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -4891,6 +5459,7 @@ class _$_SubmitReference implements _SubmitReference {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -4942,6 +5511,7 @@ class _$_SubmitReference implements _SubmitReference {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -4989,6 +5559,7 @@ class _$_SubmitReference implements _SubmitReference {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -5123,6 +5694,7 @@ class _$_AddReference implements _AddReference {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -5218,6 +5790,7 @@ class _$_AddReference implements _AddReference {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -5312,6 +5885,7 @@ class _$_AddReference implements _AddReference {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -5375,6 +5949,7 @@ class _$_AddReference implements _AddReference {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -5426,6 +6001,7 @@ class _$_AddReference implements _AddReference {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -5473,6 +6049,7 @@ class _$_AddReference implements _AddReference {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -5627,6 +6204,7 @@ class _$DeleteReference implements DeleteReference {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -5722,6 +6300,7 @@ class _$DeleteReference implements DeleteReference {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -5816,6 +6395,7 @@ class _$DeleteReference implements DeleteReference {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -5879,6 +6459,7 @@ class _$DeleteReference implements DeleteReference {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -5930,6 +6511,7 @@ class _$DeleteReference implements DeleteReference {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -5977,6 +6559,7 @@ class _$DeleteReference implements DeleteReference {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -6136,6 +6719,7 @@ class _$UpdateReference implements UpdateReference {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -6231,6 +6815,7 @@ class _$UpdateReference implements UpdateReference {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -6325,6 +6910,7 @@ class _$UpdateReference implements UpdateReference {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -6388,6 +6974,7 @@ class _$UpdateReference implements UpdateReference {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -6439,6 +7026,7 @@ class _$UpdateReference implements UpdateReference {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -6486,6 +7074,7 @@ class _$UpdateReference implements UpdateReference {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -6654,6 +7243,7 @@ class _$EditReference implements EditReference {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -6749,6 +7339,7 @@ class _$EditReference implements EditReference {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -6843,6 +7434,7 @@ class _$EditReference implements EditReference {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -6906,6 +7498,7 @@ class _$EditReference implements EditReference {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -6957,6 +7550,7 @@ class _$EditReference implements EditReference {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -7004,6 +7598,7 @@ class _$EditReference implements EditReference {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -7140,6 +7735,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -7235,6 +7831,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -7329,6 +7926,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -7392,6 +7990,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -7443,6 +8042,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -7490,6 +8090,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -7660,6 +8261,7 @@ class _$_GetPetList implements _GetPetList {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -7755,6 +8357,7 @@ class _$_GetPetList implements _GetPetList {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -7849,6 +8452,7 @@ class _$_GetPetList implements _GetPetList {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -7912,6 +8516,7 @@ class _$_GetPetList implements _GetPetList {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -7963,6 +8568,7 @@ class _$_GetPetList implements _GetPetList {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -8010,6 +8616,7 @@ class _$_GetPetList implements _GetPetList {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -8190,6 +8797,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -8285,6 +8893,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -8379,6 +8988,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -8442,6 +9052,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -8493,6 +9104,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -8540,6 +9152,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -8702,6 +9315,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -8797,6 +9411,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -8891,6 +9506,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -8954,6 +9570,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -9005,6 +9622,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -9052,6 +9670,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -9212,6 +9831,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -9307,6 +9927,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -9401,6 +10022,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -9464,6 +10086,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -9515,6 +10138,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -9562,6 +10186,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -9722,6 +10347,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -9817,6 +10443,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -9911,6 +10538,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -9974,6 +10602,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -10025,6 +10654,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -10072,6 +10702,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -10233,6 +10864,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -10328,6 +10960,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -10422,6 +11055,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -10485,6 +11119,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -10536,6 +11171,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -10583,6 +11219,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -10746,6 +11383,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -10841,6 +11479,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -10935,6 +11574,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -10998,6 +11638,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -11049,6 +11690,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -11096,6 +11738,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -11258,6 +11901,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -11353,6 +11997,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -11447,6 +12092,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -11510,6 +12156,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -11561,6 +12208,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -11608,6 +12256,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -11772,6 +12421,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -11867,6 +12517,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -11961,6 +12612,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -12024,6 +12676,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -12075,6 +12728,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -12122,6 +12776,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -12283,6 +12938,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -12378,6 +13034,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -12472,6 +13129,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -12535,6 +13193,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -12586,6 +13245,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -12633,6 +13293,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -12794,6 +13455,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -12889,6 +13551,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -12983,6 +13646,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -13046,6 +13710,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -13097,6 +13762,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -13144,6 +13810,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -13305,6 +13972,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -13400,6 +14068,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -13494,6 +14163,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -13557,6 +14227,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -13608,6 +14279,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -13655,6 +14327,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -13839,6 +14512,7 @@ class _$_SecurityDocumentUploadSelected
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -13934,6 +14608,7 @@ class _$_SecurityDocumentUploadSelected
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -14028,6 +14703,7 @@ class _$_SecurityDocumentUploadSelected
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -14091,6 +14767,7 @@ class _$_SecurityDocumentUploadSelected
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -14142,6 +14819,7 @@ class _$_SecurityDocumentUploadSelected
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -14189,6 +14867,7 @@ class _$_SecurityDocumentUploadSelected
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -14373,6 +15052,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -14468,6 +15148,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -14562,6 +15243,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -14625,6 +15307,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -14676,6 +15359,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -14723,6 +15407,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -14907,6 +15592,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -15002,6 +15688,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -15096,6 +15783,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -15159,6 +15847,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -15210,6 +15899,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -15257,6 +15947,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -15440,6 +16131,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -15535,6 +16227,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -15629,6 +16322,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -15692,6 +16386,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -15743,6 +16438,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -15790,6 +16486,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -15974,6 +16671,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -16069,6 +16767,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -16163,6 +16862,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -16226,6 +16926,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -16277,6 +16978,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -16324,6 +17026,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -16460,6 +17163,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -16555,6 +17259,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -16649,6 +17354,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -16712,6 +17418,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -16763,6 +17470,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -16810,6 +17518,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -16938,6 +17647,7 @@ class _$_StatePagination implements _StatePagination {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -17033,6 +17743,7 @@ class _$_StatePagination implements _StatePagination {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -17127,6 +17838,7 @@ class _$_StatePagination implements _StatePagination {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -17190,6 +17902,7 @@ class _$_StatePagination implements _StatePagination {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -17241,6 +17954,7 @@ class _$_StatePagination implements _StatePagination {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -17288,6 +18002,7 @@ class _$_StatePagination implements _StatePagination {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -17416,6 +18131,7 @@ class _$_CityPagination implements _CityPagination {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -17511,6 +18227,7 @@ class _$_CityPagination implements _CityPagination {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -17605,6 +18322,7 @@ class _$_CityPagination implements _CityPagination {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -17668,6 +18386,7 @@ class _$_CityPagination implements _CityPagination {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -17719,6 +18438,7 @@ class _$_CityPagination implements _CityPagination {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -17766,6 +18486,7 @@ class _$_CityPagination implements _CityPagination {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -17894,6 +18615,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -17989,6 +18711,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -18083,6 +18806,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -18146,6 +18870,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -18197,6 +18922,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -18244,6 +18970,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -18415,6 +19142,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -18510,6 +19238,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -18604,6 +19333,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -18667,6 +19397,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -18718,6 +19449,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -18765,6 +19497,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -18938,6 +19671,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -19033,6 +19767,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -19127,6 +19862,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -19190,6 +19926,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -19241,6 +19978,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -19288,6 +20026,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -19485,6 +20224,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -19580,6 +20320,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -19675,6 +20416,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -19739,6 +20481,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -19790,6 +20533,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -19837,6 +20581,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -20040,6 +20785,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -20136,6 +20882,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -20231,6 +20978,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -20295,6 +21043,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -20346,6 +21095,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -20393,6 +21143,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -20561,6 +21312,7 @@ class _$_SelectAllServices implements _SelectAllServices {
     required TResult Function(String searchQuery, bool wantLoading) cityList,
     required TResult Function(String stateSearchQuery, bool wantLoading)
         stateList,
+    required TResult Function(String userId) fetchPersonalDetails,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -20656,6 +21408,7 @@ class _$_SelectAllServices implements _SelectAllServices {
     TResult? Function()? commonData,
     TResult? Function(String searchQuery, bool wantLoading)? cityList,
     TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function(String userId)? fetchPersonalDetails,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -20750,6 +21503,7 @@ class _$_SelectAllServices implements _SelectAllServices {
     TResult Function()? commonData,
     TResult Function(String searchQuery, bool wantLoading)? cityList,
     TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function(String userId)? fetchPersonalDetails,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -20813,6 +21567,7 @@ class _$_SelectAllServices implements _SelectAllServices {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_FetchPersonalDetails value) fetchPersonalDetails,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
     required TResult Function(_AddReference value) addReference,
@@ -20864,6 +21619,7 @@ class _$_SelectAllServices implements _SelectAllServices {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
     TResult? Function(_AddReference value)? addReference,
@@ -20911,6 +21667,7 @@ class _$_SelectAllServices implements _SelectAllServices {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_FetchPersonalDetails value)? fetchPersonalDetails,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
     TResult Function(_AddReference value)? addReference,
@@ -20977,6 +21734,8 @@ mixin _$OnboardingState {
   List<GetReferences> get referenceList => throw _privateConstructorUsedError;
   List<PetsModel> get petsList => throw _privateConstructorUsedError;
   List<PreferenceLanguageModel> get languageList =>
+      throw _privateConstructorUsedError;
+  PersonalDetailsResponse? get personalDetails =>
       throw _privateConstructorUsedError;
   List<ServiceModel> get serviceList => throw _privateConstructorUsedError;
   int get isHHASelected => throw _privateConstructorUsedError;
@@ -21054,6 +21813,7 @@ abstract class $OnboardingStateCopyWith<$Res> {
       List<GetReferences> referenceList,
       List<PetsModel> petsList,
       List<PreferenceLanguageModel> languageList,
+      PersonalDetailsResponse? personalDetails,
       List<ServiceModel> serviceList,
       int isHHASelected,
       int isBLSSelected,
@@ -21119,6 +21879,7 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
     Object? referenceList = null,
     Object? petsList = null,
     Object? languageList = null,
+    Object? personalDetails = freezed,
     Object? serviceList = null,
     Object? isHHASelected = null,
     Object? isBLSSelected = null,
@@ -21195,6 +21956,10 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
           ? _value.languageList
           : languageList // ignore: cast_nullable_to_non_nullable
               as List<PreferenceLanguageModel>,
+      personalDetails: freezed == personalDetails
+          ? _value.personalDetails
+          : personalDetails // ignore: cast_nullable_to_non_nullable
+              as PersonalDetailsResponse?,
       serviceList: null == serviceList
           ? _value.serviceList
           : serviceList // ignore: cast_nullable_to_non_nullable
@@ -21369,6 +22134,7 @@ abstract class _$$_OnboardingStateCopyWith<$Res>
       List<GetReferences> referenceList,
       List<PetsModel> petsList,
       List<PreferenceLanguageModel> languageList,
+      PersonalDetailsResponse? personalDetails,
       List<ServiceModel> serviceList,
       int isHHASelected,
       int isBLSSelected,
@@ -21432,6 +22198,7 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
     Object? referenceList = null,
     Object? petsList = null,
     Object? languageList = null,
+    Object? personalDetails = freezed,
     Object? serviceList = null,
     Object? isHHASelected = null,
     Object? isBLSSelected = null,
@@ -21508,6 +22275,10 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
           ? _value._languageList
           : languageList // ignore: cast_nullable_to_non_nullable
               as List<PreferenceLanguageModel>,
+      personalDetails: freezed == personalDetails
+          ? _value.personalDetails
+          : personalDetails // ignore: cast_nullable_to_non_nullable
+              as PersonalDetailsResponse?,
       serviceList: null == serviceList
           ? _value._serviceList
           : serviceList // ignore: cast_nullable_to_non_nullable
@@ -21677,6 +22448,7 @@ class _$_OnboardingState implements _OnboardingState {
       required final List<GetReferences> referenceList,
       required final List<PetsModel> petsList,
       required final List<PreferenceLanguageModel> languageList,
+      this.personalDetails,
       required final List<ServiceModel> serviceList,
       required this.isHHASelected,
       required this.isBLSSelected,
@@ -21793,6 +22565,8 @@ class _$_OnboardingState implements _OnboardingState {
     return EqualUnmodifiableListView(_languageList);
   }
 
+  @override
+  final PersonalDetailsResponse? personalDetails;
   final List<ServiceModel> _serviceList;
   @override
   List<ServiceModel> get serviceList {
@@ -21883,7 +22657,7 @@ class _$_OnboardingState implements _OnboardingState {
 
   @override
   String toString() {
-    return 'OnboardingState(pickedProfilePic: $pickedProfilePic, securityDocumentList: $securityDocumentList, hhaDocumentList: $hhaDocumentList, blsDocumentList: $blsDocumentList, tbDocumentList: $tbDocumentList, covidDocumentList: $covidDocumentList, referenceList: $referenceList, petsList: $petsList, languageList: $languageList, serviceList: $serviceList, isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, nextClicked: $nextClicked, listUpdated: $listUpdated, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected, isLoading: $isLoading, isInitialLoading: $isInitialLoading, isCityApiCalling: $isCityApiCalling, isAllServicesSelected: $isAllServicesSelected, selectedGenderId: $selectedGenderId, languagePaginationPage: $languagePaginationPage, statePaginationPage: $statePaginationPage, cityPaginationPage: $cityPaginationPage, caregiverServiceListIndex: $caregiverServiceListIndex, personalDetailsOption: $personalDetailsOption, genderOption: $genderOption, documentOption: $documentOption, stateOption: $stateOption, cityOption: $cityOption, petListOption: $petListOption, yearsOption: $yearsOption, languageListOption: $languageListOption, getServiceOption: $getServiceOption, relationOption: $relationOption, qualificationDetailsOption: $qualificationDetailsOption, preferenceDetailsOption: $preferenceDetailsOption, referenceOption: $referenceOption, submitServiceOption: $submitServiceOption, submitBuildProfileOption: $submitBuildProfileOption, submitAccountDetailsOption: $submitAccountDetailsOption)';
+    return 'OnboardingState(pickedProfilePic: $pickedProfilePic, securityDocumentList: $securityDocumentList, hhaDocumentList: $hhaDocumentList, blsDocumentList: $blsDocumentList, tbDocumentList: $tbDocumentList, covidDocumentList: $covidDocumentList, referenceList: $referenceList, petsList: $petsList, languageList: $languageList, personalDetails: $personalDetails, serviceList: $serviceList, isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, nextClicked: $nextClicked, listUpdated: $listUpdated, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected, isLoading: $isLoading, isInitialLoading: $isInitialLoading, isCityApiCalling: $isCityApiCalling, isAllServicesSelected: $isAllServicesSelected, selectedGenderId: $selectedGenderId, languagePaginationPage: $languagePaginationPage, statePaginationPage: $statePaginationPage, cityPaginationPage: $cityPaginationPage, caregiverServiceListIndex: $caregiverServiceListIndex, personalDetailsOption: $personalDetailsOption, genderOption: $genderOption, documentOption: $documentOption, stateOption: $stateOption, cityOption: $cityOption, petListOption: $petListOption, yearsOption: $yearsOption, languageListOption: $languageListOption, getServiceOption: $getServiceOption, relationOption: $relationOption, qualificationDetailsOption: $qualificationDetailsOption, preferenceDetailsOption: $preferenceDetailsOption, referenceOption: $referenceOption, submitServiceOption: $submitServiceOption, submitBuildProfileOption: $submitBuildProfileOption, submitAccountDetailsOption: $submitAccountDetailsOption)';
   }
 
   @override
@@ -21908,6 +22682,8 @@ class _$_OnboardingState implements _OnboardingState {
             const DeepCollectionEquality().equals(other._petsList, _petsList) &&
             const DeepCollectionEquality()
                 .equals(other._languageList, _languageList) &&
+            (identical(other.personalDetails, personalDetails) ||
+                other.personalDetails == personalDetails) &&
             const DeepCollectionEquality()
                 .equals(other._serviceList, _serviceList) &&
             (identical(other.isHHASelected, isHHASelected) ||
@@ -21990,6 +22766,7 @@ class _$_OnboardingState implements _OnboardingState {
         const DeepCollectionEquality().hash(_referenceList),
         const DeepCollectionEquality().hash(_petsList),
         const DeepCollectionEquality().hash(_languageList),
+        personalDetails,
         const DeepCollectionEquality().hash(_serviceList),
         isHHASelected,
         isBLSSelected,
@@ -22048,6 +22825,7 @@ abstract class _OnboardingState implements OnboardingState {
       required final List<GetReferences> referenceList,
       required final List<PetsModel> petsList,
       required final List<PreferenceLanguageModel> languageList,
+      final PersonalDetailsResponse? personalDetails,
       required final List<ServiceModel> serviceList,
       required final int isHHASelected,
       required final int isBLSSelected,
@@ -22121,6 +22899,8 @@ abstract class _OnboardingState implements OnboardingState {
   List<PetsModel> get petsList;
   @override
   List<PreferenceLanguageModel> get languageList;
+  @override
+  PersonalDetailsResponse? get personalDetails;
   @override
   List<ServiceModel> get serviceList;
   @override

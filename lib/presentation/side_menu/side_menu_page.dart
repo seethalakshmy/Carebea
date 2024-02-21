@@ -52,6 +52,7 @@ import '../transaction_management/transaction_management_page.dart';
 import '../upcoming_birthdays/upcoming_birthdays.dart';
 import '../user_management/user_management_page.dart';
 import '../user_mangement_detail/user_managemet_detail_page.dart';
+import '../user_mangement_detail/widgets/pending_service_page.dart';
 import '../widget/dropdown/dropdown.dart';
 import 'package:universal_html/html.dart' as html;
 
@@ -110,6 +111,7 @@ class _MenuBarState extends State<SideMenuPage> {
       sharedPreffUtil.getViewServiceRequest
           ? AppString.serviceRequestManagement.val
           : "": "",
+      AppString.pendingServices.val: "",
       AppString.clientAnalytics.val: "",
       AppString.careAmbassadorAnalytics.val: "",
       AppString.subscription.val: "",
@@ -531,7 +533,9 @@ class _MenuBarState extends State<SideMenuPage> {
                                                                   ? "/admin/main/help-support"
                                                                   : items.keys.elementAt(index) == AppString.faq.val
                                                                       ? "/admin/main/faq"
-                                                                      : "/admin/main/page_list"),
+                                                                      : items.keys.elementAt(index) == AppString.pendingServices.val
+                                                                          ? "/admin/main/pending-services"
+                                                                          : "/admin/main/page_list"),
               builder:
                   (BuildContext context, Future<void> Function()? followLink) {
                 return ListTile(
@@ -642,6 +646,7 @@ class _MenuBarState extends State<SideMenuPage> {
     AdminsRoute(),
     AdminCreationRoute(),
     ServiceRequestManagementRoute(clientId: ''),
+    PendingServiceRoute(clientId: ''),
     HelpAndSupportRoute(),
     SupportTicketsDetailRoute(),
     FaqRoute(),
@@ -688,34 +693,36 @@ class _MenuBarState extends State<SideMenuPage> {
       return 13;
     } else if (route == AppString.serviceRequestManagement.val) {
       return 14;
-    } else if (route == AppString.supportTickets.val) {
+    } else if (route == AppString.pendingServices.val) {
       return 15;
-    } else if (route == AppString.supportTicketsDetails.val) {
+    } else if (route == AppString.supportTickets.val) {
       return 16;
-    } else if (route == AppString.faq.val) {
+    } else if (route == AppString.supportTicketsDetails.val) {
       return 17;
-    } else if (route == AppString.faqCreation.val) {
+    } else if (route == AppString.faq.val) {
       return 18;
-    } else if (route == AppString.subProfileDetails.val) {
+    } else if (route == AppString.faqCreation.val) {
       return 19;
-    } else if (route == AppString.subscription.val) {
+    } else if (route == AppString.subProfileDetails.val) {
       return 20;
-    } else if (route == AppString.videoManagement.val) {
+    } else if (route == AppString.subscription.val) {
       return 21;
-    } else if (route == AppString.videoUpload.val) {
+    } else if (route == AppString.videoManagement.val) {
       return 22;
-    } else if (route == AppString.clientAnalytics.val) {
+    } else if (route == AppString.videoUpload.val) {
       return 23;
-    } else if (route == AppString.page.val) {
+    } else if (route == AppString.clientAnalytics.val) {
       return 24;
-    } else if (route == AppString.pageCreation.val) {
+    } else if (route == AppString.page.val) {
       return 25;
-    } else if (route == AppString.careAmbassadorAnalytics.val) {
+    } else if (route == AppString.pageCreation.val) {
       return 26;
-    } else if (route == AppString.upcomingBirthdays.val) {
+    } else if (route == AppString.careAmbassadorAnalytics.val) {
       return 27;
-    } else if (route == AppString.sendGift.val) {
+    } else if (route == AppString.upcomingBirthdays.val) {
       return 28;
+    } else if (route == AppString.sendGift.val) {
+      return 29;
     } else {
       return 0;
     }
@@ -752,32 +759,34 @@ class _MenuBarState extends State<SideMenuPage> {
     } else if (index == 14) {
       return ServiceRequestManagementPage(clientId: '');
     } else if (index == 15) {
-      return const HelpAndSupportPage();
+      return PendingServicePage(clientId: '');
     } else if (index == 16) {
-      return const SupportTicketsDetailPage();
+      return const HelpAndSupportPage();
     } else if (index == 17) {
-      return const FaqPage();
+      return const SupportTicketsDetailPage();
     } else if (index == 18) {
-      return const FaqCreationPage();
+      return const FaqPage();
     } else if (index == 19) {
-      return const ClientSubProfileDetailsPage();
+      return const FaqCreationPage();
     } else if (index == 20) {
-      return const SubscriptionPage();
+      return const ClientSubProfileDetailsPage();
     } else if (index == 21) {
-      return const VideoManagementPage();
+      return const SubscriptionPage();
     } else if (index == 22) {
-      return const VideoUploadPage();
+      return const VideoManagementPage();
     } else if (index == 23) {
+      return const VideoUploadPage();
+    } else if (index == 24) {
       return const ClientAnalyticsPage();
     } else if (index == 26) {
       return const CareAmbassadorAnalysisPage();
-    } else if (index == 24) {
-      return const PageListPage();
     } else if (index == 25) {
-      return PageCreationPage();
+      return const PageListPage();
     } else if (index == 27) {
-      return const UpcomingBirthdayPage();
+      return PageCreationPage();
     } else if (index == 28) {
+      return const UpcomingBirthdayPage();
+    } else if (index == 29) {
       return const SendGiftPage();
     } else {
       return const DashboardPage();

@@ -466,6 +466,25 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     emit(personalState);
   }
 
+  _fetchPersonalData(
+      _FetchPersonalDetails event, Emitter<OnboardingState> emit) async {
+    print('asd ${sharedPreffUtil.getAccessToken}');
+    emit(state.copyWith(isLoading: true));
+    final Either<ApiErrorHandler, PersonalDetailsResponse> result =
+        await onboardingRepository.fetchPersonalDetails(userId: event.userId);
+
+    OnboardingState personalState = result.fold((l) {
+      return state.copyWith(
+          isLoading: false, personalDetailsOption: Some(Left(l)));
+    }, (r) {
+      personalDetails = r;
+
+      return state.copyWith(
+          isLoading: false, personalDetailsOption: Some(Right(r)));
+    });
+    emit(personalState);
+  }
+
   _getQualificationDetails(
       _GetQualificationDetails event, Emitter<OnboardingState> emit) async {
     emit(state.copyWith(isLoading: true));

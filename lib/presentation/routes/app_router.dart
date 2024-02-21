@@ -1,6 +1,4 @@
 import 'package:admin_580_tech/presentation/routes/gurad.dart';
-import 'package:admin_580_tech/presentation/subscription/subscription_view.dart';
-import 'package:admin_580_tech/presentation/video_management/video_management_view.dart';
 import 'package:auto_route/auto_route.dart';
 
 import 'app_router.gr.dart';
@@ -119,6 +117,10 @@ class AppRouter extends $AppRouter {
       AutoRoute(
           path: "service-request",
           page: ServiceRequestManagementRoute.page,
+          maintainState: false),
+      AutoRoute(
+          path: "pending-services",
+          page: PendingServiceRoute.page,
           maintainState: false),
       AutoRoute(
           path: "help-support",

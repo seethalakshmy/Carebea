@@ -58,8 +58,8 @@ class Data {
     Name? name,
     String? age,
     String? agreement,
-    String? averageReview,
-    String? reviewCount,
+    dynamic? averageReview,
+    dynamic? reviewCount,
     PersonalDetails? personalDetails,
     DocumentDetails? documentDetails,
     QualificationAndTest? qualificationAndTest,
@@ -129,8 +129,8 @@ class Data {
   Name? _name;
   String? _age;
   String? _agreement;
-  String? _averageReview;
-  String? _reviewCount;
+  dynamic? _averageReview;
+  dynamic? _reviewCount;
   PersonalDetails? _personalDetails;
   DocumentDetails? _documentDetails;
   QualificationAndTest? _qualificationAndTest;
@@ -147,8 +147,8 @@ class Data {
     Name? name,
     String? age,
     String? agreement,
-    String? averageReview,
-    String? reviewCount,
+    dynamic? averageReview,
+    dynamic? reviewCount,
     PersonalDetails? personalDetails,
     DocumentDetails? documentDetails,
     QualificationAndTest? qualificationAndTest,
@@ -184,8 +184,8 @@ class Data {
   Name? get name => _name;
   String? get age => _age;
   String? get agreement => _agreement;
-  String? get averageReview => _averageReview;
-  String? get reviewCount => _reviewCount;
+  dynamic? get averageReview => _averageReview;
+  dynamic? get reviewCount => _reviewCount;
   PersonalDetails? get personalDetails => _personalDetails;
   DocumentDetails? get documentDetails => _documentDetails;
   QualificationAndTest? get qualificationAndTest => _qualificationAndTest;

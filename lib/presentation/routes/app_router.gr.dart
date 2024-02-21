@@ -484,11 +484,11 @@ abstract class $AppRouter extends _i42.RootStackRouter {
         ),
       );
     },
-    PendingServiceView.name: (routeData) {
-      final args = routeData.argsAs<PendingServiceViewArgs>();
+    PendingServiceRoute.name: (routeData) {
+      final args = routeData.argsAs<PendingServiceRouteArgs>();
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i41.PendingServiceView(
+        child: _i41.PendingServicePage(
           key: args.key,
           clientId: args.clientId,
         ),
@@ -1601,29 +1601,29 @@ class VideoUploadRouteArgs {
 }
 
 /// generated route for
-/// [_i41.PendingServiceView]
-class PendingServiceView extends _i42.PageRouteInfo<PendingServiceViewArgs> {
-  PendingServiceView({
+/// [_i41.PendingServicePage]
+class PendingServiceRoute extends _i42.PageRouteInfo<PendingServiceRouteArgs> {
+  PendingServiceRoute({
     _i43.Key? key,
     required String clientId,
     List<_i42.PageRouteInfo>? children,
   }) : super(
-          PendingServiceView.name,
-          args: PendingServiceViewArgs(
+          PendingServiceRoute.name,
+          args: PendingServiceRouteArgs(
             key: key,
             clientId: clientId,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'PendingServiceView';
+  static const String name = 'PendingServiceRoute';
 
-  static const _i42.PageInfo<PendingServiceViewArgs> page =
-      _i42.PageInfo<PendingServiceViewArgs>(name);
+  static const _i42.PageInfo<PendingServiceRouteArgs> page =
+      _i42.PageInfo<PendingServiceRouteArgs>(name);
 }
 
-class PendingServiceViewArgs {
-  const PendingServiceViewArgs({
+class PendingServiceRouteArgs {
+  const PendingServiceRouteArgs({
     this.key,
     required this.clientId,
   });
@@ -1634,6 +1634,6 @@ class PendingServiceViewArgs {
 
   @override
   String toString() {
-    return 'PendingServiceViewArgs{key: $key, clientId: $clientId}';
+    return 'PendingServiceRouteArgs{key: $key, clientId: $clientId}';
   }
 }
