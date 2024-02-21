@@ -34,14 +34,17 @@ class NearByShops extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  IconButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
+                  InkWell(
+                    child: const Icon(
+                      Icons.arrow_back_ios_new,
                       size: 17,
                     ),
+                    onTap: () {
+                      Get.back();
+                    },
+                  ),
+                  const SizedBox(
+                    width: 15,
                   ),
                   Text(
                     'Near By Shops',
@@ -347,94 +350,95 @@ class NearByShops extends StatelessWidget {
                                                 context));
                                       }
 
-                                      return Padding(
-                                          padding: const EdgeInsets.all(15.0),
-                                          child: SingleChildScrollView(
-                                            controller: remarkHistoryController
-                                                .scrollController,
-                                            child: SizedBox(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  remarkHistoryController
-                                                          .remarkHistory
-                                                          .isNotEmpty
-                                                      ? ListView.separated(
-                                                          physics:
-                                                              NeverScrollableScrollPhysics(),
-                                                          shrinkWrap: true,
-                                                          separatorBuilder: (_,
-                                                                  __) =>
+                                      return SingleChildScrollView(
+                                        controller: remarkHistoryController
+                                            .scrollController,
+                                        child: SizedBox(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              remarkHistoryController
+                                                      .remarkHistory.isNotEmpty
+                                                  ? ListView.separated(
+                                                      physics:
+                                                          NeverScrollableScrollPhysics(),
+                                                      shrinkWrap: true,
+                                                      separatorBuilder:
+                                                          (_, __) =>
                                                               const SizedBox(
                                                                   height: 16),
-                                                          // physics: const NeverScrollableScrollPhysics(),
-                                                          itemCount:
+                                                      // physics: const NeverScrollableScrollPhysics(),
+                                                      itemCount:
+                                                          remarkHistoryController
+                                                              .remarkHistory
+                                                              .length,
+                                                      itemBuilder:
+                                                          (context, index) {
+                                                        return ColoredBox(
+                                                          color: Colors
+                                                              .grey.shade200,
+                                                          child: ListTile(
+                                                            title: Text(
                                                               remarkHistoryController
-                                                                  .remarkHistory
-                                                                  .length,
-                                                          itemBuilder:
-                                                              (context, index) {
-                                                            return ColoredBox(
-                                                              color: Colors.grey
-                                                                  .shade200,
-                                                              child: ListTile(
-                                                                title: Text(
+                                                                      .remarkHistory[
+                                                                          index]
+                                                                      .commentName ??
+                                                                  "",
+                                                              style: customTheme(
+                                                                      context)
+                                                                  .medium
+                                                                  .copyWith(
+                                                                      fontSize:
+                                                                          12),
+                                                            ),
+                                                            subtitle: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  DateFormat(
+                                                                          'dd/MMM/yyyy h:mm a')
+                                                                      .format(DateTime
+                                                                          .parse(
+                                                                    remarkHistoryController
+                                                                            .remarkHistory[index]
+                                                                            .createDate ??
+                                                                        "",
+                                                                  )),
+                                                                ),
+                                                                const SizedBox(
+                                                                  height: 5,
+                                                                ),
+                                                                Text(
                                                                   remarkHistoryController
                                                                           .remarkHistory[
                                                                               index]
-                                                                          .commentName ??
+                                                                          .createdUserName ??
                                                                       "",
-                                                                  style: customTheme(
-                                                                          context)
-                                                                      .medium
-                                                                      .copyWith(
-                                                                          fontSize:
-                                                                              12),
                                                                 ),
-                                                                subtitle: Row(
-                                                                  children: [
-                                                                    Flexible(
-                                                                      flex: 6,
-                                                                      child:
-                                                                          Text(
-                                                                        DateFormat('dd/MMM/yyyy h:mm a')
-                                                                            .format(DateTime.parse(
-                                                                          remarkHistoryController.remarkHistory[index].createDate ??
-                                                                              "",
-                                                                        )),
-                                                                      ),
-                                                                    ),
-                                                                    const Spacer(),
-                                                                    Flexible(
-                                                                      flex: 2,
-                                                                      child:
-                                                                          Text(
-                                                                        remarkHistoryController.remarkHistory[index].createdUserName ??
-                                                                            "",
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            );
-                                                          })
-                                                      : Align(
-                                                          alignment:
-                                                              Alignment.center,
-                                                          child: Text(
-                                                            "No Remarks Found",
-                                                            style: customTheme(
-                                                                    context)
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        );
+                                                      })
+                                                  : Align(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Text(
+                                                        "No Remarks Found",
+                                                        style:
+                                                            customTheme(context)
                                                                 .medium
                                                                 .copyWith(
                                                                     fontSize:
                                                                         12),
-                                                          ))
-                                                ],
-                                              ),
-                                            ),
-                                          ));
+                                                      ))
+                                            ],
+                                          ),
+                                        ),
+                                      );
                                     })
                                   ]),
                             );
@@ -669,93 +673,92 @@ class NearByShops extends StatelessWidget {
                                                 context));
                                       }
 
-                                      return Padding(
-                                          padding: const EdgeInsets.all(15.0),
-                                          child: SingleChildScrollView(
-                                            controller: remarkHistoryController
-                                                .scrollController,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                remarkHistoryController
-                                                        .remarkHistory
-                                                        .isNotEmpty
-                                                    ? ListView.separated(
-                                                        physics:
-                                                            NeverScrollableScrollPhysics(),
-                                                        shrinkWrap: true,
-                                                        separatorBuilder: (_,
-                                                                __) =>
-                                                            const SizedBox(
-                                                                height: 16),
-                                                        // physics: const NeverScrollableScrollPhysics(),
-                                                        itemCount:
+                                      return SingleChildScrollView(
+                                        controller: remarkHistoryController
+                                            .scrollController,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            remarkHistoryController
+                                                    .remarkHistory.isNotEmpty
+                                                ? ListView.separated(
+                                                    physics:
+                                                        NeverScrollableScrollPhysics(),
+                                                    shrinkWrap: true,
+                                                    separatorBuilder: (_, __) =>
+                                                        const SizedBox(
+                                                            height: 16),
+                                                    // physics: const NeverScrollableScrollPhysics(),
+                                                    itemCount:
+                                                        remarkHistoryController
+                                                            .remarkHistory
+                                                            .length,
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return ColoredBox(
+                                                        color: Colors
+                                                            .grey.shade200,
+                                                        child: ListTile(
+                                                          title: Text(
                                                             remarkHistoryController
-                                                                .remarkHistory
-                                                                .length,
-                                                        itemBuilder:
-                                                            (context, index) {
-                                                          return ColoredBox(
-                                                            color: Colors
-                                                                .grey.shade200,
-                                                            child: ListTile(
-                                                              title: Text(
+                                                                    .remarkHistory[
+                                                                        index]
+                                                                    .commentName ??
+                                                                "",
+                                                            style: customTheme(
+                                                                    context)
+                                                                .medium
+                                                                .copyWith(
+                                                                    fontSize:
+                                                                        12),
+                                                          ),
+                                                          subtitle: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                DateFormat(
+                                                                        'dd/MMM/yyyy h:mm a')
+                                                                    .format(
+                                                                        DateTime
+                                                                            .parse(
+                                                                  remarkHistoryController
+                                                                          .remarkHistory[
+                                                                              index]
+                                                                          .createDate ??
+                                                                      "",
+                                                                )),
+                                                              ),
+                                                              const SizedBox(
+                                                                height: 5,
+                                                              ),
+                                                              Text(
                                                                 remarkHistoryController
                                                                         .remarkHistory[
                                                                             index]
-                                                                        .commentName ??
+                                                                        .createdUserName ??
                                                                     "",
-                                                                style: customTheme(
-                                                                        context)
-                                                                    .medium
-                                                                    .copyWith(
-                                                                        fontSize:
-                                                                            12),
                                                               ),
-                                                              subtitle: Row(
-                                                                children: [
-                                                                  Flexible(
-                                                                    flex: 6,
-                                                                    child: Text(
-                                                                      DateFormat(
-                                                                              'dd/MMM/yyyy h:mm a')
-                                                                          .format(
-                                                                              DateTime.parse(
-                                                                        remarkHistoryController.remarkHistory[index].createDate ??
-                                                                            "",
-                                                                      )),
-                                                                    ),
-                                                                  ),
-                                                                  const Spacer(),
-                                                                  Flexible(
-                                                                    flex: 2,
-                                                                    child: Text(
-                                                                      remarkHistoryController
-                                                                              .remarkHistory[index]
-                                                                              .createdUserName ??
-                                                                          "",
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          );
-                                                        })
-                                                    : Align(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        child: Text(
-                                                          "No Remarks Found",
-                                                          style: customTheme(
-                                                                  context)
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      );
+                                                    })
+                                                : Align(
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      "No Remarks Found",
+                                                      style:
+                                                          customTheme(context)
                                                               .medium
                                                               .copyWith(
                                                                   fontSize: 12),
-                                                        ))
-                                              ],
-                                            ),
-                                          ));
+                                                    ))
+                                          ],
+                                        ),
+                                      );
                                     })
                                   ]),
                             );
