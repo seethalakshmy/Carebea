@@ -379,30 +379,44 @@ class NearByShops extends StatelessWidget {
                                                               color: Colors.grey
                                                                   .shade200,
                                                               child: ListTile(
-                                                                  title: Text(
-                                                                    remarkHistoryController
-                                                                            .remarkHistory[index]
-                                                                            .commentName ??
-                                                                        "",
-                                                                    style: customTheme(
-                                                                            context)
-                                                                        .medium
-                                                                        .copyWith(
-                                                                            fontSize:
-                                                                                12),
-                                                                  ),
-                                                                  subtitle:
-                                                                      Text(
-                                                                    DateFormat(
-                                                                            'dd/MMM/yyyy h:mm a')
-                                                                        .format(
-                                                                            DateTime.parse(
-                                                                      remarkHistoryController
-                                                                              .remarkHistory[index]
-                                                                              .createDate ??
-                                                                          "",
-                                                                    )),
-                                                                  )),
+                                                                title: Text(
+                                                                  remarkHistoryController
+                                                                          .remarkHistory[
+                                                                              index]
+                                                                          .commentName ??
+                                                                      "",
+                                                                  style: customTheme(
+                                                                          context)
+                                                                      .medium
+                                                                      .copyWith(
+                                                                          fontSize:
+                                                                              12),
+                                                                ),
+                                                                subtitle: Row(
+                                                                  children: [
+                                                                    Flexible(
+                                                                      flex: 6,
+                                                                      child:
+                                                                          Text(
+                                                                        DateFormat('dd/MMM/yyyy h:mm a')
+                                                                            .format(DateTime.parse(
+                                                                          remarkHistoryController.remarkHistory[index].createDate ??
+                                                                              "",
+                                                                        )),
+                                                                      ),
+                                                                    ),
+                                                                    const Spacer(),
+                                                                    Flexible(
+                                                                      flex: 2,
+                                                                      child:
+                                                                          Text(
+                                                                        remarkHistoryController.remarkHistory[index].createdUserName ??
+                                                                            "",
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
                                                             );
                                                           })
                                                       : Align(
@@ -686,30 +700,46 @@ class NearByShops extends StatelessWidget {
                                                             color: Colors
                                                                 .grey.shade200,
                                                             child: ListTile(
-                                                                title: Text(
-                                                                  remarkHistoryController
-                                                                          .remarkHistory[
-                                                                              index]
-                                                                          .commentName ??
-                                                                      "",
-                                                                  style: customTheme(
-                                                                          context)
-                                                                      .medium
-                                                                      .copyWith(
-                                                                          fontSize:
-                                                                              12),
-                                                                ),
-                                                                subtitle: Text(
-                                                                  DateFormat(
-                                                                          'dd/MMM/yyyy h:mm a')
-                                                                      .format(DateTime
-                                                                          .parse(
-                                                                    remarkHistoryController
-                                                                            .remarkHistory[index]
-                                                                            .createDate ??
-                                                                        "",
-                                                                  )),
-                                                                )),
+                                                              title: Text(
+                                                                remarkHistoryController
+                                                                        .remarkHistory[
+                                                                            index]
+                                                                        .commentName ??
+                                                                    "",
+                                                                style: customTheme(
+                                                                        context)
+                                                                    .medium
+                                                                    .copyWith(
+                                                                        fontSize:
+                                                                            12),
+                                                              ),
+                                                              subtitle: Row(
+                                                                children: [
+                                                                  Flexible(
+                                                                    flex: 6,
+                                                                    child: Text(
+                                                                      DateFormat(
+                                                                              'dd/MMM/yyyy h:mm a')
+                                                                          .format(
+                                                                              DateTime.parse(
+                                                                        remarkHistoryController.remarkHistory[index].createDate ??
+                                                                            "",
+                                                                      )),
+                                                                    ),
+                                                                  ),
+                                                                  const Spacer(),
+                                                                  Flexible(
+                                                                    flex: 2,
+                                                                    child: Text(
+                                                                      remarkHistoryController
+                                                                              .remarkHistory[index]
+                                                                              .createdUserName ??
+                                                                          "",
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
                                                           );
                                                         })
                                                     : Align(

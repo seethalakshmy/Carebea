@@ -126,6 +126,7 @@ class PaymentFollowupsList {
     String? commentName,
     num? createdUserId,
     String? createDate,
+    String? createdUserName,
   }) {
     _id = id;
     _partnerId = partnerId;
@@ -133,6 +134,7 @@ class PaymentFollowupsList {
     _commentName = commentName;
     _createdUserId = createdUserId;
     _createDate = createDate;
+    _createdUserName = createdUserName;
   }
 
   PaymentFollowupsList.fromJson(dynamic json) {
@@ -142,6 +144,7 @@ class PaymentFollowupsList {
     _commentName = json['comment_name'];
     _createdUserId = json['created_user_id'];
     _createDate = json['create_date'];
+    _createdUserName = json['created_user_name'];
   }
   num? _id;
   num? _partnerId;
@@ -149,28 +152,30 @@ class PaymentFollowupsList {
   String? _commentName;
   num? _createdUserId;
   String? _createDate;
-  PaymentFollowupsList copyWith({
-    num? id,
-    num? partnerId,
-    num? commentId,
-    String? commentName,
-    num? createdUserId,
-    String? createDate,
-  }) =>
+  String? _createdUserName;
+  PaymentFollowupsList copyWith(
+          {num? id,
+          num? partnerId,
+          num? commentId,
+          String? commentName,
+          num? createdUserId,
+          String? createDate,
+          String? createdUserName}) =>
       PaymentFollowupsList(
-        id: id ?? _id,
-        partnerId: partnerId ?? _partnerId,
-        commentId: commentId ?? _commentId,
-        commentName: commentName ?? _commentName,
-        createdUserId: createdUserId ?? _createdUserId,
-        createDate: createDate ?? _createDate,
-      );
+          id: id ?? _id,
+          partnerId: partnerId ?? _partnerId,
+          commentId: commentId ?? _commentId,
+          commentName: commentName ?? _commentName,
+          createdUserId: createdUserId ?? _createdUserId,
+          createDate: createDate ?? _createDate,
+          createdUserName: createdUserName ?? _createdUserName);
   num? get id => _id;
   num? get partnerId => _partnerId;
   num? get commentId => _commentId;
   String? get commentName => _commentName;
   num? get createdUserId => _createdUserId;
   String? get createDate => _createDate;
+  String? get createdUserName => _createdUserName;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -180,6 +185,7 @@ class PaymentFollowupsList {
     map['comment_name'] = _commentName;
     map['created_user_id'] = _createdUserId;
     map['create_date'] = _createDate;
+    map['created_user_name'] = _createdUserName;
     return map;
   }
 }
