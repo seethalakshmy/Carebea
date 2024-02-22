@@ -404,7 +404,7 @@ enum AppString {
   relationship("Relationship"),
   addressLine1("Address Line 1"),
   addressLine2("Address Line 2"),
-  street("Street"),
+  street("Address Line 2"),
   city("City"),
   state("State"),
   zip("Zip"),

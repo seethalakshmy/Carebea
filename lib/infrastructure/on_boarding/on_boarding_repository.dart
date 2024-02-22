@@ -10,6 +10,7 @@ import 'package:dio/dio.dart';
 import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
 import '../../domain/on_boarding/i_on_boarding_repo.dart';
+import '../../domain/on_boarding/models/get_personal_details_response.dart';
 import '../../domain/on_boarding/models/preferences/pet_list_response.dart';
 import '../../domain/on_boarding/models/preferences/years_of_experience_response.dart';
 import '../../domain/on_boarding/models/services/get_services_response.dart';
@@ -43,22 +44,23 @@ class OnBoardingRepository implements IOnBoardingRepo {
   }
 
   @override
-  Future<Either<ApiErrorHandler, PersonalDetailsResponse>> fetchPersonalDetails(
-      {required String userId}) async {
-    try {
-      final response = await apiClient.fetchPersonalDetails(userId);
-      return Right(response);
-    } on DioError catch (e) {
-      CustomLog.log("CareGiverListRepository: ${e.message}");
-      if (e.message.contains("SocketException")) {
-        CustomLog.log("reached here..");
-        return Left(ClientFailure(
-            error: AppString.noInternetConnection.val, isClientError: true));
-      } else {
-        return Left(ServerFailure(
-            error: AppString.somethingWentWrong.val, isClientError: false));
-      }
-    }
+  Future<Either<ApiErrorHandler, GetPersonalDetailsResponse>>
+      fetchPersonalDetails({required String userId}) async {
+    // try {
+    final response = await apiClient.fetchPersonalDetails(userId);
+    return Right(response);
+    // }
+    // on DioError catch (e) {
+    //   CustomLog.log("CareGiverListRepository: ${e.message}");
+    //   if (e.message.contains("SocketException")) {
+    //     CustomLog.log("reached here..");
+    //     return Left(ClientFailure(
+    //         error: AppString.noInternetConnection.val, isClientError: true));
+    //   } else {
+    //     return Left(ServerFailure(
+    //         error: AppString.somethingWentWrong.val, isClientError: false));
+    //   }
+    // }
   }
 
   @override

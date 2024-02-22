@@ -20,5 +20,8 @@ class UserManagementDetailEvent with _$UserManagementDetailEvent {
     required String profileId,
     required String page,
     required String limit,
+    required String searchTerm,
+    String? fromDate,
+    String? toDate,
   }) = _GetPendingServices;
 }

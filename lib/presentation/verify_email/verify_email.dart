@@ -14,9 +14,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../application/bloc/email-otp-verification/email_otp_verification_bloc.dart';
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../application/bloc/resend_otp_bloc/resend_otp_bloc.dart';
 import '../../application/bloc/verify_email/verify_email_bloc.dart';
+import '../../core/custom_snackbar.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../widget/custom_text_field.dart';
 
@@ -42,25 +44,46 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<EmailOtpVerificationBloc>(context)
+        .add(const EmailOtpVerificationEvent.count());
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        body: BlocProvider(
-      create: (context) => _validationBloc,
-      child: BlocBuilder<FormValidationBloc, FormValidationState>(
-        buildWhen: (previous, current) => previous != current,
-        builder: (context, state) {
-          state.whenOrNull(
-            formSubmitSuccess: () {
-              _validateMode = AutovalidateMode.always;
+        body: BlocListener<ResendOtpBloc, ResendOtpState>(
+      listener: (context, state) {
+        state.when(
+            initial: () {},
+            loading: () {},
+            failed: (error) {
+              CSnackBar.showError(context, msg: error);
             },
-          );
-          return Responsive(
-            web: webView(context, size),
-            mobile: _verifyEmailView(size),
-            tablet: _verifyEmailView(size),
-          );
-        },
+            success: (data) {
+              CSnackBar.showSuccess(context, msg: "Resend OTP Success");
+              CSnackBar.showSuccess(context, msg: "OTP is ${data.data}");
+            });
+      },
+      child: BlocProvider(
+        create: (context) => _validationBloc,
+        child: BlocBuilder<FormValidationBloc, FormValidationState>(
+          buildWhen: (previous, current) => previous != current,
+          builder: (context, state) {
+            state.whenOrNull(
+              formSubmitSuccess: () {
+                _validateMode = AutovalidateMode.always;
+              },
+            );
+            return Responsive(
+              web: webView(context, size),
+              mobile: _verifyEmailView(size),
+              tablet: _verifyEmailView(size),
+            );
+          },
+        ),
       ),
     ));
   }
@@ -125,6 +148,51 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                   height: DBL.eleven.val,
                 ),
                 _emailVerifyTextFormView(),
+                SizedBox(
+                  height: DBL.sixty.val,
+                  width: DBL.fourFifty.val,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      BlocBuilder<EmailOtpVerificationBloc,
+                          EmailOtpVerificationState>(
+                        // bloc: _emailOtpVerificationBloc,
+                        builder: (context, state) {
+                          return Text(
+                            '${state.count}${"s"}',
+                            style: const TextStyle(
+                                color: Colors.red,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                decoration: TextDecoration.none),
+                          );
+                        },
+                      ),
+                      const Spacer(),
+                      TextButton(
+                          onPressed: () {
+                            BlocProvider.of<EmailOtpVerificationBloc>(context)
+                                .add(const EmailOtpVerificationEvent.count());
+                            context.read<ResendOtpBloc>().add(ResendOtpEvent.resend(
+                                userId: SharedPreffUtil().getAdminId,
+                                type:
+                                    1)); // Type 0=>registration, 1=>forgotPassword, 2=> verify phone number
+                          },
+                          child: Text(
+                            AppString.resentOTP.val,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
+                                    decoration: TextDecoration.underline),
+                          ))
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+
                 // CustomSizedBox(
                 //   height: DBL.fifty.val,
                 // ),

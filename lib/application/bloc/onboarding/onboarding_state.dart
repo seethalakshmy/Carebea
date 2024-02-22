@@ -37,6 +37,8 @@ class OnboardingState with _$OnboardingState {
     required int caregiverServiceListIndex,
     required Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
         personalDetailsOption,
+    required Option<Either<ApiErrorHandler, GetPersonalDetailsResponse>>
+        getPersonalDetailsOption,
     required Option<Either<ApiErrorHandler, GenderListResponse>> genderOption,
     required Option<Either<ApiErrorHandler, DocumentListResponse>>
         documentOption,
@@ -114,6 +116,7 @@ class OnboardingState with _$OnboardingState {
       submitAccountDetailsOption: const None(),
       referenceOption: const None(),
       personalDetails: null,
+      getPersonalDetailsOption: const None(),
     );
   }
 }

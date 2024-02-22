@@ -6,21 +6,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
+import '../../../application/bloc/service_request_management/service_request_management_bloc.dart';
 import '../../../application/bloc/user_management_detail/user_management_detail_bloc.dart';
+import '../../../core/custom_snackbar.dart';
 import '../../../core/enum.dart';
 import '../../../core/properties.dart';
 import '../../../core/responsive.dart';
+import '../../../core/string_extension.dart';
 import '../../../core/text_styles.dart';
 import '../../../core/utility.dart';
 import '../../../domain/user_management_detail/model/pending_service_response.dart';
 import '../../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../../infrastructure/user_management_detail/user_management_detail_repository.dart';
+import '../../widget/custom_button.dart';
 import '../../widget/custom_card.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_data_table_2.dart';
 import '../../widget/custom_selection_area.dart';
+import '../../widget/custom_shimmer.dart';
 import '../../widget/custom_sizedbox.dart';
+import '../../widget/custom_svg.dart';
 import '../../widget/custom_text.dart';
+import '../../widget/custom_text_field.dart';
 import '../../widget/empty_view.dart';
 import '../../widget/error_view.dart';
 import '../../widget/header_view.dart';
@@ -83,7 +90,13 @@ class _PendingServicePageState extends State<PendingServicePage> {
                       userId: SharedPreffUtil().getAdminId,
                       profileId: widget.clientId,
                       page: _page.toString(),
-                      limit: _limit.toString()));
+                      limit: _limit.toString(),
+                      searchTerm: '',
+                      fromDate: _userManagementDetailBloc.selectedFromDate
+                          ?.parseWithFormat(dateFormat: AppString.yyyyMMdd.val),
+                      toDate: _userManagementDetailBloc.selectedToDate
+                          ?.parseWithFormat(
+                              dateFormat: AppString.yyyyMMdd.val)));
               return BlocBuilder<UserManagementDetailBloc,
                   UserManagementDetailState>(
                 bloc: _userManagementDetailBloc,
@@ -93,45 +106,39 @@ class _PendingServicePageState extends State<PendingServicePage> {
                     children: [
                       /*_tabView(state),
                     const SizedBox(height: 20),*/
-                      // Wrap(
-                      //   crossAxisAlignment: WrapCrossAlignment.start,
-                      //   alignment: WrapAlignment.start,
-                      //   runAlignment: WrapAlignment.center,
-                      //   spacing: 20,
-                      //   runSpacing: 10,
-                      //   children: [
-                      //     /*state.isLoading ?? false
-                      //       ? _shimmerForFilterWidgets()
-                      //       : _dateFilterDropDown(context),*/
-                      //     // _bookingStatusDropDown(context),
-                      //     state.isLoading ?? false
-                      //         ? _shimmerForFilterWidgets()
-                      //         : _serviceStatusDropDown(context),
-                      //     state.isLoading ?? false
-                      //         ? _shimmerForFilterWidgets()
-                      //         : _buildDatePicker(state, fromDateController,
-                      //         AppString.startDate.val, () {
-                      //           _selectFromDate(context, state);
-                      //         }),
-                      //     state.isLoading ?? false
-                      //         ? _shimmerForFilterWidgets()
-                      //         : _buildDatePicker(
-                      //         state, toDateController, AppString.endDate.val,
-                      //             () {
-                      //           _serviceRequestBloc.selectedFromDate != "" ||
-                      //               fromDateController.text.isNotEmpty
-                      //               ? _selectToDate(context, state)
-                      //               : CSnackBar.showError(context,
-                      //               msg: 'Please select a startDate');
-                      //         }),
-                      //     state.isLoading ?? false
-                      //         ? _shimmerForFilterWidgets()
-                      //         : _searchWidget(context),
-                      //     state.isLoading ?? false
-                      //         ? _shimmerForFilterWidgets(width: DBL.oneTwenty.val)
-                      //         : _clearAllFiltersButtonWidget()
-                      //   ],
-                      // ),
+                      Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.start,
+                        alignment: WrapAlignment.start,
+                        runAlignment: WrapAlignment.center,
+                        spacing: 20,
+                        runSpacing: 10,
+                        children: [
+                          state.isLoading ?? false
+                              ? _shimmerForFilterWidgets()
+                              : _buildDatePicker(state, fromDateController,
+                                  AppString.startDate.val, () {
+                                  _selectFromDate(context, state);
+                                }),
+                          state.isLoading ?? false
+                              ? _shimmerForFilterWidgets()
+                              : _buildDatePicker(state, toDateController,
+                                  AppString.endDate.val, () {
+                                  _userManagementDetailBloc.selectedFromDate !=
+                                              "" ||
+                                          fromDateController.text.isNotEmpty
+                                      ? _selectToDate(context, state)
+                                      : CSnackBar.showError(context,
+                                          msg: 'Please select a startDate');
+                                }),
+                          state.isLoading ?? false
+                              ? _shimmerForFilterWidgets()
+                              : _searchWidget(context),
+                          state.isLoading ?? false
+                              ? _shimmerForFilterWidgets(
+                                  width: DBL.oneTwenty.val)
+                              : _clearAllFiltersButtonWidget()
+                        ],
+                      ),
                       const SizedBox(height: 30),
                       _cardView(state, context),
                     ],
@@ -145,204 +152,192 @@ class _PendingServicePageState extends State<PendingServicePage> {
     );
   }
 
-  // CustomShimmerWidget _shimmerForFilterWidgets({double? width}) {
-  //   return CustomShimmerWidget.rectangular(
-  //     height: DBL.fortySeven.val,
-  //     width: width ?? DBL.twoTen.val,
-  //     baseColor: AppColor.rowBackgroundColor.val,
-  //     highlightColor: AppColor.lightGrey.val,
-  //   );
-  // }
+  CustomShimmerWidget _shimmerForFilterWidgets({double? width}) {
+    return CustomShimmerWidget.rectangular(
+      height: DBL.fortySeven.val,
+      width: width ?? DBL.twoTen.val,
+      baseColor: AppColor.rowBackgroundColor.val,
+      highlightColor: AppColor.lightGrey.val,
+    );
+  }
 
-  // CTextField _buildDatePicker(ServiceRequestManagementState state,
-  //     TextEditingController controller, String hintText, Function() onTap) {
-  //   return CTextField(
-  //     width: DBL.twoTen.val,
-  //     height: DBL.fortySeven.val,
-  //     hintStyle: TS().gRoboto(
-  //         fontWeight: FW.w400.val,
-  //         fontSize: FS.font14.val,
-  //         color: AppColor.columColor2.val),
-  //     textColor: AppColor.columColor2.val,
-  //     hintText: hintText,
-  //     isReadOnly: true,
-  //     controller: controller,
-  //     validator: (value) {
-  //       if (value!.isEmpty) {
-  //         return AppString.emptyDate.val;
-  //       }
-  //       return null;
-  //     },
-  //     onTap: onTap,
-  //     onChanged: (val) {},
-  //     textInputAction: TextInputAction.next,
-  //     keyBoardType: TextInputType.text,
-  //     suffixIcon: CustomSvg(
-  //       width: DBL.twentyFive.val,
-  //       height: DBL.twentyFive.val,
-  //       path: IMG.calenderOutLine.val,
-  //     ),
-  //   );
-  // }
+  CTextField _buildDatePicker(UserManagementDetailState state,
+      TextEditingController controller, String hintText, Function() onTap) {
+    return CTextField(
+      width: DBL.twoTen.val,
+      height: DBL.fortySeven.val,
+      hintStyle: TS().gRoboto(
+          fontWeight: FW.w400.val,
+          fontSize: FS.font14.val,
+          color: AppColor.columColor2.val),
+      textColor: AppColor.columColor2.val,
+      hintText: hintText,
+      isReadOnly: true,
+      controller: controller,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return AppString.emptyDate.val;
+        }
+        return null;
+      },
+      onTap: onTap,
+      onChanged: (val) {},
+      textInputAction: TextInputAction.next,
+      keyBoardType: TextInputType.text,
+      suffixIcon: CustomSvg(
+        width: DBL.twentyFive.val,
+        height: DBL.twentyFive.val,
+        path: IMG.calenderOutLine.val,
+      ),
+    );
+  }
 
-  // _clearAllFiltersButtonWidget() {
-  //   return Padding(
-  //     padding: const EdgeInsets.only(right: 20.0),
-  //     child: CustomSizedBox(
-  //       height: 46,
-  //       child: CustomButton(
-  //         onPressed: () {
-  //           _page = 1;
-  //           _searchController.clear();
-  //           fromDateController.clear();
-  //           toDateController.clear();
-  //           _serviceRequestBloc.selectedFromDate = '';
-  //           _serviceRequestBloc.selectedToDate = '';
-  //           _serviceRequestBloc.statusFilterId = 0;
-  //           _serviceRequestBloc
-  //               .add(const ServiceRequestManagementEvent.getServiceStatus());
-  //           _serviceRequestBloc.add(
-  //               ServiceRequestManagementEvent.getServiceRequests(
-  //                   context: context,
-  //                   page: _page,
-  //                   limit: _limit,
-  //                   clientId: widget.clientId));
-  //           debugPrint("date test ${fromDateController.text}");
-  //         },
-  //         text: AppString.clear.val,
-  //       ),
-  //     ),
-  //   );
-  // }
+  _clearAllFiltersButtonWidget() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 20.0),
+      child: CustomSizedBox(
+        height: 46,
+        child: CustomButton(
+          onPressed: () {
+            _page = 1;
+            _searchController.clear();
+            fromDateController.clear();
+            toDateController.clear();
+            _userManagementDetailBloc.selectedFromDate = '';
+            _userManagementDetailBloc.selectedToDate = '';
+            _userManagementDetailBloc.add(
+                UserManagementDetailEvent.getPendingServices(
+                    userId: SharedPreffUtil().getAdminId,
+                    profileId: widget.clientId,
+                    page: _page.toString(),
+                    limit: _limit.toString(),
+                    searchTerm: '',
+                    fromDate: _userManagementDetailBloc.selectedFromDate
+                        ?.parseWithFormat(dateFormat: AppString.yyyyMMdd.val),
+                    toDate: _userManagementDetailBloc.selectedToDate
+                        ?.parseWithFormat(dateFormat: AppString.yyyyMMdd.val)));
+            debugPrint("date test ${fromDateController.text}");
+          },
+          text: AppString.clear.val,
+        ),
+      ),
+    );
+  }
 
-  // Future<void> _selectFromDate(
-  //     BuildContext context, ServiceRequestManagementState state) async {
-  //   debugPrint("date check ${_serviceRequestBloc.selectedToDateTime}");
-  //   final DateTime now = DateTime.now();
-  //   showDatePicker(
-  //       context: context,
-  //       initialDate: _serviceRequestBloc.selectedToDateTime ?? now,
-  //       firstDate: _serviceRequestBloc.selectedToDateTime
-  //           ?.subtract(const Duration(days: 1825)) ??
-  //           DateTime(DateTime.now().year - 5),
-  //       lastDate: _serviceRequestBloc.selectedToDateTime ??
-  //           DateTime(DateTime.now().year + 5))
-  //       .then((value) {
-  //     if (value != null) {
-  //       _serviceRequestBloc.selectedFromDate =
-  //           value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
-  //       print("selecteddd from date : ${_serviceRequestBloc.selectedFromDate}");
-  //       _serviceRequestBloc.selectedFromDateTime = value;
-  //       if (_serviceRequestBloc.selectedFromDate.isNotEmpty &&
-  //           _serviceRequestBloc.selectedToDate.isNotEmpty) {
-  //         _page = 1;
-  //         _serviceRequestBloc.add(
-  //             ServiceRequestManagementEvent.getServiceRequests(
-  //                 searchTerm: _searchController.text,
-  //                 statusFilterId: _serviceRequestBloc.statusFilterId,
-  //                 context: context,
-  //                 page: _page,
-  //                 limit: _limit,
-  //                 fromDate: _serviceRequestBloc.selectedFromDate,
-  //                 toDate: _serviceRequestBloc.selectedToDate,
-  //                 clientId: widget.clientId));
-  //       }
-  //       fromDateController.text =
-  //           value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
-  //       FocusScope.of(context).unfocus();
-  //     }
-  //   });
-  // }
-  //
-  // Future<void> _selectToDate(
-  //     BuildContext context, ServiceRequestManagementState state) async {
-  //   final DateTime now = DateTime.now();
-  //   showDatePicker(
-  //       context: context,
-  //       initialDate:
-  //       _serviceRequestBloc.selectedToDateTime ?? state.selectedDate,
-  //       firstDate: _serviceRequestBloc.selectedFromDateTime,
-  //       lastDate: DateTime(DateTime.now().year + 5))
-  //       .then((value) {
-  //     if (value != null) {
-  //       _serviceRequestBloc.selectedToDateTime = value;
-  //       _serviceRequestBloc.selectedToDate =
-  //           value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
-  //       print("selecteddd to date : ${_serviceRequestBloc.selectedToDate}");
-  //       if (_serviceRequestBloc.selectedFromDate.isNotEmpty &&
-  //           _serviceRequestBloc.selectedToDate.isNotEmpty) {
-  //         _page = 1;
-  //         _serviceRequestBloc.add(
-  //             ServiceRequestManagementEvent.getServiceRequests(
-  //                 context: context,
-  //                 statusFilterId: _serviceRequestBloc.statusFilterId == 0
-  //                     ? null
-  //                     : _serviceRequestBloc.statusFilterId,
-  //                 searchTerm: _searchController.text,
-  //                 page: _page,
-  //                 limit: _limit,
-  //                 fromDate: _serviceRequestBloc.selectedFromDate,
-  //                 toDate: _serviceRequestBloc.selectedToDate,
-  //                 clientId: widget.clientId));
-  //       }
-  //       toDateController.text =
-  //           value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
-  //       FocusScope.of(context).unfocus();
-  //       debugPrint("toDatesss ${toDateController.text}");
-  //       debugPrint("date check ${_serviceRequestBloc.selectedToDateTime}");
-  //     }
-  //   });
-  // }
-  //
-  // CTextField _searchWidget(BuildContext context) {
-  //   return CTextField(
-  //     onSubmitted: (val) {
-  //       print("item inside search submit : ${items.title}");
-  //       _serviceRequestBloc.searchQuery = val;
-  //       _page = 1;
-  //       _serviceRequestBloc.add(
-  //           ServiceRequestManagementEvent.getServiceRequests(
-  //               statusFilterId: _serviceRequestBloc.statusFilterId == 0
-  //                   ? null
-  //                   : _serviceRequestBloc.statusFilterId,
-  //               fromDate: _serviceRequestBloc.selectedFromDate,
-  //               toDate: _serviceRequestBloc.selectedToDate,
-  //               context: context,
-  //               page: _page,
-  //               limit: _limit,
-  //               searchTerm: _searchController.text,
-  //               clientId: widget.clientId));
-  //     },
-  //     onChanged: (String value) {
-  //       _serviceRequestBloc.add(
-  //           ServiceRequestManagementEvent.getServiceRequests(
-  //               statusFilterId: _serviceRequestBloc.statusFilterId == 0
-  //                   ? null
-  //                   : _serviceRequestBloc.statusFilterId,
-  //               fromDate: _serviceRequestBloc.selectedFromDate,
-  //               toDate: _serviceRequestBloc.selectedToDate,
-  //               context: context,
-  //               page: _page,
-  //               limit: _limit,
-  //               searchTerm: _searchController.text,
-  //               clientId: widget.clientId));
-  //     },
-  //     width: DBL.twoTen.val,
-  //     height: DBL.fortySeven.val,
-  //     controller: _searchController,
-  //     hintText: AppString.search.val,
-  //     hintStyle: TS().gRoboto(
-  //         fontSize: FS.font14.val,
-  //         fontWeight: FW.w400.val,
-  //         color: AppColor.columColor2.val),
-  //     textColor: AppColor.columColor2.val,
-  //     suffixIcon: CustomSvg(
-  //       path: IMG.search.val,
-  //       height: 16,
-  //       width: 16,
-  //     ),
-  //   );
-  // }
+  Future<void> _selectFromDate(
+      BuildContext context, UserManagementDetailState state) async {
+    final DateTime now = DateTime.now();
+    showDatePicker(
+            context: context,
+            initialDate: _userManagementDetailBloc.selectedToDateTime ?? now,
+            firstDate: _userManagementDetailBloc.selectedToDateTime
+                    ?.subtract(const Duration(days: 1825)) ??
+                DateTime(DateTime.now().year - 5),
+            lastDate: _userManagementDetailBloc.selectedToDateTime ??
+                DateTime(DateTime.now().year + 5))
+        .then((value) {
+      if (value != null) {
+        _userManagementDetailBloc.selectedFromDate =
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        _userManagementDetailBloc.selectedFromDateTime = value;
+        if (_userManagementDetailBloc.selectedFromDate != "" &&
+            _userManagementDetailBloc.selectedToDate != "") {
+          _page = 1;
+          _userManagementDetailBloc.add(
+              UserManagementDetailEvent.getPendingServices(
+                  userId: SharedPreffUtil().getAdminId,
+                  profileId: widget.clientId,
+                  page: _page.toString(),
+                  limit: _limit.toString(),
+                  searchTerm: _searchController.text,
+                  fromDate: _userManagementDetailBloc.selectedFromDate
+                      ?.parseWithFormat(dateFormat: AppString.yyyyMMdd.val),
+                  toDate: _userManagementDetailBloc.selectedToDate
+                      ?.parseWithFormat(dateFormat: AppString.yyyyMMdd.val)));
+        }
+        fromDateController.text =
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        FocusScope.of(context).unfocus();
+      }
+    });
+  }
+
+  Future<void> _selectToDate(
+      BuildContext context, UserManagementDetailState state) async {
+    final DateTime now = DateTime.now();
+    showDatePicker(
+            context: context,
+            initialDate: _userManagementDetailBloc.selectedToDateTime ?? now,
+            firstDate: _userManagementDetailBloc.selectedFromDateTime,
+            lastDate: DateTime(DateTime.now().year + 5))
+        .then((value) {
+      if (value != null) {
+        _userManagementDetailBloc.selectedToDateTime = value;
+        _userManagementDetailBloc.selectedToDate =
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        if (_userManagementDetailBloc.selectedFromDate != "" &&
+            _userManagementDetailBloc.selectedToDate != "") {
+          _page = 1;
+          _userManagementDetailBloc.add(
+              UserManagementDetailEvent.getPendingServices(
+                  userId: SharedPreffUtil().getAdminId,
+                  profileId: widget.clientId,
+                  page: _page.toString(),
+                  limit: _limit.toString(),
+                  searchTerm: _searchController.text,
+                  fromDate: _userManagementDetailBloc.selectedFromDate,
+                  toDate: _userManagementDetailBloc.selectedToDate));
+        }
+        toDateController.text =
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        FocusScope.of(context).unfocus();
+        debugPrint("toDatesss ${toDateController.text}");
+      }
+    });
+  }
+
+  CTextField _searchWidget(BuildContext context) {
+    return CTextField(
+      onSubmitted: (val) {
+        _userManagementDetailBloc.searchQuery = val;
+        _page = 1;
+        _userManagementDetailBloc.add(
+            UserManagementDetailEvent.getPendingServices(
+                userId: SharedPreffUtil().getAdminId,
+                profileId: widget.clientId,
+                page: _page.toString(),
+                limit: _limit.toString(),
+                searchTerm: _searchController.text,
+                fromDate: _userManagementDetailBloc.selectedFromDate,
+                toDate: _userManagementDetailBloc.selectedToDate));
+      },
+      onChanged: (String value) {
+        _userManagementDetailBloc.add(
+            UserManagementDetailEvent.getPendingServices(
+                userId: SharedPreffUtil().getAdminId,
+                profileId: widget.clientId,
+                page: _page.toString(),
+                limit: _limit.toString(),
+                searchTerm: _searchController.text,
+                fromDate: _userManagementDetailBloc.selectedFromDate,
+                toDate: _userManagementDetailBloc.selectedToDate));
+      },
+      width: DBL.twoTen.val,
+      height: DBL.fortySeven.val,
+      controller: _searchController,
+      hintText: AppString.search.val,
+      hintStyle: TS().gRoboto(
+          fontSize: FS.font14.val,
+          fontWeight: FW.w400.val,
+          color: AppColor.columColor2.val),
+      textColor: AppColor.columColor2.val,
+      suffixIcon: CustomSvg(
+        path: IMG.search.val,
+        height: 16,
+        width: 16,
+      ),
+    );
+  }
 
   CustomCard _cardView(UserManagementDetailState state, BuildContext context) {
     log("list is ${state.pendingServiceList.length}", name: "TEST");
@@ -433,45 +428,6 @@ class _PendingServicePageState extends State<PendingServicePage> {
                       text: AppString.endDateAndTime.val,
                       fontWeight: FontWeight.bold),
                 ),
-                /*  DataColumn2(
-                size: ColumnSize.L,
-                fixedWidth: 150,
-                label: _columnsView(
-                    text: AppString.serviceFee.val,
-                    fontWeight: FontWeight.bold),
-              ),*/
-                /*if (_serviceRequestBloc.statusFilterId == 0 ||
-                  _serviceRequestBloc.statusFilterId == 6)
-                DataColumn2(
-                  size: ColumnSize.L,
-                  fixedWidth: 100,
-                  label: _columnsView(
-                      text: AppString.refund.val,
-                      fontWeight: FontWeight.bold),
-                ),
-              if (_serviceRequestBloc.statusFilterId == 0 ||
-                  _serviceRequestBloc.statusFilterId == 6)
-                DataColumn2(
-                  size: ColumnSize.L,
-                  fixedWidth: 100,
-                  label: _columnsView(
-                      text: AppString.canceledBy.val,
-                      fontWeight: FontWeight.bold),
-                ),*/
-                //bug num 67494
-                // DataColumn2(
-                //   size: ColumnSize.S,
-                //   fixedWidth: 150,
-                //   label: _columnsView(
-                //       text: AppString.status.val, fontWeight: FontWeight.bold),
-                // ),
-                // DataColumn2(
-                //   size: ColumnSize.S,
-                //   fixedWidth: Responsive.isWeb(context)
-                //       ? MediaQuery.of(context).size.width * .1
-                //       : DBL.oneSeventy.val,
-                //   label: const CustomText(""),
-                // ),
               ],
               rows: _userManagementDetailBloc.state.pendingServiceList
                   .asMap()
@@ -790,7 +746,10 @@ class _PendingServicePageState extends State<PendingServicePage> {
                         userId: SharedPreffUtil().getAdminId,
                         profileId: widget.clientId,
                         page: _page.toString(),
-                        limit: _limit.toString()));
+                        limit: _limit.toString(),
+                        searchTerm: _searchController.text,
+                        fromDate: _userManagementDetailBloc.selectedFromDate,
+                        toDate: _userManagementDetailBloc.selectedToDate));
 
                 updateData();
               }
@@ -802,7 +761,10 @@ class _PendingServicePageState extends State<PendingServicePage> {
                       userId: SharedPreffUtil().getAdminId,
                       profileId: widget.clientId,
                       page: _page.toString(),
-                      limit: _limit.toString()));
+                      limit: _limit.toString(),
+                      searchTerm: _searchController.text,
+                      fromDate: _userManagementDetailBloc.selectedFromDate,
+                      toDate: _userManagementDetailBloc.selectedToDate));
               updateData();
             },
             onPreviousPressed: () {
@@ -813,7 +775,10 @@ class _PendingServicePageState extends State<PendingServicePage> {
                         userId: SharedPreffUtil().getAdminId,
                         profileId: widget.clientId,
                         page: _page.toString(),
-                        limit: _limit.toString()));
+                        limit: _limit.toString(),
+                        searchTerm: _searchController.text,
+                        fromDate: _userManagementDetailBloc.selectedFromDate,
+                        toDate: _userManagementDetailBloc.selectedToDate));
                 updateData();
               }
             });

@@ -48,6 +48,7 @@ import '../faq_creation/models/faq_details_response_model.dart';
 import '../forgot_password/model/forgot_password.dart';
 import '../master/model/region_list_response.dart';
 import '../on_boarding/models/common_response.dart';
+import '../on_boarding/models/get_personal_details_response.dart';
 import '../on_boarding/models/preferences/pet_list_response.dart';
 import '../on_boarding/models/preferences/years_of_experience_response.dart';
 import '../on_boarding/models/resend_otp_response.dart';
@@ -355,7 +356,7 @@ abstract class ApiClient {
   );
 
   @GET("/admin/personal-details?")
-  Future<PersonalDetailsResponse> fetchPersonalDetails(
+  Future<GetPersonalDetailsResponse> fetchPersonalDetails(
     @Query("user_id") String userId,
   );
 
@@ -910,5 +911,8 @@ abstract class ApiClient {
     @Field("profile_id") String profileId,
     @Field("page") String page,
     @Field("offset") String limit,
+    @Field("search_term") String searchTerm,
+    @Field("from_date") String? fromDate,
+    @Field("to_date") String? toDate,
   );
 }

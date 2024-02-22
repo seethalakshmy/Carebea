@@ -15,6 +15,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../core/custom_snackbar.dart';
 import '../../../domain/caregiver_profile/model/caregiver_profile_response.dart';
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
+import '../../../domain/on_boarding/models/get_personal_details_response.dart';
 import '../../../domain/on_boarding/models/preferences/pet_list_response.dart';
 import '../../../domain/on_boarding/models/preferences/pets_model.dart';
 import '../../../domain/on_boarding/models/preferences/preference_language_model.dart';
@@ -64,6 +65,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   List<PlatformFile> covidBytesList = [];
 
   PersonalDetailsResponse? personalDetails;
+  GetPersonalDetailsResponse? getPersonalDetailsResponse;
 
   bool nextButtonClicked = false;
   String stateId = "";
@@ -90,6 +92,22 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   final TextEditingController citySearchController = TextEditingController();
   final TextEditingController stateSearchController = TextEditingController();
   final TextEditingController relationSearchController =
+      TextEditingController();
+
+  /// personal details
+
+  TextEditingController socialSecurityNumberController =
+      TextEditingController();
+  TextEditingController addressLineController = TextEditingController();
+  TextEditingController personalStreetController = TextEditingController();
+  TextEditingController personalZipController = TextEditingController();
+  final TextEditingController dobController = TextEditingController();
+  final TextEditingController documentNumberController =
+      TextEditingController();
+  final TextEditingController expiryDateController = TextEditingController();
+  final TextEditingController personalCitySearchController =
+      TextEditingController();
+  final TextEditingController personalStateSearchController =
       TextEditingController();
   int languagePage = 1;
   int cityPage = 1;
@@ -167,6 +185,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     on<_SubmitAccountDetails>(_submitAccountDetails);
     on<_SubmitReference>(_submitReference);
     on<_SelectAllServices>(_selectAllServices);
+    on<_FetchPersonalDetails>(_fetchPersonalData);
     print("inside bloc ${SharedPreffUtil().getIsFromWebsite}");
 
     on<_AddReference>((event, emit) {
@@ -466,23 +485,68 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     emit(personalState);
   }
 
+  // Future<void> fetchPersonalData(
+  //     _FetchPersonalDetails event, Emitter<OnboardingState> emit) async {
+  //   // emit(state.copyWith(isCityApiCalling: event.wantLoading));
+  //   final Either<ApiErrorHandler, PersonalDetailsResponse>
+  //       personalDetailResult =
+  //       await onboardingRepository.fetchPersonalDetails(userId: event.userId);
+  //   OnboardingState personalDetailState = personalDetailResult.fold((l) {
+  //     // return state.copyWith(isCityApiCalling: false, cityOption: Some(Left(l)));
+  //   }, (r) {
+  //     personalDetails = r;
+  //
+  //     // return state.copyWith(
+  //     //     isCityApiCalling: false, cityOption: Some(Right(r)));
+  //   });
+  //   emit(personalDetailResult);
+  // }
+
   _fetchPersonalData(
       _FetchPersonalDetails event, Emitter<OnboardingState> emit) async {
     print('asd ${sharedPreffUtil.getAccessToken}');
-    emit(state.copyWith(isLoading: true));
-    final Either<ApiErrorHandler, PersonalDetailsResponse> result =
+    // emit(state.copyWith(isLoading: true));
+    final Either<ApiErrorHandler, GetPersonalDetailsResponse> result =
         await onboardingRepository.fetchPersonalDetails(userId: event.userId);
-
-    OnboardingState personalState = result.fold((l) {
-      return state.copyWith(
-          isLoading: false, personalDetailsOption: Some(Left(l)));
+    debugPrint("result $result");
+    result.fold((l) {
+      debugPrint("left print");
+      emit(state.copyWith(getPersonalDetailsOption: Some(Left(l))));
     }, (r) {
-      personalDetails = r;
+      getPersonalDetailsResponse = r;
+      addressLineController.text = r.data?.address?.address ?? "";
+      socialSecurityNumberController.text = r.data?.socialSecurityNumber ?? "";
+      personalStreetController.text = r.data?.address?.streetName ?? "";
+      personalZipController.text = r.data?.address?.zipCode ?? "";
+      dobController.text = r.data?.dob ?? "";
+      documentNumberController.text =
+          r.data?.documentDetails?.documentNumber ?? "";
+      expiryDateController.text = r.data?.documentDetails?.expiryDate ?? "";
+      personalCitySearchController.text = r.data?.address?.cityName ?? "";
+      personalStateSearchController.text = r.data?.address?.stateName ?? "";
+      selectedStateName = r.data?.address?.stateName ?? "";
+      selectedCityName = r.data?.address?.cityName ?? "";
+      // streetController.text = r.data?.address?.streetName ?? "";
+      // social
+      //
+      // debugPrint("data check inside bloc ${streetController.text}");
 
-      return state.copyWith(
-          isLoading: false, personalDetailsOption: Some(Right(r)));
+      emit(state.copyWith(getPersonalDetailsOption: Some(Right(r))));
     });
-    emit(personalState);
+
+    // OnboardingState personalState = result.fold((l) {
+    //   debugPrint("left print");
+    //   return state.copyWith(
+    //       isLoading: false, personalDetailsOption: Some(Left(l)));
+    // }, (r) {
+    //   personalDetails = r;
+    //
+    //   debugPrint("data check inside bloc ${r.status}");
+    //
+    //   return state.copyWith(
+    //       isLoading: false, personalDetailsOption: Some(Right(r)));
+    // });
+    // emit(personalState);
   }
 
   _getQualificationDetails(

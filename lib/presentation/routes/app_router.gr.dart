@@ -78,13 +78,13 @@ import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet
 import 'package:admin_580_tech/presentation/user_mangement_detail/views/sub_profile_view.dart'
     as _i37;
 import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/pending_service_page.dart'
-    as _i41;
-import 'package:admin_580_tech/presentation/verify_email/verify_email.dart'
     as _i38;
-import 'package:admin_580_tech/presentation/video_management/video_management_view.dart'
+import 'package:admin_580_tech/presentation/verify_email/verify_email.dart'
     as _i39;
-import 'package:admin_580_tech/presentation/video_management_creation/video_management_creation_screen.dart'
+import 'package:admin_580_tech/presentation/video_management/video_management_view.dart'
     as _i40;
+import 'package:admin_580_tech/presentation/video_management_creation/video_management_creation_screen.dart'
+    as _i41;
 import 'package:auto_route/auto_route.dart' as _i42;
 import 'package:flutter/material.dart' as _i43;
 
@@ -450,16 +450,26 @@ abstract class $AppRouter extends _i42.RootStackRouter {
         ),
       );
     },
+    PendingServiceRoute.name: (routeData) {
+      final args = routeData.argsAs<PendingServiceRouteArgs>();
+      return _i42.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i38.PendingServicePage(
+          key: args.key,
+          clientId: args.clientId,
+        ),
+      );
+    },
     VerifyEmailRoute.name: (routeData) {
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i38.VerifyEmailPage(),
+        child: const _i39.VerifyEmailPage(),
       );
     },
     VideoManagementRoute.name: (routeData) {
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i39.VideoManagementPage(),
+        child: const _i40.VideoManagementPage(),
       );
     },
     VideoUploadRoute.name: (routeData) {
@@ -474,23 +484,13 @@ abstract class $AppRouter extends _i42.RootStackRouter {
               ));
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i40.VideoUploadPage(
+        child: _i41.VideoUploadPage(
           key: args.key,
           isEdit: args.isEdit,
           title: args.title,
           type: args.type,
           attachment: args.attachment,
           id: args.id,
-        ),
-      );
-    },
-    PendingServiceRoute.name: (routeData) {
-      final args = routeData.argsAs<PendingServiceRouteArgs>();
-      return _i42.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i41.PendingServicePage(
-          key: args.key,
-          clientId: args.clientId,
         ),
       );
     },
@@ -1508,7 +1508,45 @@ class SubProfileViewArgs {
 }
 
 /// generated route for
-/// [_i38.VerifyEmailPage]
+/// [_i38.PendingServicePage]
+class PendingServiceRoute extends _i42.PageRouteInfo<PendingServiceRouteArgs> {
+  PendingServiceRoute({
+    _i43.Key? key,
+    required String clientId,
+    List<_i42.PageRouteInfo>? children,
+  }) : super(
+          PendingServiceRoute.name,
+          args: PendingServiceRouteArgs(
+            key: key,
+            clientId: clientId,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'PendingServiceRoute';
+
+  static const _i42.PageInfo<PendingServiceRouteArgs> page =
+      _i42.PageInfo<PendingServiceRouteArgs>(name);
+}
+
+class PendingServiceRouteArgs {
+  const PendingServiceRouteArgs({
+    this.key,
+    required this.clientId,
+  });
+
+  final _i43.Key? key;
+
+  final String clientId;
+
+  @override
+  String toString() {
+    return 'PendingServiceRouteArgs{key: $key, clientId: $clientId}';
+  }
+}
+
+/// generated route for
+/// [_i39.VerifyEmailPage]
 class VerifyEmailRoute extends _i42.PageRouteInfo<void> {
   const VerifyEmailRoute({List<_i42.PageRouteInfo>? children})
       : super(
@@ -1522,7 +1560,7 @@ class VerifyEmailRoute extends _i42.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i39.VideoManagementPage]
+/// [_i40.VideoManagementPage]
 class VideoManagementRoute extends _i42.PageRouteInfo<void> {
   const VideoManagementRoute({List<_i42.PageRouteInfo>? children})
       : super(
@@ -1536,7 +1574,7 @@ class VideoManagementRoute extends _i42.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i40.VideoUploadPage]
+/// [_i41.VideoUploadPage]
 class VideoUploadRoute extends _i42.PageRouteInfo<VideoUploadRouteArgs> {
   VideoUploadRoute({
     _i43.Key? key,
@@ -1597,43 +1635,5 @@ class VideoUploadRouteArgs {
   @override
   String toString() {
     return 'VideoUploadRouteArgs{key: $key, isEdit: $isEdit, title: $title, type: $type, attachment: $attachment, id: $id}';
-  }
-}
-
-/// generated route for
-/// [_i41.PendingServicePage]
-class PendingServiceRoute extends _i42.PageRouteInfo<PendingServiceRouteArgs> {
-  PendingServiceRoute({
-    _i43.Key? key,
-    required String clientId,
-    List<_i42.PageRouteInfo>? children,
-  }) : super(
-          PendingServiceRoute.name,
-          args: PendingServiceRouteArgs(
-            key: key,
-            clientId: clientId,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'PendingServiceRoute';
-
-  static const _i42.PageInfo<PendingServiceRouteArgs> page =
-      _i42.PageInfo<PendingServiceRouteArgs>(name);
-}
-
-class PendingServiceRouteArgs {
-  const PendingServiceRouteArgs({
-    this.key,
-    required this.clientId,
-  });
-
-  final _i43.Key? key;
-
-  final String clientId;
-
-  @override
-  String toString() {
-    return 'PendingServiceRouteArgs{key: $key, clientId: $clientId}';
   }
 }

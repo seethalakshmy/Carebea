@@ -1046,13 +1046,13 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<PersonalDetailsResponse> fetchPersonalDetails(userId) async {
+  Future<GetPersonalDetailsResponse> fetchPersonalDetails(userId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'user_id': userId};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<PersonalDetailsResponse>(Options(
+        _setStreamType<GetPersonalDetailsResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -1064,7 +1064,7 @@ class _ApiClient implements ApiClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = PersonalDetailsResponse.fromJson(_result.data!);
+    final value = GetPersonalDetailsResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -3549,16 +3549,24 @@ class _ApiClient implements ApiClient {
     profileId,
     page,
     limit,
+    searchTerm,
+    fromDate,
+    toDate,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = {
       'user_id': userId,
       'profile_id': profileId,
       'page': page,
       'offset': limit,
+      'search_term': searchTerm,
+      'from_date': fromDate,
+      'to_date': toDate,
     };
+    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<PendingServiceResponse>(Options(
       method: 'POST',

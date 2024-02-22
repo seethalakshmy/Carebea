@@ -24,5 +24,8 @@ abstract class IClientDetailRepo {
     required String profileId,
     required String page,
     required String limit,
+    required String searchTerm,
+    required String fromDate,
+    required String toDate,
   });
 }

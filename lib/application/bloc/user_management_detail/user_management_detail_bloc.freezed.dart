@@ -24,8 +24,8 @@ mixin _$UserManagementDetailEvent {
     required TResult Function(
             String userId, String page, String limit, String searchTerm)
         getSubClients,
-    required TResult Function(
-            String userId, String profileId, String page, String limit)
+    required TResult Function(String userId, String profileId, String page,
+            String limit, String searchTerm, String? fromDate, String? toDate)
         getPendingServices,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,8 +36,8 @@ mixin _$UserManagementDetailEvent {
     TResult? Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
-    TResult? Function(
-            String userId, String profileId, String page, String limit)?
+    TResult? Function(String userId, String profileId, String page,
+            String limit, String searchTerm, String? fromDate, String? toDate)?
         getPendingServices,
   }) =>
       throw _privateConstructorUsedError;
@@ -48,8 +48,8 @@ mixin _$UserManagementDetailEvent {
     TResult Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
-    TResult Function(
-            String userId, String profileId, String page, String limit)?
+    TResult Function(String userId, String profileId, String page, String limit,
+            String searchTerm, String? fromDate, String? toDate)?
         getPendingServices,
     required TResult orElse(),
   }) =>
@@ -198,8 +198,8 @@ class _$_GetUserDetail implements _GetUserDetail {
     required TResult Function(
             String userId, String page, String limit, String searchTerm)
         getSubClients,
-    required TResult Function(
-            String userId, String profileId, String page, String limit)
+    required TResult Function(String userId, String profileId, String page,
+            String limit, String searchTerm, String? fromDate, String? toDate)
         getPendingServices,
   }) {
     return getUserDetail(userId, adminId);
@@ -213,8 +213,8 @@ class _$_GetUserDetail implements _GetUserDetail {
     TResult? Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
-    TResult? Function(
-            String userId, String profileId, String page, String limit)?
+    TResult? Function(String userId, String profileId, String page,
+            String limit, String searchTerm, String? fromDate, String? toDate)?
         getPendingServices,
   }) {
     return getUserDetail?.call(userId, adminId);
@@ -228,8 +228,8 @@ class _$_GetUserDetail implements _GetUserDetail {
     TResult Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
-    TResult Function(
-            String userId, String profileId, String page, String limit)?
+    TResult Function(String userId, String profileId, String page, String limit,
+            String searchTerm, String? fromDate, String? toDate)?
         getPendingServices,
     required TResult orElse(),
   }) {
@@ -370,8 +370,8 @@ class _$_GetClientService implements _GetClientService {
     required TResult Function(
             String userId, String page, String limit, String searchTerm)
         getSubClients,
-    required TResult Function(
-            String userId, String profileId, String page, String limit)
+    required TResult Function(String userId, String profileId, String page,
+            String limit, String searchTerm, String? fromDate, String? toDate)
         getPendingServices,
   }) {
     return getClientService(userId, adminId);
@@ -385,8 +385,8 @@ class _$_GetClientService implements _GetClientService {
     TResult? Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
-    TResult? Function(
-            String userId, String profileId, String page, String limit)?
+    TResult? Function(String userId, String profileId, String page,
+            String limit, String searchTerm, String? fromDate, String? toDate)?
         getPendingServices,
   }) {
     return getClientService?.call(userId, adminId);
@@ -400,8 +400,8 @@ class _$_GetClientService implements _GetClientService {
     TResult Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
-    TResult Function(
-            String userId, String profileId, String page, String limit)?
+    TResult Function(String userId, String profileId, String page, String limit,
+            String searchTerm, String? fromDate, String? toDate)?
         getPendingServices,
     required TResult orElse(),
   }) {
@@ -563,8 +563,8 @@ class _$_GetSubClients implements _GetSubClients {
     required TResult Function(
             String userId, String page, String limit, String searchTerm)
         getSubClients,
-    required TResult Function(
-            String userId, String profileId, String page, String limit)
+    required TResult Function(String userId, String profileId, String page,
+            String limit, String searchTerm, String? fromDate, String? toDate)
         getPendingServices,
   }) {
     return getSubClients(userId, page, limit, searchTerm);
@@ -578,8 +578,8 @@ class _$_GetSubClients implements _GetSubClients {
     TResult? Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
-    TResult? Function(
-            String userId, String profileId, String page, String limit)?
+    TResult? Function(String userId, String profileId, String page,
+            String limit, String searchTerm, String? fromDate, String? toDate)?
         getPendingServices,
   }) {
     return getSubClients?.call(userId, page, limit, searchTerm);
@@ -593,8 +593,8 @@ class _$_GetSubClients implements _GetSubClients {
     TResult Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
-    TResult Function(
-            String userId, String profileId, String page, String limit)?
+    TResult Function(String userId, String profileId, String page, String limit,
+            String searchTerm, String? fromDate, String? toDate)?
         getPendingServices,
     required TResult orElse(),
   }) {
@@ -668,7 +668,14 @@ abstract class _$$_GetPendingServicesCopyWith<$Res>
       __$$_GetPendingServicesCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String userId, String profileId, String page, String limit});
+  $Res call(
+      {String userId,
+      String profileId,
+      String page,
+      String limit,
+      String searchTerm,
+      String? fromDate,
+      String? toDate});
 }
 
 /// @nodoc
@@ -686,6 +693,9 @@ class __$$_GetPendingServicesCopyWithImpl<$Res>
     Object? profileId = null,
     Object? page = null,
     Object? limit = null,
+    Object? searchTerm = null,
+    Object? fromDate = freezed,
+    Object? toDate = freezed,
   }) {
     return _then(_$_GetPendingServices(
       userId: null == userId
@@ -704,6 +714,18 @@ class __$$_GetPendingServicesCopyWithImpl<$Res>
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
               as String,
+      searchTerm: null == searchTerm
+          ? _value.searchTerm
+          : searchTerm // ignore: cast_nullable_to_non_nullable
+              as String,
+      fromDate: freezed == fromDate
+          ? _value.fromDate
+          : fromDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      toDate: freezed == toDate
+          ? _value.toDate
+          : toDate // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -715,7 +737,10 @@ class _$_GetPendingServices implements _GetPendingServices {
       {required this.userId,
       required this.profileId,
       required this.page,
-      required this.limit});
+      required this.limit,
+      required this.searchTerm,
+      this.fromDate,
+      this.toDate});
 
   @override
   final String userId;
@@ -725,10 +750,16 @@ class _$_GetPendingServices implements _GetPendingServices {
   final String page;
   @override
   final String limit;
+  @override
+  final String searchTerm;
+  @override
+  final String? fromDate;
+  @override
+  final String? toDate;
 
   @override
   String toString() {
-    return 'UserManagementDetailEvent.getPendingServices(userId: $userId, profileId: $profileId, page: $page, limit: $limit)';
+    return 'UserManagementDetailEvent.getPendingServices(userId: $userId, profileId: $profileId, page: $page, limit: $limit, searchTerm: $searchTerm, fromDate: $fromDate, toDate: $toDate)';
   }
 
   @override
@@ -740,11 +771,17 @@ class _$_GetPendingServices implements _GetPendingServices {
             (identical(other.profileId, profileId) ||
                 other.profileId == profileId) &&
             (identical(other.page, page) || other.page == page) &&
-            (identical(other.limit, limit) || other.limit == limit));
+            (identical(other.limit, limit) || other.limit == limit) &&
+            (identical(other.searchTerm, searchTerm) ||
+                other.searchTerm == searchTerm) &&
+            (identical(other.fromDate, fromDate) ||
+                other.fromDate == fromDate) &&
+            (identical(other.toDate, toDate) || other.toDate == toDate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId, profileId, page, limit);
+  int get hashCode => Object.hash(runtimeType, userId, profileId, page, limit,
+      searchTerm, fromDate, toDate);
 
   @JsonKey(ignore: true)
   @override
@@ -761,11 +798,12 @@ class _$_GetPendingServices implements _GetPendingServices {
     required TResult Function(
             String userId, String page, String limit, String searchTerm)
         getSubClients,
-    required TResult Function(
-            String userId, String profileId, String page, String limit)
+    required TResult Function(String userId, String profileId, String page,
+            String limit, String searchTerm, String? fromDate, String? toDate)
         getPendingServices,
   }) {
-    return getPendingServices(userId, profileId, page, limit);
+    return getPendingServices(
+        userId, profileId, page, limit, searchTerm, fromDate, toDate);
   }
 
   @override
@@ -776,11 +814,12 @@ class _$_GetPendingServices implements _GetPendingServices {
     TResult? Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
-    TResult? Function(
-            String userId, String profileId, String page, String limit)?
+    TResult? Function(String userId, String profileId, String page,
+            String limit, String searchTerm, String? fromDate, String? toDate)?
         getPendingServices,
   }) {
-    return getPendingServices?.call(userId, profileId, page, limit);
+    return getPendingServices?.call(
+        userId, profileId, page, limit, searchTerm, fromDate, toDate);
   }
 
   @override
@@ -791,13 +830,14 @@ class _$_GetPendingServices implements _GetPendingServices {
     TResult Function(
             String userId, String page, String limit, String searchTerm)?
         getSubClients,
-    TResult Function(
-            String userId, String profileId, String page, String limit)?
+    TResult Function(String userId, String profileId, String page, String limit,
+            String searchTerm, String? fromDate, String? toDate)?
         getPendingServices,
     required TResult orElse(),
   }) {
     if (getPendingServices != null) {
-      return getPendingServices(userId, profileId, page, limit);
+      return getPendingServices(
+          userId, profileId, page, limit, searchTerm, fromDate, toDate);
     }
     return orElse();
   }
@@ -845,13 +885,19 @@ abstract class _GetPendingServices implements UserManagementDetailEvent {
       {required final String userId,
       required final String profileId,
       required final String page,
-      required final String limit}) = _$_GetPendingServices;
+      required final String limit,
+      required final String searchTerm,
+      final String? fromDate,
+      final String? toDate}) = _$_GetPendingServices;
 
   @override
   String get userId;
   String get profileId;
   String get page;
   String get limit;
+  String get searchTerm;
+  String? get fromDate;
+  String? get toDate;
   @override
   @JsonKey(ignore: true)
   _$$_GetPendingServicesCopyWith<_$_GetPendingServices> get copyWith =>

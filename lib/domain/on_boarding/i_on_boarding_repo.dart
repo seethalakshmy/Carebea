@@ -10,6 +10,7 @@ import '../../presentation/on_boarding/modules/personal_details/models/gender_li
 import '../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
 import '../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
 import 'models/common_response.dart';
+import 'models/get_personal_details_response.dart';
 import 'models/preferences/pet_list_response.dart';
 import 'models/preferences/years_of_experience_response.dart';
 import 'models/services/get_services_response.dart';
@@ -23,8 +24,8 @@ abstract class IOnBoardingRepo {
     required String searchKey,
   });
 
-  Future<Either<ApiErrorHandler, PersonalDetailsResponse>> fetchPersonalDetails(
-      {required String userId});
+  Future<Either<ApiErrorHandler, GetPersonalDetailsResponse>>
+      fetchPersonalDetails({required String userId});
 
   Future<Either<ApiErrorHandler, StateListResponse>> getStateList({
     required String page,

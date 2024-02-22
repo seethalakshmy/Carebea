@@ -79,15 +79,17 @@ class UserManagementDetailRepository implements IClientDetailRepo {
   }
 
   @override
-  Future<Either<ApiErrorHandler, PendingServiceResponse>> getPendingServices({
-    required String userId,
-    required String profileId,
-    required String page,
-    required String limit,
-  }) async {
+  Future<Either<ApiErrorHandler, PendingServiceResponse>> getPendingServices(
+      {required String userId,
+      required String profileId,
+      required String page,
+      required String limit,
+      required String searchTerm,
+      String? fromDate,
+      String? toDate}) async {
     try {
-      final response =
-          await _apiClient.pendingService(userId, profileId, page, limit);
+      final response = await _apiClient.pendingService(
+          userId, profileId, page, limit, searchTerm, fromDate, toDate);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log(": ${e.message}");

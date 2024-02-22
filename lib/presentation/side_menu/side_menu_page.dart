@@ -778,11 +778,11 @@ class _MenuBarState extends State<SideMenuPage> {
       return const VideoUploadPage();
     } else if (index == 24) {
       return const ClientAnalyticsPage();
-    } else if (index == 26) {
+    } else if (index == 27) {
       return const CareAmbassadorAnalysisPage();
     } else if (index == 25) {
       return const PageListPage();
-    } else if (index == 27) {
+    } else if (index == 26) {
       return PageCreationPage();
     } else if (index == 28) {
       return const UpcomingBirthdayPage();

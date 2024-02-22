@@ -860,11 +860,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.0.2"
-      resolved-ref: "9f634c349c839172605c45f9bdaaa6ea1b596cf1"
+      ref: "0.0.3"
+      resolved-ref: "6c69e9d30f3542f882e41b0c51185edd78fe8761"
       url: "https://github.com/AdarshSeroo/google_map_location_picker_flutter.git"
     source: git
-    version: "0.0.2"
+    version: "0.0.3"
   google_maps:
     dependency: transitive
     description:
@@ -1959,5 +1959,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.0.0 <3.1.3"
+  dart: ">=3.0.0 <4.0.0"
   flutter: ">=3.10.0"

@@ -85,9 +85,10 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
           return SingleChildScrollView(
             child: Column(
               children: [
-                widget.clientId == ""
-                    ? HeaderView(title: AppString.transactionManagement.val)
-                    : SizedBox.shrink(),
+                // widget.clientId == ""
+                //     ?
+                HeaderView(title: AppString.transactionManagement.val),
+                // : SizedBox.shrink(),
                 CustomSizedBox(height: DBL.twenty.val),
                 BlocProvider(
                   create: (context) => _transactionBloc,
@@ -205,6 +206,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                             width: 16,
                           ),
                         ),
+                      ),
+                      SizedBox(
+                        width: 10,
                       ),
                       _clearAllFiltersButtonWidget(),
                     ],

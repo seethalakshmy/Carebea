@@ -21761,6 +21761,8 @@ mixin _$OnboardingState {
   int get caregiverServiceListIndex => throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
       get personalDetailsOption => throw _privateConstructorUsedError;
+  Option<Either<ApiErrorHandler, GetPersonalDetailsResponse>>
+      get getPersonalDetailsOption => throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, GenderListResponse>> get genderOption =>
       throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, DocumentListResponse>> get documentOption =>
@@ -21838,6 +21840,8 @@ abstract class $OnboardingStateCopyWith<$Res> {
       int caregiverServiceListIndex,
       Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
           personalDetailsOption,
+      Option<Either<ApiErrorHandler, GetPersonalDetailsResponse>>
+          getPersonalDetailsOption,
       Option<Either<ApiErrorHandler, GenderListResponse>> genderOption,
       Option<Either<ApiErrorHandler, DocumentListResponse>> documentOption,
       Option<Either<ApiErrorHandler, StateListResponse>> stateOption,
@@ -21903,6 +21907,7 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
     Object? cityPaginationPage = null,
     Object? caregiverServiceListIndex = null,
     Object? personalDetailsOption = null,
+    Object? getPersonalDetailsOption = null,
     Object? genderOption = null,
     Object? documentOption = null,
     Object? stateOption = null,
@@ -22052,6 +22057,10 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
           ? _value.personalDetailsOption
           : personalDetailsOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiErrorHandler, PersonalDetailsResponse>>,
+      getPersonalDetailsOption: null == getPersonalDetailsOption
+          ? _value.getPersonalDetailsOption
+          : getPersonalDetailsOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, GetPersonalDetailsResponse>>,
       genderOption: null == genderOption
           ? _value.genderOption
           : genderOption // ignore: cast_nullable_to_non_nullable
@@ -22159,6 +22168,8 @@ abstract class _$$_OnboardingStateCopyWith<$Res>
       int caregiverServiceListIndex,
       Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
           personalDetailsOption,
+      Option<Either<ApiErrorHandler, GetPersonalDetailsResponse>>
+          getPersonalDetailsOption,
       Option<Either<ApiErrorHandler, GenderListResponse>> genderOption,
       Option<Either<ApiErrorHandler, DocumentListResponse>> documentOption,
       Option<Either<ApiErrorHandler, StateListResponse>> stateOption,
@@ -22222,6 +22233,7 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
     Object? cityPaginationPage = null,
     Object? caregiverServiceListIndex = null,
     Object? personalDetailsOption = null,
+    Object? getPersonalDetailsOption = null,
     Object? genderOption = null,
     Object? documentOption = null,
     Object? stateOption = null,
@@ -22371,6 +22383,10 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
           ? _value.personalDetailsOption
           : personalDetailsOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiErrorHandler, PersonalDetailsResponse>>,
+      getPersonalDetailsOption: null == getPersonalDetailsOption
+          ? _value.getPersonalDetailsOption
+          : getPersonalDetailsOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, GetPersonalDetailsResponse>>,
       genderOption: null == genderOption
           ? _value.genderOption
           : genderOption // ignore: cast_nullable_to_non_nullable
@@ -22472,6 +22488,7 @@ class _$_OnboardingState implements _OnboardingState {
       required this.cityPaginationPage,
       required this.caregiverServiceListIndex,
       required this.personalDetailsOption,
+      required this.getPersonalDetailsOption,
       required this.genderOption,
       required this.documentOption,
       required this.stateOption,
@@ -22621,6 +22638,9 @@ class _$_OnboardingState implements _OnboardingState {
   final Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
       personalDetailsOption;
   @override
+  final Option<Either<ApiErrorHandler, GetPersonalDetailsResponse>>
+      getPersonalDetailsOption;
+  @override
   final Option<Either<ApiErrorHandler, GenderListResponse>> genderOption;
   @override
   final Option<Either<ApiErrorHandler, DocumentListResponse>> documentOption;
@@ -22657,7 +22677,7 @@ class _$_OnboardingState implements _OnboardingState {
 
   @override
   String toString() {
-    return 'OnboardingState(pickedProfilePic: $pickedProfilePic, securityDocumentList: $securityDocumentList, hhaDocumentList: $hhaDocumentList, blsDocumentList: $blsDocumentList, tbDocumentList: $tbDocumentList, covidDocumentList: $covidDocumentList, referenceList: $referenceList, petsList: $petsList, languageList: $languageList, personalDetails: $personalDetails, serviceList: $serviceList, isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, nextClicked: $nextClicked, listUpdated: $listUpdated, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected, isLoading: $isLoading, isInitialLoading: $isInitialLoading, isCityApiCalling: $isCityApiCalling, isAllServicesSelected: $isAllServicesSelected, selectedGenderId: $selectedGenderId, languagePaginationPage: $languagePaginationPage, statePaginationPage: $statePaginationPage, cityPaginationPage: $cityPaginationPage, caregiverServiceListIndex: $caregiverServiceListIndex, personalDetailsOption: $personalDetailsOption, genderOption: $genderOption, documentOption: $documentOption, stateOption: $stateOption, cityOption: $cityOption, petListOption: $petListOption, yearsOption: $yearsOption, languageListOption: $languageListOption, getServiceOption: $getServiceOption, relationOption: $relationOption, qualificationDetailsOption: $qualificationDetailsOption, preferenceDetailsOption: $preferenceDetailsOption, referenceOption: $referenceOption, submitServiceOption: $submitServiceOption, submitBuildProfileOption: $submitBuildProfileOption, submitAccountDetailsOption: $submitAccountDetailsOption)';
+    return 'OnboardingState(pickedProfilePic: $pickedProfilePic, securityDocumentList: $securityDocumentList, hhaDocumentList: $hhaDocumentList, blsDocumentList: $blsDocumentList, tbDocumentList: $tbDocumentList, covidDocumentList: $covidDocumentList, referenceList: $referenceList, petsList: $petsList, languageList: $languageList, personalDetails: $personalDetails, serviceList: $serviceList, isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, nextClicked: $nextClicked, listUpdated: $listUpdated, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected, isLoading: $isLoading, isInitialLoading: $isInitialLoading, isCityApiCalling: $isCityApiCalling, isAllServicesSelected: $isAllServicesSelected, selectedGenderId: $selectedGenderId, languagePaginationPage: $languagePaginationPage, statePaginationPage: $statePaginationPage, cityPaginationPage: $cityPaginationPage, caregiverServiceListIndex: $caregiverServiceListIndex, personalDetailsOption: $personalDetailsOption, getPersonalDetailsOption: $getPersonalDetailsOption, genderOption: $genderOption, documentOption: $documentOption, stateOption: $stateOption, cityOption: $cityOption, petListOption: $petListOption, yearsOption: $yearsOption, languageListOption: $languageListOption, getServiceOption: $getServiceOption, relationOption: $relationOption, qualificationDetailsOption: $qualificationDetailsOption, preferenceDetailsOption: $preferenceDetailsOption, referenceOption: $referenceOption, submitServiceOption: $submitServiceOption, submitBuildProfileOption: $submitBuildProfileOption, submitAccountDetailsOption: $submitAccountDetailsOption)';
   }
 
   @override
@@ -22730,6 +22750,8 @@ class _$_OnboardingState implements _OnboardingState {
                 other.caregiverServiceListIndex == caregiverServiceListIndex) &&
             (identical(other.personalDetailsOption, personalDetailsOption) ||
                 other.personalDetailsOption == personalDetailsOption) &&
+            (identical(other.getPersonalDetailsOption, getPersonalDetailsOption) ||
+                other.getPersonalDetailsOption == getPersonalDetailsOption) &&
             (identical(other.genderOption, genderOption) ||
                 other.genderOption == genderOption) &&
             (identical(other.documentOption, documentOption) ||
@@ -22742,8 +22764,7 @@ class _$_OnboardingState implements _OnboardingState {
                 other.petListOption == petListOption) &&
             (identical(other.yearsOption, yearsOption) ||
                 other.yearsOption == yearsOption) &&
-            (identical(other.languageListOption, languageListOption) ||
-                other.languageListOption == languageListOption) &&
+            (identical(other.languageListOption, languageListOption) || other.languageListOption == languageListOption) &&
             (identical(other.getServiceOption, getServiceOption) || other.getServiceOption == getServiceOption) &&
             (identical(other.relationOption, relationOption) || other.relationOption == relationOption) &&
             (identical(other.qualificationDetailsOption, qualificationDetailsOption) || other.qualificationDetailsOption == qualificationDetailsOption) &&
@@ -22790,6 +22811,7 @@ class _$_OnboardingState implements _OnboardingState {
         cityPaginationPage,
         caregiverServiceListIndex,
         personalDetailsOption,
+        getPersonalDetailsOption,
         genderOption,
         documentOption,
         stateOption,
@@ -22850,6 +22872,8 @@ abstract class _OnboardingState implements OnboardingState {
       required final int caregiverServiceListIndex,
       required final Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
           personalDetailsOption,
+      required final Option<Either<ApiErrorHandler, GetPersonalDetailsResponse>>
+          getPersonalDetailsOption,
       required final Option<Either<ApiErrorHandler, GenderListResponse>>
           genderOption,
       required final Option<Either<ApiErrorHandler, DocumentListResponse>>
@@ -22948,6 +22972,9 @@ abstract class _OnboardingState implements OnboardingState {
   @override
   Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
       get personalDetailsOption;
+  @override
+  Option<Either<ApiErrorHandler, GetPersonalDetailsResponse>>
+      get getPersonalDetailsOption;
   @override
   Option<Either<ApiErrorHandler, GenderListResponse>> get genderOption;
   @override

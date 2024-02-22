@@ -26,6 +26,15 @@ class UserManagementDetailBloc
   List<ServicesList> pendingServiceList = [];
   final TextEditingController searchController = TextEditingController();
   int totalItems = 1;
+  int filterId = 0;
+  int? statusFilterId = 0;
+  String searchQuery = "";
+
+  String? selectedFromDate;
+  String? selectedToDate;
+  DateTime selectedFromDateTime = DateTime(2020);
+  DateTime? selectedToDateTime;
+  bool isClearFilterClicked = false;
 
   UserManagementDetailBloc(this.userDetailRepository)
       : super(UserManagementDetailState.initial()) {
@@ -106,7 +115,10 @@ class UserManagementDetailBloc
             userId: event.userId,
             profileId: event.profileId,
             page: event.page,
-            limit: event.limit);
+            limit: event.limit,
+            searchTerm: event.searchTerm,
+            fromDate: event.fromDate,
+            toDate: event.toDate);
     var pendingServiceState = result.fold((l) {
       return state.copyWith(
           error: l.error,
