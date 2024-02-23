@@ -451,7 +451,8 @@ abstract class $AppRouter extends _i42.RootStackRouter {
       );
     },
     PendingServiceRoute.name: (routeData) {
-      final args = routeData.argsAs<PendingServiceRouteArgs>();
+      final args = routeData.argsAs<PendingServiceRouteArgs>(
+          orElse: () => const PendingServiceRouteArgs());
       return _i42.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i38.PendingServicePage(
@@ -1512,7 +1513,7 @@ class SubProfileViewArgs {
 class PendingServiceRoute extends _i42.PageRouteInfo<PendingServiceRouteArgs> {
   PendingServiceRoute({
     _i43.Key? key,
-    required String clientId,
+    String? clientId,
     List<_i42.PageRouteInfo>? children,
   }) : super(
           PendingServiceRoute.name,
@@ -1532,12 +1533,12 @@ class PendingServiceRoute extends _i42.PageRouteInfo<PendingServiceRouteArgs> {
 class PendingServiceRouteArgs {
   const PendingServiceRouteArgs({
     this.key,
-    required this.clientId,
+    this.clientId,
   });
 
   final _i43.Key? key;
 
-  final String clientId;
+  final String? clientId;
 
   @override
   String toString() {

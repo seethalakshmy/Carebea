@@ -30,8 +30,8 @@ class UserManagementDetailBloc
   int? statusFilterId = 0;
   String searchQuery = "";
 
-  String? selectedFromDate;
-  String? selectedToDate;
+  String selectedFromDate = "";
+  String selectedToDate = "";
   DateTime selectedFromDateTime = DateTime(2020);
   DateTime? selectedToDateTime;
   bool isClearFilterClicked = false;

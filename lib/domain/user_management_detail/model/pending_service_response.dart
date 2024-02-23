@@ -55,7 +55,7 @@ String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
     num? totals,
-    num? limit,
+    dynamic limit,
     List<ServicesList>? servicesList,
   }) {
     _totals = totals;
@@ -74,11 +74,11 @@ class Data {
     }
   }
   num? _totals;
-  num? _limit;
+  dynamic _limit;
   List<ServicesList>? _servicesList;
   Data copyWith({
     num? totals,
-    num? limit,
+    dynamic limit,
     List<ServicesList>? servicesList,
   }) =>
       Data(
@@ -87,7 +87,7 @@ class Data {
         servicesList: servicesList ?? _servicesList,
       );
   num? get totals => _totals;
-  num? get limit => _limit;
+  dynamic get limit => _limit;
   List<ServicesList>? get servicesList => _servicesList;
 
   Map<String, dynamic> toJson() {

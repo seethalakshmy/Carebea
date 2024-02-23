@@ -685,11 +685,11 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
   }
 
   _transactionDetails(Transactions item) {
-    debugPrint('service id on demand ${item.serviceId}');
+    debugPrint('service id on demand ${item.serviceIdPublic}');
     debugPrint('transaction id on demand ${item.transactionId}');
     _transactionBloc.add(TransactionManagementEvent.getTransactionDetails(
         transactionId: item.transactionId ?? "",
-        serviceId: item.serviceId ?? ''));
+        serviceId: item.serviceIdPublic ?? ''));
     showDialog(
       context: context,
       builder: (BuildContext context) {

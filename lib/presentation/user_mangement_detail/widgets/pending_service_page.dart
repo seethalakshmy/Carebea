@@ -38,10 +38,10 @@ import '../../widget/table_loader_view.dart';
 class PendingServicePage extends StatefulWidget {
   PendingServicePage({
     Key? key,
-    required this.clientId,
+    this.clientId,
   }) : super(key: key);
 
-  String clientId;
+  String? clientId;
 
   @override
   State<PendingServicePage> createState() => _PendingServicePageState();
@@ -55,6 +55,8 @@ class _PendingServicePageState extends State<PendingServicePage> {
   int _start = 0;
   int _end = 10;
   int _page = 1;
+  String fromDate = "";
+  String toDate = "";
   final UserManagementDetailBloc _userManagementDetailBloc =
       UserManagementDetailBloc(UserManagementDetailRepository());
   final TextEditingController _searchController = TextEditingController();
@@ -63,6 +65,8 @@ class _PendingServicePageState extends State<PendingServicePage> {
 
   @override
   void initState() {
+    debugPrint("date ${DateTime.timestamp()}");
+
     super.initState();
   }
 
@@ -85,63 +89,59 @@ class _PendingServicePageState extends State<PendingServicePage> {
           BlocProvider(
             create: (context) => _userManagementDetailBloc,
             child: Builder(builder: (context) {
+              debugPrint("date check $fromDate");
+
               _userManagementDetailBloc.add(
                   UserManagementDetailEvent.getPendingServices(
                       userId: SharedPreffUtil().getAdminId,
-                      profileId: widget.clientId,
+                      profileId: widget.clientId ?? "",
                       page: _page.toString(),
                       limit: _limit.toString(),
-                      searchTerm: '',
-                      fromDate: _userManagementDetailBloc.selectedFromDate
-                          ?.parseWithFormat(dateFormat: AppString.yyyyMMdd.val),
-                      toDate: _userManagementDetailBloc.selectedToDate
-                          ?.parseWithFormat(
-                              dateFormat: AppString.yyyyMMdd.val)));
+                      searchTerm: _searchController.text,
+                      fromDate:
+                          _userManagementDetailBloc.selectedFromDate.toString(),
+                      toDate:
+                          _userManagementDetailBloc.selectedToDate.toString()));
               return BlocBuilder<UserManagementDetailBloc,
                   UserManagementDetailState>(
                 bloc: _userManagementDetailBloc,
                 builder: (context, state) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      /*_tabView(state),
-                    const SizedBox(height: 20),*/
-                      Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.start,
-                        alignment: WrapAlignment.start,
-                        runAlignment: WrapAlignment.center,
-                        spacing: 20,
-                        runSpacing: 10,
-                        children: [
-                          state.isLoading ?? false
-                              ? _shimmerForFilterWidgets()
-                              : _buildDatePicker(state, fromDateController,
-                                  AppString.startDate.val, () {
-                                  _selectFromDate(context, state);
-                                }),
-                          state.isLoading ?? false
-                              ? _shimmerForFilterWidgets()
-                              : _buildDatePicker(state, toDateController,
-                                  AppString.endDate.val, () {
-                                  _userManagementDetailBloc.selectedFromDate !=
-                                              "" ||
-                                          fromDateController.text.isNotEmpty
-                                      ? _selectToDate(context, state)
-                                      : CSnackBar.showError(context,
-                                          msg: 'Please select a startDate');
-                                }),
-                          state.isLoading ?? false
-                              ? _shimmerForFilterWidgets()
-                              : _searchWidget(context),
-                          state.isLoading ?? false
-                              ? _shimmerForFilterWidgets(
-                                  width: DBL.oneTwenty.val)
-                              : _clearAllFiltersButtonWidget()
-                        ],
-                      ),
-                      const SizedBox(height: 30),
-                      _cardView(state, context),
-                    ],
+                  return Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        /*_tabView(state),
+                      const SizedBox(height: 20),*/
+                        Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.start,
+                          alignment: WrapAlignment.start,
+                          runAlignment: WrapAlignment.center,
+                          spacing: 20,
+                          runSpacing: 10,
+                          children: [
+                            _buildDatePicker(state, fromDateController,
+                                AppString.startDate.val, () {
+                              _selectFromDate(context, state);
+                            }),
+                            _buildDatePicker(
+                                state, toDateController, AppString.endDate.val,
+                                () {
+                              _userManagementDetailBloc.selectedFromDate !=
+                                          "" ||
+                                      fromDateController.text.isNotEmpty
+                                  ? _selectToDate(context, state)
+                                  : CSnackBar.showError(context,
+                                      msg: 'Please select a startDate');
+                            }),
+                            _searchWidget(context),
+                            _clearAllFiltersButtonWidget()
+                          ],
+                        ),
+                        const SizedBox(height: 30),
+                        _cardView(state, context),
+                      ],
+                    ),
                   );
                 },
               );
@@ -208,14 +208,14 @@ class _PendingServicePageState extends State<PendingServicePage> {
             _userManagementDetailBloc.add(
                 UserManagementDetailEvent.getPendingServices(
                     userId: SharedPreffUtil().getAdminId,
-                    profileId: widget.clientId,
+                    profileId: widget.clientId ?? "",
                     page: _page.toString(),
                     limit: _limit.toString(),
-                    searchTerm: '',
-                    fromDate: _userManagementDetailBloc.selectedFromDate
-                        ?.parseWithFormat(dateFormat: AppString.yyyyMMdd.val),
-                    toDate: _userManagementDetailBloc.selectedToDate
-                        ?.parseWithFormat(dateFormat: AppString.yyyyMMdd.val)));
+                    searchTerm: _searchController.text,
+                    fromDate: _userManagementDetailBloc.selectedFromDateTime
+                        .toString(),
+                    toDate:
+                        _userManagementDetailBloc.selectedToDate.toString()));
             debugPrint("date test ${fromDateController.text}");
           },
           text: AppString.clear.val,
@@ -237,26 +237,29 @@ class _PendingServicePageState extends State<PendingServicePage> {
                 DateTime(DateTime.now().year + 5))
         .then((value) {
       if (value != null) {
-        _userManagementDetailBloc.selectedFromDate =
-            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
-        _userManagementDetailBloc.selectedFromDateTime = value;
+        debugPrint("valuesss $value");
+        _userManagementDetailBloc.selectedToDateTime = value;
+        _userManagementDetailBloc.selectedFromDate = value.toString();
+        // fromDate = Timestamp.fromDate(
+        //         DateTime.parse(_userManagementDetailBloc.selectedFromDate!))
+        //     .toString();
         if (_userManagementDetailBloc.selectedFromDate != "" &&
             _userManagementDetailBloc.selectedToDate != "") {
           _page = 1;
           _userManagementDetailBloc.add(
               UserManagementDetailEvent.getPendingServices(
                   userId: SharedPreffUtil().getAdminId,
-                  profileId: widget.clientId,
+                  profileId: widget.clientId ?? "",
                   page: _page.toString(),
                   limit: _limit.toString(),
                   searchTerm: _searchController.text,
-                  fromDate: _userManagementDetailBloc.selectedFromDate
-                      ?.parseWithFormat(dateFormat: AppString.yyyyMMdd.val),
-                  toDate: _userManagementDetailBloc.selectedToDate
-                      ?.parseWithFormat(dateFormat: AppString.yyyyMMdd.val)));
+                  fromDate:
+                      _userManagementDetailBloc.selectedFromDate.toString(),
+                  toDate: _userManagementDetailBloc.selectedToDate.toString()));
         }
-        fromDateController.text =
-            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        fromDateController.text = value
+            .toString()
+            .parseWithFormat(dateFormat: AppString.MMMMddYYYY.val);
         FocusScope.of(context).unfocus();
       }
     });
@@ -273,20 +276,20 @@ class _PendingServicePageState extends State<PendingServicePage> {
         .then((value) {
       if (value != null) {
         _userManagementDetailBloc.selectedToDateTime = value;
-        _userManagementDetailBloc.selectedToDate =
-            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        _userManagementDetailBloc.selectedToDate = value.toString();
         if (_userManagementDetailBloc.selectedFromDate != "" &&
             _userManagementDetailBloc.selectedToDate != "") {
           _page = 1;
-          _userManagementDetailBloc.add(
-              UserManagementDetailEvent.getPendingServices(
-                  userId: SharedPreffUtil().getAdminId,
-                  profileId: widget.clientId,
-                  page: _page.toString(),
-                  limit: _limit.toString(),
-                  searchTerm: _searchController.text,
-                  fromDate: _userManagementDetailBloc.selectedFromDate,
-                  toDate: _userManagementDetailBloc.selectedToDate));
+          _userManagementDetailBloc
+              .add(UserManagementDetailEvent.getPendingServices(
+            userId: SharedPreffUtil().getAdminId,
+            profileId: widget.clientId ?? "",
+            page: _page.toString(),
+            limit: _limit.toString(),
+            searchTerm: _searchController.text,
+            fromDate: _userManagementDetailBloc.selectedFromDate.toString(),
+            toDate: _userManagementDetailBloc.selectedToDate.toString(),
+          ));
         }
         toDateController.text =
             value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
@@ -301,26 +304,28 @@ class _PendingServicePageState extends State<PendingServicePage> {
       onSubmitted: (val) {
         _userManagementDetailBloc.searchQuery = val;
         _page = 1;
-        _userManagementDetailBloc.add(
-            UserManagementDetailEvent.getPendingServices(
-                userId: SharedPreffUtil().getAdminId,
-                profileId: widget.clientId,
-                page: _page.toString(),
-                limit: _limit.toString(),
-                searchTerm: _searchController.text,
-                fromDate: _userManagementDetailBloc.selectedFromDate,
-                toDate: _userManagementDetailBloc.selectedToDate));
+        _userManagementDetailBloc
+            .add(UserManagementDetailEvent.getPendingServices(
+          userId: SharedPreffUtil().getAdminId,
+          profileId: widget.clientId ?? "",
+          page: _page.toString(),
+          limit: _limit.toString(),
+          searchTerm: _searchController.text,
+          fromDate: _userManagementDetailBloc.selectedFromDate.toString(),
+          toDate: _userManagementDetailBloc.selectedToDate.toString(),
+        ));
       },
       onChanged: (String value) {
-        _userManagementDetailBloc.add(
-            UserManagementDetailEvent.getPendingServices(
-                userId: SharedPreffUtil().getAdminId,
-                profileId: widget.clientId,
-                page: _page.toString(),
-                limit: _limit.toString(),
-                searchTerm: _searchController.text,
-                fromDate: _userManagementDetailBloc.selectedFromDate,
-                toDate: _userManagementDetailBloc.selectedToDate));
+        _userManagementDetailBloc
+            .add(UserManagementDetailEvent.getPendingServices(
+          userId: SharedPreffUtil().getAdminId,
+          profileId: widget.clientId ?? "",
+          page: _page.toString(),
+          limit: _limit.toString(),
+          searchTerm: _searchController.text,
+          fromDate: _userManagementDetailBloc.selectedFromDate.toString(),
+          toDate: _userManagementDetailBloc.selectedToDate.toString(),
+        ));
       },
       width: DBL.twoTen.val,
       height: DBL.fortySeven.val,
@@ -374,140 +379,144 @@ class _PendingServicePageState extends State<PendingServicePage> {
   _requestsTable(UserManagementDetailState state) {
     return _userManagementDetailBloc.state.pendingServiceList.isEmpty
         ? EmptyView(title: AppString.noServiceRequestsFound.val)
-        : CSelectionArea(
-            child: CDataTable2(
-              minWidth: 2000,
-              dividerThickness: .3,
-              headingRowHeight: DBL.fortyEight.val,
-              dataRowHeight: DBL.sixty.val,
-              columns: [
-                DataColumn2(
-                  size: ColumnSize.S,
-                  fixedWidth: DBL.oneHundredEight.val,
-                  label: _columnsView(
-                      text: AppString.slNo.val, fontWeight: FontWeight.bold),
-                ),
-                DataColumn2(
-                  size: ColumnSize.L,
-                  fixedWidth: DBL.twoHundred.val,
-                  label: _columnsView(
-                      text: AppString.serviceId.val,
-                      fontWeight: FontWeight.bold),
-                ),
-                DataColumn2(
-                  size: ColumnSize.L,
-                  fixedWidth: DBL.twoHundred.val,
-                  label: _columnsView(
-                      text: AppString.clientName.val,
-                      fontWeight: FontWeight.bold),
-                ),
-                // DataColumn2(
-                //   size: ColumnSize.L,
-                //   fixedWidth: DBL.twoHundred.val,
-                //   label: _columnsView(
-                //       text: AppString.careRecipient.val,
-                //       fontWeight: FontWeight.bold),
-                // ),
-                DataColumn2(
-                  size: ColumnSize.L,
-                  fixedWidth: DBL.twoHundred.val,
-                  label: _columnsView(
-                      text: AppString.caName.val, fontWeight: FontWeight.bold),
-                ),
-                DataColumn2(
-                  size: ColumnSize.L,
-                  fixedWidth: DBL.twoHundred.val,
-                  label: _columnsView(
-                      text: AppString.startDateAndTime.val,
-                      fontWeight: FontWeight.bold),
-                ),
-                DataColumn2(
-                  size: ColumnSize.L,
-                  fixedWidth: DBL.twoHundred.val,
-                  label: _columnsView(
-                      text: AppString.endDateAndTime.val,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-              rows: _userManagementDetailBloc.state.pendingServiceList
-                  .asMap()
-                  .entries
-                  .map((e) {
-                setIndex(e.key);
+        : Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CSelectionArea(
+              child: CDataTable2(
+                dividerThickness: .3,
+                headingRowHeight: DBL.fortyEight.val,
+                dataRowHeight: DBL.sixty.val,
+                columns: [
+                  DataColumn2(
+                    size: ColumnSize.S,
+                    fixedWidth: DBL.oneHundredEight.val,
+                    label: _columnsView(
+                        text: AppString.slNo.val, fontWeight: FontWeight.bold),
+                  ),
+                  DataColumn2(
+                    size: ColumnSize.L,
+                    fixedWidth: DBL.twoHundred.val,
+                    label: _columnsView(
+                        text: AppString.serviceId.val,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  DataColumn2(
+                    size: ColumnSize.L,
+                    fixedWidth: DBL.twoHundred.val,
+                    label: _columnsView(
+                        text: AppString.clientName.val,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  // DataColumn2(
+                  //   size: ColumnSize.L,
+                  //   fixedWidth: DBL.twoHundred.val,
+                  //   label: _columnsView(
+                  //       text: AppString.careRecipient.val,
+                  //       fontWeight: FontWeight.bold),
+                  // ),
+                  DataColumn2(
+                    size: ColumnSize.L,
+                    fixedWidth: DBL.twoHundred.val,
+                    label: _columnsView(
+                        text: AppString.caName.val,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  DataColumn2(
+                    size: ColumnSize.L,
+                    fixedWidth: DBL.twoHundred.val,
+                    label: _columnsView(
+                        text: AppString.startDateAndTime.val,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  DataColumn2(
+                    size: ColumnSize.L,
+                    fixedWidth: DBL.twoHundred.val,
+                    label: _columnsView(
+                        text: AppString.endDateAndTime.val,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+                rows: _userManagementDetailBloc.state.pendingServiceList
+                    .asMap()
+                    .entries
+                    .map((e) {
+                  setIndex(e.key);
 
-                var item = e.value;
-                String dynamicGmtStartTime = item?.startTime ?? "";
-                String dynamicGmtEndTime = item?.endTime ?? "";
-                TimeOfDay dynamicLocalStartTime =
-                    Utility.convertToLocalTime(dynamicGmtStartTime);
-                TimeOfDay dynamicLocalEndTime =
-                    Utility.convertToLocalTime(dynamicGmtEndTime);
-                return DataRow2(
-                  // onTap: () {
-                  //   _getServiceDetails(item, state);
-                  // },
-                  cells: [
-                    DataCell(_rowsView(
-                      text: pageIndex.toString(),
-                    )),
-                    DataCell(_rowsView(
-                      text: item.bookingId.toString(),
-                    )),
-                    DataCell(_rowsView(
-                      text: item.clientName ?? "",
-                    )),
-                    // DataCell(_rowsView(
-                    //   text: item.clientName ?? "",
-                    // )),
-                    DataCell(_rowsView(
-                      text: item.careGiverName ?? "",
-                    )),
-                    DataCell(_rowsView(
-                      text: Utility.generateFormattedDateForPendingService(
-                              DateTime.parse(item.startDate ?? "")
-                                  .toLocal()
-                                  .toString()) +
-                          (",") +
-                          Utility.formatTimeOfDay(dynamicLocalStartTime),
-                    )),
-                    DataCell(_rowsView(
+                  var item = e.value;
+                  String dynamicGmtStartTime = item?.startTime ?? "";
+                  String dynamicGmtEndTime = item?.endTime ?? "";
+                  TimeOfDay dynamicLocalStartTime =
+                      Utility.convertToLocalTime(dynamicGmtStartTime);
+                  TimeOfDay dynamicLocalEndTime =
+                      Utility.convertToLocalTime(dynamicGmtEndTime);
+                  return DataRow2(
+                    // onTap: () {
+                    //   _getServiceDetails(item, state);
+                    // },
+                    cells: [
+                      DataCell(_rowsView(
+                        text: pageIndex.toString(),
+                      )),
+                      DataCell(_rowsView(
+                        text: item.bookingId.toString(),
+                      )),
+                      DataCell(_rowsView(
+                        text: item.clientName ?? "",
+                      )),
+                      // DataCell(_rowsView(
+                      //   text: item.clientName ?? "",
+                      // )),
+                      DataCell(_rowsView(
+                        text: item.careGiverName ?? "",
+                      )),
+                      DataCell(_rowsView(
                         text: Utility.generateFormattedDateForPendingService(
-                                DateTime.parse(item.endDate ?? "").toString()) +
+                                DateTime.parse(item.startDate ?? "")
+                                    .toLocal()
+                                    .toString()) +
                             (",") +
-                            Utility.formatTimeOfDay(dynamicLocalEndTime))),
-                    /*DataCell(_rowsView(
-                    text:
-                        '\$ ${Utility.formatAmount(double.tryParse(item.serviceFee.toString() ?? "0.0") ?? 0.0)}',
-                  )),
-                  if (_serviceRequestBloc.statusFilterId == 0 ||
-                      _serviceRequestBloc.statusFilterId == 6)
-                    DataCell(_rowsView(
-                      text: item.refundStatus != null
-                          ? '\$ ${item.refundStatus}'
-                          : "-",
+                            Utility.formatTimeOfDay(dynamicLocalStartTime),
+                      )),
+                      DataCell(_rowsView(
+                          text: Utility.generateFormattedDateForPendingService(
+                                  DateTime.parse(item.endDate ?? "")
+                                      .toString()) +
+                              (",") +
+                              Utility.formatTimeOfDay(dynamicLocalEndTime))),
+                      /*DataCell(_rowsView(
+                      text:
+                          '\$ ${Utility.formatAmount(double.tryParse(item.serviceFee.toString() ?? "0.0") ?? 0.0)}',
                     )),
-                  if (_serviceRequestBloc.statusFilterId == 0 ||
-                      _serviceRequestBloc.statusFilterId == 6)
-                    DataCell(_rowsView(
-                      text: item.cancelledBy == "" || item.cancelledBy == null
-                          ? "-"
-                          : item.cancelledBy ?? "",
-                    )),*/
-                    // DataCell(
-                    //     _rowsView(text: item.serviceStatus, isStatus: true)),
-                    // DataCell(InkWell(
-                    //     onTap: () {
-                    //       //autoTabRouter?.navigate(ServiceDetailsRoute(id: item.id));
-                    //       _getServiceDetails(item, state);
-                    //     },
-                    //     child: CustomSvg(
-                    //       path: IMG.eye.val,
-                    //       width: DBL.twelve.val,
-                    //       height: DBL.twelve.val,
-                    //     ))),
-                  ],
-                );
-              }).toList(),
+                    if (_serviceRequestBloc.statusFilterId == 0 ||
+                        _serviceRequestBloc.statusFilterId == 6)
+                      DataCell(_rowsView(
+                        text: item.refundStatus != null
+                            ? '\$ ${item.refundStatus}'
+                            : "-",
+                      )),
+                    if (_serviceRequestBloc.statusFilterId == 0 ||
+                        _serviceRequestBloc.statusFilterId == 6)
+                      DataCell(_rowsView(
+                        text: item.cancelledBy == "" || item.cancelledBy == null
+                            ? "-"
+                            : item.cancelledBy ?? "",
+                      )),*/
+                      // DataCell(
+                      //     _rowsView(text: item.serviceStatus, isStatus: true)),
+                      // DataCell(InkWell(
+                      //     onTap: () {
+                      //       //autoTabRouter?.navigate(ServiceDetailsRoute(id: item.id));
+                      //       _getServiceDetails(item, state);
+                      //     },
+                      //     child: CustomSvg(
+                      //       path: IMG.eye.val,
+                      //       width: DBL.twelve.val,
+                      //       height: DBL.twelve.val,
+                      //     ))),
+                    ],
+                  );
+                }).toList(),
+              ),
             ),
           );
   }
@@ -741,44 +750,49 @@ class _PendingServicePageState extends State<PendingServicePage> {
             onNextPressed: () {
               if (_page < totalPages) {
                 _page = _page + 1;
-                _userManagementDetailBloc.add(
-                    UserManagementDetailEvent.getPendingServices(
-                        userId: SharedPreffUtil().getAdminId,
-                        profileId: widget.clientId,
-                        page: _page.toString(),
-                        limit: _limit.toString(),
-                        searchTerm: _searchController.text,
-                        fromDate: _userManagementDetailBloc.selectedFromDate,
-                        toDate: _userManagementDetailBloc.selectedToDate));
+                _userManagementDetailBloc
+                    .add(UserManagementDetailEvent.getPendingServices(
+                  userId: SharedPreffUtil().getAdminId,
+                  profileId: widget.clientId ?? "",
+                  page: _page.toString(),
+                  limit: _limit.toString(),
+                  searchTerm: _searchController.text,
+                  fromDate:
+                      _userManagementDetailBloc.selectedFromDate.toString(),
+                  toDate: _userManagementDetailBloc.selectedToDate.toString(),
+                ));
 
                 updateData();
               }
             },
             onItemPressed: (i) {
               _page = i;
-              _userManagementDetailBloc.add(
-                  UserManagementDetailEvent.getPendingServices(
-                      userId: SharedPreffUtil().getAdminId,
-                      profileId: widget.clientId,
-                      page: _page.toString(),
-                      limit: _limit.toString(),
-                      searchTerm: _searchController.text,
-                      fromDate: _userManagementDetailBloc.selectedFromDate,
-                      toDate: _userManagementDetailBloc.selectedToDate));
+              _userManagementDetailBloc
+                  .add(UserManagementDetailEvent.getPendingServices(
+                userId: SharedPreffUtil().getAdminId,
+                profileId: widget.clientId ?? "",
+                page: _page.toString(),
+                limit: _limit.toString(),
+                searchTerm: _searchController.text,
+                fromDate: _userManagementDetailBloc.selectedFromDate.toString(),
+                toDate: _userManagementDetailBloc.selectedToDate.toString(),
+              ));
               updateData();
             },
             onPreviousPressed: () {
               if (_page > 1) {
                 _page = _page - 1;
-                _userManagementDetailBloc.add(
-                    UserManagementDetailEvent.getPendingServices(
-                        userId: SharedPreffUtil().getAdminId,
-                        profileId: widget.clientId,
-                        page: _page.toString(),
-                        limit: _limit.toString(),
-                        searchTerm: _searchController.text,
-                        fromDate: _userManagementDetailBloc.selectedFromDate,
-                        toDate: _userManagementDetailBloc.selectedToDate));
+                _userManagementDetailBloc
+                    .add(UserManagementDetailEvent.getPendingServices(
+                  userId: SharedPreffUtil().getAdminId,
+                  profileId: widget.clientId ?? "",
+                  page: _page.toString(),
+                  limit: _limit.toString(),
+                  searchTerm: _searchController.text,
+                  fromDate:
+                      _userManagementDetailBloc.selectedFromDate.toString(),
+                  toDate: _userManagementDetailBloc.selectedToDate.toString(),
+                ));
                 updateData();
               }
             });

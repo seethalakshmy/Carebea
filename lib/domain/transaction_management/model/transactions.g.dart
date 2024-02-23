@@ -10,14 +10,13 @@ _$_Transactions _$$_TransactionsFromJson(Map<String, dynamic> json) =>
     _$_Transactions(
       serviceId: json['service_id'] as String?,
       serviceIdPublic: json['serviceId'] as String?,
-      transactionId: json['transaction_id'] as String?,
-      transactionIdPublic: json['transactionId'] as String?,
-      transactionType: json['transaction_type'] as String?,
+      transactionId: json['_id'] as String?,
+      transactionIdPublic: json['uniqueId'] as String?,
+      transactionType: json['transactionType'] as String?,
       dateTime: json['date_time'] as String?,
-      paidTo: json['paid_to'] as String?,
-      receivedFrom: json['recieved_from'] as String?,
+      paidTo: json['receiverName'] as String?,
+      receivedFrom: json['payerName'] as String?,
       paidFor: json['paid_for'] as String?,
-      receiverName: json['receiverName'] as String?,
       amount: json['amount'] as String?,
       cardNumber: json['cardNumber'] as String?,
       name: json['name'] == null
@@ -41,14 +40,13 @@ Map<String, dynamic> _$$_TransactionsToJson(_$_Transactions instance) {
 
   writeNotNull('service_id', instance.serviceId);
   writeNotNull('serviceId', instance.serviceIdPublic);
-  writeNotNull('transaction_id', instance.transactionId);
-  writeNotNull('transactionId', instance.transactionIdPublic);
-  writeNotNull('transaction_type', instance.transactionType);
+  writeNotNull('_id', instance.transactionId);
+  writeNotNull('uniqueId', instance.transactionIdPublic);
+  writeNotNull('transactionType', instance.transactionType);
   writeNotNull('date_time', instance.dateTime);
-  writeNotNull('paid_to', instance.paidTo);
-  writeNotNull('recieved_from', instance.receivedFrom);
+  writeNotNull('receiverName', instance.paidTo);
+  writeNotNull('payerName', instance.receivedFrom);
   writeNotNull('paid_for', instance.paidFor);
-  writeNotNull('receiverName', instance.receiverName);
   writeNotNull('amount', instance.amount);
   writeNotNull('cardNumber', instance.cardNumber);
   writeNotNull('name', instance.name?.toJson());

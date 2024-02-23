@@ -24,22 +24,20 @@ mixin _$Transactions {
   String? get serviceId => throw _privateConstructorUsedError;
   @JsonKey(name: "serviceId")
   String? get serviceIdPublic => throw _privateConstructorUsedError;
-  @JsonKey(name: "transaction_id")
+  @JsonKey(name: "_id")
   String? get transactionId => throw _privateConstructorUsedError;
-  @JsonKey(name: "transactionId")
+  @JsonKey(name: "uniqueId")
   String? get transactionIdPublic => throw _privateConstructorUsedError;
-  @JsonKey(name: "transaction_type")
+  @JsonKey(name: "transactionType")
   String? get transactionType => throw _privateConstructorUsedError;
   @JsonKey(name: 'date_time')
   String? get dateTime => throw _privateConstructorUsedError;
-  @JsonKey(name: "paid_to")
+  @JsonKey(name: "receiverName")
   String? get paidTo => throw _privateConstructorUsedError;
-  @JsonKey(name: "recieved_from")
+  @JsonKey(name: "payerName")
   String? get receivedFrom => throw _privateConstructorUsedError;
   @JsonKey(name: "paid_for")
   String? get paidFor => throw _privateConstructorUsedError;
-  @JsonKey(name: "receiverName")
-  String? get receiverName => throw _privateConstructorUsedError;
   String? get amount => throw _privateConstructorUsedError;
   String? get cardNumber => throw _privateConstructorUsedError;
   Name? get name => throw _privateConstructorUsedError;
@@ -62,14 +60,13 @@ abstract class $TransactionsCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: "service_id") String? serviceId,
       @JsonKey(name: "serviceId") String? serviceIdPublic,
-      @JsonKey(name: "transaction_id") String? transactionId,
-      @JsonKey(name: "transactionId") String? transactionIdPublic,
-      @JsonKey(name: "transaction_type") String? transactionType,
+      @JsonKey(name: "_id") String? transactionId,
+      @JsonKey(name: "uniqueId") String? transactionIdPublic,
+      @JsonKey(name: "transactionType") String? transactionType,
       @JsonKey(name: 'date_time') String? dateTime,
-      @JsonKey(name: "paid_to") String? paidTo,
-      @JsonKey(name: "recieved_from") String? receivedFrom,
+      @JsonKey(name: "receiverName") String? paidTo,
+      @JsonKey(name: "payerName") String? receivedFrom,
       @JsonKey(name: "paid_for") String? paidFor,
-      @JsonKey(name: "receiverName") String? receiverName,
       String? amount,
       String? cardNumber,
       Name? name,
@@ -103,7 +100,6 @@ class _$TransactionsCopyWithImpl<$Res, $Val extends Transactions>
     Object? paidTo = freezed,
     Object? receivedFrom = freezed,
     Object? paidFor = freezed,
-    Object? receiverName = freezed,
     Object? amount = freezed,
     Object? cardNumber = freezed,
     Object? name = freezed,
@@ -147,10 +143,6 @@ class _$TransactionsCopyWithImpl<$Res, $Val extends Transactions>
       paidFor: freezed == paidFor
           ? _value.paidFor
           : paidFor // ignore: cast_nullable_to_non_nullable
-              as String?,
-      receiverName: freezed == receiverName
-          ? _value.receiverName
-          : receiverName // ignore: cast_nullable_to_non_nullable
               as String?,
       amount: freezed == amount
           ? _value.amount
@@ -215,14 +207,13 @@ abstract class _$$_TransactionsCopyWith<$Res>
   $Res call(
       {@JsonKey(name: "service_id") String? serviceId,
       @JsonKey(name: "serviceId") String? serviceIdPublic,
-      @JsonKey(name: "transaction_id") String? transactionId,
-      @JsonKey(name: "transactionId") String? transactionIdPublic,
-      @JsonKey(name: "transaction_type") String? transactionType,
+      @JsonKey(name: "_id") String? transactionId,
+      @JsonKey(name: "uniqueId") String? transactionIdPublic,
+      @JsonKey(name: "transactionType") String? transactionType,
       @JsonKey(name: 'date_time') String? dateTime,
-      @JsonKey(name: "paid_to") String? paidTo,
-      @JsonKey(name: "recieved_from") String? receivedFrom,
+      @JsonKey(name: "receiverName") String? paidTo,
+      @JsonKey(name: "payerName") String? receivedFrom,
       @JsonKey(name: "paid_for") String? paidFor,
-      @JsonKey(name: "receiverName") String? receiverName,
       String? amount,
       String? cardNumber,
       Name? name,
@@ -256,7 +247,6 @@ class __$$_TransactionsCopyWithImpl<$Res>
     Object? paidTo = freezed,
     Object? receivedFrom = freezed,
     Object? paidFor = freezed,
-    Object? receiverName = freezed,
     Object? amount = freezed,
     Object? cardNumber = freezed,
     Object? name = freezed,
@@ -301,10 +291,6 @@ class __$$_TransactionsCopyWithImpl<$Res>
           ? _value.paidFor
           : paidFor // ignore: cast_nullable_to_non_nullable
               as String?,
-      receiverName: freezed == receiverName
-          ? _value.receiverName
-          : receiverName // ignore: cast_nullable_to_non_nullable
-              as String?,
       amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
@@ -340,14 +326,13 @@ class _$_Transactions implements _Transactions {
   const _$_Transactions(
       {@JsonKey(name: "service_id") this.serviceId,
       @JsonKey(name: "serviceId") this.serviceIdPublic,
-      @JsonKey(name: "transaction_id") this.transactionId,
-      @JsonKey(name: "transactionId") this.transactionIdPublic,
-      @JsonKey(name: "transaction_type") this.transactionType,
+      @JsonKey(name: "_id") this.transactionId,
+      @JsonKey(name: "uniqueId") this.transactionIdPublic,
+      @JsonKey(name: "transactionType") this.transactionType,
       @JsonKey(name: 'date_time') this.dateTime,
-      @JsonKey(name: "paid_to") this.paidTo,
-      @JsonKey(name: "recieved_from") this.receivedFrom,
+      @JsonKey(name: "receiverName") this.paidTo,
+      @JsonKey(name: "payerName") this.receivedFrom,
       @JsonKey(name: "paid_for") this.paidFor,
-      @JsonKey(name: "receiverName") this.receiverName,
       this.amount,
       this.cardNumber,
       this.name,
@@ -365,29 +350,26 @@ class _$_Transactions implements _Transactions {
   @JsonKey(name: "serviceId")
   final String? serviceIdPublic;
   @override
-  @JsonKey(name: "transaction_id")
+  @JsonKey(name: "_id")
   final String? transactionId;
   @override
-  @JsonKey(name: "transactionId")
+  @JsonKey(name: "uniqueId")
   final String? transactionIdPublic;
   @override
-  @JsonKey(name: "transaction_type")
+  @JsonKey(name: "transactionType")
   final String? transactionType;
   @override
   @JsonKey(name: 'date_time')
   final String? dateTime;
   @override
-  @JsonKey(name: "paid_to")
+  @JsonKey(name: "receiverName")
   final String? paidTo;
   @override
-  @JsonKey(name: "recieved_from")
+  @JsonKey(name: "payerName")
   final String? receivedFrom;
   @override
   @JsonKey(name: "paid_for")
   final String? paidFor;
-  @override
-  @JsonKey(name: "receiverName")
-  final String? receiverName;
   @override
   final String? amount;
   @override
@@ -403,7 +385,7 @@ class _$_Transactions implements _Transactions {
 
   @override
   String toString() {
-    return 'Transactions(serviceId: $serviceId, serviceIdPublic: $serviceIdPublic, transactionId: $transactionId, transactionIdPublic: $transactionIdPublic, transactionType: $transactionType, dateTime: $dateTime, paidTo: $paidTo, receivedFrom: $receivedFrom, paidFor: $paidFor, receiverName: $receiverName, amount: $amount, cardNumber: $cardNumber, name: $name, user: $user, status: $status, id: $id)';
+    return 'Transactions(serviceId: $serviceId, serviceIdPublic: $serviceIdPublic, transactionId: $transactionId, transactionIdPublic: $transactionIdPublic, transactionType: $transactionType, dateTime: $dateTime, paidTo: $paidTo, receivedFrom: $receivedFrom, paidFor: $paidFor, amount: $amount, cardNumber: $cardNumber, name: $name, user: $user, status: $status, id: $id)';
   }
 
   @override
@@ -427,8 +409,6 @@ class _$_Transactions implements _Transactions {
             (identical(other.receivedFrom, receivedFrom) ||
                 other.receivedFrom == receivedFrom) &&
             (identical(other.paidFor, paidFor) || other.paidFor == paidFor) &&
-            (identical(other.receiverName, receiverName) ||
-                other.receiverName == receiverName) &&
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.cardNumber, cardNumber) ||
                 other.cardNumber == cardNumber) &&
@@ -451,7 +431,6 @@ class _$_Transactions implements _Transactions {
       paidTo,
       receivedFrom,
       paidFor,
-      receiverName,
       amount,
       cardNumber,
       name,
@@ -477,14 +456,13 @@ abstract class _Transactions implements Transactions {
   const factory _Transactions(
       {@JsonKey(name: "service_id") final String? serviceId,
       @JsonKey(name: "serviceId") final String? serviceIdPublic,
-      @JsonKey(name: "transaction_id") final String? transactionId,
-      @JsonKey(name: "transactionId") final String? transactionIdPublic,
-      @JsonKey(name: "transaction_type") final String? transactionType,
+      @JsonKey(name: "_id") final String? transactionId,
+      @JsonKey(name: "uniqueId") final String? transactionIdPublic,
+      @JsonKey(name: "transactionType") final String? transactionType,
       @JsonKey(name: 'date_time') final String? dateTime,
-      @JsonKey(name: "paid_to") final String? paidTo,
-      @JsonKey(name: "recieved_from") final String? receivedFrom,
+      @JsonKey(name: "receiverName") final String? paidTo,
+      @JsonKey(name: "payerName") final String? receivedFrom,
       @JsonKey(name: "paid_for") final String? paidFor,
-      @JsonKey(name: "receiverName") final String? receiverName,
       final String? amount,
       final String? cardNumber,
       final Name? name,
@@ -502,29 +480,26 @@ abstract class _Transactions implements Transactions {
   @JsonKey(name: "serviceId")
   String? get serviceIdPublic;
   @override
-  @JsonKey(name: "transaction_id")
+  @JsonKey(name: "_id")
   String? get transactionId;
   @override
-  @JsonKey(name: "transactionId")
+  @JsonKey(name: "uniqueId")
   String? get transactionIdPublic;
   @override
-  @JsonKey(name: "transaction_type")
+  @JsonKey(name: "transactionType")
   String? get transactionType;
   @override
   @JsonKey(name: 'date_time')
   String? get dateTime;
   @override
-  @JsonKey(name: "paid_to")
+  @JsonKey(name: "receiverName")
   String? get paidTo;
   @override
-  @JsonKey(name: "recieved_from")
+  @JsonKey(name: "payerName")
   String? get receivedFrom;
   @override
   @JsonKey(name: "paid_for")
   String? get paidFor;
-  @override
-  @JsonKey(name: "receiverName")
-  String? get receiverName;
   @override
   String? get amount;
   @override

@@ -1,11 +1,11 @@
-import 'package:admin_580_tech/application/bloc/caregiver-profile/caregiver_profile_bloc.dart';
-import 'package:admin_580_tech/core/enum.dart';
-import 'package:admin_580_tech/core/text_styles.dart';
-import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
-import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
-import 'package:admin_580_tech/presentation/widget/custom_text.dart';
-import 'package:admin_580_tech/presentation/widget/empty_label_view.dart';
-import 'package:admin_580_tech/presentation/widget/row_combo.dart';
+import '../../../application/bloc/caregiver-profile/caregiver_profile_bloc.dart';
+import '../../../core/enum.dart';
+import '../../../core/text_styles.dart';
+import '../../widget/custom_padding.dart';
+import '../../widget/custom_sizedbox.dart';
+import '../../widget/custom_text.dart';
+import '../../widget/empty_label_view.dart';
+import '../../widget/row_combo.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/caregiver_profile/model/caregiver_profile_response.dart';
@@ -104,7 +104,11 @@ class _CareGiverReferenceViewState extends State<CareGiverReferenceView> {
         ),
         RowColonCombo.twoHundred(
             label: AppString.relationship.val,
-            value: e.relationshipDescription ?? e.relationship ?? '',
+            value: (e.relationship == ""
+                    ? e.relationshipDescription
+                    : e.relationship) ??
+                "",
+            // value: e.relationship.isEmpty ?? e.relationshipDescription ?? "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.eight.val,

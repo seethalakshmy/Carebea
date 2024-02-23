@@ -88,6 +88,7 @@ class CustomDropdownState<T> extends State<CustomDropdown<T>>
             height: style.height,
             child: ElevatedButton(
               style: OutlinedButton.styleFrom(
+                foregroundColor: style.primaryColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
                     side: BorderSide(
@@ -98,7 +99,6 @@ class CustomDropdownState<T> extends State<CustomDropdown<T>>
                 padding: style.padding,
                 backgroundColor: style.backgroundColor,
                 elevation: style.elevation,
-                primary: style.primaryColor,
               ),
               onPressed: _toggleDropdown,
               child: Row(

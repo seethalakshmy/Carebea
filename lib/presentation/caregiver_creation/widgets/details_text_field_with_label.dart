@@ -24,6 +24,7 @@ class DetailsTextFieldWithLabel extends StatelessWidget {
       this.width,
       this.textAlignVertical,
       this.inputFormatter,
+      this.enabled,
       this.height})
       : super(key: key);
   final String labelName;
@@ -40,6 +41,7 @@ class DetailsTextFieldWithLabel extends StatelessWidget {
   final int? maxLength;
   final TextAlignVertical? textAlignVertical;
   final List<TextInputFormatter>? inputFormatter;
+  final bool? enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +66,7 @@ class DetailsTextFieldWithLabel extends StatelessWidget {
         ),
         CustomSizedBox(height: DBL.ten.val),
         CTextField(
+          enabled: enabled ?? true,
           maxLength: maxLength,
           textAlignVertical: textAlignVertical,
           suffixIcon: suffixIcon,

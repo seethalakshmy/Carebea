@@ -6,38 +6,39 @@ import 'package:flutter/services.dart';
 import '../../core/text_styles.dart';
 
 class CTextField extends StatelessWidget {
-  const CTextField({
-    Key? key,
-    this.controller,
-    this.margin,
-    this.textInputAction,
-    this.focusNode,
-    this.onChanged,
-    this.obscureText = false,
-    this.onTap,
-    this.onSubmitted,
-    this.keyBoardType,
-    this.textCapitalization = TextCapitalization.none,
-    this.errorText,
-    this.changeColor,
-    this.onIconTap,
-    this.suffixIcon,
-    this.prefixIcon,
-    this.validator,
-    this.maxLength,
-    this.textColor,
-    this.height,
-    this.width,
-    this.hintText,
-    this.hintStyle,
-    this.fillColor,
-    this.maxLines,
-    this.textAlignVertical,
-    this.inputFormatter,
-    this.borderColor,
-    this.isIgnore = false,
-    this.isReadOnly = false,
-  })  : assert(controller != null),
+  const CTextField(
+      {Key? key,
+      this.controller,
+      this.margin,
+      this.textInputAction,
+      this.focusNode,
+      this.onChanged,
+      this.obscureText = false,
+      this.onTap,
+      this.onSubmitted,
+      this.keyBoardType,
+      this.textCapitalization = TextCapitalization.none,
+      this.errorText,
+      this.changeColor,
+      this.onIconTap,
+      this.suffixIcon,
+      this.prefixIcon,
+      this.validator,
+      this.maxLength,
+      this.textColor,
+      this.height,
+      this.width,
+      this.hintText,
+      this.hintStyle,
+      this.fillColor,
+      this.maxLines,
+      this.textAlignVertical,
+      this.inputFormatter,
+      this.borderColor,
+      this.isIgnore = false,
+      this.isReadOnly = false,
+      this.enabled = true})
+      : assert(controller != null),
         super(key: key);
   final TextEditingController? controller;
   final EdgeInsetsGeometry? margin;
@@ -67,6 +68,7 @@ class CTextField extends StatelessWidget {
   final TextAlignVertical? textAlignVertical;
   final List<TextInputFormatter>? inputFormatter;
   final bool isIgnore;
+  final bool enabled;
   final bool isReadOnly;
   @override
   Widget build(BuildContext context) {
@@ -77,6 +79,7 @@ class CTextField extends StatelessWidget {
       child: CustomSizedBox(
         width: width,
         child: TextFormField(
+          enabled: enabled,
           textAlignVertical: textAlignVertical ?? TextAlignVertical.center,
           inputFormatters: inputFormatter ?? [],
           controller: controller,

@@ -104,7 +104,7 @@ class PageBloc extends Bloc<PageEvent, PageState> {
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: "Updated successfully");
-        autoTabRouter?.setActiveIndex(24);
+        autoTabRouter?.setActiveIndex(25);
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }

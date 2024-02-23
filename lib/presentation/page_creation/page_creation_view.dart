@@ -103,7 +103,7 @@ class _PageCreationPageState extends State<PageCreationPage> {
     debugPrint("description passed $description");
     pageBloc.titleController.text =
         autoTabRouter?.currentChild?.queryParams.getString("title", "") ?? '';
-    pageBloc.radioValue = forWhom!.toInt();
+    pageBloc.radioValue = forWhom!.toInt() - 1;
     // _faqCreationBloc.add(FaqCreationEvent.getFaq(id: adminId));
     log("radioValue ${pageBloc.radioValue}");
   }
@@ -129,6 +129,7 @@ class _PageCreationPageState extends State<PageCreationPage> {
                   CustomSizedBox(
                     width: DBL.twoEighty.val,
                     child: DetailsTextFieldWithLabel(
+                      enabled: false,
                       isMandatory: true,
                       maxLines: 20,
                       labelName: AppString.title.val,
@@ -187,7 +188,7 @@ class _PageCreationPageState extends State<PageCreationPage> {
               height: 100,
             ),
             BlocBuilder<PageBloc, PageState>(
-              bloc: pageBloc,
+              // bloc: pageBloc,
               builder: (context, state) {
                 log("state is ${state}");
                 return Row(
@@ -195,6 +196,7 @@ class _PageCreationPageState extends State<PageCreationPage> {
                     Spacer(),
                     state.when(initial: (isLoading, isError, isForClient,
                         response, getPagesResponse, radioValue) {
+                      debugPrint("radio value api call $radioValue");
                       return CustomButton(
                           minWidth: 100,
                           height: 50,
@@ -282,17 +284,19 @@ class _PageCreationPageState extends State<PageCreationPage> {
             return state.when(initial: (isLoading, isError, isForClient,
                 response, getPagesResponse, radioValue) {
               log(("called initial"));
-              return RadioButtonWidget(
-                groupValue: radioValue,
-                firstLabel: AppString.forClient.val,
-                secondLabel: AppString.forCa.val,
-                thirdLabel: AppString.forWebsite.val,
-                onChanged: (val) {
-                  debugPrint("selected radio $val");
-                  debugPrint("selected value $isForClient");
-                  BlocProvider.of<PageBloc>(context)
-                      .add(PageEvent.radioForClient(isSelected: val));
-                },
+              return IgnorePointer(
+                child: RadioButtonWidget(
+                  groupValue: radioValue,
+                  firstLabel: AppString.forClient.val,
+                  secondLabel: AppString.forCa.val,
+                  thirdLabel: AppString.forWebsite.val,
+                  onChanged: (val) {
+                    debugPrint("selected radio $val");
+                    debugPrint("selected value $isForClient");
+                    BlocProvider.of<PageBloc>(context)
+                        .add(PageEvent.radioForClient(isSelected: val));
+                  },
+                ),
               );
             }, loading: () {
               return RadioButtonWidget(
