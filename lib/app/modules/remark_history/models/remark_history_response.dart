@@ -141,7 +141,7 @@ class PaymentFollowupsList {
     _id = json['id'];
     _partnerId = json['partner_id'];
     _commentId = json['comment_id'];
-    _commentName = json['comment_name'];
+    _commentName = json['message'];
     _createdUserId = json['created_user_id'];
     _createDate = json['create_date'];
     _createdUserName = json['created_user_name'];
@@ -182,7 +182,7 @@ class PaymentFollowupsList {
     map['id'] = _id;
     map['partner_id'] = _partnerId;
     map['comment_id'] = _commentId;
-    map['comment_name'] = _commentName;
+    map['message'] = _commentName;
     map['created_user_id'] = _createdUserId;
     map['create_date'] = _createDate;
     map['created_user_name'] = _createdUserName;

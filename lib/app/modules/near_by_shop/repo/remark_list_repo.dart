@@ -18,12 +18,14 @@ class RemarkListRepo {
       required int commentId,
       required int shopId,
       required double latitude,
-      required double longitude}) async {
+      required double longitude,
+      String? message}) async {
     return remarkListDataSource.remarkSubmission(
         userId: userId,
         commentId: commentId,
         shopId: shopId,
         latitude: latitude,
-        longitude: longitude);
+        longitude: longitude,
+        message: message);
   }
 }

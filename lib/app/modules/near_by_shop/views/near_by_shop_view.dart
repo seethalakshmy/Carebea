@@ -11,6 +11,7 @@ import 'package:intl/intl.dart';
 
 import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_card.dart';
+import '../../add_shop/views/add_shop_view.dart';
 import '../../remark_history/controllers/remark_history_controller.dart';
 import '../controllers/near_by_shop_controller.dart';
 
@@ -200,6 +201,10 @@ class NearByShops extends StatelessWidget {
                   controller.nearByShopList[index].id!;
               remarkHistoryController.fetchRemarkHistory(
                   shopId: controller.nearByShopList[index].id!);
+              controller.messageController.clear();
+              controller.selectedReason.value = 'Choose';
+              controller.selectedReasonId.value = 0;
+              controller.isOther.value = false;
               showDialog(
                 context: context,
                 builder: (ctx) => Material(
@@ -242,103 +247,163 @@ class NearByShops extends StatelessWidget {
                             return SizedBox(
                               height: tabIndex.value == 1
                                   ? MediaQuery.of(context).size.height * .7
-                                  : MediaQuery.of(context).size.height * .2,
+                                  : MediaQuery.of(context).size.height * .28,
                               child: TabBarView(
                                   controller: controller.tabController,
                                   children: [
                                     Obx(() {
                                       return Padding(
                                         padding: const EdgeInsets.only(top: 20),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            DropdownButton<PaymentCommentsList>(
-                                              hint: Text(
-                                                controller.selectedReason.value,
-                                                style: customTheme(Get.context!)
-                                                    .regular
-                                                    .copyWith(
-                                                        fontSize: 11,
-                                                        color: const Color(
-                                                            0xff929292)),
+                                        child: Form(
+                                          autovalidateMode: AutovalidateMode
+                                              .onUserInteraction,
+                                          key: controller.remarkFormKey,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              DropdownButton<
+                                                  PaymentCommentsList>(
+                                                hint: Text(
+                                                  controller
+                                                      .selectedReason.value,
+                                                  style: customTheme(
+                                                          Get.context!)
+                                                      .regular
+                                                      .copyWith(
+                                                          fontSize: 11,
+                                                          color: const Color(
+                                                              0xff929292)),
+                                                ),
+                                                underline:
+                                                    const SizedBox.shrink(),
+                                                isDense: true,
+                                                onChanged: (value) {
+                                                  // _focusNode.requestFocus();
+                                                  controller.selectedReason(
+                                                      value?.name ?? "");
+                                                  controller.selectedReasonId(
+                                                      (value?.id ?? 0).toInt());
+                                                  controller.isOther(
+                                                      value?.other ?? false);
+                                                },
+                                                items: controller.remarkList
+                                                    ?.map(
+                                                      (e) => DropdownMenuItem(
+                                                        value: e,
+                                                        child: controller
+                                                                .isRemarksLoading
+                                                                .value
+                                                            ? CircularProgressIndicator()
+                                                            : Text(e.name ?? "",
+                                                                style: customTheme(Get
+                                                                        .context!)
+                                                                    .regular
+                                                                    .copyWith(
+                                                                        fontSize:
+                                                                            11,
+                                                                        color: Colors
+                                                                            .black)),
+                                                      ),
+                                                    )
+                                                    .toList(),
                                               ),
-                                              underline:
-                                                  const SizedBox.shrink(),
-                                              isDense: true,
-                                              onChanged: (value) {
-                                                // _focusNode.requestFocus();
-                                                controller.selectedReason(
-                                                    value?.name ?? "");
-                                                controller.selectedReasonId(
-                                                    (value?.id ?? 0).toInt());
-                                              },
-                                              items: controller.remarkList
-                                                  ?.map(
-                                                    (e) => DropdownMenuItem(
-                                                      value: e,
-                                                      child: controller
-                                                              .isRemarksLoading
-                                                              .value
-                                                          ? CircularProgressIndicator()
-                                                          : Text(e.name ?? "",
-                                                              style: customTheme(Get
-                                                                      .context!)
-                                                                  .regular
-                                                                  .copyWith(
-                                                                      fontSize:
-                                                                          11,
-                                                                      color: Colors
-                                                                          .black)),
-                                                    ),
-                                                  )
-                                                  .toList(),
-                                            ),
-                                            const Spacer(),
-                                            Obx(() {
-                                              return CustomButton(
-                                                  isLoading: controller
-                                                      .isRemarksSubmitLoading
-                                                      .value,
-                                                  title: "Confirm",
-                                                  onTap: () {
-                                                    debugPrint(
-                                                        "near shop reason ${controller.selectedReason.value}");
-                                                    debugPrint(
-                                                        "near shop reason ${controller.selectedReasonId.value}");
-                                                    FocusScope.of(context)
-                                                        .requestFocus(
-                                                            FocusNode());
-                                                    if (controller
-                                                                .selectedReason
-                                                                .value !=
-                                                            "choose" &&
-                                                        controller
-                                                                .selectedReasonId
-                                                                .value !=
-                                                            0) {
-                                                      controller.submitRemarks(
-                                                          commentId: controller
-                                                              .selectedReasonId
-                                                              .value,
-                                                          shopId: controller
-                                                                  .nearByShopList[
-                                                                      index]
-                                                                  .id ??
-                                                              0);
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Obx(() {
+                                                return controller.isOther.value
+                                                    ? RichText(
+                                                        text: TextSpan(
+                                                        text: 'Remark',
+                                                        style:
+                                                            customTheme(context)
+                                                                .regular
+                                                                .copyWith(
+                                                                    fontSize:
+                                                                        12),
+                                                        children: const <
+                                                            TextSpan>[
+                                                          TextSpan(
+                                                              text: '\*',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .blue)),
+                                                        ],
+                                                      ))
+                                                    : const SizedBox.shrink();
+                                              }),
+                                              Obx(() {
+                                                return controller.isOther.value
+                                                    ? CustomTextField(
+                                                        textcontroller: controller
+                                                            .messageController,
+                                                        validaton: (value) {
+                                                          if (value == null ||
+                                                              value
+                                                                  .trim()
+                                                                  .isEmpty) {
+                                                            return 'Remark can\'t be empty';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      )
+                                                    : const SizedBox.shrink();
+                                              }),
+                                              const Spacer(),
+                                              Obx(() {
+                                                return CustomButton(
+                                                    isLoading: controller
+                                                        .isRemarksSubmitLoading
+                                                        .value,
+                                                    title: "Confirm",
+                                                    onTap: () {
+                                                      debugPrint(
+                                                          "near shop reason ${controller.selectedReason.value}");
+                                                      debugPrint(
+                                                          "near shop reason ${controller.selectedReasonId.value}");
+                                                      FocusScope.of(context)
+                                                          .requestFocus(
+                                                              FocusNode());
+                                                      if (controller
+                                                          .remarkFormKey
+                                                          .currentState!
+                                                          .validate()) {
+                                                        if (controller
+                                                                    .selectedReason
+                                                                    .value !=
+                                                                "choose" &&
+                                                            controller
+                                                                    .selectedReasonId
+                                                                    .value !=
+                                                                0) {
+                                                          controller.submitRemarks(
+                                                              commentId: controller
+                                                                  .selectedReasonId
+                                                                  .value,
+                                                              shopId: controller
+                                                                      .nearByShopList[
+                                                                          index]
+                                                                      .id ??
+                                                                  0,
+                                                              message: controller
+                                                                  .messageController
+                                                                  .text);
 
-                                                      Get.back();
-                                                    } else {
-                                                      ScaffoldMessenger.of(
-                                                              Get.context!)
-                                                          .showSnackBar(
-                                                              const SnackBar(
-                                                                  content: Text(
-                                                                      "Please select a remark")));
-                                                    }
-                                                  });
-                                            })
-                                          ],
+                                                          Get.back();
+                                                        } else {
+                                                          ScaffoldMessenger.of(
+                                                                  Get.context!)
+                                                              .showSnackBar(
+                                                                  const SnackBar(
+                                                                      content: Text(
+                                                                          "Please select a remark")));
+                                                        }
+                                                      }
+                                                    });
+                                              })
+                                            ],
+                                          ),
                                         ),
                                       );
                                     }),
@@ -525,6 +590,10 @@ class NearByShops extends StatelessWidget {
               remarkHistoryController.shopId = controller.shopList[index].id!;
               remarkHistoryController.fetchRemarkHistory(
                   shopId: controller.shopList[index].id!);
+              controller.messageController.clear();
+              controller.selectedReason.value = 'Choose';
+              controller.selectedReasonId.value = 0;
+              controller.isOther.value = false;
               showDialog(
                 context: context,
                 builder: (ctx) => Material(
@@ -567,7 +636,7 @@ class NearByShops extends StatelessWidget {
                           Obx(() {
                             return SizedBox(
                               height: tabIndex.value == 0
-                                  ? MediaQuery.of(context).size.height * .2
+                                  ? MediaQuery.of(context).size.height * .28
                                   : MediaQuery.of(context).size.height * .7,
                               child: TabBarView(
                                   controller: controller.tabController,
@@ -575,93 +644,153 @@ class NearByShops extends StatelessWidget {
                                     Obx(() {
                                       return Padding(
                                         padding: const EdgeInsets.only(top: 20),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            DropdownButton<PaymentCommentsList>(
-                                              hint: Text(
-                                                controller.selectedReason.value,
-                                                style: customTheme(Get.context!)
-                                                    .regular
-                                                    .copyWith(
-                                                        fontSize: 11,
-                                                        color: const Color(
-                                                            0xff929292)),
+                                        child: Form(
+                                          key: controller.remarkFormKey,
+                                          autovalidateMode: AutovalidateMode
+                                              .onUserInteraction,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              DropdownButton<
+                                                  PaymentCommentsList>(
+                                                hint: Text(
+                                                  controller
+                                                      .selectedReason.value,
+                                                  style: customTheme(
+                                                          Get.context!)
+                                                      .regular
+                                                      .copyWith(
+                                                          fontSize: 11,
+                                                          color: const Color(
+                                                              0xff929292)),
+                                                ),
+                                                // value: controller.selectedSearchtype.value,
+                                                underline:
+                                                    const SizedBox.shrink(),
+                                                isDense: true,
+                                                onChanged: (value) {
+                                                  // _focusNode.requestFocus();
+                                                  controller.selectedReason(
+                                                      value?.name ?? "");
+                                                  controller.selectedReasonId(
+                                                      (value?.id ?? 0).toInt());
+                                                  controller.isOther(
+                                                      value?.other ?? false);
+                                                },
+                                                items: controller.remarkList
+                                                    ?.map(
+                                                      (e) => DropdownMenuItem(
+                                                        value: e,
+                                                        child: controller
+                                                                .isRemarksLoading
+                                                                .value
+                                                            ? CircularProgressIndicator()
+                                                            : Text(e.name ?? "",
+                                                                style: customTheme(Get
+                                                                        .context!)
+                                                                    .regular
+                                                                    .copyWith(
+                                                                        fontSize:
+                                                                            11,
+                                                                        color: Colors
+                                                                            .black)),
+                                                      ),
+                                                    )
+                                                    .toList(),
                                               ),
-                                              // value: controller.selectedSearchtype.value,
-                                              underline:
-                                                  const SizedBox.shrink(),
-                                              isDense: true,
-                                              onChanged: (value) {
-                                                // _focusNode.requestFocus();
-                                                controller.selectedReason(
-                                                    value?.name ?? "");
-                                                controller.selectedReasonId(
-                                                    (value?.id ?? 0).toInt());
-                                              },
-                                              items: controller.remarkList
-                                                  ?.map(
-                                                    (e) => DropdownMenuItem(
-                                                      value: e,
-                                                      child: controller
-                                                              .isRemarksLoading
-                                                              .value
-                                                          ? CircularProgressIndicator()
-                                                          : Text(e.name ?? "",
-                                                              style: customTheme(Get
-                                                                      .context!)
-                                                                  .regular
-                                                                  .copyWith(
-                                                                      fontSize:
-                                                                          11,
-                                                                      color: Colors
-                                                                          .black)),
-                                                    ),
-                                                  )
-                                                  .toList(),
-                                            ),
-                                            Spacer(),
-                                            Obx(() {
-                                              return CustomButton(
-                                                  isLoading: controller
-                                                      .isRemarksSubmitLoading
-                                                      .value,
-                                                  title: "Confirm",
-                                                  onTap: () {
-                                                    FocusScope.of(context)
-                                                        .requestFocus(
-                                                            FocusNode());
-                                                    if (controller
-                                                                .selectedReason
-                                                                .value !=
-                                                            "choose" &&
-                                                        controller
-                                                                .selectedReasonId
-                                                                .value !=
-                                                            0) {
-                                                      controller.submitRemarks(
-                                                          commentId: controller
-                                                              .selectedReasonId
-                                                              .value,
-                                                          shopId: controller
-                                                                  .shopList[
-                                                                      index]
-                                                                  .id ??
-                                                              0);
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Obx(() {
+                                                return controller.isOther.value
+                                                    ? RichText(
+                                                        text: TextSpan(
+                                                        text: 'Remark',
+                                                        style:
+                                                            customTheme(context)
+                                                                .regular
+                                                                .copyWith(
+                                                                    fontSize:
+                                                                        12),
+                                                        children: const <
+                                                            TextSpan>[
+                                                          TextSpan(
+                                                              text: '\*',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .blue)),
+                                                        ],
+                                                      ))
+                                                    : const SizedBox.shrink();
+                                              }),
+                                              Obx(() {
+                                                return controller.isOther.value
+                                                    ? CustomTextField(
+                                                        textcontroller: controller
+                                                            .messageController,
+                                                        validaton: (value) {
+                                                          if (value == null ||
+                                                              value
+                                                                  .trim()
+                                                                  .isEmpty) {
+                                                            return 'Remark can\'t be empty';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      )
+                                                    : const SizedBox.shrink();
+                                              }),
+                                              Spacer(),
+                                              Obx(() {
+                                                return CustomButton(
+                                                    isLoading: controller
+                                                        .isRemarksSubmitLoading
+                                                        .value,
+                                                    title: "Confirm",
+                                                    onTap: () {
+                                                      FocusScope.of(context)
+                                                          .requestFocus(
+                                                              FocusNode());
+                                                      if (controller
+                                                          .remarkFormKey
+                                                          .currentState!
+                                                          .validate()) {
+                                                        if (controller
+                                                                    .selectedReason
+                                                                    .value !=
+                                                                "choose" &&
+                                                            controller
+                                                                    .selectedReasonId
+                                                                    .value !=
+                                                                0) {
+                                                          controller.submitRemarks(
+                                                              commentId: controller
+                                                                  .selectedReasonId
+                                                                  .value,
+                                                              shopId: controller
+                                                                      .shopList[
+                                                                          index]
+                                                                      .id ??
+                                                                  0,
+                                                              message: controller
+                                                                  .messageController
+                                                                  .text);
 
-                                                      Get.back();
-                                                    } else {
-                                                      ScaffoldMessenger.of(
-                                                              Get.context!)
-                                                          .showSnackBar(
-                                                              const SnackBar(
-                                                                  content: Text(
-                                                                      "Please select a remark")));
-                                                    }
-                                                  });
-                                            })
-                                          ],
+                                                          Get.back();
+                                                        } else {
+                                                          ScaffoldMessenger.of(
+                                                                  Get.context!)
+                                                              .showSnackBar(
+                                                                  const SnackBar(
+                                                                      content: Text(
+                                                                          "Please select a remark")));
+                                                        }
+                                                      }
+                                                    });
+                                              })
+                                            ],
+                                          ),
                                         ),
                                       );
                                     }),

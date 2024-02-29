@@ -32,7 +32,8 @@ class RemarkListDataSource {
       required int commentId,
       required int shopId,
       required double latitude,
-      required double longitude}) async {
+      required double longitude,
+      String? message}) async {
     Map<String, dynamic> body = {
       "user_id": userId,
       "comment_id": commentId,
@@ -40,6 +41,10 @@ class RemarkListDataSource {
       "latitude": latitude,
       "longitude": longitude
     };
+
+    if (message != null) {
+      body.addAll({'message': message});
+    }
 
     var response = await apiService.post('create-payment_followups', body);
 

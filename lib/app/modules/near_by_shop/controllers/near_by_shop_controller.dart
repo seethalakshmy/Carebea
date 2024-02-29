@@ -42,6 +42,8 @@ class NearByShopsController extends GetxController
   RemarkSubmitResponse? remarkSubmitResponse;
   RxString selectedReason = 'Choose'.obs;
   RxInt selectedReasonId = 0.obs;
+  RxBool isOther = false.obs;
+  final remarkFormKey = GlobalKey<FormState>();
 
   int pageNumber = 0;
   int pageSize = 10;
@@ -58,6 +60,7 @@ class NearByShopsController extends GetxController
   bool? isFromDelivery;
   TabController? tabController;
   RemarkHistoryController remarkHistoryController = Get.find();
+  TextEditingController messageController = TextEditingController();
 
   Rx<SearchType> selectedSearchtype = Rx(
     SearchType("Name", "name"),
@@ -171,7 +174,8 @@ class NearByShopsController extends GetxController
     isRemarksLoading(false);
   }
 
-  submitRemarks({required int commentId, required int shopId}) async {
+  submitRemarks(
+      {required int commentId, required int shopId, String? message}) async {
     isRemarksSubmitLoading(true);
 
     remarkSubmitResponse = await remarkListRepo.remarkSubmit(
@@ -179,7 +183,8 @@ class NearByShopsController extends GetxController
         commentId: commentId,
         shopId: shopId,
         latitude: latitude!,
-        longitude: longitude!);
+        longitude: longitude!,
+        message: message);
 
     if (remarkSubmitResponse?.result?.status == true) {
       isRemarksSubmitLoading(false);

@@ -121,35 +121,32 @@ String paymentCommentsListToJson(PaymentCommentsList data) =>
     json.encode(data.toJson());
 
 class PaymentCommentsList {
-  PaymentCommentsList({
-    num? id,
-    String? name,
-  }) {
+  PaymentCommentsList({num? id, String? name, bool? other}) {
     _id = id;
     _name = name;
+    _other = other;
   }
 
   PaymentCommentsList.fromJson(dynamic json) {
     _id = json['id'];
     _name = json['name'];
+    _other = json['other'];
   }
   num? _id;
   String? _name;
-  PaymentCommentsList copyWith({
-    num? id,
-    String? name,
-  }) =>
+  bool? _other;
+  PaymentCommentsList copyWith({num? id, String? name, bool? other}) =>
       PaymentCommentsList(
-        id: id ?? _id,
-        name: name ?? _name,
-      );
+          id: id ?? _id, name: name ?? _name, other: _other ?? _other);
   num? get id => _id;
   String? get name => _name;
+  bool? get other => _other;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = _id;
     map['name'] = _name;
+    map['other'] = _other;
     return map;
   }
 }

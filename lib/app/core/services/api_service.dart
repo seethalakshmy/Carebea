@@ -12,14 +12,14 @@ import '../../../model/access_token.dart';
 import '../../utils/shared_prefs.dart';
 
 class ApiService extends GetxService {
-  // final _baseUrl = "https://4715-103-70-199-239.ngrok-free.app"; //test
+  final _baseUrl = "https://092a-117-193-165-154.ngrok-free.app"; //test
   // final _baseUrl = "http://15.206.14.111"; //live
-  final _baseUrl = "https://erp.carebea.com/"; //live
+  // final _baseUrl = "https://erp.carebea.com/"; //live
 
-  // var xAuthClient = "12345";
-  // var xAuthToken = '12345';
-  var xAuthClient = "Xjfgnf35*\$&dfgkgb\$AViwqALG";
-  var xAuthToken = 'Xjfgnf35*\$&dfgkgb\$AViwqALG';
+  var xAuthClient = "12345";
+  var xAuthToken = '12345';
+  // var xAuthClient = "Xjfgnf35*\$&dfgkgb\$AViwqALG";
+  // var xAuthToken = 'Xjfgnf35*\$&dfgkgb\$AViwqALG';
   String get baseUrl => "$_baseUrl/api/v2/";
   var auth = '';
   var token = '';
