@@ -11,7 +11,6 @@ import 'package:intl/intl.dart';
 
 import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_card.dart';
-import '../../add_shop/views/add_shop_view.dart';
 import '../../remark_history/controllers/remark_history_controller.dart';
 import '../controllers/near_by_shop_controller.dart';
 
@@ -20,9 +19,9 @@ class NearByShops extends StatelessWidget {
   final RemarkHistoryController remarkHistoryController =
       Get.put(RemarkHistoryController());
   final NearByShopsController controller = Get.put(NearByShopsController());
-  var focusNode = FocusNode();
+  final focusNode = FocusNode();
 
-  RxInt tabIndex = 0.obs;
+  final RxInt tabIndex = 0.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +64,6 @@ class NearByShops extends StatelessWidget {
                     textcontroller: controller.searchEditingController,
                     key: const ValueKey("search"),
                     inputType: TextInputType.visiblePassword,
-                    // controller.selectedSearchtype.value.type == "phone"
-                    //     ? TextInputType.visiblePassword
-                    //     : TextInputType.phone,
                     focusNode: focusNode,
                     onChanged: (val) {
                       controller.searchShop(val);
@@ -146,7 +142,6 @@ class NearByShops extends StatelessWidget {
               Flexible(
                 child: Obx(() {
                   if (controller.searchEditingController.text == "") {
-                    debugPrint("inside empty");
                     if (controller.isNearByShopLoading.value) {
                       return Center(child: circularProgressIndicator(context));
                     }
@@ -157,13 +152,10 @@ class NearByShops extends StatelessWidget {
                           padding: const EdgeInsets.only(top: 50),
                           child: const Text("No shops found!"));
                     }
-                    return buildNearByShopClick();
+                    return buildOnShopClick(
+                        shopList: controller.nearByShopList);
                   } else if (controller.searchEditingController.text != "") {
-                    debugPrint("outside empty");
-
                     if (controller.isLoading.value) {
-                      debugPrint("outside empty");
-
                       return Center(child: circularProgressIndicator(context));
                     }
                     if (controller.shopList.isEmpty) {
@@ -174,7 +166,7 @@ class NearByShops extends StatelessWidget {
                           child: const Text("No shops found!"));
                     }
 
-                    return buildSearchShopClick();
+                    return buildOnShopClick(shopList: controller.shopList);
                   } else {
                     return Container(
                       color: Colors.red,
@@ -187,20 +179,19 @@ class NearByShops extends StatelessWidget {
         ));
   }
 
-  ListView buildNearByShopClick() {
+  ListView buildOnShopClick({required List shopList}) {
     return ListView.separated(
         controller: controller.scrollController,
         separatorBuilder: (_, __) => const SizedBox(height: 20),
         shrinkWrap: true,
-        itemCount: controller.nearByShopList.length,
+        itemCount: shopList.length,
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
               debugPrint("index tab ${controller.tabController?.index}");
-              remarkHistoryController.shopId =
-                  controller.nearByShopList[index].id!;
+              remarkHistoryController.shopId = shopList[index].id!;
               remarkHistoryController.fetchRemarkHistory(
-                  shopId: controller.nearByShopList[index].id!);
+                  shopId: shopList[index].id!);
               controller.messageController.clear();
               controller.selectedReason.value = 'Choose';
               controller.selectedReasonId.value = 0;
@@ -294,7 +285,7 @@ class NearByShops extends StatelessWidget {
                                                         child: controller
                                                                 .isRemarksLoading
                                                                 .value
-                                                            ? CircularProgressIndicator()
+                                                            ? const CircularProgressIndicator()
                                                             : Text(e.name ?? "",
                                                                 style: customTheme(Get
                                                                         .context!)
@@ -308,7 +299,7 @@ class NearByShops extends StatelessWidget {
                                                     )
                                                     .toList(),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 10,
                                               ),
                                               Obx(() {
@@ -381,8 +372,7 @@ class NearByShops extends StatelessWidget {
                                                               commentId: controller
                                                                   .selectedReasonId
                                                                   .value,
-                                                              shopId: controller
-                                                                      .nearByShopList[
+                                                              shopId: shopList[
                                                                           index]
                                                                       .id ??
                                                                   0,
@@ -427,7 +417,7 @@ class NearByShops extends StatelessWidget {
                                                       .remarkHistory.isNotEmpty
                                                   ? ListView.separated(
                                                       physics:
-                                                          NeverScrollableScrollPhysics(),
+                                                          const NeverScrollableScrollPhysics(),
                                                       shrinkWrap: true,
                                                       separatorBuilder:
                                                           (_, __) =>
@@ -525,8 +515,7 @@ class NearByShops extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${controller.nearByShopList[index].name!} ${controller.nearByShopList[index].lastName}",
-                    // 'Trinity Shop',
+                    "${shopList[index].name!} ${shopList[index].lastName}",
                     style: customTheme(context).medium.copyWith(fontSize: 13),
                   ),
                   const SizedBox(
@@ -544,8 +533,7 @@ class NearByShops extends StatelessWidget {
                       ),
                       Flexible(
                         child: Text(
-                          getFullAddress(
-                              controller.nearByShopList[index].address),
+                          getFullAddress(shopList[index].address),
                           style: customTheme(context)
                               .regular
                               .copyWith(fontSize: 11),
@@ -553,7 +541,7 @@ class NearByShops extends StatelessWidget {
                       ),
                     ],
                   ),
-                  if ((controller.nearByShopList[index].phone ?? "").isNotEmpty)
+                  if ((shopList[index].phone ?? "").isNotEmpty)
                     Row(
                       children: [
                         Image.asset(
@@ -564,390 +552,7 @@ class NearByShops extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          "+91 ${controller.nearByShopList[index].phone!}",
-                          // '+91 6398541236',
-                          style: customTheme(context)
-                              .regular
-                              .copyWith(fontSize: 11),
-                        ),
-                      ],
-                    ),
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
-  ListView buildSearchShopClick() {
-    return ListView.separated(
-        separatorBuilder: (_, __) => const SizedBox(height: 20),
-        shrinkWrap: true,
-        itemCount: controller.shopList.length,
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              remarkHistoryController.shopId = controller.shopList[index].id!;
-              remarkHistoryController.fetchRemarkHistory(
-                  shopId: controller.shopList[index].id!);
-              controller.messageController.clear();
-              controller.selectedReason.value = 'Choose';
-              controller.selectedReasonId.value = 0;
-              controller.isOther.value = false;
-              showDialog(
-                context: context,
-                builder: (ctx) => Material(
-                  type: MaterialType.transparency,
-                  color: Colors.transparent,
-                  child: Center(
-                    child: CustomCard(
-                      padding: const EdgeInsets.all(20),
-                      width: Get.size.width * .8,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          TabBar(
-                            onTap: (index) {
-                              tabIndex.value =
-                                  controller.tabController?.index ?? 0;
-                              debugPrint(
-                                  "print index inside searchShop $tabIndex");
-                            },
-                            controller: controller.tabController,
-                            tabs: <Tab>[
-                              Tab(
-                                child: Text(
-                                  "Remarks",
-                                  style: customTheme(context)
-                                      .medium
-                                      .copyWith(fontSize: 14),
-                                ),
-                              ),
-                              Tab(
-                                child: Text(
-                                  "History",
-                                  style: customTheme(context)
-                                      .medium
-                                      .copyWith(fontSize: 14),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Obx(() {
-                            return SizedBox(
-                              height: tabIndex.value == 0
-                                  ? MediaQuery.of(context).size.height * .28
-                                  : MediaQuery.of(context).size.height * .7,
-                              child: TabBarView(
-                                  controller: controller.tabController,
-                                  children: [
-                                    Obx(() {
-                                      return Padding(
-                                        padding: const EdgeInsets.only(top: 20),
-                                        child: Form(
-                                          key: controller.remarkFormKey,
-                                          autovalidateMode: AutovalidateMode
-                                              .onUserInteraction,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              DropdownButton<
-                                                  PaymentCommentsList>(
-                                                hint: Text(
-                                                  controller
-                                                      .selectedReason.value,
-                                                  style: customTheme(
-                                                          Get.context!)
-                                                      .regular
-                                                      .copyWith(
-                                                          fontSize: 11,
-                                                          color: const Color(
-                                                              0xff929292)),
-                                                ),
-                                                // value: controller.selectedSearchtype.value,
-                                                underline:
-                                                    const SizedBox.shrink(),
-                                                isDense: true,
-                                                onChanged: (value) {
-                                                  // _focusNode.requestFocus();
-                                                  controller.selectedReason(
-                                                      value?.name ?? "");
-                                                  controller.selectedReasonId(
-                                                      (value?.id ?? 0).toInt());
-                                                  controller.isOther(
-                                                      value?.other ?? false);
-                                                },
-                                                items: controller.remarkList
-                                                    ?.map(
-                                                      (e) => DropdownMenuItem(
-                                                        value: e,
-                                                        child: controller
-                                                                .isRemarksLoading
-                                                                .value
-                                                            ? CircularProgressIndicator()
-                                                            : Text(e.name ?? "",
-                                                                style: customTheme(Get
-                                                                        .context!)
-                                                                    .regular
-                                                                    .copyWith(
-                                                                        fontSize:
-                                                                            11,
-                                                                        color: Colors
-                                                                            .black)),
-                                                      ),
-                                                    )
-                                                    .toList(),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Obx(() {
-                                                return controller.isOther.value
-                                                    ? RichText(
-                                                        text: TextSpan(
-                                                        text: 'Details',
-                                                        style:
-                                                            customTheme(context)
-                                                                .regular
-                                                                .copyWith(
-                                                                    fontSize:
-                                                                        12),
-                                                        children: const <
-                                                            TextSpan>[
-                                                          TextSpan(
-                                                              text: '\*',
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .blue)),
-                                                        ],
-                                                      ))
-                                                    : const SizedBox.shrink();
-                                              }),
-                                              Obx(() {
-                                                return controller.isOther.value
-                                                    ? CustomTextField(
-                                                        textcontroller: controller
-                                                            .messageController,
-                                                        validaton: (value) {
-                                                          if (value == null ||
-                                                              value
-                                                                  .trim()
-                                                                  .isEmpty) {
-                                                            return 'Remark can\'t be empty';
-                                                          }
-                                                          return null;
-                                                        },
-                                                      )
-                                                    : const SizedBox.shrink();
-                                              }),
-                                              Spacer(),
-                                              Obx(() {
-                                                return CustomButton(
-                                                    isLoading: controller
-                                                        .isRemarksSubmitLoading
-                                                        .value,
-                                                    title: "Confirm",
-                                                    onTap: () {
-                                                      FocusScope.of(context)
-                                                          .requestFocus(
-                                                              FocusNode());
-                                                      if (controller
-                                                          .remarkFormKey
-                                                          .currentState!
-                                                          .validate()) {
-                                                        if (controller
-                                                                    .selectedReason
-                                                                    .value !=
-                                                                "choose" &&
-                                                            controller
-                                                                    .selectedReasonId
-                                                                    .value !=
-                                                                0) {
-                                                          controller.submitRemarks(
-                                                              commentId: controller
-                                                                  .selectedReasonId
-                                                                  .value,
-                                                              shopId: controller
-                                                                      .shopList[
-                                                                          index]
-                                                                      .id ??
-                                                                  0,
-                                                              message: controller
-                                                                  .messageController
-                                                                  .text);
-
-                                                          Get.back();
-                                                        } else {
-                                                          ScaffoldMessenger.of(
-                                                                  Get.context!)
-                                                              .showSnackBar(
-                                                                  const SnackBar(
-                                                                      content: Text(
-                                                                          "Please select a remark")));
-                                                        }
-                                                      }
-                                                    });
-                                              })
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                                    Obx(() {
-                                      if (remarkHistoryController
-                                          .isLoading.value) {
-                                        return Center(
-                                            child: circularProgressIndicator(
-                                                context));
-                                      }
-
-                                      return SingleChildScrollView(
-                                        controller: remarkHistoryController
-                                            .scrollController,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            remarkHistoryController
-                                                    .remarkHistory.isNotEmpty
-                                                ? ListView.separated(
-                                                    physics:
-                                                        NeverScrollableScrollPhysics(),
-                                                    shrinkWrap: true,
-                                                    separatorBuilder: (_, __) =>
-                                                        const SizedBox(
-                                                            height: 16),
-                                                    // physics: const NeverScrollableScrollPhysics(),
-                                                    itemCount:
-                                                        remarkHistoryController
-                                                            .remarkHistory
-                                                            .length,
-                                                    itemBuilder:
-                                                        (context, index) {
-                                                      return ColoredBox(
-                                                        color: Colors
-                                                            .grey.shade200,
-                                                        child: ListTile(
-                                                          title: Text(
-                                                            remarkHistoryController
-                                                                    .remarkHistory[
-                                                                        index]
-                                                                    .commentName ??
-                                                                "",
-                                                            style: customTheme(
-                                                                    context)
-                                                                .medium
-                                                                .copyWith(
-                                                                    fontSize:
-                                                                        12),
-                                                          ),
-                                                          subtitle: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                DateFormat(
-                                                                        'dd/MMM/yyyy h:mm a')
-                                                                    .format(
-                                                                        DateTime
-                                                                            .parse(
-                                                                  remarkHistoryController
-                                                                          .remarkHistory[
-                                                                              index]
-                                                                          .createDate ??
-                                                                      "",
-                                                                )),
-                                                              ),
-                                                              const SizedBox(
-                                                                height: 5,
-                                                              ),
-                                                              Text(
-                                                                remarkHistoryController
-                                                                        .remarkHistory[
-                                                                            index]
-                                                                        .createdUserName ??
-                                                                    "",
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      );
-                                                    })
-                                                : Align(
-                                                    alignment: Alignment.center,
-                                                    child: Text(
-                                                      "No Remarks Found",
-                                                      style:
-                                                          customTheme(context)
-                                                              .medium
-                                                              .copyWith(
-                                                                  fontSize: 12),
-                                                    ))
-                                          ],
-                                        ),
-                                      );
-                                    })
-                                  ]),
-                            );
-                          }),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            },
-            child: CustomCard(
-              hasShadow: false,
-              color: const Color(0xfffff1f1),
-              width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.only(
-                  top: 16, bottom: 12, left: 13, right: 13),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "${controller.shopList[index].name!} ${controller.shopList[index].lastName}",
-                    // 'Trinity Shop',
-                    style: customTheme(context).medium.copyWith(fontSize: 13),
-                  ),
-                  const SizedBox(
-                    height: 6,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                        Assets.assetsLocationFilled,
-                        scale: 3,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Flexible(
-                        child: Text(
-                          getFullAddress(controller.shopList[index].address),
-                          style: customTheme(context)
-                              .regular
-                              .copyWith(fontSize: 11),
-                        ),
-                      ),
-                    ],
-                  ),
-                  if ((controller.shopList[index].phone ?? "").isNotEmpty)
-                    Row(
-                      children: [
-                        Image.asset(
-                          Assets.assetsPhone,
-                          scale: 3,
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          "+91 ${controller.shopList[index].phone!}",
+                          "+91 ${shopList[index].phone!}",
                           // '+91 6398541236',
                           style: customTheme(context)
                               .regular
