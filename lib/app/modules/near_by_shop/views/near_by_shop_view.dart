@@ -315,7 +315,7 @@ class NearByShops extends StatelessWidget {
                                                 return controller.isOther.value
                                                     ? RichText(
                                                         text: TextSpan(
-                                                        text: 'Remark',
+                                                        text: 'Details',
                                                         style:
                                                             customTheme(context)
                                                                 .regular
@@ -706,7 +706,7 @@ class NearByShops extends StatelessWidget {
                                                 return controller.isOther.value
                                                     ? RichText(
                                                         text: TextSpan(
-                                                        text: 'Remark',
+                                                        text: 'Details',
                                                         style:
                                                             customTheme(context)
                                                                 .regular
