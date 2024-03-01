@@ -270,7 +270,6 @@ class NearByShops extends StatelessWidget {
                                                     const SizedBox.shrink(),
                                                 isDense: true,
                                                 onChanged: (value) {
-                                                  // _focusNode.requestFocus();
                                                   controller.selectedReason(
                                                       value?.name ?? "");
                                                   controller.selectedReasonId(
@@ -423,7 +422,6 @@ class NearByShops extends StatelessWidget {
                                                           (_, __) =>
                                                               const SizedBox(
                                                                   height: 16),
-                                                      // physics: const NeverScrollableScrollPhysics(),
                                                       itemCount:
                                                           remarkHistoryController
                                                               .remarkHistory
@@ -553,7 +551,6 @@ class NearByShops extends StatelessWidget {
                         ),
                         Text(
                           "+91 ${shopList[index].phone!}",
-                          // '+91 6398541236',
                           style: customTheme(context)
                               .regular
                               .copyWith(fontSize: 11),
